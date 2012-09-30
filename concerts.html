@@ -9,14 +9,16 @@
 <link rel='stylesheet' href='http://cdn1.editmysite.com/editor/images/common/common-v2.css?buildTime=1346362758' type='text/css' />
 <link rel='stylesheet' type='text/css' href='css/main_style.css' title='wsite-theme-css' />
 <link href='http://cdn1.editmysite.com/editor/fonts/Capture_it/font.css?2' rel='stylesheet' type='text/css' />
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
 <style type='text/css'>
 #wsite-content div.paragraph, #wsite-content p, #wsite-content .product-block .product-title, #wsite-content .product-description, .blog-sidebar div.paragraph, .blog-sidebar p, .wsite-form-field label, .wsite-form-field label {}
 #wsite-content h2, #wsite-content .product-long .product-title, #wsite-content .product-large .product-title, #wsite-content .product-small .product-title, .blog-sidebar h2 {}
 #wsite-title{font-family:'Capture it' !important;color:#009900 !important;}
-#wsite-content a:link, .blog-sidebar a:link{color:#FFFFFF !important;}
-#wsite-content a:visited, .blog-sidebar a:visited{color:#FFFFFF !important;}
-#wsite-content a:hover, .blog-sidebar a:hover{color:#FFFFFF !important;}
-</style>
+/*<!--#wsite-content a:link, .blog-sidebar a:link{color:#FFFFFF !important;}  -->    */
+    /*#wsite-content a:visited, .blog-sidebar a:visited{color:#FFFFFF !important;}
+    #wsite-content a:hover, .blog-sidebar a:hover{color:#FFFFFF !important;} */
+    </style>
 <style type='text/css'>
 .wsite-header {
 	background-image: url(uploads/1/3/4/4/13443306/header_images/1346208841.jpg) !important;
@@ -33,6 +35,8 @@ var STYLE_PREFIX = 'wsite';
 <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.min.js?1346362758'></script>
 <script type='text/javascript' src='http://cdn1.editmysite.com/editor/images/common/utilities-jq.js?1346362758'></script>
 <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/flyout_menus_jq.js?1346362758'></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type='text/javascript'><!--
 var IS_ARCHIVE=1;
 (function(jQuery){
@@ -56,7 +60,7 @@ else document.observe('dom:loaded', initFlyouts);
 			<td id="header-right">
 				<table>
 					<tr>
-						<td class="phone-number"><span class='wsite-text'>Welcome Ricardo! Not Ricardo? Sign out!</span></td>
+						<td class="phone-number"><span class='wsite-text'>Don't have an account? Register <a href="" style="color: #32CD32; text-decoration: underline; ">HERE</a></span></td>
 						<td class="social"></td>
 					</tr>
 				</table>
@@ -65,9 +69,8 @@ else document.observe('dom:loaded', initFlyouts);
 		</tr>
 	</table>
 	<div id="navigation">
-		<ul><li id='pg581818271480209023'><a href='index.html'>Home</a></li><li id='active'><a href='concerts.html'>Concerts</a></li><li id='pg404778243583026952'><a href='../../../../Desktop/6500945155041460787557/sports.html'>Sports</a></li><li id='pg441792526610757515'><a href='../../../../Desktop/6500945155041460787557/entertainment.html'>Entertainment</a></li><li id='pg269210016325162137'><a href='../../../../Desktop/6500945155041460787557/business--education.html'>Business & Education</a></li><li id='pg224132398954985812'><a href='../../../../Desktop/6500945155041460787557/profile.html'>Profile</a><div class='wsite-menu-wrap' style='display:none'><ul class='wsite-menu'><li id='wsite-nav-115402879236912927'><a href='../../../../Desktop/6500945155041460787557/create-event.html'><span class='wsite-menu-title'>Create Event</span></a></li></ul></div></li><li id='pg313146698326919915'><a href='../../../../Desktop/6500945155041460787557/login.html'>Login</a></li><li id='pg435700788219059228'><a href='../../../../Desktop/6500945155041460787557/nightwish-detail.html'>Nightwish Detail</a></li><li id='pg549951918166142509'><a href='../../../../Desktop/6500945155041460787557/add-friends.html'>Add Friends</a></li><li id='pg170216070745516754'><a href='../../../../Desktop/6500945155041460787557/venue.html'>Venue</a></li></ul>
-	</div>
-	<div id="container">
+        <ul><li id='active'><a href='index.html'>Home</a></li><li id='pg145650631833651339'><a href='concerts.html'>Concerts</a></li><li id='pg404778243583026952'><a href='sports.html'>Sports</a></li><li id='pg441792526610757515'><a href='entertainment.html'>Entertainment</a></li><li id='pg269210016325162137'><a href='business--education.html'>Business & Education</a></li></ul>
+        <div id="container" style="margin-top: 29px;">
 		<div id="content">
 			<div id="banner">
 				<div class="wsite-header"></div>
@@ -75,16 +78,17 @@ else document.observe('dom:loaded', initFlyouts);
 			<div class="text"><div id='wsite-content' class='wsite-not-footer'>
 <div>
 
-	<div id="nav" style="display: inline-block; text-align: left; float: left;width: 100%; position: relative; margin-top: 40px;"> 
-		<ul> 
-			<li style="display: inline-block; height: 50px;border: 2px solid; border-radius: 3px;"><a href="" style="padding: 20px; background: #FFD700;  color: white;">All Concerts</a></li>
-			<li style="display: inline-block; height: 60px;"><a href="" style="padding: 20px; background: #FFD700;  color: white;">Electronica</a></li>
-			<li style="display: inline-block; height: 60px;"><a href="" style="padding: 20px; background: #FFD700;  color: white;">Rock</a></li>
-			<li style="display: inline-block; height: 60px;"><a href="" style="padding: 20px; background: #FFD700;  color: white;">Polka</a></li>
-			<li style="display: inline-block; height: 60px;"><a href="" style="padding: 20px; background: #FFD700;  color: white;">Hip Hop</a></li>
-		</ul>
+    <div class="btn-toolbar">
+        <div class="btn-group">
 
-</div></div>
+            <a class="btn btn-eventPR" href="#"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;"> ALL CONCERTS</span></a>
+            <a class="btn btn-eventPR" href="#"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;"> ROCK</span></a>
+            <a class="btn btn-eventPR" href="#"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;"> HIP HOP</span></a>
+            <a class="btn btn-eventPR" href="#"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;"> ELECTRONICA</span></a>
+            <a class="btn btn-eventPR" href="#"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">COUNTRY</span></a>
+            <a class="btn btn-eventPR" href="#"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">OPERA</span></a>
+        </div>
+    </div></div>
 <div><div style="height: 20px; overflow: hidden; width: 100%;"></div>
 <hr class="styled-hr" style="width:100%;">
 <div style="height: 20px; overflow: hidden; width: 100%;"></div></div>
@@ -96,7 +100,7 @@ else document.observe('dom:loaded', initFlyouts);
 <td class='wsite-multicol-col' style='width:79.074889867841%;padding:0 15px'>
 
 <h2 style="text-align:left;">Electric Daisy Carnival Puerto Rico</h2>
-<span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="../../../../Desktop/6500945155041460787557/uploads/1/3/4/4/13443306/609754347.jpg?147" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
+<span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="uploads/1/3/4/4/13443306/609754347.jpg?147" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
 <div class="paragraph" style="text-align:left;display:block;"><font size="4">September 15, 2012</font><br /><font size="4">Saturday at 8:00pm</font><br /><font size="4">Panamerican Pier Complex</font><br /><font size="4"><span style="line-height: 27px;">San Juan, PR</span></font><br /><font size="4"><span style="line-height: 27px;"><br /></span></font><br /><font size="4"><span style="line-height: 27px;">Genre: Electronic</span></font></div>
 <hr style="clear:both;visibility:hidden;width:100%;">
 
@@ -144,7 +148,7 @@ else document.observe('dom:loaded', initFlyouts);
 <td class='wsite-multicol-col' style='width:78.303964757709%;padding:0 15px'>
 
 <h2 style="text-align:left;">Nightwish</h2>
-<span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="../../../../Desktop/6500945155041460787557/uploads/1/3/4/4/13443306/344251092.jpg" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
+<span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="uploads/1/3/4/4/13443306/344251092.jpg" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
 <div class="paragraph" style="text-align:left;display:block;"><font size="4">December 1, 2012</font><br /><font size="4">Saturday at 8:00pm</font><br /><font size="4">Anfiteatro Tito Puente</font><br /><font size="4">San Juan, PR</font><br /><br /><br /><font size="4">Genre: Rock</font></div>
 <hr style="clear:both;visibility:hidden;width:100%;">
 
@@ -183,7 +187,7 @@ else document.observe('dom:loaded', initFlyouts);
 </div>
 		</div>
 	</div>
-	<div id="footer">Create a <a target="_top" href="http://www.weebly.com/">free web site</a> with <a target="_top" href="http://www.weebly.com/" title="free web site">Weebly</a><span style='display:block;margin:1em 0 0;padding:0 0 1em;font-size:.8em'>Photos used under Creative Commons from <a href='http://www.flickr.com/photos/91471930@N00/3906300517' target='_blank'>jeroen_bennink</a>, <a href='http://www.flickr.com/photos/35897260@N00/3727153949' target='_blank'>Cilou101</a></span></div>
+	<div id="footer"></div>
 	<div class="clear"></div>
 </div>
 
