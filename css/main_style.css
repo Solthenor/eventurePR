@@ -147,6 +147,7 @@ h2 {
     background: url(navigationbg.png) no-repeat;
     _bbbackground: none;
     _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src = 'files/theme/navigationbg.png', sizingMethod = 'crop');
+    text-align: center;
 }
 
 #navigation ul li {
@@ -496,6 +497,7 @@ h2 {
     background: url(button_small_blue.png) no-repeat 100% -105px;
 }
 
+
 .wsite-button:hover {
     background-position: 100% -140px;
 }
@@ -654,3 +656,46 @@ states (normal, :hover, :active) have their sprite coordinates in the same place
 #mainmenu li a:link, .blog-sidebar a:link{color:#227289 }
 #mainmenu li a:visited, .blog-sidebar a:visited{color:#227289 }
 #mainmenu li a:hover, .blog-sidebar a:hover{color:#227289 }
+
+/*
+ --------------------------------------------------------------------------------------------
+*/
+
+#wall {
+    float: left;
+    width:50%;
+
+}
+
+#myPics {
+    float:left;
+    width: 50%;
+}
+#user_info{
+    text-align:left;
+    display:block;
+    float:left;
+    padding-top: 5px;
+    width:50%;
+    padding-left: 30px;
+}
+.friends_list{
+    margin-top: 40px;
+    text-align: center;
+   margin-bottom: 30px;
+}
+.paragraph{
+    padding-top: 45px;
+    display:table-column;
+    text-decoration-color: #f5f5f5;
+}
+.comment{
+    text-align:left;
+    float:left;
+    color: navy;
+    margin-left:20px;
+    margin-top:20px;
+    font-size: small;
+    font-style: italic;
+    background-color: #b0c4de;
+}
