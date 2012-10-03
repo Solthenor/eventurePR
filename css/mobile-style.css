@@ -6,7 +6,9 @@
     height: 100%;
     margin: 0;
     padding: 0;
-    position: relative;
+    position: relative !important;
+    width: 100%;
+    overflow-x: hidden !important;
 
 }
 
@@ -23,7 +25,10 @@
 	
 }
 
-#wsite-title{font-family:'Capture it' !important;color:#009900 !important; text-shadow: none !important;}
+#wsite-title{
+    font-family:'Capture it' !important;
+    color:#009900 !important;
+    text-shadow: none !important;}
 
 .wsite-logo {
     width: 488px;
@@ -37,3 +42,4 @@
     margin: 0 auto;
     background: url('wrapper.jpg') top no-repeat;
 }
+

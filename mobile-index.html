@@ -1,19 +1,17 @@
 <!DOCTYPE html> 
 <html> 
-	<head> 
-	<title>Welcome to E-vents</title> 
+	<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Welcome to E-vents</title>
 	<link rel="stylesheet" href="css/mobile-style.css" />
-	<link rel="stylesheet" href="css/jquery.mobile-1.0a1.min.css" />
+	<link rel="stylesheet" href="css/jquery.mobile-1.2.0.css" />
     <link href='http://cdn1.editmysite.com/editor/fonts/Capture_it/font.css?2' rel='stylesheet' type='text/css' />
     <link rel='stylesheet' href='http://cdn1.editmysite.com/editor/images/common/common-v2.css?buildTime=1346362758' type='text/css' />
 
-	<script src="js/jquery-1.4.3.min.js"></script>
-	<script src="js/jquery.mobile-1.0a1.min.js"></script>
-	<script type='text/javascript'><!--
-    var STATIC_BASE = 'http://cdn1.editmysite.com/';
-    var STYLE_PREFIX = 'wsite';
-    //-->
-    </script>
+	<script src="js/jquery-1.8.2.js"></script>
+	<script src="js/jquery.mobile-1.2.0.js"></script>
+
     <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/jquery_effects.js?1346362758'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.min.js?1346362758'></script>
@@ -21,71 +19,82 @@
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/flyout_menus_jq.js?1346362758'></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script type='text/javascript'><!--
-    var IS_ARCHIVE=1;
-    (function(jQuery){
-        function initFlyouts(){initPublishedFlyoutMenus([{"id":"581818271480209023","title":"Home","url":"index.html"},{"id":"145650631833651339","title":"Concerts","url":"concerts.html"},{"id":"404778243583026952","title":"Sports","url":"sports.html"},{"id":"441792526610757515","title":"Entertainment","url":"entertainment.html"},{"id":"269210016325162137","title":"Business & Education","url":"business--education.html"},{"id":"224132398954985812","title":"Profile","url":"profile.html"},{"id":"313146698326919915","title":"Login","url":"login.html"},{"id":"435700788219059228","title":"Nightwish Detail","url":"nightwish-detail.html"},{"id":"549951918166142509","title":"Add Friends","url":"add-friends.html"},{"id":"170216070745516754","title":"Venue","url":"venue.html"}],'581818271480209023',"<li class='wsite-nav-more'><a href='#'>more...<\/a><\/li>",'active',false)}
-        if (jQuery) {
-            if (jQuery.browser.msie) window.onload = initFlyouts;
-            else jQuery(initFlyouts)
-        }else{
-            if (Prototype.Browser.IE) window.onload = initFlyouts;
-            else document.observe('dom:loaded', initFlyouts);
-        }
-    })(window._W && _W.jQuery)
-    //-->
-    </script>
+
+        <script>
+            $(function(){
+
+                $('select').change(function() {
+                    var nextpage = $(this).children('option:selected').attr('value');
+
+// case: Multi-page
+                    $.mobile.changePage( '#' + nextpage );
+
+// case: Single page
+//      $.mobile.changePage( nextpage + '.html' );
+
+                });
+
+            });​
+        </script>
+
 </head> 
-<body> 
+<body style="overflow-x: hidden;">
 
 <div data-role="page" id="home">
 	<div id="wrapper">
 	<div id="header">
 		<span class='wsite-logo'><span id="wsite-title" >E-venturePR</span></span>
 			<div data-role="controlgroup" data-type="horizontal" style="position: relative; float: left; padding-left: 3%;" >
-		<a href="register.html" data-role="button" data-theme="b" style="height: 35px; font-size: 15px;" >Sign up</a>
-		<a href="login.html" data-role="button" data-theme="b" style="height: 35px; font-size: 15px;">Log in</a>
+		<a href="register.html" data-role="button" data-theme="b" style="height: 35px; font-size: 15px;" >Log in</a>
+		<a href="login.html" data-role="button" data-theme="b" style="height: 35px; font-size: 15px;">Sign up</a>
 		
 	</div>
 	</div><!-- /header -->
 	<div data-role="content">
-	
+        <div data-role="fieldcontain">
+            <label for="select-choice-1" style="font-size: 15px;color: white;  " >Event Type:</label>
+            <select name="select-choice-0" id="select-choice-1" data-native-menu="false">
+                <option value="email">Share via Email</option>
+                <option value="bbm">Share via BBM</option>
+                <option value="sms">Share via SMS</option>
+                <option value="facebook">Share via Facebook</option>
+                <option value="twitter">Share via Twitter</option>
+                <option value="google">Share via Google</option>
+            </select>
+        </div><!-- /fieldcontain -->
 
-		<form action="results.html" method="post">
-			<div data-role="fieldcontain" data-inset="true">
-				<label for="search" style="font-size: 14px;color: white; padding-top: 5px;">Search Events:</label>
-				<input type="search" name="query" id="search" value=""/>
-			</div> <!-- /fieldcontain -->
-		</form>
-	<p><b><span style="font-size: 16px;color: white; ">Advanced Search: </span></b></p>
-    
-			<div data-role="fieldcontain">
-				<label for="select-choice-9" class="select" style="font-size: 15px;color: white;  " >Event Type:</label>
-				<select name="select-choice-9" id="select-choice-9" data-native-menu="false">
-				<option>Choose options</option>
-				<option value="themeparties">Concert</option>
-				<option value="festival">Party</option>
-				<option value="nightclub">Live-Music</option>
-				<option value="conferences">Other</option>
-				</select>
-			</div><!-- /fieldcontain -->        
+
+	<p><b><span style="font-size: 16px;color: white; ">Find an event: </span></b></p>
+
+        <form action="results.html" method="post">
+            <div data-role="fieldcontain" data-inset="true">
+                <label for="search" style="font-size: 14px;color: white; padding-top: 5px;">Search:</label>
+                <input type="search" name="query" id="search" value=""/>
+            </div> <!-- /fieldcontain -->
+        </form>
             
    
 
 			<div data-role="fieldcontain">
-				<ul data-role="listview" data-inset="true" data-theme="a" data-dividertheme="b"> 
+				<ul data-role="listview" data-inset="true" data-theme="a" data-dividertheme="b">
 					<li data-role="list-divider" style="font-size: 12px;color: white;  ">Featured Events:</li> 
-					<li><a href="jquery dummy3.html"><font size="2">Mofongo Party</font></a></li>
-					<li><a href="justaspage.html"><font size="2">Justas 2011</font></a></li>
+					<li><a href=""><font size="2">"Luis Raul: Que Clase E Lengua!"</font></a></li>
+					<li><a href=""><font size="2">"Nightwish: Imaginareum"</font></a></li>
+                    <li><a href=""><font size="2">"Baloncesto: Los Piratas de Quebradillas</font></a></li>
 
-				</ul>
+
+                </ul>
 				</div>
 				
 				<div data-role="fieldcontain">
-				<ul data-role="listview" data-inset="true" data-theme="a" data-dividertheme="b"> 
+				<ul data-role="listview" data-inset="true" data-theme="a" data-dividertheme="b">
 					<li data-role="list-divider" style="font-size: 12px;color: white;  ">Other Events:</li> 
-					<li><a href="jquery dummy3.html"><font size="2" >Mofongo Party</font></a></li>
-					<li><a href="justaspage.html"><font size="2">Justas 2011</font></a></li>
+					<li><a href=""><font size="2" >Mofongo Party</font></a></li>
+					<li><a href=""><font size="2">Alvaro's Supercalifragilisticexpialidocious Fest</font></a></li>
+                    <li><a href=""><font size="2" >Mofongo Party</font></a></li>
+                    <li><a href=""><font size="2">Improvisacion: TEATRUM</font></a></li>
+                    <li><a href=""><font size="2" >DIGILIFE: Effective Project Management</font></a></li>
+                    <li><a href=""><font size="2">ACM - Basic Python Programming Seminar</font></a></li>
 	
 				</ul>
 				</div>
@@ -93,7 +102,7 @@
 	
 
 
-	
+
 </div><!-- /page -->
 
 </div>
