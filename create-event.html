@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <title>E-venturePR - Home</title>
 
@@ -62,7 +62,7 @@ else document.observe('dom:loaded', initFlyouts);
 		</tr>
 	</table>
 	<div id="navigation">
-        <ul><li id='active'><a href='index2.html'>Home</a></li><li id='pg145650631833651339'><a href='concerts2.html'>Music</a></li><li id='pg404778243583026952'><a href='sports2.html'>Sports</a></li><li id='pg441792526610757515'><a href='entertainment2.html'>Entertainment</a></li><li id='pg269210016325162137'><a href='business--education2.html'>Business & Education</a></li><li id="pgabout_us"><a href="about-us.html">About Us</a></li></ul>
+        <ul><li id='active'><a href='index2.html'>Home</a></li><li id='pg145650631833651339'><a href='concerts2.html'>Concerts</a></li><li id='pg404778243583026952'><a href='sports2.html'>Sports</a></li><li id='pg441792526610757515'><a href='entertainment2.html'>Entertainment</a></li><li id='pg269210016325162137'><a href='business--education2.html'>Business & Education</a></li><li id="pgabout_us"><a href="about-us2.html">About Us</a></li></ul>
     </div>
 	<div id="container">
 		<div id="content">
@@ -77,17 +77,9 @@ else document.observe('dom:loaded', initFlyouts);
 <table class='wsite-multicol-table'>
 <tbody class='wsite-multicol-tbody'>
 <tr class='wsite-multicol-tr'>
-<td class='wsite-multicol-col' style='width:31.194690265487%;padding:0 15px; padding-top: 100px; '>
 
-    <div >
-    <button class="btn btn-large btn-eventPR" type="button" style="border-bottom-left-radius: 0; border-bottom-right-radius: 0; height:60px; width: 100%;">PROFILE</button>
-    <button class="btn btn-large btn-eventPR" type="button" style="border-radius: 0; height: 60px;width: 100%; ">MY EVENTS</button>
-    <button class="btn btn-large btn-eventPR" type="button" style="border-top-left-radius: 0; border-top-right-radius: 0; height:60px;width: 100%;">CONTACTS</button>
-       </div>
-
-</td>
 <td class='wsite-multicol-col' style='width:68.805309734513%;padding:0 15px'>
-                                                      <!--  -->
+    <div style="text-align: left;"><a class="btn btn-eventPR" href="profile3.html"><span style="font-weight: bold; font-size: 14px; font-family: Arial sans-serif;">GO BACK TO PROFILE</span></a></div>
 <h2 style="text-align:left;">E-Vent it</h2>
 
 <div>
@@ -111,25 +103,55 @@ else document.observe('dom:loaded', initFlyouts);
 </div></div>
 
 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
-  <label class="wsite-form-label" for="input-935462346745001510">Where <span class="form-required">*</span></label>
+  <label class="wsite-form-label" for="input-935462346745001510">Location <span class="form-required">*</span></label>
   <div class="wsite-form-input-container">
     <input id="input-935462346745001510" class="wsite-form-input wsite-input" type="text" name="_u935462346745001510" style="width:200px;" />
   </div>
   <div id="instructions-935462346745001510" class="wsite-form-instructions" style="display:none;"></div>
 </div></div>
 
+      <div><div class="wsite-form-field" style="margin:5px 0px 0px 0px;">
+          <label class="wsite-form-label" for="input-860164904846382269">Select a Type: <span class="form-required">*</span></label>
+          <div class="wsite-form-radio-container">
+              <select name='_u860164904846382269' class='form-select'>
+                  <option value='Concert'>Concert</option>
+                  <option value='Sports'>Sports</option>
+                  <option value='Sports'>Entertainment</option>
+                  <option value='Business &amp; Education'>Business &amp; Education</option>
+              </select>
+
+          </div>
+          <div id="instructions-Select a Genre:" class="wsite-form-instructions" style="display:none;"></div>
+      </div></div>
+
 <div><div class="wsite-form-field" style="margin:5px 0px 0px 0px;">
   <label class="wsite-form-label" for="input-860164904846382269">Select a Genre: <span class="form-required">*</span></label>
   <div class="wsite-form-radio-container">
     <select name='_u860164904846382269' class='form-select'>
-	<option value='Concert'>Concert</option>
-	<option value='Sports'>Sports</option>
-	<option value='Business &amp; Education'>Business &amp; Education</option>
+	<option value='Alternative'>Alternative</option>
+	<option value='Rock'>Rock</option>
+    <option value='Pop'>Pop</option>
+    <option value='Rap'>Hip Hop / Rap</option>
+    <option value='Electronic'>Electronic</option>
+    <option value='Country'>Country</option>
+    <option value='Classical'>Classical</option>
 </select>
 
   </div>
   <div id="instructions-Select a Genre:" class="wsite-form-instructions" style="display:none;"></div>
 </div></div>
+
+    <div><div class="wsite-form-field" style="margin:5px 0px 0px 0px;">
+          <label class="wsite-form-label" for="input-860164904846382269">Public or Private? <span class="form-required">*</span></label>
+          <div class="wsite-form-radio-container">
+              <select name='_u860164904846382269' class='form-select'>
+                  <option value='Public'>Public</option>
+                  <option value='Private'>Private</option>
+              </select>
+
+          </div>
+          <div id="instructions-Select a Genre:" class="wsite-form-instructions" style="display:none;"></div>
+      </div></div>
 
 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
   <label class="wsite-form-label" for="input-740288841696996782">Brief Description <span class="form-required">*</span></label>
@@ -161,17 +183,22 @@ else document.observe('dom:loaded', initFlyouts);
 </div></div></div>
 
 </td>
+
 <td class='wsite-multicol-col' style='width:47.687224669604%;padding:0 15px'>
 
 <div><div class="wsite-multicol"><div class='wsite-multicol-table-wrap' style='margin:0 -15px'>
 <table class='wsite-multicol-table'>
 <tbody class='wsite-multicol-tbody'>
 <tr class='wsite-multicol-tr'>
-<td class='wsite-multicol-col' style='width:61.283185840708%;padding:0 15px'>
+
 
 <div class="paragraph" style="text-align:left;">Add a Picture:</div>
 
+    <a>
+        <img src="uploads/1/3/4/4/13443306/1346212298.jpg" alt="Picture" style="width:auto;max-width:100%; margin-top: 100px;" />
+    </a>
 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
+
   <label class="wsite-form-label" for="input-436611527555598588">Upload File <span class="form-required">*</span></label>
   <div class="wsite-form-input-container">
     <input type="hidden" name="MAX_FILE_SIZE" value="20971520" />
@@ -181,17 +208,11 @@ else document.observe('dom:loaded', initFlyouts);
   <div id="instructions-436611527555598588" class="wsite-form-instructions" style="display:none;"></div>
 </div></div>
 
-</td>
-<td class='wsite-multicol-col' style='width:38.716814159292%;padding:0 15px'>
-
 <div><div class="wsite-image wsite-image-border-border-width:0 " style="padding-top:10px;padding-bottom:10px;margin-left:10px;margin-right:10px;text-align:right">
-<a>
-<img src="uploads/1/3/4/4/13443306/1346212298.jpg" alt="Picture" style="width:auto;max-width:100%" />
-</a>
+
 <div style="display:block;font-size:90%"></div>
 </div></div>
 
-</td>
 </tr>
 </tbody>
 </table>
@@ -205,8 +226,6 @@ else document.observe('dom:loaded', initFlyouts);
 </div>
 		</div>
 	</div>
-	<div id="footer">Create a <a target="_top" href="http://www.weebly.com/">free web site</a> with <a target="_top" href="http://www.weebly.com/" title="free web site">Weebly</a></div>
-	<div class="clear"></div>
 </div>
 
 </body>
