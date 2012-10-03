@@ -21,6 +21,7 @@
 #header{
 	font-size: 36px;
 	text-align: left;
+    width: 100%;
 
 	
 }
@@ -31,15 +32,19 @@
     text-shadow: none !important;}
 
 .wsite-logo {
-    width: 488px;
-    padding: 10px 35px 10px 35px;
-	
+    width: 75%;
+
 }
 
 #wrapper {
-    width: 100%;
+    width: 99%;
+
 	
     margin: 0 auto;
     background: url('wrapper.jpg') top no-repeat;
 }
 
+.ui-content {
+
+    overflow-x: hidden !important;
+}
