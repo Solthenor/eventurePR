@@ -1,4 +1,4 @@
-<!-- THIS PAGE DISPLAYS THE ACCOUNT REGISTER OPTION WHEN USING YOUR MOBILE-->
+<!-- THIS PAGE DISPLAYS THE ACCOUNT REGISTER OPTION WHEN USING YOUR MOBILE. Once fully implemented, registered users will be able to view additional information about events through their mobiles-->
 
 
 <!DOCTYPE html>
@@ -7,43 +7,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <title>Welcome to E-vents</title>
-    <link rel="stylesheet" href="css/mobile-style.css" />
-    <link rel="stylesheet" href="css/jquery.mobile-1.2.0.css" />
-    <link href='http://cdn1.editmysite.com/editor/fonts/Capture_it/font.css?2' rel='stylesheet' type='text/css' />
-    <link rel='stylesheet' href='css/common-v2.css' type='text/css' />
+    <link rel="stylesheet" href="css/mobile-style.css" />      <!--Calls the mobile version css file -->
+    <link rel="stylesheet" href="css/jquery.mobile-1.2.0.css" />      <!-- Calls the jquery mobile styling file. This is used for things such as buttons, fitting in screen, event handling -->
+    <link href='http://cdn1.editmysite.com/editor/fonts/Capture_it/font.css?2' rel='stylesheet' type='text/css' />    <!--Used to style the logo -->
+    <link rel='stylesheet' href='css/common-v2.css' type='text/css' />    <!--gives the page wrapper some constraints and styling -->
 
 
-    <script src="js/jquery-1.8.2.js"></script>
-    <script src="js/jquery.mobile-1.2.0.js"></script>
+    <script src="js/jquery-1.8.2.js"></script>        <!-- jquery javascript-->
+    <script src="js/jquery.mobile-1.2.0.js"></script>  <!--jquery mobile javascript-->
 
 
 
-    <script>
-        $(document).ready(function(){
-            $('#select-choice-1').change(function()  {
-                var $vn = $(this).children('option:selected').attr('value') + ".html";
+    <script>                                          /* script used to choose the drop down select menu option and switch the window to the corresponding page */
+    $(document).ready(function(){
+        $('#select-choice-1').change(function()  {
+            var $vn = $(this).children('option:selected').attr('value') + ".html";
 
-                window.location.href = $vn;
-            });
+            window.location.href = $vn;
         });
+    });
 
 
     </script>
 
+
 </head>
 <body>
 
-<div id="wrapper" style="height: 100%">
-    <div id="header" style="height: 25%">
-        <span class='wsite-logo'><span id="wsite-title" >E-venturePR</span></span>
-        <div data-role="controlgroup" data-type="horizontal" style="float:left;" >
+<div id="wrapper" style="height: 100%">                <!--wraps the content of the page for styling purposes -->
+    <div id="header" style="height: 25%">              <!--header -->
+        <span class='wsite-logo'><span id="wsite-title" >E-venturePR</span></span>   <!-- Eventure logo -->
+        <div data-role="controlgroup" data-type="horizontal" style="float:left;" >   <!-- Button used to return the user to the home page-->
             <a  href="mobile-index.html"  rel="external" data-role="button" data-theme="b" style="height: 35px; font-size: 15px;" onclick="window.location.href = this.href" >RETURN HOME</a>
 
         </div>
     </div><!-- /header -->
     <div id="content" style="height: 75%;">
         <form action="home.html" method="post">
-            <div data-role="fieldcontain">
+            <div data-role="fieldcontain">        <!-- form for user to fill out his registry information to create an account. Accounts are needed to view additional information about events -->
                 <div style="width: 100%;margin-bottom: 5%;">
                 <label for="name">Enter User Name:</label>
                 <input type="name" name="name" id="name" value="" style=" margin-left: 2%; text-align: left;" />
@@ -65,7 +66,7 @@
                     <input type="answer" name="answer" id="answer" value="" style=" margin-left: 12%;margin-top: 5%" />
                 </div><!-- /fieldcontain -->
             <div style="width: 100%;margin-top: 5%;">
-
+                 <!-- button used to submit form after filling it out, currently inactive -->
             <a href="indexRegUser.html" data-role="button">Register Account!</a>
                 </div>
     </form>

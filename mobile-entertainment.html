@@ -1,48 +1,48 @@
 <!-- THIS PAGE DISPLAYS WHAT THE MOBILE ENTERTAINMENT GENRE EVENT WILL LOOK LIKE WHEN BROWSING WITHOUT AN ACCOUNT -->
 
-
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <title>Welcome to E-vents</title>
-    <link rel="stylesheet" href="css/mobile-style.css" />
-    <link rel="stylesheet" href="css/jquery.mobile-1.2.0.css" />
-    <link href='http://cdn1.editmysite.com/editor/fonts/Capture_it/font.css?2' rel='stylesheet' type='text/css' />
-    <link rel='stylesheet' href='css/common-v2.css' type='text/css' />
+    <link rel="stylesheet" href="css/mobile-style.css" />      <!--Calls the mobile version css file -->
+    <link rel="stylesheet" href="css/jquery.mobile-1.2.0.css" />      <!-- Calls the jquery mobile styling file. This is used for things such as buttons, fitting in screen, event handling -->
+    <link href='http://cdn1.editmysite.com/editor/fonts/Capture_it/font.css?2' rel='stylesheet' type='text/css' />    <!--Used to style the logo -->
+    <link rel='stylesheet' href='css/common-v2.css' type='text/css' />    <!--gives the page wrapper some constraints and styling -->
 
 
-    <script src="js/jquery-1.8.2.js"></script>
-    <script src="js/jquery.mobile-1.2.0.js"></script>
+    <script src="js/jquery-1.8.2.js"></script>        <!-- jquery javascript-->
+    <script src="js/jquery.mobile-1.2.0.js"></script>  <!--jquery mobile javascript-->
 
 
 
-    <script>
-        $(document).ready(function(){
-            $('#select-choice-1').change(function()  {
-                var $vn = $(this).children('option:selected').attr('value') + ".html";
+    <script>                                          /* script used to choose the drop down select menu option and switch the window to the corresponding page */
+    $(document).ready(function(){
+        $('#select-choice-1').change(function()  {
+            var $vn = $(this).children('option:selected').attr('value') + ".html";
 
-                window.location.href = $vn;
-            });
+            window.location.href = $vn;
         });
+    });
 
 
     </script>
 
+
 </head>
 <body>
-<div id="wrapper" style="height: 100%">
-    <div id="header" style="height: 25%">
-        <span class='wsite-logo'><span id="wsite-title" >E-venturePR</span></span>
-        <div data-role="controlgroup" data-type="horizontal" style="float:left;" >
+<div id="wrapper" style="height: 100%">               <!--wraps the content of the page for styling purposes -->
+    <div id="header" style="height: 25%">                 <!--header -->
+        <span class='wsite-logo'><span id="wsite-title" >E-venturePR</span></span>   <!-- Eventure logo -->
+        <div data-role="controlgroup" data-type="horizontal" style="float:left;" >         <!-- buttons styled to fit our website content, used to log in or sign into an account. Currently dummy buttons until further development-->
             <a href="mobile-login.html" rel="external" data-role="button" data-theme="c" style="height: 35px; font-size: 15px;" >Log in</a>
             <a href="mobile-register.html" rel="external" data-role="button" data-theme="c" style="height: 35px; font-size: 15px;">Sign up</a>
 
         </div>
     </div><!-- /header -->
     <div id="content" style="height: 75%; padding-top: 50px;">
-        <div data-role="fieldcontain">
+        <div data-role="fieldcontain">      <!-- dropdown select menu to scroll through different event genres-->
             <label for="select-choice-1" class="select" style="color: white; font-weight: bold; text-shadow: none;">Select an Option:</label>
             <select id="select-choice-1" name="select-choice-1" data-native-menu="true">
                 <option value="">MAIN MENU</option>
@@ -54,7 +54,7 @@
             </select>
         </div>
 
-        <div id="list">
+        <div id="list">                                   <!--Shows list of upcoming events, currently dummy events for presentation purposes -->
             <h1 style="color:white; text-shadow: none; text-align: left;">Select an event: </h1>
             <ul data-role="listview" data-inset="true" data-split-theme="c">
                 <li><a href=""><img src="uploads/799823178.jpg" class="ui-li-thumb" style="position:absolute !important; top: 10px; left: 10px; height: 80%"><h3>Concierto de Guitarra Cl&aacute;sica - Jose Antonio Lopez</h3></a></li>

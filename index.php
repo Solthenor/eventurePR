@@ -1,3 +1,5 @@
+/*This code is used mainly to detect if you are accessing the website through a mobile device or a desktop application and routes the address accordingly */
+
 <?php
 $iphone = strpos($_SERVER['HTTP_USER_AGENT'],"iPhone");
 $android = strpos($_SERVER['HTTP_USER_AGENT'],"Android");
