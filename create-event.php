@@ -1,32 +1,55 @@
 <?php
-error_reporting(-1);
 $iphone = strpos($_SERVER['HTTP_USER_AGENT'],"iPhone");
 $android = strpos($_SERVER['HTTP_USER_AGENT'],"Android");
 $palmpre = strpos($_SERVER['HTTP_USER_AGENT'],"webOS");
 $berry = strpos($_SERVER['HTTP_USER_AGENT'],"BlackBerry");
 $ipod = strpos($_SERVER['HTTP_USER_AGENT'],"iPod");
 
-// if ($iphone || $android || $palmpre || $ipod || $berry == true)
-// {
-// header('Location: http://icom5016.ece.uprm.edu/~g13/mobile-index.html');
-// //OR
-// }
-
-// else {
-//         header('Location: http://icom5016.ece.uprm.edu/~g13/home.html');
-
-// }
+if ($iphone || $android || $palmpre || $ipod || $berry == true) {
+    header('Location: /mobile-index.html');
+    return;
+}
 
 require_once('db.php');
+require_once('checkAuth.php');
 
-$db = db::getInstance();
-$sql = "SELECT * FROM Event";
-$stmt = $db->prepare($sql);
-// $stmt->bindParam(':table', $table, PDO::PARAM_STR);
-$stmt->execute();
-// var_dump($stmt->fetchColumn(0));
+if( !$loggedin ){
+  header('Location: /index.php');
+}
+
+
+if ( count($_POST) > 0) {
+
+    //TODO: better validation for empty fields
+
+  // startHour = '{$_POST['street']}',
+  // endHour = '{$_POST['street']}',
+  // featured = '{$_POST['street']}',
+  // price = '{$_POST['street']}',
+    $db = db::getInstance();
+    $sql = "INSERT INTO Event
+            SET
+              userID = 1,
+              eventName = '{$_POST['event-name']}',
+              date = '{$_POST['date']}',
+              venueID = '{$_POST['venue']}',
+              eventType = '{$_POST['type']}',
+              genre = '{$_POST['genre']}',
+              status = '{$_POST['private']}',           
+              description = '{$_POST['description']}'
+    ";
+
+    $stmt = $db->prepare($sql);
+    // $stmt->bindValue(':vName', , PDO::PARAM_STR);
+    // $stmt->bindValue(':street', $_POST['location'], PDO::PARAM_STR);
+    // $stmt->bindValue(':city', $_POST['location'], PDO::PARAM_STR);
+    // $stmt->bindValue(':zipcode', $_POST['location'], PDO::PARAM_STR);
+    // $stmt->bindValue(':pNumber', $_POST['telephone'], PDO::PARAM_STR);
+    // $stmt->bindValue(':website', $_POST['website'], PDO::PARAM_STR);
+    // $stmt->bindValue(':description', $_POST['description'], PDO::PARAM_STR);
+    $stmt->execute();
+}
 ?>
-
 
 <!DOCTYPE html>
 <html>
@@ -48,32 +71,12 @@ $stmt->execute();
         #wsite-content a:visited, .blog-sidebar a:visited{color:#FFFFFF }
         #wsite-content a:hover, .blog-sidebar a:hover{color:#FFFFFF }
     </style>
-    <script type='text/javascript'><!--
-    var STATIC_BASE = 'http://cdn1.editmysite.com/';
-    var STYLE_PREFIX = 'wsite';
-    //-->
-    </script>
     <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/jquery_effects.js?1346362758'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.min.js?1346362758'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/images/common/utilities-jq.js?1346362758'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/flyout_menus_jq.js?1346362758'></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script type='text/javascript'><!--
-var IS_ARCHIVE=1;
-(function(jQuery){
-function initFlyouts(){initPublishedFlyoutMenus([{"id":"581818271480209023","title":"Home","url":"index.html"},{"id":"145650631833651339","title":"Concerts","url":"concerts.html"},{"id":"404778243583026952","title":"Sports","url":"sports.html"},{"id":"441792526610757515","title":"Entertainment","url":"entertainment.html"},{"id":"269210016325162137","title":"Business & Education","url":"business--education.html"},{"id":"224132398954985812","title":"Profile","url":"profile.html"},{"id":"313146698326919915","title":"Login","url":"login.html"},{"id":"435700788219059228","title":"Nightwish Detail","url":"nightwish-detail.html"},{"id":"549951918166142509","title":"Add Friends","url":"add-friends.html"},{"id":"170216070745516754","title":"Venue","url":"venue.html"}],'115402879236912927',"<li class='wsite-nav-more'><a href='#'>more...<\/a><\/li>",'',false)}
-if (jQuery) {
-if (jQuery.browser.msie) window.onload = initFlyouts;
-else jQuery(initFlyouts)
-}else{
-if (Prototype.Browser.IE) window.onload = initFlyouts;
-else document.observe('dom:loaded', initFlyouts);
-}
-})(window._W && _W.jQuery)
-//-->
-</script>
 </head>
 <body class='wsite-theme-dark no-header-page wsite-page-create-event'>
 <div id="wrapper">
@@ -82,10 +85,18 @@ else document.observe('dom:loaded', initFlyouts);
 			<td id="logo"><span class='wsite-logo'><a href=''><span id="wsite-title">E-venturePR</span></a></span></td>
 			<td id="header-right">
 				<table>
-					<tr>
-                        <td class="phone-number"><span class='wsite-text'><a href="profile3.html" style="color: #32CD32; text-decoration: underline; ">Profile</a> | <a href="home.html" style="color: #32CD32; text-decoration: underline;">Log out</a></span></td>
-                        <td class="social"></td>
-                    </tr>
+          <?php if($loggedin) { ?>
+          <tr>
+              <td class="phone-number"><span class='wsite-text'><a href="profile3.html" style="color: #32CD32; text-decoration: underline; ">Profile</a> | <a href="home.html" style="color: #32CD32; text-decoration: underline;">Log out</a></span></td>
+              <td class="social"></td>
+          </tr>
+          
+          <?php }  else {?>
+          <tr>
+              <td class="phone-number"><span class='wsite-text'>Don't have an account? Register <a href="login.php" style="color: #32CD32; text-decoration: underline; ">HERE</a> | <a href="login.php" style="color: #32CD32; text-decoration: underline;">Sign in</a></span></td>
+              <td class="social"></td>
+          </tr>
+          <?php }?>
 				</table>
 				<div class="search"></div>
 			</td>
@@ -113,37 +124,49 @@ else document.observe('dom:loaded', initFlyouts);
 <h2 style="text-align:left;">E-Vent it</h2>
 
 <div>
-<form enctype="multipart/form-data" action="http://www.weebly.com/weebly/apps/formSubmit.php" method="POST" id="form-807999966852778988">
+<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" id="create-event">
 <div id="807999966852778988-form-parent" class="wsite-form-container" style="margin-top:10px;">
   <ul class="formlist" id="807999966852778988-form-list">
     <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
-  <label class="wsite-form-label" for="input-461209313855761342">Event Name <span class="form-required">*</span></label>
+  <label class="wsite-form-label" for="event-name">Event Name <span class="form-required">*</span></label>
   <div class="wsite-form-input-container">
-    <input id="input-461209313855761342" class="wsite-form-input wsite-input" type="text" name="_u461209313855761342" style="width:200px;" />
+    <input id="event-name" class="wsite-form-input wsite-input" type="text" name="event-name" style="width:200px;" />
   </div>
   <div id="instructions-461209313855761342" class="wsite-form-instructions" style="display:none;"></div>
 </div></div>
 
 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
-  <label class="wsite-form-label" for="input-376105289394483033">Date <span class="form-required">*</span></label>
+  <label class="wsite-form-label" for="date">Date <span class="form-required">*</span></label>
   <div class="wsite-form-input-container">
-    <input id="input-376105289394483033" class="wsite-form-input wsite-input" type="text" name="_u376105289394483033" style="width:200px;" />
+    <input id="date" class="wsite-form-input wsite-input" type="text" name="date" style="width:200px;" />
   </div>
   <div id="instructions-376105289394483033" class="wsite-form-instructions" style="display:none;"></div>
 </div></div>
 
-<div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
-  <label class="wsite-form-label" for="input-935462346745001510">Location <span class="form-required">*</span></label>
-  <div class="wsite-form-input-container">
-    <input id="input-935462346745001510" class="wsite-form-input wsite-input" type="text" name="_u935462346745001510" style="width:200px;" />
-  </div>
-  <div id="instructions-935462346745001510" class="wsite-form-instructions" style="display:none;"></div>
+<div><div class="wsite-form-field" style="margin:5px 0px 0px 0px;">
+    <label class="wsite-form-label" for="venue">Select a Venue: <span class="form-required">*</span></label>
+    <div class="wsite-form-radio-container">
+        <select name='venue' class='form-select'>
+          <?php
+            $db = db::getInstance();
+            $sql = "SELECT venueID V, vName N FROM Venue";
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+            foreach ($result as &$venue) {
+              echo "<option value='{$venue['V']}'>{$venue['N']}</option>";
+            }
+          ?>
+        </select>
+
+    </div>
+    <div id="instructions-Select a Genre:" class="wsite-form-instructions" style="display:none;"></div>
 </div></div>
 
       <div><div class="wsite-form-field" style="margin:5px 0px 0px 0px;">
-          <label class="wsite-form-label" for="input-860164904846382269">Select a Type: <span class="form-required">*</span></label>
+          <label class="wsite-form-label" for="type">Select a Type: <span class="form-required">*</span></label>
           <div class="wsite-form-radio-container">
-              <select name='_u860164904846382269' class='form-select'>
+              <select name='type' class='form-select'>
                   <option value='Concert'>Concert</option>
                   <option value='Sports'>Sports</option>
                   <option value='Sports'>Entertainment</option>
@@ -155,9 +178,9 @@ else document.observe('dom:loaded', initFlyouts);
       </div></div>
 
 <div><div class="wsite-form-field" style="margin:5px 0px 0px 0px;">
-  <label class="wsite-form-label" for="input-860164904846382269">Select a Genre: <span class="form-required">*</span></label>
+  <label class="wsite-form-label" for="genre">Select a Genre: <span class="form-required">*</span></label>
   <div class="wsite-form-radio-container">
-    <select name='_u860164904846382269' class='form-select'>
+    <select name='genre' class='form-select'>
 	<option value='Alternative'>Alternative</option>
 	<option value='Rock'>Rock</option>
     <option value='Pop'>Pop</option>
@@ -172,11 +195,11 @@ else document.observe('dom:loaded', initFlyouts);
 </div></div>
 
     <div><div class="wsite-form-field" style="margin:5px 0px 0px 0px;">
-          <label class="wsite-form-label" for="input-860164904846382269">Public or Private? <span class="form-required">*</span></label>
+          <label class="wsite-form-label" for="private">Public or Private? <span class="form-required">*</span></label>
           <div class="wsite-form-radio-container">
-              <select name='_u860164904846382269' class='form-select'>
-                  <option value='Public'>Public</option>
-                  <option value='Private'>Private</option>
+              <select name='private' class='form-select'>
+                  <option value='0'>Public</option>
+                  <option value='1'>Private</option>
               </select>
 
           </div>
@@ -184,22 +207,16 @@ else document.observe('dom:loaded', initFlyouts);
       </div></div>
 
 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
-  <label class="wsite-form-label" for="input-740288841696996782">Brief Description <span class="form-required">*</span></label>
+  <label class="wsite-form-label" for="description">Brief Description <span class="form-required">*</span></label>
   <div class="wsite-form-input-container">
-    <textarea id="input-740288841696996782" class="wsite-form-input wsite-input" name="_u740288841696996782" style="width:285px; height: 50px"></textarea>
+    <textarea id="description" class="wsite-form-input wsite-input" name="description" style="width:285px; height: 50px"></textarea>
   </div>
   <div id="instructions-740288841696996782" class="wsite-form-instructions" style="display:none;"></div>
 </div></div>
   </ul>
 </div>
-<div style="display:none; visibility:hidden;">
-  <input type="text" name="wsite_subject" />
-</div>
 <div style="text-align:left; margin-top:10px; margin-bottom:10px;">
-  <input type="hidden" name="form_version" value="2" />
-  <input type="hidden" name="wsite_approved" id="wsite-approved" value="approved" />
-  <input type="hidden" name="ucfid" value="807999966852778988" />
-  <input type='submit' style='position:absolute;top:0;left:-9999px;width:1px;height:1px' /><a class='wsite-button' onclick="document.getElementById('form-807999966852778988').submit()"><span class='wsite-button-inner'>Submit</span></a>
+  <input type='submit' name="submit" value="Submit" class='btn btn-eventPR' />
 </div>
 </form>
 

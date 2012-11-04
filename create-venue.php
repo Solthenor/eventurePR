@@ -1,5 +1,4 @@
 <?php
-error_reporting(-1);
 $iphone = strpos($_SERVER['HTTP_USER_AGENT'],"iPhone");
 $android = strpos($_SERVER['HTTP_USER_AGENT'],"Android");
 $palmpre = strpos($_SERVER['HTTP_USER_AGENT'],"webOS");
@@ -7,7 +6,14 @@ $berry = strpos($_SERVER['HTTP_USER_AGENT'],"BlackBerry");
 $ipod = strpos($_SERVER['HTTP_USER_AGENT'],"iPod");
 
 if ($iphone || $android || $palmpre || $ipod || $berry == true) {
-    header('Location: http://icom5016.ece.uprm.edu/~g13/mobile-index.html');
+    header('Location: /mobile-index.html');
+    return;
+}
+
+require_once('checkAuth.php');
+
+if( !$loggedin ){
+  header('Location: /index.php');
 }
 
 if ( count($_POST) > 0) {
@@ -38,7 +44,6 @@ if ( count($_POST) > 0) {
     // $stmt->bindValue(':description', $_POST['description'], PDO::PARAM_STR);
     $stmt->execute();
 }
-
 
 ?>
 
@@ -75,10 +80,18 @@ if ( count($_POST) > 0) {
             <td id="logo"><span class='wsite-logo'><a href=''><span id="wsite-title">E-venturePR</span></a></span></td>
             <td id="header-right">
                 <table>
+                    <?php if($loggedin) { ?>
                     <tr>
                         <td class="phone-number"><span class='wsite-text'><a href="profile3.html" style="color: #32CD32; text-decoration: underline; ">Profile</a> | <a href="home.html" style="color: #32CD32; text-decoration: underline;">Log out</a></span></td>
                         <td class="social"></td>
                     </tr>
+                    
+                    <?php }  else {?>
+                    <tr>
+                        <td class="phone-number"><span class='wsite-text'>Don't have an account? Register <a href="login.php" style="color: #32CD32; text-decoration: underline; ">HERE</a> | <a href="login.php" style="color: #32CD32; text-decoration: underline;">Sign in</a></span></td>
+                        <td class="social"></td>
+                    </tr>
+                    <?php }?>
                 </table>
                 <div class="search"></div>
             </td>

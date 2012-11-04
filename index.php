@@ -1,32 +1,18 @@
 <?php
-error_reporting(-1);
 $iphone = strpos($_SERVER['HTTP_USER_AGENT'],"iPhone");
 $android = strpos($_SERVER['HTTP_USER_AGENT'],"Android");
 $palmpre = strpos($_SERVER['HTTP_USER_AGENT'],"webOS");
 $berry = strpos($_SERVER['HTTP_USER_AGENT'],"BlackBerry");
 $ipod = strpos($_SERVER['HTTP_USER_AGENT'],"iPod");
 
-// if ($iphone || $android || $palmpre || $ipod || $berry == true)
-// {
-// header('Location: http://icom5016.ece.uprm.edu/~g13/mobile-index.html');
-// //OR
-// }
-
-// else {
-//         header('Location: http://icom5016.ece.uprm.edu/~g13/home.html');
-
-// }
+if ($iphone || $android || $palmpre || $ipod || $berry == true) {
+    header('Location: /mobile-index.html');
+}
 
 require_once('db.php');
+require_once('checkAuth.php');
 
-$db = db::getInstance();
-$sql = "SELECT * FROM Event";
-$stmt = $db->prepare($sql);
-// $stmt->bindParam(':table', $table, PDO::PARAM_STR);
-$stmt->execute();
-var_dump($stmt->fetchColumn(0));
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,43 +22,23 @@ var_dump($stmt->fetchColumn(0));
 
     <link rel='stylesheet' type='text/css' href='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.css?1346362758'>
     <link rel='stylesheet' href='http://cdn1.editmysite.com/editor/images/common/common-v2.css?buildTime=1346362758' type='text/css' />
-            <link rel='stylesheet' type='text/css' href='css/main_style.css' title='wsite-theme-css' />
-            <link href='http://cdn1.editmysite.com/editor/fonts/Capture_it/font.css?2' rel='stylesheet' type='text/css' />
-            <link href="css/bootstrap.min.css" rel="stylesheet">
-            <style type='text/css'>
-    #wsite-content div.paragraph, #wsite-content p, #wsite-content .product-block .product-title, #wsite-content .product-description, .blog-sidebar div.paragraph, .blog-sidebar p, .wsite-form-field label, .wsite-form-field label {}
-    #wsite-content h2, #wsite-content .product-long .product-title, #wsite-content .product-large .product-title, #wsite-content .product-small .product-title, .blog-sidebar h2 {}
-    #wsite-title{font-family:'Capture it' !important;color:#009900 !important;}
-    #wsite-content a:link, .blog-sidebar a:link{color:#FFFFFF }
-    #wsite-content a:visited, .blog-sidebar a:visited{color:#FFFFFF }
-    #wsite-content a:hover, .blog-sidebar a:hover{color:#FFFFFF }
+    <link rel='stylesheet' type='text/css' href='css/main_style.css' title='wsite-theme-css' />
+    <link href='http://cdn1.editmysite.com/editor/fonts/Capture_it/font.css?2' rel='stylesheet' type='text/css' />
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <style type='text/css'>
+        #wsite-content div.paragraph, #wsite-content p, #wsite-content .product-block .product-title, #wsite-content .product-description, .blog-sidebar div.paragraph, .blog-sidebar p, .wsite-form-field label, .wsite-form-field label {}
+        #wsite-content h2, #wsite-content .product-long .product-title, #wsite-content .product-large .product-title, #wsite-content .product-small .product-title, .blog-sidebar h2 {}
+        #wsite-title{font-family:'Capture it' !important;color:#009900 !important;}
+        #wsite-content a:link, .blog-sidebar a:link{color:#FFFFFF }
+        #wsite-content a:visited, .blog-sidebar a:visited{color:#FFFFFF }
+        #wsite-content a:hover, .blog-sidebar a:hover{color:#FFFFFF }
     </style>
-    <script type='text/javascript'><!--
-    var STATIC_BASE = 'http://cdn1.editmysite.com/';
-    var STYLE_PREFIX = 'wsite';
-    //-->
-    </script>
     <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/jquery_effects.js?1346362758'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.min.js?1346362758'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/images/common/utilities-jq.js?1346362758'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/flyout_menus_jq.js?1346362758'></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script type='text/javascript'><!--
-    var IS_ARCHIVE=1;
-    (function(jQuery){
-        function initFlyouts(){initPublishedFlyoutMenus([{"id":"581818271480209023","title":"Home","url":"index.html"},{"id":"145650631833651339","title":"Concerts","url":"concerts.html"},{"id":"404778243583026952","title":"Sports","url":"sports.html"},{"id":"441792526610757515","title":"Entertainment","url":"entertainment.html"},{"id":"269210016325162137","title":"Business & Education","url":"business--education.html"},{"id":"224132398954985812","title":"Profile","url":"profile.html"},{"id":"313146698326919915","title":"Login","url":"login.html"},{"id":"435700788219059228","title":"Nightwish Detail","url":"nightwish-detail.html"},{"id":"549951918166142509","title":"Add Friends","url":"add-friends.html"},{"id":"170216070745516754","title":"Venue","url":"venue.html"}],'581818271480209023',"<li class='wsite-nav-more'><a href='#'>more...<\/a><\/li>",'active',false)}
-        if (jQuery) {
-            if (jQuery.browser.msie) window.onload = initFlyouts;
-            else jQuery(initFlyouts)
-        }else{
-            if (Prototype.Browser.IE) window.onload = initFlyouts;
-            else document.observe('dom:loaded', initFlyouts);
-        }
-    })(window._W && _W.jQuery)
-    //-->
-    </script>
 </head>
 <body class='wsite-theme-dark tall-header-page wsite-page-index'>
 <div id="wrapper">
@@ -81,10 +47,18 @@ var_dump($stmt->fetchColumn(0));
             <td id="logo"><span class='wsite-logo'><a href=''><span id="wsite-title">E-venturePR</span></a></span></td>
             <td id="header-right">
                 <table>
+                    <?php if($loggedin) { ?>
                     <tr>
-                        <td class="phone-number"><span class='wsite-text'>Don't have an account? Register <a href="login.html" style="color: #32CD32; text-decoration: underline; ">HERE</a> | <a href="login.html" style="color: #32CD32; text-decoration: underline;">Sign in</a></span></td>
+                        <td class="phone-number"><span class='wsite-text'><a href="profile3.html" style="color: #32CD32; text-decoration: underline; ">Profile</a> | <a href="home.html" style="color: #32CD32; text-decoration: underline;">Log out</a></span></td>
                         <td class="social"></td>
                     </tr>
+   
+                    <?php }  else {?>
+                    <tr>
+                        <td class="phone-number"><span class='wsite-text'>Don't have an account? Register <a href="login.php" style="color: #32CD32; text-decoration: underline; ">HERE</a> | <a href="login.php" style="color: #32CD32; text-decoration: underline;">Sign in</a></span></td>
+                        <td class="social"></td>
+                    </tr>
+                    <?php }?>
                 </table>
                 <div class="search"></div>
             </td>
@@ -106,28 +80,22 @@ var_dump($stmt->fetchColumn(0));
                         <tbody class='wsite-multicol-tbody'>
                         <tr class='wsite-multicol-tr'>
                             <td class='wsite-multicol-col' style='width:34.634492266734%;padding:0 15px'>
-
                                 <h2 style="text-align:left;">Entertainment<br /></h2>
                                 <span class='imgPusher' style='float:right;height:0px'></span><span style='position:relative;float:right;z-index:10;;clear:right;margin-top:0px;*margin-top:0px'><a href=''><img class="wsite-image galleryImageBorder" src="uploads/1/3/4/4/13443306/147751913.jpg?142" style="margin-top: 5px; margin-bottom: 10px; margin-left: 10px; margin-right: 0px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
                                 <div class="paragraph" style="text-align:left;display:block;"><a href="">"Luis Raul: Que Clase E Lengua!"&nbsp;</a></div>
                                 <hr style="clear:both;visibility:hidden;width:100%;">
-
                             </td>
                             <td class='wsite-multicol-col' style='width:33.840153244709%;padding:0 15px'>
                                 <h2 style="text-align:left;">Concerts</h2>
                                 <span class='imgPusher' style='float:right;height:0px'></span><span style='position:relative;float:right;z-index:10;;clear:right;margin-top:0px;*margin-top:0px'><a href="#"><img class="wsite-image galleryImageBorder" src="uploads/1/3/4/4/13443306/253613209.jpg?147" style="margin-top: 5px; margin-bottom: 10px; margin-left: 10px; margin-right: 0px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
                                 <div class="paragraph" style="text-align:left;display:block;"><a href="#">"Nightwish: Imaginareum"&nbsp;<br /><br /></a></div>
                                 <hr style="clear:both;visibility:hidden;width:100%;">
-
-
                             </td>
                             <td class='wsite-multicol-col' style='width:31.525354488556%;padding:0 15px'>
                                 <h2 style="text-align:left;">Sports</h2>
                                 <span class='imgPusher' style='float:right;height:0px'></span><span style='position:relative;float:right;z-index:10;;clear:right;margin-top:0px;*margin-top:0px'><a href=''><img class="wsite-image galleryImageBorder" src="uploads/1/3/4/4/13443306/946440671.jpg?147" style="margin-top: 5px; margin-bottom: 10px; margin-left: 10px; margin-right: 0px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
                                 <div class="paragraph" style="text-align:left;display:block;"><a href="">"Baloncesto: Los Piratas de Quebradillas</a></div>
                                 <hr style="clear:both;visibility:hidden;width:100%;">
-
-
                             </td>
                         </tr>
                         </tbody>
@@ -145,33 +113,31 @@ var_dump($stmt->fetchColumn(0));
                         <tbody class='wsite-multicol-tbody'>
                         <tr class='wsite-multicol-tr'>
                             <td class='wsite-multicol-col' style='width:50%;padding:0 15px'>
-
                                  <div id="mainmenu">
                                  	<ul style="font-size: 22px; color: white;">
-                                 	    
-<!-- 
-                                 	<li><a href=""> <span style="color: white">Alvaro's Supercalifragilisticexpialidocious Fest</span></a></li>
-                                 	         <hr class="styled-hr" style="width:100%;">
-                                 	         <div style="height: 20px; overflow: hidden; width: 100%;"></div>
-
-                                 	    <li><a href=""> <span style="color: white">Improvisación: TEATRUM</span></a></li>
-                                 	         <hr class="styled-hr" style="width:100%;">
-                                 	         <div style="height: 20px; overflow: hidden; width: 100%;"></div>
-                                 	   <li><a href=""> <span style="color: white">DIGILIFE: Effective Project Management</span></a></li>
-                                 	         <hr class="styled-hr" style="width:100%;">
-                                 	         <div style="height: 20px; overflow: hidden; width: 100%;"></div>
-                                 	   <li><a href=""> <span style="color: white">ACM - Basic Python Programming Seminar</span></a></li>
-                                 	         <hr class="styled-hr" style="width:100%;">
-                                 	         <div style="height: 20px; overflow: hidden; width: 100%;"></div> -->
                                  	<?php
-      									echo '<li><a href=""> <span style="color: white">Mofongo Party</span></a></li>
-                                 	         <hr class="styled-hr" style="width:100%;">
-                                 	         <div style="height: 20px; overflow: hidden; width: 100%;"></div>'
+
+                                    $db = db::getInstance();
+                                    $sql = "SELECT eventName
+                                            FROM Event AS r1 
+                                                JOIN (SELECT (RAND() * (SELECT MAX(eventID) FROM Event)) AS id) AS r2
+                                            WHERE r1.eventID >= r2.id
+                                            ORDER BY r1.eventID ASC
+                                            LIMIT 5
+                                    ";
+
+                                    $stmt = $db->prepare($sql);
+                                    $stmt->execute();
+                                    
+                                    $result = $stmt->fetchAll();
+
+                                    foreach ($result as &$venue) {
+                                      echo "<li><a href=''> <span style='color: white'>{$venue['eventName']}</span></a></li>
+                                        <hr class='styled-hr' style='width:100%;''>
+                                        <div style='height: 20px; overflow: hidden; width: 100%;''></div>";
+                                    }
                                     ?>
                                     </ul>
-
-
-
                                 </div>
 
                             </td>
@@ -191,6 +157,5 @@ var_dump($stmt->fetchColumn(0));
     </div>
     <div class="clear"></div>
     </div>
-
 </body>
 </html>
