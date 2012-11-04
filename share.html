@@ -1,62 +1,51 @@
-<!--
-Share page
-
-Page to share an E-venture
--->
 <!DOCTYPE html>
 <html>
 <head>
-    <title>E-venturePR - Share</title>
+    <title>Contacts - E-venturePR</title>
+
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-    <!--Style sheets-->
-    <link rel='stylesheet' type='text/css' href="css/fancybox.css">
-    <link rel='stylesheet' href='http://cdn1.editmysite.com/editor/images/common/common-v2.css?buildTime=1346362758' type='text/css'/>
-    <link rel='stylesheet' type='text/css' href='css/main_style.css' title='wsite-theme-css'/>
-    <link href='http://cdn1.editmysite.com/editor/fonts/Capture_it/font.css?2' rel='stylesheet' type='text/css'/>
+    <link rel='stylesheet' type='text/css' href='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.css?1346362758'>
+    <link rel='stylesheet' href='http://cdn1.editmysite.com/editor/images/common/common-v2.css?buildTime=1346362758' type='text/css' />
+    <link rel='stylesheet' type='text/css' href='css/main_style.css' title='wsite-theme-css' />
+    <link href='http://cdn1.editmysite.com/editor/fonts/Capture_it/font.css?2' rel='stylesheet' type='text/css' />
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <style type='text/css'>
-
-            /*<!--These area the tags invoked by the universal stylesheet-->*/
-        #wsite-content div.paragraph, #wsite-content p, #wsite-content .product-block .product-title, #wsite-content .product-description, .blog-sidebar div.paragraph, .blog-sidebar p, .wsite-form-field label, .wsite-form-field label {
-        }
-
-        #wsite-content h2, #wsite-content .product-long .product-title, #wsite-content .product-large .product-title, #wsite-content .product-small .product-title, .blog-sidebar h2 {
-        }
-
-        #wsite-title {
-            font-family: 'Capture it' !important;
-            color: #009900 !important;
-        }
-
-        #wsite-content a:link, .blog-sidebar a:link {
-            color: #FFFFFF
-        }
-
-        #wsite-content a:visited, .blog-sidebar a:visited {
-            color: #FFFFFF
-        }
-
-        #wsite-content a:hover, .blog-sidebar a:hover {
-            color: #FFFFFF
-        }
+        #wsite-content div.paragraph, #wsite-content p, #wsite-content .product-block .product-title, #wsite-content .product-description, .blog-sidebar div.paragraph, .blog-sidebar p, .wsite-form-field label, .wsite-form-field label {}
+        #wsite-content h2, #wsite-content .product-long .product-title, #wsite-content .product-large .product-title, #wsite-content .product-small .product-title, .blog-sidebar h2 {}
+        #wsite-title{font-family:'Capture it' !important;color:#009900 !important;}
+        #wsite-content a:link, .blog-sidebar a:link{color:#FFFFFF !important;}
+        #wsite-content a:visited, .blog-sidebar a:visited{color:#FFFFFF !important;}
+        #wsite-content a:hover, .blog-sidebar a:hover{color:#FFFFFF !important;}
     </style>
-
-    <!--Scripts-->
-    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
-    <script type='text/javascript' src='js/jquery_effects.js'></script>
-    <script type='text/javascript' src='js/fancybox.min.js'></script>
-    <script type='text/javascript' src='js/utilities-jq.js'></script>
-    <script type='text/javascript' src='js/flyout_menus_jq.js'></script>
-
+    <script type='text/javascript'><!--
+    var STATIC_BASE = 'http://cdn1.editmysite.com/';
+    var STYLE_PREFIX = 'wsite';
+    //-->
+    </script>
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js'></script>
+    <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/jquery_effects.js?1346362758'></script>
+    <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.min.js?1346362758'></script>
+    <script type='text/javascript' src='http://cdn1.editmysite.com/editor/images/common/utilities-jq.js?1346362758'></script>
+    <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/flyout_menus_jq.js?1346362758'></script>
+    <script type='text/javascript'><!--
+    var IS_ARCHIVE=1;
+    (function(jQuery){
+        function initFlyouts(){initPublishedFlyoutMenus([{"id":"581818271480209023","title":"Home","url":"index.html"},{"id":"145650631833651339","title":"Concerts","url":"concerts.html"},{"id":"404778243583026952","title":"Sports","url":"sports.html"},{"id":"441792526610757515","title":"Entertainment","url":"entertainment.html"},{"id":"269210016325162137","title":"Business & Education","url":"business--education.html"},{"id":"224132398954985812","title":"About us","url":"about-us.html"}],'435700788219059228',"<li class='wsite-nav-more'><a href='#'>more...<\/a><\/li>",'active',false)}
+        if (jQuery) {
+            if (jQuery.browser.msie) window.onload = initFlyouts;
+            else jQuery(initFlyouts)
+        }else{
+            if (Prototype.Browser.IE) window.onload = initFlyouts;
+            else document.observe('dom:loaded', initFlyouts);
+        }
+    })(window._W && _W.jQuery)
+    //-->
+    </script>
 </head>
 <body class='wsite-theme-dark no-header-page wsite-page-add-friends'>
 <div id="wrapper">
-    <!--
-    Page Header:
-    Contains logo, rainbow background image, and registered user's options
-    -->
     <table id="header">
         <tr>
             <td id="logo"><span class='wsite-logo'><a href=''><span id="wsite-title">E-venturePR</span></a></span></td>
@@ -71,14 +60,9 @@ Page to share an E-venture
             </td>
         </tr>
     </table>
-    <!--
-    Navigation Bar:
-    Holds buttons to navigate within the site
-    -->
     <div id="navigation">
-        <ul><li id='active'><a href='home2.html'>Home</a></li><li><a href='concerts2.html'>Music</a></li><li ><a href='sports2.html'>Sports</a></li><li ><a href='entertainment2.html'>Entertainment</a></li><li><a href='business--education2.html'>Business & Education</a></li><li id="pgabout_us"><a href="about-us.html">About Us</a></li></ul>
+        <ul><li id='active'><a href='home2.html'>Home</a></li><li id='pg145650631833651339'><a href='concerts2.html'>Music</a></li><li id='pg404778243583026952'><a href='sports2.html'>Sports</a></li><li id='pg441792526610757515'><a href='entertainment2.html'>Entertainment</a></li><li id='pg269210016325162137'><a href='business--education2.html'>Business & Education</a></li><li id="pgabout_us"><a href="about-us.html">About Us</a></li></ul>
     </div>
-    <!--Enter email field & submit photo -->
     <div id="container">
         <div id="content">
             <div class="text"><div id='wsite-content' class='wsite-not-footer'>
@@ -89,7 +73,7 @@ Page to share an E-venture
                 <h2 style="text-align:left;">Share E-venture<br /></h2>
 
                 <div>
-                    <form enctype="multipart/form-data"  method="POST" id="form-679517611896646411">
+                    <form enctype="multipart/form-data" action="http://www.weebly.com/weebly/apps/formSubmit.php" method="POST" id="form-679517611896646411">
                         <div id="679517611896646411-form-parent" class="wsite-form-container" style="margin-top:10px;">
                             <ul class="formlist" id="679517611896646411-form-list">
                                 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">

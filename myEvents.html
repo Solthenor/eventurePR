@@ -1,62 +1,59 @@
-<!--
-My Events Page
-
-Contains info about user's events
--->
 <!DOCTYPE html>
 <html>
 <head>
-    <title>E-venturePR - My Events</title>
+    <title>Concerts - E-venturePR</title>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-    <!--Style sheets-->
-    <link rel='stylesheet' type='text/css' href="css/fancybox.css">
-    <link rel='stylesheet' href='http://cdn1.editmysite.com/editor/images/common/common-v2.css?buildTime=1346362758' type='text/css'/>
-    <link rel='stylesheet' type='text/css' href='css/main_style.css' title='wsite-theme-css'/>
-    <link href='http://cdn1.editmysite.com/editor/fonts/Capture_it/font.css?2' rel='stylesheet' type='text/css'/>
+    <link rel='stylesheet' type='text/css' href='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.css?1346362758'>
+    <link rel='stylesheet' href='http://cdn1.editmysite.com/editor/images/common/common-v2.css?buildTime=1346362758' type='text/css' />
+    <link rel='stylesheet' type='text/css' href='css/main_style.css' title='wsite-theme-css' />
+    <link href='http://cdn1.editmysite.com/editor/fonts/Capture_it/font.css?2' rel='stylesheet' type='text/css' />
     <link href="css/bootstrap.min.css" rel="stylesheet">
+
     <style type='text/css'>
-
-            /*<!--These area the tags invoked by the universal stylesheet-->*/
-        #wsite-content div.paragraph, #wsite-content p, #wsite-content .product-block .product-title, #wsite-content .product-description, .blog-sidebar div.paragraph, .blog-sidebar p, .wsite-form-field label, .wsite-form-field label {
-        }
-
-        #wsite-content h2, #wsite-content .product-long .product-title, #wsite-content .product-large .product-title, #wsite-content .product-small .product-title, .blog-sidebar h2 {
-        }
-
-        #wsite-title {
-            font-family: 'Capture it' !important;
-            color: #009900 !important;
-        }
-
-        #wsite-content a:link, .blog-sidebar a:link {
-            color: #FFFFFF
-        }
-
-        #wsite-content a:visited, .blog-sidebar a:visited {
-            color: #FFFFFF
-        }
-
-        #wsite-content a:hover, .blog-sidebar a:hover {
-            color: #FFFFFF
+        #wsite-content div.paragraph, #wsite-content p, #wsite-content .product-block .product-title, #wsite-content .product-description, .blog-sidebar div.paragraph, .blog-sidebar p, .wsite-form-field label, .wsite-form-field label {}
+        #wsite-content h2, #wsite-content .product-long .product-title, #wsite-content .product-large .product-title, #wsite-content .product-small .product-title, .blog-sidebar h2 {}
+        #wsite-title{font-family:'Capture it' !important;color:#009900 !important;}
+            /*<!--#wsite-content a:link, .blog-sidebar a:link{color:#FFFFFF !important;}  -->    */
+            /*#wsite-content a:visited, .blog-sidebar a:visited{color:#FFFFFF !important;}
+       #wsite-content a:hover, .blog-sidebar a:hover{color:#FFFFFF !important;} */
+    </style>
+    <style type='text/css'>
+        .wsite-header {
+            background-image: url(uploads/1/3/4/4/13443306/header_images/1346208841.jpg) !important;
+            background-position: 0 0 !important;
         }
     </style>
-
-    <!--Scripts-->
-    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
-    <script type='text/javascript' src='js/jquery_effects.js'></script>
-    <script type='text/javascript' src='js/fancybox.min.js'></script>
-    <script type='text/javascript' src='js/utilities-jq.js'></script>
-    <script type='text/javascript' src='js/flyout_menus_jq.js'></script>
-
+    <script type='text/javascript'><!--
+    var STATIC_BASE = 'http://cdn1.editmysite.com/';
+    var STYLE_PREFIX = 'wsite';
+    //-->
+    </script>
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js'></script>
+    <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/jquery_effects.js?1346362758'></script>
+    <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.min.js?1346362758'></script>
+    <script type='text/javascript' src='http://cdn1.editmysite.com/editor/images/common/utilities-jq.js?1346362758'></script>
+    <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/flyout_menus_jq.js?1346362758'></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type='text/javascript'><!--
+    var IS_ARCHIVE=1;
+    (function(jQuery){
+        function initFlyouts(){initPublishedFlyoutMenus([{"id":"581818271480209023","title":"Home","url":"index.html"},{"id":"145650631833651339","title":"Concerts","url":"concerts.html"},{"id":"404778243583026952","title":"Sports","url":"sports.html"},{"id":"441792526610757515","title":"Entertainment","url":"entertainment.html"},{"id":"269210016325162137","title":"Business & Education","url":"business--education.html"},{"id":"224132398954985812","title":"Profile","url":"profile.html"},{"id":"313146698326919915","title":"Login","url":"login.html"},{"id":"435700788219059228","title":"Nightwish Detail","url":"nightwish-detail.html"},{"id":"549951918166142509","title":"Add Friends","url":"add-friends.html"},{"id":"170216070745516754","title":"Venue","url":"venue.html"}],'145650631833651339',"<li class='wsite-nav-more'><a href='#'>more...<\/a><\/li>",'active',false)}
+        if (jQuery) {
+            if (jQuery.browser.msie) window.onload = initFlyouts;
+            else jQuery(initFlyouts)
+        }else{
+            if (Prototype.Browser.IE) window.onload = initFlyouts;
+            else document.observe('dom:loaded', initFlyouts);
+        }
+    })(window._W && _W.jQuery)
+    //-->
+    </script>
 </head>
 <body class='wsite-theme-dark tall-header-page wsite-page-concerts'>
 <div id="wrapper">
-    <!--
-    Page Header:
-    Contains logo, rainbow background image, and registered user's options
-    -->
     <table id="header">
         <tr>
             <td id="logo"><span class='wsite-logo'><a href=''><span id="wsite-title">E-venturePR</span></a></span></td>
@@ -71,18 +68,9 @@ Contains info about user's events
             </td>
         </tr>
     </table>
-    <!--
-    Navigation Bar:
-    Holds buttons to navigate within the site
-    -->
     <div id="navigation">
-        <ul><li id='active'><a href='home2.html'>Home</a></li><li><a href='concerts2.html'>Music</a></li><li ><a href='sports2.html'>Sports</a></li><li ><a href='entertainment2.html'>Entertainment</a></li><li><a href='business--education2.html'>Business & Education</a></li><li id="pgabout_us"><a href="about-us.html">About Us</a></li></ul>
-    </div>
-    <!--
-    Contains the body's content, photos, and text data
-    -->
-    <div id="container" style="margin-top: 29px;">
-        <!--Listed Events-->
+        <ul><li id='active'><a href='home2.html'>Home</a></li><li id='pg145650631833651339'><a href='concerts2.html'>Music</a></li><li id='pg404778243583026952'><a href='sports2.html'>Sports</a></li><li id='pg441792526610757515'><a href='entertainment2.html'>Entertainment</a></li><li id='pg269210016325162137'><a href='business--education2.html'>Business & Education</a></li><li id="pgabout_us"><a href="about-us2.html">About Us</a></li></ul>
+        <div id="container" style="margin-top: 29px;">
             <div id="content">
                 <div style="text-align: left;"><a class="btn btn-eventPR" href="profile3.html"><span style="font-weight: bold; font-size: 14px; font-family: Arial sans-serif;">GO BACK TO PROFILE</span></a></div>
                 <div class="text"><div id='wsite-content' class='wsite-not-footer'>
@@ -98,7 +86,7 @@ Contains info about user's events
                                 <td class='wsite-multicol-col' style='width:78.303964757709%;padding:0 15px'>
 
                                     <h2 style="text-align:left;">Nightwish</h2>
-                                    <span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="uploads/344251092.jpg" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
+                                    <span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="uploads/1/3/4/4/13443306/344251092.jpg" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
                                     <div class="paragraph" style="text-align:left;display:block;"><font size="4">December 1, 2012</font><br /><font size="4">Saturday at 8:00pm</font><br /><font size="4">Anfiteatro Tito Puente</font><br /><font size="4">San Juan, PR</font><br /><br /><br /><font size="4">Genre: Rock</font></div>
                                     <hr style="clear:both;visibility:hidden;width:100%;">
 
@@ -124,7 +112,7 @@ Contains info about user's events
                                 <td class='wsite-multicol-col' style='width:79.074889867841%;padding:0 15px'>
 
                                     <h2 style="text-align:left;">Electric Daisy Carnival Puerto Rico</h2>
-                                    <span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="uploads/609754347.jpg?147" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
+                                    <span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="uploads/1/3/4/4/13443306/609754347.jpg?147" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
                                     <div class="paragraph" style="text-align:left;display:block;"><font size="4">September 15, 2012</font><br /><font size="4">Saturday at 8:00pm</font><br /><font size="4">Panamerican Pier Complex</font><br /><font size="4"><span style="line-height: 27px;">San Juan, PR</span></font><br /><font size="4"><span style="line-height: 27px;"><br /></span></font><br /><font size="4"><span style="line-height: 27px;">Genre: Electronic</span></font></div>
                                     <hr style="clear:both;visibility:hidden;width:100%;">
 
@@ -150,7 +138,7 @@ Contains info about user's events
                                 <td class='wsite-multicol-col' style='width:79.074889867841%;padding:0 15px'>
 
                                     <h2 style="text-align:left;">Concierto de Guitarra Cl&aacute;sica - Jose Antonio Lopez</h2>
-                                    <span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="uploads/799823178.jpg" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
+                                    <span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="uploads/1/3/4/4/13443306/799823178.jpg" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
                                     <div class="paragraph" style="text-align:left;display:block;"><font size="4">Septiembre 14, 2012</font><br /><font size="4">Viernes at 6:30pm</font><br /><font size="4"><span style="line-height: 27px;">Centro de Bellas Artes</span></font><br /><font size="4"><span style="line-height: 27px;">Guaynabo, PR</span></font><br /><font size="4"><span style="line-height: 27px;"><br /></span></font><br /><font size="4"><span style="line-height: 27px;">Genre: Arts</span></font></div>
                                     <hr style="clear:both;visibility:hidden;width:100%;">
 
@@ -176,7 +164,7 @@ Contains info about user's events
                                 <td class='wsite-multicol-col' style='width:79.074889867841%;padding:0 15px'>
 
                                     <h2 style="text-align:left;">ACM - Basic Python Programming Seminar</h2>
-                                    <span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="uploads/402899464.jpg" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
+                                    <span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="uploads/1/3/4/4/13443306/402899464.jpg" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
                                     <div class="paragraph" style="text-align:left;display:block;"><font size="4">Wednesday, August 29, 2012</font><br /><font size="4">UPRM Classroom S-204 at&nbsp;</font>
                                         <span style="font-size: large; line-height: 27px; ">6:00pm</span><br /><font size="4"><span style="line-height: 27px;">Mayaguez, PR</span></font><br /><font size="4"><span style="line-height: 27px;"><br /></span></font><font size="4"><span style="line-height: 27px;">Genre: Seminars</span></font><br /><font size="4"><span style="line-height: 27px;"><br /></span></font><br /></div>
                                     <hr style="clear:both;visibility:hidden;width:100%;">
@@ -199,7 +187,7 @@ Contains info about user's events
             </div>
         </div>
         <div id="footer"></div>
-
+        <div class="clear"></div>
     </div>
 
 </body>

@@ -1,62 +1,52 @@
-<!--
-Home page
-
-Contains the user's information
--->
 <!DOCTYPE html>
 <html>
 <head>
-    <title>E-venturePR - About us</title>
+    <title>E-venturePR - Home</title>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-    <!--Style sheets-->
-    <link rel='stylesheet' type='text/css' href="css/fancybox.css">
-    <link rel='stylesheet' href='http://cdn1.editmysite.com/editor/images/common/common-v2.css?buildTime=1346362758' type='text/css'/>
-    <link rel='stylesheet' type='text/css' href='css/main_style.css' title='wsite-theme-css'/>
-    <link href='http://cdn1.editmysite.com/editor/fonts/Capture_it/font.css?2' rel='stylesheet' type='text/css'/>
+    <link rel='stylesheet' type='text/css' href='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.css?1346362758'>
+    <link rel='stylesheet' href='http://cdn1.editmysite.com/editor/images/common/common-v2.css?buildTime=1346362758' type='text/css' />
+    <link rel='stylesheet' type='text/css' href='css/main_style.css' title='wsite-theme-css' />
+    <link href='http://cdn1.editmysite.com/editor/fonts/Capture_it/font.css?2' rel='stylesheet' type='text/css' />
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <style type='text/css'>
-
-            /*<!--These area the tags invoked by the universal stylesheet-->*/
-        #wsite-content div.paragraph, #wsite-content p, #wsite-content .product-block .product-title, #wsite-content .product-description, .blog-sidebar div.paragraph, .blog-sidebar p, .wsite-form-field label, .wsite-form-field label {
-        }
-
-        #wsite-content h2, #wsite-content .product-long .product-title, #wsite-content .product-large .product-title, #wsite-content .product-small .product-title, .blog-sidebar h2 {
-        }
-
-        #wsite-title {
-            font-family: 'Capture it' !important;
-            color: #009900 !important;
-        }
-
-        #wsite-content a:link, .blog-sidebar a:link {
-            color: #FFFFFF
-        }
-
-        #wsite-content a:visited, .blog-sidebar a:visited {
-            color: #FFFFFF
-        }
-
-        #wsite-content a:hover, .blog-sidebar a:hover {
-            color: #FFFFFF
-        }
+        #wsite-content div.paragraph, #wsite-content p, #wsite-content .product-block .product-title, #wsite-content .product-description, .blog-sidebar div.paragraph, .blog-sidebar p, .wsite-form-field label, .wsite-form-field label {}
+        #wsite-content h2, #wsite-content .product-long .product-title, #wsite-content .product-large .product-title, #wsite-content .product-small .product-title, .blog-sidebar h2 {}
+        #wsite-title{font-family:'Capture it' !important;color:#009900 !important;}
+        #wsite-content a:link, .blog-sidebar a:link{color:#FFFFFF }
+        #wsite-content a:visited, .blog-sidebar a:visited{color:#FFFFFF }
+        #wsite-content a:hover, .blog-sidebar a:hover{color:#FFFFFF }
     </style>
-
-    <!--Scripts-->
-    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
-    <script type='text/javascript' src='js/jquery_effects.js'></script>
-    <script type='text/javascript' src='js/fancybox.min.js'></script>
-    <script type='text/javascript' src='js/utilities-jq.js'></script>
-    <script type='text/javascript' src='js/flyout_menus_jq.js'></script>
-
+    <script type='text/javascript'><!--
+    var STATIC_BASE = 'http://cdn1.editmysite.com/';
+    var STYLE_PREFIX = 'wsite';
+    //-->
+    </script>
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js'></script>
+    <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/jquery_effects.js?1346362758'></script>
+    <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.min.js?1346362758'></script>
+    <script type='text/javascript' src='http://cdn1.editmysite.com/editor/images/common/utilities-jq.js?1346362758'></script>
+    <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/flyout_menus_jq.js?1346362758'></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type='text/javascript'><!--
+    var IS_ARCHIVE=1;
+    (function(jQuery){
+        function initFlyouts(){initPublishedFlyoutMenus([{"id":"581818271480209023","title":"Home","url":"index.html"},{"id":"145650631833651339","title":"Concerts","url":"concerts.html"},{"id":"404778243583026952","title":"Sports","url":"sports.html"},{"id":"441792526610757515","title":"Entertainment","url":"entertainment.html"},{"id":"269210016325162137","title":"Business & Education","url":"business--education.html"},{"id":"224132398954985812","title":"Profile","url":"profile.html"},{"id":"313146698326919915","title":"Login","url":"login.html"},{"id":"435700788219059228","title":"Nightwish Detail","url":"nightwish-detail.html"},{"id":"549951918166142509","title":"Add Friends","url":"add-friends.html"},{"id":"170216070745516754","title":"Venue","url":"venue.html"}],'581818271480209023',"<li class='wsite-nav-more'><a href='#'>more...<\/a><\/li>",'active',false)}
+        if (jQuery) {
+            if (jQuery.browser.msie) window.onload = initFlyouts;
+            else jQuery(initFlyouts)
+        }else{
+            if (Prototype.Browser.IE) window.onload = initFlyouts;
+            else document.observe('dom:loaded', initFlyouts);
+        }
+    })(window._W && _W.jQuery)
+    //-->
+    </script>
 </head>
 <body class='wsite-theme-dark tall-header-page wsite-page-index'>
 <div id="wrapper">
-    <!--
-    Page Header:
-    Contains logo, rainbow background image, and registered user's options
-    -->
     <table id="header">
         <tr>
             <td id="logo"><span class='wsite-logo'><a href=''><span id="wsite-title">E-venturePR</span></a></span></td>
@@ -71,22 +61,14 @@ Contains the user's information
             </td>
         </tr>
     </table>
-    <!--
-    Navigation Bar:
-    Holds buttons to navigate within the site
-    -->
     <div id="navigation">
-        <ul><li id='active'><a href='home2.html'>Home</a></li><li><a href='concerts2.html'>Music</a></li><li ><a href='sports2.html'>Sports</a></li><li ><a href='entertainment2.html'>Entertainment</a></li><li><a href='business--education2.html'>Business & Education</a></li><li id="pgabout_us"><a href="about-us.html">About Us</a></li></ul>
+        <ul><li id='active'><a href='home2.html'>Home</a></li><li id='pg145650631833651339'><a href='concerts2.html'>Music</a></li><li id='pg404778243583026952'><a href='sports2.html'>Sports</a></li><li id='pg441792526610757515'><a href='entertainment2.html'>Entertainment</a></li><li id='pg269210016325162137'><a href='business--education2.html'>Business & Education</a></li><li id="pgabout_us"><a href="about-us2.html">About Us</a></li></ul>
     </div>
-    <!--
-    Contains the body's content, photos, and text data
-    -->
     <div id="container">
         <div id="content">
             <div id="banner" >
                 <div class="wsite-header"></div>
             </div>
-            <!--Featured Events-->
             <div class="text"><div id='wsite-content' class='wsite-not-footer'>
                 <h2 style="text-align:left;"><u>Featured Events:</u></h2>
 
@@ -97,14 +79,14 @@ Contains the user's information
                             <td class='wsite-multicol-col' style='width:34.634492266734%;padding:0 15px'>
 
                                 <h2 style="text-align:left;">Entertainment<br /></h2>
-                                <span class='imgPusher' style='float:right;height:0px'></span><span style='position:relative;float:right;z-index:10;;clear:right;margin-top:0px;*margin-top:0px'><a href=''><img class="wsite-image galleryImageBorder" src="uploads/147751913.jpg?142" style="margin-top: 5px; margin-bottom: 10px; margin-left: 10px; margin-right: 0px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
+                                <span class='imgPusher' style='float:right;height:0px'></span><span style='position:relative;float:right;z-index:10;;clear:right;margin-top:0px;*margin-top:0px'><a href=''><img class="wsite-image galleryImageBorder" src="uploads/1/3/4/4/13443306/147751913.jpg?142" style="margin-top: 5px; margin-bottom: 10px; margin-left: 10px; margin-right: 0px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
                                 <div class="paragraph" style="text-align:left;display:block;"><a href="">"Luis Raul: Que Clase E Lengua!"&nbsp;</a></div>
                                 <hr style="clear:both;visibility:hidden;width:100%;">
 
                             </td>
                             <td class='wsite-multicol-col' style='width:33.840153244709%;padding:0 15px'>
                                 <h2 style="text-align:left;">Concerts</h2>
-                                <span class='imgPusher' style='float:right;height:0px'></span><span style='position:relative;float:right;z-index:10;;clear:right;margin-top:0px;*margin-top:0px'><a href="nightwish-detail.html"><img class="wsite-image galleryImageBorder" src="uploads/253613209.jpg?147" style="margin-top: 5px; margin-bottom: 10px; margin-left: 10px; margin-right: 0px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
+                                <span class='imgPusher' style='float:right;height:0px'></span><span style='position:relative;float:right;z-index:10;;clear:right;margin-top:0px;*margin-top:0px'><a href="nightwish-detail.html"><img class="wsite-image galleryImageBorder" src="uploads/1/3/4/4/13443306/253613209.jpg?147" style="margin-top: 5px; margin-bottom: 10px; margin-left: 10px; margin-right: 0px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
                                 <div class="paragraph" style="text-align:left;display:block;"><a href="nightwish-detail.html">"Nightwish: Imaginareum"&nbsp;<br /><br /></a></div>
                                 <hr style="clear:both;visibility:hidden;width:100%;">
 
@@ -112,7 +94,7 @@ Contains the user's information
                             </td>
                             <td class='wsite-multicol-col' style='width:31.525354488556%;padding:0 15px'>
                                 <h2 style="text-align:left;">Sports</h2>
-                                <span class='imgPusher' style='float:right;height:0px'></span><span style='position:relative;float:right;z-index:10;;clear:right;margin-top:0px;*margin-top:0px'><a href=''><img class="wsite-image galleryImageBorder" src="uploads/946440671.jpg?147" style="margin-top: 5px; margin-bottom: 10px; margin-left: 10px; margin-right: 0px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
+                                <span class='imgPusher' style='float:right;height:0px'></span><span style='position:relative;float:right;z-index:10;;clear:right;margin-top:0px;*margin-top:0px'><a href=''><img class="wsite-image galleryImageBorder" src="uploads/1/3/4/4/13443306/946440671.jpg?147" style="margin-top: 5px; margin-bottom: 10px; margin-left: 10px; margin-right: 0px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
                                 <div class="paragraph" style="text-align:left;display:block;"><a href="">"Baloncesto: Los Piratas de Quebradillas</a></div>
                                 <hr style="clear:both;visibility:hidden;width:100%;">
 
@@ -127,7 +109,6 @@ Contains the user's information
                     <hr class="styled-hr" style="width:100%;">
                     <div style="height: 20px; overflow: hidden; width: 100%;"></div></div>
 
-                <!--Other Events-->
                 <h2 style="text-align:left;"><u>Other Events:</u></h2>
 
                 <div><div class="wsite-multicol"><div class='wsite-multicol-table-wrap' style='margin:0 -15px'>
@@ -171,7 +152,6 @@ Contains the user's information
         </div>
     </div>
     <div id="footer">
-        <!--Mobile Version Link-->
         <div id="mobileLink" style="text-align: center;position: relative; ">
             <a href="mobile-index.html"><button class="btn btn-eventPR" style="height:60px; font-weight: bold;">Click Here For Mobile Version!</button></a>
         </div>

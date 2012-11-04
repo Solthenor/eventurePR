@@ -1,50 +1,52 @@
-<!-- THIS PAGE DISPLAYS THE LOGIN MENU FOR A USER THAT HAS AN ACCOUNT-->
-
-
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta content="width=device-width, minimum-scale=1, maximum-scale=1" name="viewport">
 
     <title>Welcome to E-vents</title>
-    <link rel="stylesheet" href="css/mobile-style.css" />      <!--Calls the mobile version css file -->
-    <link rel="stylesheet" href="css/jquery.mobile-1.2.0.css" />      <!-- Calls the jquery mobile styling file. This is used for things such as buttons, fitting in screen, event handling -->
-    <link href='http://cdn1.editmysite.com/editor/fonts/Capture_it/font.css?2' rel='stylesheet' type='text/css' />    <!--Used to style the logo -->
-    <link rel='stylesheet' href='css/common-v2.css' type='text/css' />    <!--gives the page wrapper some constraints and styling -->
+    <link rel="stylesheet" href="css/mobile-style.css" />
+    <link rel="stylesheet" href="css/jquery.mobile-1.2.0.css" />
+    <link href='http://cdn1.editmysite.com/editor/fonts/Capture_it/font.css?2' rel='stylesheet' type='text/css' />
+    <link rel='stylesheet' href='http://cdn1.editmysite.com/editor/images/common/common-v2.css?buildTime=1346362758' type='text/css' />
 
 
-    <script src="js/jquery-1.8.2.js"></script>        <!-- jquery javascript-->
-    <script src="js/jquery.mobile-1.2.0.js"></script>  <!--jquery mobile javascript-->
+    <script src="js/jquery-1.8.2.js"></script>
+    <script src="js/jquery.mobile-1.2.0.js"></script>
 
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js'></script>
+    <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/jquery_effects.js?1346362758'></script>
+    <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.min.js?1346362758'></script>
+    <script type='text/javascript' src='http://cdn1.editmysite.com/editor/images/common/utilities-jq.js?1346362758'></script>
+    <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/flyout_menus_jq.js?1346362758'></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
 
+    <script>
+        $(document).ready(function(){
+            $('#select-choice-1').change(function()  {
+                var $vn = $(this).children('option:selected').attr('value') + ".html";
 
-    <script>                                          /* script used to choose the drop down select menu option and switch the window to the corresponding page */
-    $(document).ready(function(){
-        $('#select-choice-1').change(function()  {
-            var $vn = $(this).children('option:selected').attr('value') + ".html";
-
-            window.location.href = $vn;
+                window.location.href = $vn;
+            });
         });
-    });
 
 
     </script>
 
-
 </head>
 <body>
 
-<div id="wrapper" style="height: 100%">           <!--wraps the content of the page for styling purposes -->
-    <div id="header" style="height: 25%">              <!--header -->
-        <span class='wsite-logo'><span id="wsite-title" >E-venturePR</span></span>     <!-- Eventure logo -->
-        <div data-role="controlgroup" data-type="horizontal" style="float:left;" >            <!-- buttons styled to fit our website content, register an account. Currently dummy buttons until further development-->
+<div id="wrapper" style="height: 100%">
+    <div id="header" style="height: 25%">
+        <span class='wsite-logo'><span id="wsite-title" >E-venturePR</span></span>
+        <div data-role="controlgroup" data-type="horizontal" style="float:left;" >
             <p style="font-size: 16px;font-weight: bold;text-shadow: none;">Dont have an account?</p>
             <a  href="mobile-register.html"  rel="external" data-role="button" data-theme="b" style="height: 35px; font-size: 15px;" onclick="window.location.href = this.href" >Sign up!</a>
 
         </div>
     </div><!-- /header -->
     <div id="content" style="height: 75%;">
-        <div data-role="fieldcontain">   <!-- field that contains a form for the user to fill out his log in information -->
+        <div data-role="fieldcontain">
             <div style="width: 100%; margin-bottom: 5%;">
             <label for="name">E-mail:</label>
             <input type="name" name="name" id="name" value="" style="padding-left: 40%; margin-left: 13%"  />
@@ -54,7 +56,7 @@
             <div style="width: 100%; margin-bottom: 5%;">
 
             </div>
-                                 <!-- button that is used to log into account after filling out the information. Currently Dummy button, does not do anything at the moment-->
+
             <a  href="mobile-index2.html" rel="external" data-role="button" data-theme="c" style="height: 35px; font-size: 15px;"  onclick="window.location.href = this.href" >Login!</a>
         </div>
     </div> <!--content-->

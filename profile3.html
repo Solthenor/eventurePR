@@ -1,72 +1,57 @@
-<!--
-Profile page
-
-Contains the user's information
--->
 <!DOCTYPE html>
 <html>
 <head>
-    <title>E-venturePR - About us</title>
+    <title>My - E-venturePR</title>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-    <!--Style sheets-->
-    <link rel='stylesheet' type='text/css' href="css/fancybox.css">
-    <link rel='stylesheet' href='http://cdn1.editmysite.com/editor/images/common/common-v2.css?buildTime=1346362758' type='text/css'/>
-    <link rel='stylesheet' type='text/css' href='css/main_style.css' title='wsite-theme-css'/>
-    <link href='http://cdn1.editmysite.com/editor/fonts/Capture_it/font.css?2' rel='stylesheet' type='text/css'/>
+    <link rel='stylesheet' type='text/css' href='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.css?1346362758'>
+    <link rel='stylesheet' href='http://cdn1.editmysite.com/editor/images/common/common-v2.css?buildTime=1346362758' type='text/css' />
+    <link rel='stylesheet' type='text/css' href='css/main_style.css' title='wsite-theme-css' />
+    <link href='http://cdn1.editmysite.com/editor/fonts/Capture_it/font.css?2' rel='stylesheet' type='text/css' />
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <style type='text/css'>
-
-        /*<!--These area the tags invoked by the universal stylesheet-->*/
-        #wsite-content div.paragraph, #wsite-content p, #wsite-content .product-block .product-title, #wsite-content .product-description, .blog-sidebar div.paragraph, .blog-sidebar p, .wsite-form-field label, .wsite-form-field label {
-        }
-
-        #wsite-content h2, #wsite-content .product-long .product-title, #wsite-content .product-large .product-title, #wsite-content .product-small .product-title, .blog-sidebar h2 {
-        }
-
-        #wsite-title {
-            font-family: 'Capture it' !important;
-            color: #009900 !important;
-        }
-
-        #wsite-content a:link, .blog-sidebar a:link {
-            color: #FFFFFF
-        }
-
-        #wsite-content a:visited, .blog-sidebar a:visited {
-            color: #FFFFFF
-        }
-
-        #wsite-content a:hover, .blog-sidebar a:hover {
-            color: #FFFFFF
-        }
+        #wsite-content div.paragraph, #wsite-content p, #wsite-content .product-block .product-title, #wsite-content .product-description, .blog-sidebar div.paragraph, .blog-sidebar p, .wsite-form-field label, .wsite-form-field label {}
+        #wsite-content h2, #wsite-content .product-long .product-title, #wsite-content .product-large .product-title, #wsite-content .product-small .product-title, .blog-sidebar h2 {}
+        #wsite-title{font-family:'Capture it' !important;color:#009900 !important;}
+        #wsite-content a:link, .blog-sidebar a:link{color:#FFFFFF}
+        #wsite-content a:visited, .blog-sidebar a:visited{color:#FFFFFF}
+        #wsite-content a:hover, .blog-sidebar a:hover{color:#FFFFFF}
     </style>
-
-    <!--Scripts-->
-    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
-    <script type='text/javascript' src='js/jquery_effects.js'></script>
-    <script type='text/javascript' src='js/fancybox.min.js'></script>
-    <script type='text/javascript' src='js/utilities-jq.js'></script>
-    <script type='text/javascript' src='js/flyout_menus_jq.js'></script>
-
+    <script type='text/javascript'><!--
+    var STATIC_BASE = 'http://cdn1.editmysite.com/';
+    var STYLE_PREFIX = 'wsite';
+    //-->
+    </script>
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js'></script>
+    <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/jquery_effects.js?1346362758'></script>
+    <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.min.js?1346362758'></script>
+    <script type='text/javascript' src='http://cdn1.editmysite.com/editor/images/common/utilities-jq.js?1346362758'></script>
+    <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/flyout_menus_jq.js?1346362758'></script>
+    <script type='text/javascript'><!--
+    var IS_ARCHIVE=1;
+    (function(jQuery){
+        function initFlyouts(){initPublishedFlyoutMenus([{"id":"581818271480209023","title":"Home","url":"index.html"},{"id":"145650631833651339","title":"Concerts","url":"concerts.html"},{"id":"404778243583026952","title":"Sports","url":"sports.html"},{"id":"441792526610757515","title":"Entertainment","url":"entertainment.html"},{"id":"269210016325162137","title":"Business & Education","url":"business--education.html"},{"id":"224132398954985812","title":"About us","url":"about-us.html"}],'435700788219059228',"<li class='wsite-nav-more'><a href='#'>more...<\/a><\/li>",'active',false)}
+        if (jQuery) {
+            if (jQuery.browser.msie) window.onload = initFlyouts;
+            else jQuery(initFlyouts)
+        }else{
+            if (Prototype.Browser.IE) window.onload = initFlyouts;
+            else document.observe('dom:loaded', initFlyouts);
+        }
+    })(window._W && _W.jQuery)
+    //-->
+    </script>
 </head>
 <body class='wsite-theme-dark no-header-page wsite-page-nightwish-detail'>
 <div id="wrapper">
-<!--
-Page Header:
-Contains logo, rainbow background image, and unregistered user's options
--->
     <table id="header">
         <tr>
             <td id="logo"><span class='wsite-logo'><a href=''><span id="wsite-title">E-venturePR</span></a></span></td>
             <td id="header-right">
                 <table>
                     <tr>
-                        <td class="phone-number"><span class='wsite-text'><a href="profile3.html"
-                                                                             style="color: #32CD32; text-decoration: underline; ">Profile</a> | <a
-                                href="home.html" style="color: #32CD32; text-decoration: underline;">Log out</a></span>
-                        </td>
+                        <td class="phone-number"><span class='wsite-text'><a href="profile3.html" style="color: #32CD32; text-decoration: underline; ">Profile</a> | <a href="home.html" style="color: #32CD32; text-decoration: underline;">Log out</a></span></td>
                         <td class="social"></td>
                     </tr>
                 </table>
@@ -74,238 +59,137 @@ Contains logo, rainbow background image, and unregistered user's options
             </td>
         </tr>
     </table>
-<!--
-Navigation Bar:
-Holds buttons to navigate within the site
--->
     <div id="navigation">
-        <ul>
-            <li id='active'><a href='home2.html'>Home</a></li>
-            <li><a href='concerts2.html'>Music</a></li>
-            <li><a href='sports2.html'>Sports</a></li>
-            <li><a href='entertainment2.html'>Entertainment</a></li>
-            <li><a href='business--education2.html'>Business & Education</a></li>
-            <li><a href="about-us2.html">About Us</a></li>
-        </ul>
+        <ul><li id='active'><a href='home2.html'>Home</a></li><li id='pg145650631833651339'><a href='concerts2.html'>Music</a></li><li id='pg404778243583026952'><a href='sports2.html'>Sports</a></li><li id='pg441792526610757515'><a href='entertainment2.html'>Entertainment</a></li><li id='pg269210016325162137'><a href='business--education2.html'>Business & Education</a></li><li id="pgabout_us"><a href="about-us2.html">About Us</a></li></ul>
     </div>
     <div id="container">
         <div id="content">
-            <div class="text">
-                <div id='wsite-content' class='wsite-not-footer'>
-                    <div>
-                        <div class="wsite-multicol">
-                            <div class='wsite-multicol-table-wrap' style='margin:0 -15px'>
-                                <table class='wsite-multicol-table'>
-                                    <tbody class='wsite-multicol-tbody'>
-                                    <tr class='wsite-multicol-tr'>
-                                        <!--User info-->
-                                        <td class='wsite-multicol-col' style='width:61.742006615215%;padding:0 15px'>
+            <div class="text"><div id='wsite-content' class='wsite-not-footer'>
+                <div><div class="wsite-multicol"><div class='wsite-multicol-table-wrap' style='margin:0 -15px'>
+                    <table class='wsite-multicol-table'>
+                        <tbody class='wsite-multicol-tbody'>
+                        <tr class='wsite-multicol-tr'>
+                            <td class='wsite-multicol-col' style='width:61.742006615215%;padding:0 15px'>
 
-                                            <h2 style="text-align:left;">Pepe Cohete</h2>
-                                            <span class='imgPusher' style='float:left;height:0px'></span><span
-                                                style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img
-                                                class="wsite-image galleryImageBorder"
-                                                src="http://i.imgur.com/xhxyr.jpg?1"
-                                                style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;width:200px;"
-                                                alt="Picture"/></a><div
-                                                style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
+                                <h2 style="text-align:left;">Pepe Cohete</h2>
+                                <span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="http://i.imgur.com/xhxyr.jpg?1" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;width:200px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
+                                <!--<div class="paragraph" style="text-align:left;display:block;"><font size="4">Saturday, December 1, 2012</font><br /><font size="4"><span style="line-height: 30px;">Time: 8:00pm</span></font><br /><font size="4"><span style="line-height: 30px;">Location: Anfiteatro Tito Puentes</span></font><br /><font size="4"><span style="line-height: 30px;">San Juan, PR</span></font><br /><font size="4"><span style="line-height: 30px;"></span></font><font size="4"><span style="line-height: 30px;">Genre: Rock</span></font><br /><font size="4"><span style="line-height: 30px;">Entrance Fee: $45<br /></span></font><br />PRE-VENTA: La pre-venta de boletos comienza el s&aacute;bado 16 de junio a las 12am (MEDIANOCHE de VIERNES) por Internet y luego a las 10AM a trav&eacute;s de todos nuestros canales de venta hasta el martes 31 de julio.&nbsp;<br /><br />Nightwish &ldquo;Imaginaerum World Tour&rdquo;el s&aacute;bado 1 de diciembre en el Anfiteatro Tito Puente. Ven y disfruta de &eacute;xitos como &ldquo;Amaranth&rdquo; &ldquo;Bye Bye Beautiful&rdquo;, &ldquo;The Islander&rdquo;, &ldquo;Nemo&rdquo;, &ldquo;Wish I Had An Angel&rdquo; entre otros.<font size="4"><span style="line-height: 30px;"><br /></span></font><br /><span style="font-size: 12px;">posted by <a href="">Admin</a></span><br /></div>
+                               -->
+                                <!--<div class="paragraph" style="text-align:left;display:block;">Age: 42<br />Gender: Male<br />Favorite Event: Mofongo Party<br />Work: Astronaut<br />E-mail: speedy.gonzalez@ayayay.com</div>
+                                -->
+                                <div class="paragraph" style="text-align:left;display:block;float:left;">Username: <br />Age: <br />Gender: <br />Favorite Event: <br />Work: <br />E-mail: </div>
+                                <div class="paragraph"style="text-align:center;display:block;float:left;">sqlJedi<br />42<br />Male<br />Mofongo Party<br />Astronaut<br />speedy.gonzalez@ayayay.com</div>
 
-                                            <div class="paragraph" style="text-align:left;display:block;float:left;">
-                                                Username: <br/>Age: <br/>Gender: <br/>Favorite Event: <br/>Work: <br/>E-mail:
-                                            </div>
-                                            <div class="paragraph" style="text-align:center;display:block;float:left;">
-                                                sqlJedi<br/>42<br/>Male<br/>Mofongo Party<br/>Astronaut<br/>speedy.gonzalez@ayayay.com
-                                            </div>
+                                <hr style="clear:both;visibility:hidden;width:100%;" />
+                                <div class="btn-toolbar" style="padding: 10px 10px 0 0; display: inline-block;text-align: center; ">
+                                    <div class="btn-group">
+                                        <a href="create-event.php" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">E-vent it!</span></a>
+                                        <a href="myEvents.html" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">My E-vents</span></a>
+                                        <a href="create-venue.php" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">Create Venue</span></a>
+                                        <a href="contacts.html" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">Contacts</span></a>
 
-                                            <hr style="clear:both;visibility:hidden;width:100%;"/>
-                                            <div class="btn-toolbar"
-                                                 style="padding: 10px 10px 0 0; display: inline-block;text-align: center; ">
-                                                <div class="btn-group">
-                                                    <a href="create-event.html" class="btn btn-eventPR"><span
-                                                            style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">E-vent it!</span></a>
-                                                    <a href="myEvents.html" class="btn btn-eventPR"><span
-                                                            style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">My E-vents</span></a>
-                                                    <a href="create-venue.html" class="btn btn-eventPR"><span
-                                                            style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">Create Venue</span></a>
-                                                    <a href="contacts.html" class="btn btn-eventPR"><span
-                                                            style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">Contacts</span></a>
+                                    </div>
+                                    <!--<p style="display: inline-block; font-style: italic; padding-left: 10px;">100 people are going</p>  -->
+                                </div>
 
-                                                </div>
-                                            </div>
+                            </td>
+                            <td class='wsite-multicol-col' style='width:38.257993384785%;padding:0 15px'>
 
-                                        </td>
-                                        <!--Right side of page-->
-                                        <td class='wsite-multicol-col' style='width:38.257993384785%;padding:0 15px'>
-                                            <!--Recommended E-ventures-->
-                                            <div class="friends_list">
-                                                <div>
-                                                    <h4>Recommended E-ventures:</h4>
+                                <div class="friends_list">
+                                    <div>
+                                        <h4>Recommended E-ventures:</h4>
 
-                                                </div>
-                                            </div>
-                                            <div class='wsite-multicol-table-wrap' style='margin:0 -15px'>
-                                                <table class='wsite-multicol-table'>
-                                                    <tbody class='wsite-multicol-tbody'>
-                                                    <tr class='wsite-multicol-tr'>
-                                                        <td class='wsite-multicol-col' style='width:50%;padding:0 15px'>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="wsite-multicol"><div class='wsite-multicol-table-wrap' style='margin:0 -15px'>
+                                        <table class='wsite-multicol-table'>
+                                            <tbody class='wsite-multicol-tbody'>
+                                            <tr class='wsite-multicol-tr'>
+                                                <td class='wsite-multicol-col' style='width:50%;padding:0 15px'>
 
-                                                            <div id="mainmenu">
-                                                                <ul style="font-size: 14px; color: white;">
-                                                                    <li><a href=""> <span style="color: white">Mofongo Party</span></a>
-                                                                    </li>
+                                                    <div id="mainmenu">
+                                                        <ul style="font-size: 14px; color: white;">
+                                                            <li><a href=""> <span style="color: white">Mofongo Party</span></a></li>
 
-                                                                    <div style="height: 20px; overflow: hidden; width: 100%;"></div>
+                                                            <div style="height: 20px; overflow: hidden; width: 100%;"></div>
 
-                                                                    <li><a href=""> <span style="color: white">SQl Dating Service</span></a>
-                                                                    </li>
+                                                            <li><a href=""> <span style="color: white">SQl Dating Service</span></a></li>
 
-                                                                    <div style="height: 20px; overflow: hidden; width: 100%;"></div>
+                                                            <div style="height: 20px; overflow: hidden; width: 100%;"></div>
 
 
-                                                                    <li><a href=""> <span style="color: white">ACM - Basic Python Programming Seminar</span></a>
-                                                                    </li>
 
-                                                                    <div style="height: 20px; overflow: hidden; width: 100%;"></div>
-                                                                </ul>
+                                                            <li><a href=""> <span style="color: white">ACM - Basic Python Programming Seminar</span></a></li>
+
+                                                            <div style="height: 20px; overflow: hidden; width: 100%;"></div>
+                                                        </ul>
 
 
-                                                            </div>
 
-                                                        </td>
-
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-
-                                            </div>
-
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--Memorable E-ventures-->
-                    <div>
-                        <div class='wsite-multicol-table-wrap' style='margin:0 -15px'>
-                            <table class='wsite-multicol-table'>
-                                <tbody class='wsite-multicol-tbody'>
-                                <tr class='wsite-multicol-tr'>
-                                    <td class='wsite-multicol-col' style='width:50%;padding:0 15px'>
-
-                                        <h2 style="text-align:center;">Memorable E-ventures</h2>
-
-                                        <div>
-                                            <div>
-                                                <div style="height: 20px; overflow: hidden;"></div>
-                                                <div id='139083701912618958-gallery' class='imageGallery'
-                                                     style='line-height: 0px; padding: 0; margin: 0'>
-                                                    <div id='139083701912618958-imageContainer0'
-                                                         style='float:left;width:33.28%;margin:0;'>
-                                                        <div id='139083701912618958-insideImageContainer0'
-                                                             style='position:relative;margin:5px;padding:0 8px 8px 0'>
-                                                            <div style='position:relative;width:100%;padding:0 0 75.08%;'>
-                                                                <a href='uploads/7495447_orig.jpg'
-                                                                   rel='lightbox[gallery139083701912618958]'
-                                                                   onclick='if (!window.lightboxLoaded) return false'><img
-                                                                        src='uploads/7495447.jpg'
-                                                                        class='galleryImage galleryImageBorder'
-                                                                        _width='333' _height='225'
-                                                                        style='position:absolute;border-width:1px;padding:3px;width:100%;top:5%;left:0%'/></a>
-                                                            </div>
-                                                        </div>
                                                     </div>
-                                                    <div id='139083701912618958-imageContainer1'
-                                                         style='float:left;width:33.28%;margin:0;'>
-                                                        <div id='139083701912618958-insideImageContainer1'
-                                                             style='position:relative;margin:5px;padding:0 8px 8px 0'>
-                                                            <div style='position:relative;width:100%;padding:0 0 75.08%;'>
-                                                                <a href='uploads/8485349_orig.jpg'
-                                                                   rel='lightbox[gallery139083701912618958]'
-                                                                   onclick='if (!window.lightboxLoaded) return false'><img
-                                                                        src='uploads/8485349.jpg'
-                                                                        class='galleryImage galleryImageBorder'
-                                                                        _width='333' _height='222'
-                                                                        style='position:absolute;border-width:1px;padding:3px;width:100%;top:5.6%;left:0%'/></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div id='139083701912618958-imageContainer2'
-                                                         style='float:left;width:33.28%;margin:0;'>
-                                                        <div id='139083701912618958-insideImageContainer2'
-                                                             style='position:relative;margin:5px;padding:0 8px 8px 0'>
-                                                            <div style='position:relative;width:100%;padding:0 0 75.08%;'>
-                                                                <a href='uploads/2260870_orig.jpg'
-                                                                   rel='lightbox[gallery139083701912618958]'
-                                                                   onclick='if (!window.lightboxLoaded) return false'><img
-                                                                        src='uploads/2260870.jpg'
-                                                                        class='galleryImage galleryImageBorder'
-                                                                        _width='279' _height='250'
-                                                                        style='position:absolute;border-width:1px;padding:3px;width:83.78%;top:0%;left:8.11%'/></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div id='139083701912618958-imageContainer3'
-                                                         style='float:left;width:33.28%;margin:0;'>
-                                                        <div id='139083701912618958-insideImageContainer3'
-                                                             style='position:relative;margin:5px;padding:0 8px 8px 0'>
-                                                            <div style='position:relative;width:100%;padding:0 0 75.08%;'>
-                                                                <a href='uploads/817215_orig.jpg'
-                                                                   rel='lightbox[gallery139083701912618958]'
-                                                                   onclick='if (!window.lightboxLoaded) return false'><img
-                                                                        src='uploads/817215.jpg'
-                                                                        class='galleryImage galleryImageBorder'
-                                                                        _width='333' _height='193'
-                                                                        style='position:absolute;border-width:1px;padding:3px;width:100%;top:11.4%;left:0%'/></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <span style='display: block; clear: both; height: 0px; overflow: hidden;'></span>
-                                                </div>
 
-                                                <div style="height: 20px; overflow: hidden;"></div>
-                                            </div>
+                                                </td>
+
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div></div></div></div>
+                                </div>
+
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div></div></div>
+
+                <div><div class="wsite-multicol"><div class='wsite-multicol-table-wrap' style='margin:0 -15px'>
+                    <table class='wsite-multicol-table'>
+                        <tbody class='wsite-multicol-tbody'>
+                        <tr class='wsite-multicol-tr'>
+                            <td class='wsite-multicol-col' style='width:50%;padding:0 15px'>
+
+                                <h2 style="text-align:center;">Memorable E-ventures</h2>
+                                <div>
+                                    <div><div style="height: 20px; overflow: hidden;"></div>
+                                        <div id='139083701912618958-gallery' class='imageGallery' style='line-height: 0px; padding: 0; margin: 0'>
+                                            <div id='139083701912618958-imageContainer0' style='float:left;width:33.28%;margin:0;'><div id='139083701912618958-insideImageContainer0' style='position:relative;margin:5px;padding:0 8px 8px 0'><div style='position:relative;width:100%;padding:0 0 75.08%;'><a href='uploads/1/3/4/4/13443306/7495447_orig.jpg' rel='lightbox[gallery139083701912618958]' onclick='if (!window.lightboxLoaded) return false'><img src='uploads/1/3/4/4/13443306/7495447.jpg' class='galleryImage galleryImageBorder' _width='333' _height='225' style='position:absolute;border-width:1px;padding:3px;width:100%;top:5%;left:0%' /></a></div></div></div><div id='139083701912618958-imageContainer1' style='float:left;width:33.28%;margin:0;'><div id='139083701912618958-insideImageContainer1' style='position:relative;margin:5px;padding:0 8px 8px 0'><div style='position:relative;width:100%;padding:0 0 75.08%;'><a href='uploads/1/3/4/4/13443306/8485349_orig.jpg' rel='lightbox[gallery139083701912618958]' onclick='if (!window.lightboxLoaded) return false'><img src='uploads/1/3/4/4/13443306/8485349.jpg' class='galleryImage galleryImageBorder' _width='333' _height='222' style='position:absolute;border-width:1px;padding:3px;width:100%;top:5.6%;left:0%' /></a></div></div></div><div id='139083701912618958-imageContainer2' style='float:left;width:33.28%;margin:0;'><div id='139083701912618958-insideImageContainer2' style='position:relative;margin:5px;padding:0 8px 8px 0'><div style='position:relative;width:100%;padding:0 0 75.08%;'><a href='uploads/1/3/4/4/13443306/2260870_orig.jpg' rel='lightbox[gallery139083701912618958]' onclick='if (!window.lightboxLoaded) return false'><img src='uploads/1/3/4/4/13443306/2260870.jpg' class='galleryImage galleryImageBorder' _width='279' _height='250' style='position:absolute;border-width:1px;padding:3px;width:83.78%;top:0%;left:8.11%' /></a></div></div></div><div id='139083701912618958-imageContainer3' style='float:left;width:33.28%;margin:0;'><div id='139083701912618958-insideImageContainer3' style='position:relative;margin:5px;padding:0 8px 8px 0'><div style='position:relative;width:100%;padding:0 0 75.08%;'><a href='uploads/1/3/4/4/13443306/817215_orig.jpg' rel='lightbox[gallery139083701912618958]' onclick='if (!window.lightboxLoaded) return false'><img src='uploads/1/3/4/4/13443306/817215.jpg' class='galleryImage galleryImageBorder' _width='333' _height='193' style='position:absolute;border-width:1px;padding:3px;width:100%;top:11.4%;left:0%' /></a></div></div></div><span style='display: block; clear: both; height: 0px; overflow: hidden;'></span>
                                         </div>
 
-                                    </td>
-                                    <!--User's Wall-->
-                                    <td class='wsite-multicol-col' style='width:50%;padding:0 15px'>
+                                        <div style="height: 20px; overflow: hidden;"></div></div>
+                                </div>
 
-                                        <h2 style="text-align:left;">My wall:<br/></h2>
+                            </td>
+                            <td class='wsite-multicol-col' style='width:50%;padding:0 15px'>
 
-                                        <div id="universality">
-                                            <span class="imgPusher" style="float:left;height:0px"></span>
+                                <h2 style="text-align:left;">My wall:<br /></h2>
+                                <div style="border: 1px solid #f5f5f5; padding: 20px; height: 80%; overflow: auto;
+                                    background: -moz-linear-gradient(-45deg,  rgba(30,87,153,1) 0%, rgba(30,87,153,0.82) 24%, rgba(31,93,160,0.8) 27%, rgba(41,137,216,0.55) 50%, rgba(30,87,153,0.22) 80%, rgba(30,87,153,0) 100%);/* FF3.6+ */
+background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(30,87,153,1)), color-stop(24%,rgba(30,87,153,0.82)), color-stop(27%,rgba(31,93,160,0.8)), color-stop(50%,rgba(41,137,216,0.55)), color-stop(80%,rgba(30,87,153,0.22)), color-stop(100%,rgba(30,87,153,0)));  /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(-45deg,  rgba(30,87,153,1) 0%,rgba(30,87,153,0.82) 24%,rgba(31,93,160,0.8) 27%,rgba(41,137,216,0.55) 50%,rgba(30,87,153,0.22) 80%,rgba(30,87,153,0) 100%);   /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(-45deg,  rgba(30,87,153,1) 0%,rgba(30,87,153,0.82) 24%,rgba(31,93,160,0.8) 27%,rgba(41,137,216,0.55) 50%,rgba(30,87,153,0.22) 80%,rgba(30,87,153,0) 100%);  /* Opera 11.10+ */
+background: -ms-linear-gradient(-45deg,  rgba(30,87,153,1) 0%,rgba(30,87,153,0.82) 24%,rgba(31,93,160,0.8) 27%,rgba(41,137,216,0.55) 50%,rgba(30,87,153,0.22) 80%,rgba(30,87,153,0) 100%); /* IE10+ */
+background: linear-gradient(135deg,  rgba(30,87,153,1) 0%,rgba(30,87,153,0.82) 24%,rgba(31,93,160,0.8) 27%,rgba(41,137,216,0.55) 50%,rgba(30,87,153,0.22) 80%,rgba(30,87,153,0) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#001e5799',GradientType=1 );/* IE6-9 fallback on horizontal gradient */ >
+                                    <span class="imgPusher" style="float:left;height:0px"></span>
+                                    <div style="position:relative;float:left;z-index:10;width:70px;clear:left;margin-top:0px;*margin-top:0px">
+                                        <a><img class="wsite-image galleryImageBorder" src="http://i3.kym-cdn.com/entries/icons/original/000/010/496/asdf.jpg" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border: 1px double gray;padding:3px; background-color: #1a1a1a;" alt="Picture">
+                                        </a>
+                                        <div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></div>
+                                    <div class="paragraph" style="text-align:left;display:block; color: white; font-size: medium; font-style: italic">: HIIIIIIIIIIII!!! &lt;3</div>
+                                    <hr style="clear:both;visibility:hidden;width:100%;">
+                                </div>
 
-                                            <div style="position:relative;float:left;z-index:10;width:70px;clear:left;margin-top:0px;margin-top:0px">
-                                                <a><img class="wsite-image galleryImageBorder"
-                                                        src="http://i3.kym-cdn.com/entries/icons/original/000/010/496/asdf.jpg"
-                                                        style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border: 1px double gray;padding:3px; background-color: #1a1a1a;"
-                                                        alt="Picture">
-                                                </a>
-
-                                                <div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div>
-                                            </div>
-                                            <div class="paragraph"
-                                                 style="text-align:left;display:block; color: white; font-size: medium; font-style: italic">
-                                                : HIIIIIIIIIIII!!! &lt;3
-                                            </div>
-                                            <hr style="clear:both;visibility:hidden;width:100%;">
-                                        </div>
-
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div></div></div></div>
             </div>
         </div>
     </div>
     <div id="footer"></div>
-
+    <div class="clear"></div>
 </div>
 
 </body>
