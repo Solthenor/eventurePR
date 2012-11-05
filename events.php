@@ -110,7 +110,7 @@ $events = $stmt->fetchAll();
         </tr>
     </table>
     <div id="navigation">
-        <ul><li id='active'><a href='index.php'>Home</a></li><li id='pg145650631833651339'><a href='events.php?category=Concert'>Music</a></li><li id='pg404778243583026952'><a href='/events.php?category=Sports'>Sports</a></li><li id='pg441792526610757515'><a href='/events.php?category=Entertainment'>Entertainment</a></li><li id='pg269210016325162137'><a href='/events.php?category=Business'>Business & Education</a></li><li id="pgabout_us"><a href="about.php">About Us</a></li></ul>
+        <ul><li id='active'><a href='index.php'>Home</a></li><li id='pg145650631833651339'><a href='events.php?category=Concert'>Music</a></li><li id='pg404778243583026952'><a href='events.php?category=Sports'>Sports</a></li><li id='pg441792526610757515'><a href='events.php?category=Entertainment'>Entertainment</a></li><li id='pg269210016325162137'><a href='events.php?category=Business'>Business & Education</a></li><li id="pgabout_us"><a href="about.php">About Us</a></li></ul>
         <div id="container" style="margin-top: 29px;">
             <div id="content">
                 <div id="banner">
@@ -122,42 +122,42 @@ $events = $stmt->fetchAll();
                         <div class="btn-toolbar" style="text-align: center">
                             <div class="btn-group">
                                 <?php if($category == 'Concert') { ?>
-                                <a class="btn btn-eventPR" href="/events.php?category=Concert"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;"> SHOW ALL</span></a>
-                                <a class="btn btn-eventPR" href="/events.php?category=Concert&subcategory=Alternative"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">ALTERNATIVE</span></a>
-                                <a class="btn btn-eventPR" href="/events.php?category=Concert&subcategory=Rock"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;"> ROCK</span></a>
-                                <a class="btn btn-eventPR" href="/events.php?category=Concert&subcategory=Pop"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">POP</span></a>
-                                <a class="btn btn-eventPR" href="/events.php?category=Concert&subcategory=Rap"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;"> HIP HOP/RAP</span></a>
-                                <a class="btn btn-eventPR" href="/events.php?category=Concert&subcategory=Electronic"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;"> ELECTRONIC</span></a>
-                                <a class="btn btn-eventPR" href="/events.php?category=Concert&subcategory=Country"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">COUNTRY</span></a>
-                                <a class="btn btn-eventPR" href="/events.php?category=Concert&subcategory=Classical"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">CLASSICAL</span></a>
+                                <a class="btn btn-eventPR" href="events.php?category=Concert"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;"> SHOW ALL</span></a>
+                                <a class="btn btn-eventPR" href="events.php?category=Concert&subcategory=Alternative"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">ALTERNATIVE</span></a>
+                                <a class="btn btn-eventPR" href="events.php?category=Concert&subcategory=Rock"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;"> ROCK</span></a>
+                                <a class="btn btn-eventPR" href="events.php?category=Concert&subcategory=Pop"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">POP</span></a>
+                                <a class="btn btn-eventPR" href="events.php?category=Concert&subcategory=Rap"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;"> HIP HOP/RAP</span></a>
+                                <a class="btn btn-eventPR" href="events.php?category=Concert&subcategory=Electronic"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;"> ELECTRONIC</span></a>
+                                <a class="btn btn-eventPR" href="events.php?category=Concert&subcategory=Country"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">COUNTRY</span></a>
+                                <a class="btn btn-eventPR" href="events.php?category=Concert&subcategory=Classical"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">CLASSICAL</span></a>
                                 <?php } ?>
                                 <?php if($category == 'Business') { ?>
-                                <a class="btn btn-eventPR" href="/events.php?category=Business"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">SHOW ALL</span></a>
-                                <a class="btn btn-eventPR" href="/events.php?category=Business"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">CONFERENCES</span></a>
-                                <a class="btn btn-eventPR" href="/events.php?category=Business"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">BUSINESS MEETINGS</span></a>
-                                <a class="btn btn-eventPR" href="/events.php?category=Business"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">SEMINARS</span></a>
-                                <a class="btn btn-eventPR" href="/events.php?category=Business"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">SALES & AUCTIONS</span></a>
-                                <a class="btn btn-eventPR" href="/events.php?category=Business"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">JOB FAIRS</span></a>
+                                <a class="btn btn-eventPR" href="events.php?category=Business"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">SHOW ALL</span></a>
+                                <a class="btn btn-eventPR" href="events.php?category=Business"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">CONFERENCES</span></a>
+                                <a class="btn btn-eventPR" href="events.php?category=Business"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">BUSINESS MEETINGS</span></a>
+                                <a class="btn btn-eventPR" href="events.php?category=Business"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">SEMINARS</span></a>
+                                <a class="btn btn-eventPR" href="events.php?category=Business"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">SALES & AUCTIONS</span></a>
+                                <a class="btn btn-eventPR" href="events.php?category=Business"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">JOB FAIRS</span></a>
                                 <?php } ?>
                                 <?php if($category == 'Entertainment') { ?>
-                                <a class="btn btn-eventPR" href="/events.php?category=Entertainment"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">SHOW ALL</span></a>
-                                <a class="btn btn-eventPR" href="/events.php?category=Entertainment"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">CULINARY</span></a>
-                                <a class="btn btn-eventPR" href="/events.php?category=Entertainment"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">CINEMA</span></a>
-                                <a class="btn btn-eventPR" href="/events.php?category=Entertainment"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">ARTS & CRAFT</span></a>
-                                <a class="btn btn-eventPR" href="/events.php?category=Entertainment"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">THEATER</span></a>
-                                <a class="btn btn-eventPR" href="/events.php?category=Entertainment"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">COMEDY</span></a>
-                                <a class="btn btn-eventPR" href="/events.php?category=Entertainment"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">POLITICS</span></a>
+                                <a class="btn btn-eventPR" href="events.php?category=Entertainment"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">SHOW ALL</span></a>
+                                <a class="btn btn-eventPR" href="events.php?category=Entertainment"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">CULINARY</span></a>
+                                <a class="btn btn-eventPR" href="events.php?category=Entertainment"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">CINEMA</span></a>
+                                <a class="btn btn-eventPR" href="events.php?category=Entertainment"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">ARTS & CRAFT</span></a>
+                                <a class="btn btn-eventPR" href="events.php?category=Entertainment"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">THEATER</span></a>
+                                <a class="btn btn-eventPR" href="events.php?category=Entertainment"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">COMEDY</span></a>
+                                <a class="btn btn-eventPR" href="events.php?category=Entertainment"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">POLITICS</span></a>
                                 <?php } ?>
                                 <?php if($category == 'Sports') { ?>
-                                <a class="btn btn-eventPR" href="/events.php?category=Sports"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">SHOW ALL</span></a>
-                                <a class="btn btn-eventPR" href="/events.php?category=Sports"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">BASKETBALL</span></a>
-                                <a class="btn btn-eventPR" href="/events.php?category=Sports"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">BASEBALL</span></a>
-                                <a class="btn btn-eventPR" href="/events.php?category=Sports"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">SOCCER</span></a>
-                                <a class="btn btn-eventPR" href="/events.php?category=Sports"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">VOLLEYBALL</span></a>
-                                <a class="btn btn-eventPR" href="/events.php?category=Sports"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">TENNIS</span></a>
-                                <a class="btn btn-eventPR" href="/events.php?category=Sports"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">SWIMMING</span></a>
-                                <a class="btn btn-eventPR" href="/events.php?category=Sports"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">BOXING</span></a>
-                                <a class="btn btn-eventPR" href="/events.php?category=Sports"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">CYCLING</span></a>
+                                <a class="btn btn-eventPR" href="events.php?category=Sports"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">SHOW ALL</span></a>
+                                <a class="btn btn-eventPR" href="events.php?category=Sports"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">BASKETBALL</span></a>
+                                <a class="btn btn-eventPR" href="events.php?category=Sports"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">BASEBALL</span></a>
+                                <a class="btn btn-eventPR" href="events.php?category=Sports"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">SOCCER</span></a>
+                                <a class="btn btn-eventPR" href="events.php?category=Sports"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">VOLLEYBALL</span></a>
+                                <a class="btn btn-eventPR" href="events.php?category=Sports"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">TENNIS</span></a>
+                                <a class="btn btn-eventPR" href="events.php?category=Sports"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">SWIMMING</span></a>
+                                <a class="btn btn-eventPR" href="events.php?category=Sports"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">BOXING</span></a>
+                                <a class="btn btn-eventPR" href="events.php?category=Sports"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">CYCLING</span></a>
                                 <?php } ?>
                             </div>
                         </div></div>
@@ -178,7 +178,7 @@ $events = $stmt->fetchAll();
                                 <td class='wsite-multicol-col' style='width:79.074889867841%;padding:0 15px'>
 
                                     <h2 style="text-align:left;"><?php echo $event['eventName'] ?></h2>
-                                    <span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="/picture.php?picID=<?php echo $event['flyer'] ?>" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
+                                    <span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="picture.php?picID=<?php echo $event['flyer'] ?>" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
                                     <div class="paragraph" style="text-align:left;display:block;"><font size="4"><?php echo $event['date'] ?></font><br /><font size="4"><?php echo $event['venueName'] ?></font><br /><font size="4"><span style="line-height: 27px;"><br /></span></font><br /><font size="4"><span style="line-height: 27px;">Genre: <?php echo $event['genre'] ?></span></font></div>
                                     <hr style="clear:both;visibility:hidden;width:100%;">
 

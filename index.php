@@ -56,7 +56,7 @@ require_once('checkAuth.php');
         </tr>
     </table>
     <div id="navigation">
-      <ul><li id='active'><a href='home.html'>Home</a></li><li id='pg145650631833651339'><a href='events.php?category=Concert'>Music</a></li><li id='pg404778243583026952'><a href='/events.php?category=Sports'>Sports</a></li><li id='pg441792526610757515'><a href='/events.php?category=Entertainment'>Entertainment</a></li><li id='pg269210016325162137'><a href='/events.php?category=Business'>Business & Education</a></li><li id="pgabout_us"><a href="about.php">About Us</a></li></ul>
+      <ul><li id='active'><a href='home.html'>Home</a></li><li id='pg145650631833651339'><a href='events.php?category=Concert'>Music</a></li><li id='pg404778243583026952'><a href='events.php?category=Sports'>Sports</a></li><li id='pg441792526610757515'><a href='events.php?category=Entertainment'>Entertainment</a></li><li id='pg269210016325162137'><a href='events.php?category=Business'>Business & Education</a></li><li id="pgabout_us"><a href="about.php">About Us</a></li></ul>
     </div>
     <div id="container">
         <div id="content">
@@ -125,7 +125,7 @@ require_once('checkAuth.php');
                                     $result = $stmt->fetchAll();
 
                                     foreach ($result as &$venue) {
-                                      echo "<li><a href='/event.php?eventID={$venue['eventID']}'> <span style='color: white'>{$venue['eventName']}</span></a></li>
+                                      echo "<li><a href='event.php?eventID={$venue['eventID']}'> <span style='color: white'>{$venue['eventName']}</span></a></li>
                                         <hr class='styled-hr' style='width:100%;''>
                                         <div style='height: 20px; overflow: hidden; width: 100%;''></div>";
                                     }
