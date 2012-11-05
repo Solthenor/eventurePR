@@ -2,7 +2,7 @@
 /**
  * @Singleton to create database connection
  */
-class db{
+class db {
 
         /**
          * Holds an insance of self

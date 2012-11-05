@@ -4,11 +4,41 @@ require_once('db.php');
 require_once('checkAuth.php');
 
 if( !$loggedin ){
-  header('Location: /index.php');
+  header('Location: index.php');
 }
 
+$picID = 0;
 
 if ( count($_POST) > 0) {
+
+  $db = db::getInstance();
+
+  if ($_FILES["photo"]["error"] == 0) {
+
+    $type = str_replace('image/', '', $_FILES['photo']['type']);
+
+    $fileName = $_FILES['photo']['name'];
+    $tmpName  = $_FILES['photo']['tmp_name'];
+    $fileSize = $_FILES['photo']['size'];
+    $fileType = $_FILES['photo']['type'];
+
+    $fp      = fopen($tmpName, 'r');
+    $content = fread($fp, filesize($tmpName));
+    $content = addslashes($content);
+    fclose($fp);
+
+    $sql = "INSERT INTO Picture
+            SET
+              userID = '{$id}',
+              ext = '{$type}',
+              data = '{$content}'";
+
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+
+    $picID = $db->lastInsertId();
+  }
+
 
     //TODO: better validation for empty fields
 
@@ -16,7 +46,6 @@ if ( count($_POST) > 0) {
   // endHour = '{$_POST['street']}',
   // featured = '{$_POST['street']}',
   // price = '{$_POST['street']}',
-    $db = db::getInstance();
     $sql = "INSERT INTO Event
             SET
               userID = '{$id}',
@@ -29,15 +58,14 @@ if ( count($_POST) > 0) {
               description = '{$_POST['description']}'
     ";
 
+    if(isset($picID)) {
+      $sql .= ", flyer= {$picID}";
+    }
+
     $stmt = $db->prepare($sql);
-    // $stmt->bindValue(':vName', , PDO::PARAM_STR);
-    // $stmt->bindValue(':street', $_POST['location'], PDO::PARAM_STR);
-    // $stmt->bindValue(':city', $_POST['location'], PDO::PARAM_STR);
-    // $stmt->bindValue(':zipcode', $_POST['location'], PDO::PARAM_STR);
-    // $stmt->bindValue(':pNumber', $_POST['telephone'], PDO::PARAM_STR);
-    // $stmt->bindValue(':website', $_POST['website'], PDO::PARAM_STR);
-    // $stmt->bindValue(':description', $_POST['description'], PDO::PARAM_STR);
     $stmt->execute();
+
+
 }
 ?>
 
@@ -114,7 +142,7 @@ if ( count($_POST) > 0) {
 <h2 style="text-align:left;">E-Vent it</h2>
 
 <div>
-<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" id="create-event">
+<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" id="create-event" enctype="multipart/form-data">
 <div id="807999966852778988-form-parent" class="wsite-form-container" style="margin-top:10px;">
   <ul class="formlist" id="807999966852778988-form-list">
     <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
@@ -208,7 +236,6 @@ if ( count($_POST) > 0) {
 <div style="text-align:left; margin-top:10px; margin-bottom:10px;">
   <input type='submit' name="submit" value="Submit" class='btn btn-eventPR' />
 </div>
-</form>
 
 
 </div>
@@ -230,16 +257,11 @@ if ( count($_POST) > 0) {
 
 
 <div class="paragraph" style="text-align:left;">Add a Picture:</div>
-
-    <a>
-        <img src="uploads/1/3/4/4/13443306/1346212298.jpg" alt="Picture" style="width:auto;max-width:100%; margin-top: 100px;" />
-    </a>
 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
 
-  <label class="wsite-form-label" for="input-436611527555598588">Upload File <span class="form-required">*</span></label>
+  <label class="wsite-form-label" for="photo">Upload File <span class="form-required">*</span></label>
   <div class="wsite-form-input-container">
-    <input type="hidden" name="MAX_FILE_SIZE" value="20971520" />
-    <input id="input-436611527555598588" class="wsite-form-input" type="file" name="_u436611527555598588" />
+    <input id="photo" class="wsite-form-input" type="file" name="photo" />
     <div style="font-size:10px;">Max file size: 20MB</div> 
   </div>
   <div id="instructions-436611527555598588" class="wsite-form-instructions" style="display:none;"></div>
@@ -249,6 +271,7 @@ if ( count($_POST) > 0) {
 
 <div style="display:block;font-size:90%"></div>
 </div></div>
+</form>
 
 </tr>
 </tbody>

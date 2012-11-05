@@ -6,7 +6,7 @@ require_once('checkAuth.php');
 $venueID = $_GET['venueID'];
 
 if (!isset($venueID)) {
-    header('Location: /index.php');
+    header('Location: index.php');
     return;
 }
 
@@ -50,7 +50,7 @@ $events = $eStmt->fetchAll();
 $venue = $result[0];
 
 if(!isset($venue)){
-    header('Location: /index.php');
+    header('Location: index.php');
     return;
 }
 

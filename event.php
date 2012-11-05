@@ -6,7 +6,7 @@ require_once('checkAuth.php');
 $eventID = $_GET['eventID'];
 
 if (!isset($eventID)) {
-    header('Location: /index.php');
+    header('Location: index.php');
     return;
 }
 
@@ -47,7 +47,7 @@ $result = $stmt->fetchAll();
 $event = $result[0];
 
 if(!isset($event)){
-    header('Location: /index.php');
+    header('Location: index.php');
     return;
 }
 
@@ -142,7 +142,7 @@ if(isset($_POST['action'])) {
 
 <h2 style="text-align:left;"><?php echo $event['eventName'] ?></h2>
 <span class='imgPusher' style='float:left;height:0px'></span>
-<span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="uploads/1/3/4/4/13443306/650380585.jpg" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
+<span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="/picture.php?picID=<?php echo $event['flyer'] ?>" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
 <div class="paragraph" style="text-align:left;display:block;">
 <?php echo $event['date'] ?>
 <br />

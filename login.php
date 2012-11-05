@@ -12,7 +12,7 @@ if ($iphone || $android || $palmpre || $ipod || $berry == true) {
 
 if(isset($_COOKIE['loggedin'])){
     $loggedin = true;
-    header('Location: /index.php');
+    header('Location: index.php');
     return;
 }
 
@@ -49,6 +49,40 @@ if ( count($_POST) > 0) {
         $stmt->execute();
         $loggedin = true;
         $id = $db->lastInsertId();
+
+        if ($_FILES["photo"]["error"] == 0) {
+
+          $type = str_replace('image/', '', $_FILES['photo']['type']);
+
+          $fileName = $_FILES['photo']['name'];
+          $tmpName  = $_FILES['photo']['tmp_name'];
+          $fileSize = $_FILES['photo']['size'];
+          $fileType = $_FILES['photo']['type'];
+
+          $fp      = fopen($tmpName, 'r');
+          $content = fread($fp, filesize($tmpName));
+          $content = addslashes($content);
+          fclose($fp);
+
+          $sql = "INSERT INTO Picture
+                  SET
+                    userID = '{$id}',
+                    ext = '{$type}',
+                    data = '{$content}'";
+
+          $stmt = $db->prepare($sql);
+          $stmt->execute();
+
+          $picID = $db->lastInsertId();
+
+          $sql = "UPDATE User
+                  SET
+                    profilePicture = '{$picID}'
+                  WHERE userID = '{$id}'";
+
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+        }
     }
     else {
         $password = md5 ( $_POST['password'] );
@@ -73,7 +107,7 @@ if ( count($_POST) > 0) {
 
 if($loggedin) { 
     setcookie('loggedin', $id, time() + (86400 * 7)); // 86400 = 1 day
-    header('Location: /index.php');
+    header('Location: index.php');
     return;
 }
 ?>
@@ -174,7 +208,7 @@ if($loggedin) {
                             <td class='wsite-multicol-col' style='width:50%;padding:0 15px'>
 
                                 <div>
-                                    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" id="create-user">
+                                    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" id="create-user" enctype="multipart/form-data">
                                         <div id="729044906853205765-form-parent" class="wsite-form-container" style="margin-top:10px;">
                                             <ul class="formlist" id="729044906853205765-form-list">
                                                 <h2 style="text-align:left;">Register here:</h2>
@@ -242,9 +276,38 @@ if($loggedin) {
                                                 </div></div>
                                             </ul>
                                         </div>
+
+                                        <div><div class="wsite-multicol"><div class='wsite-multicol-table-wrap' style='margin:0 -15px'>
+                                            <table class='wsite-multicol-table'>
+                                                <tbody class='wsite-multicol-tbody'>
+                                                <tr class='wsite-multicol-tr'>
+
+
+                                                    <div class="paragraph" style="text-align:left;">Add a Picture:</div>
+                                                    <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
+
+                                                        <label class="wsite-form-label" for="photo">Upload File <span class="form-required">*</span></label>
+                                                        <div class="wsite-form-input-container">
+                                                            <input id="photo" class="wsite-form-input" type="file" name="photo" />
+                                                            <div style="font-size:10px;">Max file size: 20MB</div>
+                                                        </div>
+                                                        <div id="instructions-436611527555598588" class="wsite-form-instructions" style="display:none;"></div>
+                                                    </div></div>
+
+                                                    <div><div class="wsite-image wsite-image-border-border-width:0 " style="padding-top:10px;padding-bottom:10px;margin-left:10px;margin-right:10px;text-align:right">
+
+                                                        <div style="display:block;font-size:90%"></div>
+                                                    </div></div>
+
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div></div></div>
+
                                         <div style="text-align:left; margin-top:10px; margin-bottom:10px;">
                                             <input type='submit' name="submit" value="Sign up" class='btn btn-eventPR' />
                                         </div>
+
                                     </form>
 
 
