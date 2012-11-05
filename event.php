@@ -113,7 +113,7 @@ if(isset($_POST['action'])) {
 				<table>
                     <?php if($loggedin) { ?>
                     <tr>
-                        <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; ">Profile</a> | <a href="home.html" style="color: #32CD32; text-decoration: underline;">Log out</a></span></td>
+                        <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; ">Profile</a> | <a href="index.php" style="color: #32CD32; text-decoration: underline;">Log out</a></span></td>
                         <td class="social"></td>
                     </tr>
                     
@@ -216,7 +216,7 @@ background: -o-linear-gradient(-45deg,  rgba(30,87,153,1) 0%,rgba(30,87,153,0.82
 background: -ms-linear-gradient(-45deg,  rgba(30,87,153,1) 0%,rgba(30,87,153,0.82) 24%,rgba(31,93,160,0.8) 27%,rgba(41,137,216,0.55) 50%,rgba(30,87,153,0.22) 80%,rgba(30,87,153,0) 100%); /* IE10+ */
 background: linear-gradient(135deg,  rgba(30,87,153,1) 0%,rgba(30,87,153,0.82) 24%,rgba(31,93,160,0.8) 27%,rgba(41,137,216,0.55) 50%,rgba(30,87,153,0.22) 80%,rgba(30,87,153,0) 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#001e5799',GradientType=1 );/* IE6-9 fallback on horizontal gradient */ >
-        <span class="imgPusher  style="float:left;height:0px;"></span><div style="opacity: 1"><span style="opacity: 1; position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px; opacity: 1"><a href="profile.html"><img class="wsite-image galleryImageBorder" src="uploads/1/3/4/4/13443306/397974220.jpg?74" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border: 1px double gray;padding:3px; background-color: #1a1a1a;" alt="Picture"></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span></div>
+        <span class="imgPusher  style="float:left;height:0px;"></span><div style="opacity: 1"><span style="opacity: 1; position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px; opacity: 1"><a href="index.php"><img class="wsite-image galleryImageBorder" src="uploads/1/3/4/4/13443306/397974220.jpg?74" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border: 1px double gray;padding:3px; background-color: #1a1a1a;" alt="Picture"></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span></div>
         <div class="paragraph" style="text-align:left;display:block; color: white; font-size: medium; font-style: italic">OMG!!!! THIS IS SO COOL!!! I LOVE TARJA!! &lt;3<br></div>
         <hr style="clear:both;visibility:hidden;width:100%;">
 
