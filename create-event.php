@@ -1,15 +1,5 @@
 <?php
-$iphone = strpos($_SERVER['HTTP_USER_AGENT'],"iPhone");
-$android = strpos($_SERVER['HTTP_USER_AGENT'],"Android");
-$palmpre = strpos($_SERVER['HTTP_USER_AGENT'],"webOS");
-$berry = strpos($_SERVER['HTTP_USER_AGENT'],"BlackBerry");
-$ipod = strpos($_SERVER['HTTP_USER_AGENT'],"iPod");
-
-if ($iphone || $android || $palmpre || $ipod || $berry == true) {
-    header('Location: /mobile-index.html');
-    return;
-}
-
+require_once('mobileRedirect.php');
 require_once('db.php');
 require_once('checkAuth.php');
 
@@ -29,7 +19,7 @@ if ( count($_POST) > 0) {
     $db = db::getInstance();
     $sql = "INSERT INTO Event
             SET
-              userID = 1,
+              userID = '{$id}',
               eventName = '{$_POST['event-name']}',
               date = '{$_POST['date']}',
               venueID = '{$_POST['venue']}',
@@ -82,12 +72,12 @@ if ( count($_POST) > 0) {
 <div id="wrapper">
 	<table id="header">
 		<tr>
-			<td id="logo"><span class='wsite-logo'><a href=''><span id="wsite-title">E-venturePR</span></a></span></td>
+			<td id="logo"><span class='wsite-logo'><a href='/'><span id="wsite-title">E-venturePR</span></a></span></td>
 			<td id="header-right">
 				<table>
           <?php if($loggedin) { ?>
           <tr>
-              <td class="phone-number"><span class='wsite-text'><a href="profile3.html" style="color: #32CD32; text-decoration: underline; ">Profile</a> | <a href="home.html" style="color: #32CD32; text-decoration: underline;">Log out</a></span></td>
+              <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; ">Profile</a> | <a href="home.html" style="color: #32CD32; text-decoration: underline;">Log out</a></span></td>
               <td class="social"></td>
           </tr>
           
@@ -103,7 +93,7 @@ if ( count($_POST) > 0) {
 		</tr>
 	</table>
 	<div id="navigation">
-        <ul><li id='active'><a href='home2.html'>Home</a></li><li id='pg145650631833651339'><a href='concerts2.html'>Music</a></li><li id='pg404778243583026952'><a href='sports2.html'>Sports</a></li><li id='pg441792526610757515'><a href='entertainment2.html'>Entertainment</a></li><li id='pg269210016325162137'><a href='business--education2.html'>Business & Education</a></li><li id="pgabout_us"><a href="about-us2.html">About Us</a></li></ul>
+        <ul><li id='active'><a href='index.php'>Home</a></li><li id='pg145650631833651339'><a href='events.php?category=Concert'>Music</a></li><li id='pg404778243583026952'><a href='/events.php?category=Sports'>Sports</a></li><li id='pg441792526610757515'><a href='/events.php?category=Entertainment'>Entertainment</a></li><li id='pg269210016325162137'><a href='/events.php?category=Business'>Business & Education</a></li><li id="pgabout_us"><a href="about.php">About Us</a></li></ul>
     </div>
 	<div id="container">
 		<div id="content">
@@ -120,7 +110,7 @@ if ( count($_POST) > 0) {
 <tr class='wsite-multicol-tr'>
 
 <td class='wsite-multicol-col' style='width:68.805309734513%;padding:0 15px'>
-    <div style="text-align: left;"><a class="btn btn-eventPR" href="profile3.html"><span style="font-weight: bold; font-size: 14px; font-family: Arial sans-serif;">GO BACK TO PROFILE</span></a></div>
+    <div style="text-align: left;"><a class="btn btn-eventPR" href="profile.php"><span style="font-weight: bold; font-size: 14px; font-family: Arial sans-serif;">GO BACK TO PROFILE</span></a></div>
 <h2 style="text-align:left;">E-Vent it</h2>
 
 <div>
@@ -169,8 +159,8 @@ if ( count($_POST) > 0) {
               <select name='type' class='form-select'>
                   <option value='Concert'>Concert</option>
                   <option value='Sports'>Sports</option>
-                  <option value='Sports'>Entertainment</option>
-                  <option value='Business &amp; Education'>Business &amp; Education</option>
+                  <option value='Entertainment'>Entertainment</option>
+                  <option value='Business'>Business &amp; Education</option>
               </select>
 
           </div>

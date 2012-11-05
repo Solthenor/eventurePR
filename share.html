@@ -32,7 +32,7 @@
     <script type='text/javascript'><!--
     var IS_ARCHIVE=1;
     (function(jQuery){
-        function initFlyouts(){initPublishedFlyoutMenus([{"id":"581818271480209023","title":"Home","url":"index.html"},{"id":"145650631833651339","title":"Concerts","url":"concerts.html"},{"id":"404778243583026952","title":"Sports","url":"sports.html"},{"id":"441792526610757515","title":"Entertainment","url":"entertainment.html"},{"id":"269210016325162137","title":"Business & Education","url":"business--education.html"},{"id":"224132398954985812","title":"About us","url":"about-us.html"}],'435700788219059228',"<li class='wsite-nav-more'><a href='#'>more...<\/a><\/li>",'active',false)}
+        function initFlyouts(){initPublishedFlyoutMenus([{"id":"581818271480209023","title":"Home","url":"index.html"},{"id":"145650631833651339","title":"Concerts","url":"events.php?category=Concert"},{"id":"404778243583026952","title":"Sports","url":"/events.php?category=Sports"},{"id":"441792526610757515","title":"Entertainment","url":"/events.php?category=Entertainment"},{"id":"269210016325162137","title":"Business & Education","url":"/events.php?category=Business"},{"id":"224132398954985812","title":"About us","url":"about.php"}],'435700788219059228',"<li class='wsite-nav-more'><a href='#'>more...<\/a><\/li>",'active',false)}
         if (jQuery) {
             if (jQuery.browser.msie) window.onload = initFlyouts;
             else jQuery(initFlyouts)
@@ -48,11 +48,11 @@
 <div id="wrapper">
     <table id="header">
         <tr>
-            <td id="logo"><span class='wsite-logo'><a href=''><span id="wsite-title">E-venturePR</span></a></span></td>
+            <td id="logo"><span class='wsite-logo'><a href='/'><span id="wsite-title">E-venturePR</span></a></span></td>
             <td id="header-right">
                 <table>
                     <tr>
-                        <td class="phone-number"><span class='wsite-text'><a href="profile3.html" style="color: #32CD32; text-decoration: underline; ">Profile</a> | <a href="home.html" style="color: #32CD32; text-decoration: underline;">Log out</a></span></td>
+                        <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; ">Profile</a> | <a href="home.html" style="color: #32CD32; text-decoration: underline;">Log out</a></span></td>
                         <td class="social"></td>
                     </tr>
                 </table>
@@ -61,7 +61,7 @@
         </tr>
     </table>
     <div id="navigation">
-        <ul><li id='active'><a href='home2.html'>Home</a></li><li id='pg145650631833651339'><a href='concerts2.html'>Music</a></li><li id='pg404778243583026952'><a href='sports2.html'>Sports</a></li><li id='pg441792526610757515'><a href='entertainment2.html'>Entertainment</a></li><li id='pg269210016325162137'><a href='business--education2.html'>Business & Education</a></li><li id="pgabout_us"><a href="about-us.html">About Us</a></li></ul>
+        <ul><li id='active'><a href='index.php'>Home</a></li><li id='pg145650631833651339'><a href='events.php?category=Concert'>Music</a></li><li id='pg404778243583026952'><a href='/events.php?category=Sports'>Sports</a></li><li id='pg441792526610757515'><a href='/events.php?category=Entertainment'>Entertainment</a></li><li id='pg269210016325162137'><a href='/events.php?category=Business'>Business & Education</a></li><li id="pgabout_us"><a href="about.php">About Us</a></li></ul>
     </div>
     <div id="container">
         <div id="content">

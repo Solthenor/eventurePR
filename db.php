@@ -1,4 +1,3 @@
-
 <?php
 /**
  * @Singleton to create database connection
@@ -50,3 +49,5 @@ class db{
         }
 
 } // end of class
+
+?>

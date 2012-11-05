@@ -1,14 +1,5 @@
 <?php
-$iphone = strpos($_SERVER['HTTP_USER_AGENT'],"iPhone");
-$android = strpos($_SERVER['HTTP_USER_AGENT'],"Android");
-$palmpre = strpos($_SERVER['HTTP_USER_AGENT'],"webOS");
-$berry = strpos($_SERVER['HTTP_USER_AGENT'],"BlackBerry");
-$ipod = strpos($_SERVER['HTTP_USER_AGENT'],"iPod");
-
-if ($iphone || $android || $palmpre || $ipod || $berry == true) {
-    header('Location: /mobile-index.html');
-}
-
+require_once('mobileRedirect.php');
 require_once('db.php');
 require_once('checkAuth.php');
 
@@ -44,12 +35,12 @@ require_once('checkAuth.php');
 <div id="wrapper">
     <table id="header">
         <tr>
-            <td id="logo"><span class='wsite-logo'><a href=''><span id="wsite-title">E-venturePR</span></a></span></td>
+            <td id="logo"><span class='wsite-logo'><a href='/'><span id="wsite-title">E-venturePR</span></a></span></td>
             <td id="header-right">
                 <table>
                     <?php if($loggedin) { ?>
                     <tr>
-                        <td class="phone-number"><span class='wsite-text'><a href="profile3.html" style="color: #32CD32; text-decoration: underline; ">Profile</a> | <a href="home.html" style="color: #32CD32; text-decoration: underline;">Log out</a></span></td>
+                        <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; ">Profile</a> | <a href="home.html" style="color: #32CD32; text-decoration: underline;">Log out</a></span></td>
                         <td class="social"></td>
                     </tr>
    
@@ -65,7 +56,7 @@ require_once('checkAuth.php');
         </tr>
     </table>
     <div id="navigation">
-      <ul><li id='active'><a href='home.html'>Home</a></li><li id='pg145650631833651339'><a href='concerts.html'>Music</a></li><li id='pg404778243583026952'><a href='sports.html'>Sports</a></li><li id='pg441792526610757515'><a href='entertainment.html'>Entertainment</a></li><li id='pg269210016325162137'><a href='business--education.html'>Business & Education</a></li><li id="pgabout_us"><a href="about-us.html">About Us</a></li></ul>
+      <ul><li id='active'><a href='home.html'>Home</a></li><li id='pg145650631833651339'><a href='events.php?category=Concert'>Music</a></li><li id='pg404778243583026952'><a href='/events.php?category=Sports'>Sports</a></li><li id='pg441792526610757515'><a href='/events.php?category=Entertainment'>Entertainment</a></li><li id='pg269210016325162137'><a href='/events.php?category=Business'>Business & Education</a></li><li id="pgabout_us"><a href="about.php">About Us</a></li></ul>
     </div>
     <div id="container">
         <div id="content">
@@ -118,7 +109,9 @@ require_once('checkAuth.php');
                                  	<?php
 
                                     $db = db::getInstance();
-                                    $sql = "SELECT eventName
+                                    $sql = "SELECT 
+                                                eventID,
+                                                eventName
                                             FROM Event AS r1 
                                                 JOIN (SELECT (RAND() * (SELECT MAX(eventID) FROM Event)) AS id) AS r2
                                             WHERE r1.eventID >= r2.id
@@ -132,7 +125,7 @@ require_once('checkAuth.php');
                                     $result = $stmt->fetchAll();
 
                                     foreach ($result as &$venue) {
-                                      echo "<li><a href=''> <span style='color: white'>{$venue['eventName']}</span></a></li>
+                                      echo "<li><a href='/event.php?eventID={$venue['eventID']}'> <span style='color: white'>{$venue['eventName']}</span></a></li>
                                         <hr class='styled-hr' style='width:100%;''>
                                         <div style='height: 20px; overflow: hidden; width: 100%;''></div>";
                                     }

@@ -70,6 +70,12 @@ if ( count($_POST) > 0) {
         }
     }
 }
+
+if($loggedin) { 
+    setcookie('loggedin', $id, time() + (86400 * 7)); // 86400 = 1 day
+    header('Location: /index.php');
+    return;
+}
 ?>
 
 <!DOCTYPE html>
@@ -78,9 +84,6 @@ if ( count($_POST) > 0) {
     <title>Login - E-venturePR</title>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <script type="text/javascript">
-    <?php if($loggedin) { echo "document.cookie = 'loggedin={$id}; expires=Mon, 31 Dec 2012 20:47:11 UTC; path=/'; location.href = 'index.php'"; } ?> 
-    </script>
     <link rel='stylesheet' type='text/css' href='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.css?1346362758'>
     <link rel='stylesheet' href='http://cdn1.editmysite.com/editor/images/common/common-v2.css?buildTime=1346362758' type='text/css' />
     <link rel='stylesheet' type='text/css' href='css/main_style.css' title='wsite-theme-css' />
@@ -105,20 +108,28 @@ if ( count($_POST) > 0) {
 <div id="wrapper">
     <table id="header">
         <tr>
-            <td id="logo"><span class='wsite-logo'><a href=''><span id="wsite-title">E-venturePR</span></a></span></td>
+            <td id="logo"><span class='wsite-logo'><a href='/'><span id="wsite-title">E-venturePR</span></a></span></td>
             <td id="header-right">
                 <table>
+                    <?php if($loggedin) { ?>
                     <tr>
-                        <td class="phone-number"><span class='wsite-text'>Don't have an account? Register <a href="" style="color: #32CD32; text-decoration: underline; ">HERE</a></span></td>
+                        <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; ">Profile</a> | <a href="home.html" style="color: #32CD32; text-decoration: underline;">Log out</a></span></td>
                         <td class="social"></td>
                     </tr>
+                    
+                    <?php }  else {?>
+                    <tr>
+                        <td class="phone-number"><span class='wsite-text'>Don't have an account? Register <a href="login.php" style="color: #32CD32; text-decoration: underline; ">HERE</a> | <a href="login.php" style="color: #32CD32; text-decoration: underline;">Sign in</a></span></td>
+                        <td class="social"></td>
+                    </tr>
+                    <?php }?>
                 </table>
                 <div class="search"></div>
             </td>
         </tr>
     </table>
     <div id="navigation">
-        <ul><li id='active'><a href='home.html'>Home</a></li><li id='pg145650631833651339'><a href='concerts.html'>Music</a></li><li id='pg404778243583026952'><a href='sports.html'>Sports</a></li><li id='pg441792526610757515'><a href='entertainment.html'>Entertainment</a></li><li id='pg269210016325162137'><a href='business--education.html'>Business & Education</a></li><li id="pgabout_us"><a href="about-us.html">About Us</a></li></ul>
+        <ul><li id='active'><a href='home.html'>Home</a></li><li id='pg145650631833651339'><a href='events.php?category=Concert'>Music</a></li><li id='pg404778243583026952'><a href='/events.php?category=Sports'>Sports</a></li><li id='pg441792526610757515'><a href='/events.php?category=Entertainment'>Entertainment</a></li><li id='pg269210016325162137'><a href='/events.php?category=Business'>Business & Education</a></li><li id="pgabout_us"><a href="about.php">About Us</a></li></ul>
     </div>
     <div id="container">
         <div id="content">
