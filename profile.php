@@ -24,7 +24,7 @@ $sql = "SELECT
             age,
             gender,
             work
-        FROM User
+        FROM User 
         WHERE userID = {$id};
 ";
 
@@ -40,11 +40,13 @@ if(!isset($user)){
     return;
 }
 
+
+
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My - E-venturePR</title>
+    <title>Profile - E-venturePR</title>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
@@ -71,12 +73,12 @@ if(!isset($user)){
 <div id="wrapper">
     <table id="header">
         <tr>
-            <td id="logo"><span class='wsite-logo'><a href='index.php'><span id="wsite-title">E-venturePR</span></a></span></td>
+            <td id="logo"><span class='wsite-logo'><a href="index.php"><span id="wsite-title">E-venturePR</span></a></span></td>
             <td id="header-right">
                 <table>
                     <?php if($loggedin) { ?>
                     <tr>
-                        <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; ">Profile</a> | <a href="index.php" style="color: #32CD32; text-decoration: underline;">Log out</a></span></td>
+                        <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; "><?php echo $user['userName'] ?></a> | <a href="index.php" style="color: #32CD32; text-decoration: underline;">Log out</a></span></td>
                         <td class="social"></td>
                     </tr>
                     
@@ -187,6 +189,7 @@ if(!isset($user)){
                             <td class='wsite-multicol-col' style='width:50%;padding:0 15px'>
 
                                 <h2 style="text-align:center;">Memorable E-ventures</h2>
+                                <!--
                                 <div>
                                     <div><div style="height: 20px; overflow: hidden;"></div>
                                         <div id='139083701912618958-gallery' class='imageGallery' style='line-height: 0px; padding: 0; margin: 0'>
@@ -195,27 +198,86 @@ if(!isset($user)){
 
                                         <div style="height: 20px; overflow: hidden;"></div></div>
                                 </div>
+                                -->
+                                <div id="mainmenu">
+                                    <ul style="font-size: 14px; color: white;">
+                                        <?php $db = db::getInstance();
+                                            $sql = "SELECT 
+                                                        eventID,
+                                                        eventName
+                                                    FROM Event AS r1, User AS u1 
+                                                        JOIN (SELECT (RAND() * (SELECT MAX(eventID) FROM Attends)) AS id) AS r2
+                                                                       WHERE r1.eventID >= r2.id
+                                                                       
+                                                                        AND 
+                                                                       u1.userID = {$id}
+
+                                                                       ORDER BY r1.eventID ASC
+                                                                       LIMIT 5
+                                                               ";
+
+                                            $stmt = $db->prepare($sql);
+                                            $stmt->execute();
+                                                               
+                                           $result = $stmt->fetchAll();
+
+                                           foreach ($result as &$venue) {
+                                                echo "<li><a href='event.php?eventID={$venue['eventID']}'> <span style='color: white'>{$venue['eventName']}</span></a></li>
+                                                <div style='height: 20px; overflow: hidden; width: 100%;''></div>";
+                                                }
+                                        ?>
+                                    </ul>
+
+
+
+                                    </div>
 
                             </td>
                             <td class='wsite-multicol-col' style='width:50%;padding:0 15px'>
 
                                 <h2 style="text-align:left;">My wall:<br /></h2>
-                                <div style="border: 1px solid #f5f5f5; padding: 20px; height: 80%; overflow: auto;
-                                    background: -moz-linear-gradient(-45deg,  rgba(30,87,153,1) 0%, rgba(30,87,153,0.82) 24%, rgba(31,93,160,0.8) 27%, rgba(41,137,216,0.55) 50%, rgba(30,87,153,0.22) 80%, rgba(30,87,153,0) 100%);/* FF3.6+ */
-background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(30,87,153,1)), color-stop(24%,rgba(30,87,153,0.82)), color-stop(27%,rgba(31,93,160,0.8)), color-stop(50%,rgba(41,137,216,0.55)), color-stop(80%,rgba(30,87,153,0.22)), color-stop(100%,rgba(30,87,153,0)));  /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(-45deg,  rgba(30,87,153,1) 0%,rgba(30,87,153,0.82) 24%,rgba(31,93,160,0.8) 27%,rgba(41,137,216,0.55) 50%,rgba(30,87,153,0.22) 80%,rgba(30,87,153,0) 100%);   /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(-45deg,  rgba(30,87,153,1) 0%,rgba(30,87,153,0.82) 24%,rgba(31,93,160,0.8) 27%,rgba(41,137,216,0.55) 50%,rgba(30,87,153,0.22) 80%,rgba(30,87,153,0) 100%);  /* Opera 11.10+ */
-background: -ms-linear-gradient(-45deg,  rgba(30,87,153,1) 0%,rgba(30,87,153,0.82) 24%,rgba(31,93,160,0.8) 27%,rgba(41,137,216,0.55) 50%,rgba(30,87,153,0.22) 80%,rgba(30,87,153,0) 100%); /* IE10+ */
-background: linear-gradient(135deg,  rgba(30,87,153,1) 0%,rgba(30,87,153,0.82) 24%,rgba(31,93,160,0.8) 27%,rgba(41,137,216,0.55) 50%,rgba(30,87,153,0.22) 80%,rgba(30,87,153,0) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#001e5799',GradientType=1 );/* IE6-9 fallback on horizontal gradient */ >
+                                <div style="border: 1px solid #f5f5f5; padding: 20px; height: 80%; overflow: auto; background-color:black;">
                                     <span class="imgPusher" style="float:left;height:0px"></span>
                                     <div style="position:relative;float:left;z-index:10;width:70px;clear:left;margin-top:0px;*margin-top:0px">
                                         <a><img class="wsite-image galleryImageBorder" src="http://i3.kym-cdn.com/entries/icons/original/000/010/496/asdf.jpg" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border: 1px double gray;padding:3px; background-color: #1a1a1a;" alt="Picture">
                                         </a>
                                         <div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></div>
-                                    <div class="paragraph" style="text-align:left;display:block; color: white; font-size: medium; font-style: italic">: HIIIIIIIIIIII!!! &lt;3</div>
+                                    <!--<div class="paragraph" style="text-align:left;display:block; color: white; font-size: medium; font-style: italic">: HIIIIIIIIIIII!!! &lt;3</div>-->
+                                    <ul style="font-size: 14px; color: white;">
+                                                                <?php
+
+                                                               $db = db::getInstance();
+                                                               $sql = "SELECT 
+                                                                           userID,
+                                                                           content
+                                                                       FROM Comment AS c1 
+                                                                           JOIN (SELECT ( * (SELECT MAX(userID) FROM User)) AS id) AS u2
+                                                                       WHERE c1.userID >= u2.id
+                                                                       ORDER BY c1.userID ASC
+                                                                       LIMIT 5
+                                                               ";
+
+                                                               $stmt = $db->prepare($sql);
+                                                               $stmt->execute();
+                                                               
+                                                               $result = $stmt->fetchAll();
+
+                                                               foreach ($result as &$comment) {
+                                                                 echo "<li> <span style='color: white'>{$comment['comment']}</span></a></li>
+                                                                   <div style='height: 20px; overflow: hidden; width: 100%;''></div>";
+                                                               }
+                                                               ?>
+                                                        </ul>
+
                                     <hr style="clear:both;visibility:hidden;width:100%;">
                                 </div>
+                                <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
+                                    <label class="wsite-form-label" for="description">Post to wall: <span class="form-required">*</span></label>
+                                    <div class="wsite-form-input-container">
+                                    <textarea id="description" class="wsite-form-input wsite-input" name="description" style="width:285px; height: 50px"></textarea>
+                                    </div>
+                                    <div id="instructions-740288841696996782" class="wsite-form-instructions" style="display:none;"></div>
+                                </div></div>
 
                             </td>
                         </tr>

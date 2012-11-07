@@ -27,8 +27,8 @@ class db {
                         $db_type = 'mysql';
                         $hostname = '127.0.0.1';
                         $dbname = 'g13';
-                        $db_password = '';
-                        $db_username = 'root';
+                        $db_password = 'G13kar';
+                        $db_username = 'g13';
                         $db_port = 3306;
                                                 
                         self::$instance = new PDO("$db_type:host=$hostname;port=$db_port;dbname=$dbname", $db_username, $db_password);

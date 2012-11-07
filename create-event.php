@@ -42,10 +42,10 @@ if ( count($_POST) > 0) {
 
     //TODO: better validation for empty fields
 
-  // startHour = '{$_POST['street']}',
-  // endHour = '{$_POST['street']}',
-  // featured = '{$_POST['street']}',
-  // price = '{$_POST['street']}',
+  // startHour = '{$_POST['startHour']}',
+             // endHour = '{$_POST['endHour']}',
+              //featured = '{$_POST['featured']}',
+              //price = '{$_POST['price']}',     
     $sql = "INSERT INTO Event
             SET
               userID = '{$id}',
@@ -54,7 +54,8 @@ if ( count($_POST) > 0) {
               venueID = '{$_POST['venue']}',
               eventType = '{$_POST['type']}',
               genre = '{$_POST['genre']}',
-              status = '{$_POST['private']}',           
+              status = '{$_POST['private']}',  
+                  
               description = '{$_POST['description']}'
     ";
 
@@ -105,7 +106,7 @@ if ( count($_POST) > 0) {
 				<table>
           <?php if($loggedin) { ?>
           <tr>
-              <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; ">Profile</a> | <a href="index.php" style="color: #32CD32; text-decoration: underline;">Log out</a></span></td>
+              <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; "><?php echo $user['userName'] ?></a> | <a href="index.php" style="color: #32CD32; text-decoration: underline;">Log out</a></span></td>
               <td class="social"></td>
           </tr>
           

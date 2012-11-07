@@ -40,6 +40,9 @@ if ( count($_POST) > 0) {
                     lastName = '{$_POST['last-name']}',
                     email = '{$_POST['email']}',
                     password = '{$password}',
+                    age = '{$_POST['age']}',
+                    gender = '{$_POST['gender']}',
+                    work = '{$_POST['work']}',
                     securityQuestion = '{$_POST['question']}',
                     securityAnswer = '{$_POST['answer']}'
         ";
@@ -82,6 +85,10 @@ if ( count($_POST) > 0) {
 
             $stmt = $db->prepare($sql);
             $stmt->execute();
+        }
+        else{
+            // Default photo
+
         }
     }
     else {
@@ -139,10 +146,13 @@ if($loggedin) {
     <script src="js/bootstrap.min.js"></script>
 </head>
 <body class='wsite-theme-dark no-header-page wsite-page-login'>
+
+<?php var_dump($result) ?>
+
 <div id="wrapper">
     <table id="header">
         <tr>
-            <td id="logo"><span class='wsite-logo'><a href='/'><span id="wsite-title">E-venturePR</span></a></span></td>
+            <td id="logo"><span class='wsite-logo'><a href='/index.php'><span id="wsite-title">E-venturePR</span></a></span></td>
             <td id="header-right">
                 <table>
                     <?php if($loggedin) { ?>
@@ -200,6 +210,7 @@ if($loggedin) {
                                         <div style="text-align:left; margin-top:10px; margin-bottom:10px;">
                                             <input type='submit' name="submit" value="Login" class='btn btn-eventPR' />
                                         </div>
+
                                     </form>
 
                                 </div>
@@ -254,13 +265,38 @@ if($loggedin) {
                                                     <div id="instructions-703964987851636371" class="wsite-form-instructions" style="display:none;"></div>
                                                 </div></div>
 
+                                                <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
+                                                    <label class="wsite-form-label" for="age">Age <span class="form-required">*</span></label>
+                                                    <div class="wsite-form-input-container">
+                                                        <input id="age" class="wsite-form-input wsite-input" type="text" name="age" style="width:370px;" />
+                                                    </div>
+                                                    <div id="instructions-629303063250377115" class="wsite-form-instructions" style="display:none;"></div>
+                                                </div></div>
+
+                                                <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
+                                                    <label class="wsite-form-label" for="gender">Gender <span class="form-required">*</span></label>
+                                                    <div class="wsite-form-input-container">
+                                                        <input id="gender" class="wsite-form-input wsite-input" type="text" name="gender" style="width:370px;" />
+                                                    </div>
+                                                    <div id="instructions-629303063250377115" class="wsite-form-instructions" style="display:none;"></div>
+                                                </div></div>
+
+                                                <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
+                                                    <label class="wsite-form-label" for="age">Work <span class="form-required">*</span></label>
+                                                    <div class="wsite-form-input-container">
+                                                        <input id="work" class="wsite-form-input wsite-input" type="text" name="work" style="width:370px;" />
+                                                    </div>
+                                                    <div id="instructions-629303063250377115" class="wsite-form-instructions" style="display:none;"></div>
+                                                </div></div>
+
+
                                                 <div><div class="wsite-form-field" style="margin:5px 0px 0px 0px;">
                                                     <label class="wsite-form-label" for="question">Security Question <span class="form-required">*</span></label>
                                                     <div class="wsite-form-radio-container">
                                                         <select name='question' class='form-select'>
-                                                            <option value='0'>Option 1</option>
-                                                            <option value='1'>Option 2</option>
-                                                            <option value='2'>Option 3</option>
+                                                            <option value='0'>Favorite High-School teacher?</option>
+                                                            <option value='1'>First Kiss?</option>
+                                                            <option value='2'>Favorite pet's name?</option>
                                                         </select>
 
                                                     </div>

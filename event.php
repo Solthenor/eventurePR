@@ -81,7 +81,7 @@ if(isset($_POST['action'])) {
 <!DOCTYPE html>
 <html>
 <head>
-<title>Nightwish Detail - E-venturePR</title>
+<title><?php echo $event['eventName'] ?> - E-venturePR</title>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
@@ -113,7 +113,15 @@ if(isset($_POST['action'])) {
 				<table>
                     <?php if($loggedin) { ?>
                     <tr>
-                        <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; ">Profile</a> | <a href="index.php" style="color: #32CD32; text-decoration: underline;">Log out</a></span></td>
+                        <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; ">Profile</a> | 
+
+                            <!-- <a href="index.php" style="color: #32CD32; text-decoration: underline;">Log out</a> -->
+                            <form action="<?php echo $_SERVER['PHP_SELF']; ?><?php echo "?eventID={$eventID}" ?>" method="POST">
+                                <input name="action" type="hidden" value="logout" />
+                                <input href="index.php" value="Log Out" type="submit" style="color: #32CD32; text-decoration: underline;" />
+                            </form>
+                            </span></td>
+
                         <td class="social"></td>
                     </tr>
                     
