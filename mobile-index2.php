@@ -41,7 +41,7 @@
         <span class='wsite-logo'><span id="wsite-title" >E-venturePR</span></span>
         <div data-role="controlgroup" data-type="horizontal" style="float:left;" >
             <a  href="mobile-login.php" rel="external" data-role="button" data-theme="b" style="height: 35px; font-size: 15px;" onclick="window.location.href = this.href" >Profile</a>
-            <a  href="mobile-index.html" rel="external" data-role="button" data-theme="b" style="height: 35px; font-size: 15px;" onclick="window.location.href = this.href" >Log Out!</a>
+            <a  href="mobile-index.php" rel="external" data-role="button" data-theme="b" style="height: 35px; font-size: 15px;" onclick="window.location.href = this.href" >Log Out!</a>
 
         </div>
     </div><!-- /header -->

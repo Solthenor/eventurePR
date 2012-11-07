@@ -1,4 +1,10 @@
-<!DOCTYPE html> 
+<?php
+require_once('db.php');
+require_once('checkAuth.php');
+
+?>
+
+<!DOCTYPE html>
 <html> 
 	<head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -18,9 +24,14 @@
         <script>
             $(document).ready(function(){
                 $('#select-choice-1').change(function()  {
-                    var $vn = $(this).children('option:selected').attr('value') + ".html";
-
-                    window.location.href = $vn;
+                    if($(this).children('option:selected').attr('value') != 'mobile-index')  {
+                    var $vn = "mobile-events.php?category="+ $(this).children('option:selected').attr('value');
+                        window.location.href = $vn;
+                    }
+                    else {
+                        var $vn = $(this).children('option:selected').attr('value') + ".php" ;
+                        window.location.href = $vn;
+                    }
                 });
             });
 
@@ -34,9 +45,17 @@
         <div id="header" >
             <span class='wsite-logo'><span id="wsite-title" >E-venturePR</span></span>
             <div data-role="controlgroup" data-type="horizontal" style="float:left;" >
-                <a  href="mobile-login.php"  rel="external" data-role="button" data-theme="c" style="height: 35px; font-size: 15px;" onclick="window.location.href = this.href" >Log in!</a>
-                <a  href="mobile-register.html" rel="external" data-role="button" data-theme="c" style="height: 35px; font-size: 15px;" onclick="window.location.href = this.href" >Sign up!</a>
+                <?php if($loggedin) { ?>
+                <a  href="mobile-profile.php" rel="external" data-role="button" data-theme="c" style="height: 35px; font-size: 15px;"  >Profile</a>
+                <a  href="mobile-index.php" rel="external" data-role="button" data-theme="c" style="height: 35px; font-size: 15px;" >Log Out!</a>
 
+
+                <?php }  else {?>
+                <p style="font-size: 16px;font-weight: bold;text-shadow: none;">Dont have an account?</p>
+                <a  href="mobile-register.php"  rel="external" data-role="button" data-theme="c" style="height: 35px; font-size: 15px;"  >Sign up!</a>
+                <a  href="mobile-login.php"  rel="external" data-role="button" data-theme="c" style="height: 35px; font-size: 15px;"  >Log in!</a>
+
+                <?php }?>
             </div>
         </div><!-- /header -->
         <div id="content" style=";margin:auto;">
@@ -45,10 +64,10 @@
                 <select id="select-choice-1" name="select-choice-1" data-native-menu="true">
                     <option value="">MAIN MENU</option>
                     <option value="mobile-index">HOME</option>
-                    <option value="mobile-concerts">CONCERTS</option>
-                    <option value="mobile-sports">SPORTS</option>
-                    <option value="mobile-entertainment">ENTERTAINMENT</option>
-                    <option value="mobile-business">BUSINESS & EDUCATION</option>
+                    <option value="Concert">CONCERTS</option>
+                    <option value="Sports">SPORTS</option>
+                    <option value="Entertainment">ENTERTAINMENT</option>
+                    <option value="Business">BUSINESS & EDUCATION</option>
               </select>
             </div> <!--fieldcontain-->
 
@@ -58,7 +77,7 @@
                 <form action="results.html" method="post">
                     <div data-role="fieldcontain" data-inset="true">
                         <label for="search" style="font-size: 14px;color: white; padding-top: 5px;">Search:</label>
-                        <input type="search" name="query" id="search" value=""/>
+                        <input style="color: black !important;" type="search" name="query" id="search" value=""/>
                     </div> <!-- /fieldcontain -->
                 </form>
             </div>
