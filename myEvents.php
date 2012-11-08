@@ -24,7 +24,7 @@ $sql = "SELECT *
 $stmt = $db->prepare($sql);
 $stmt->execute();
 
-$result = $stmt->fetchAll();
+$events = $stmt->fetchAll();
 
 ?>
 <!DOCTYPE html>
@@ -66,19 +66,7 @@ $result = $stmt->fetchAll();
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/flyout_menus_jq.js?1346362758'></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script type='text/javascript'><!--
-    var IS_ARCHIVE=1;
-    (function(jQuery){
-        function initFlyouts(){initPublishedFlyoutMenus([{"id":"581818271480209023","title":"Home","url":"index.php"},{"id":"145650631833651339","title":"Concerts","url":"events.php?category=Concert"},{"id":"404778243583026952","title":"Sports","url":"events.php?category=Sports"},{"id":"441792526610757515","title":"Entertainment","url":"events.php?category=Entertainment"},{"id":"269210016325162137","title":"Business & Education","url":"events.php?category=Business"},{"id":"224132398954985812","title":"Profile","url":"profile.php"},{"id":"313146698326919915","title":"Login","url":"login.php"},{"id":"435700788219059228","title":"Event x","url":"event.php"},{"id":"549951918166142509","title":"Add Friends","url":"add-friends.html"},{"id":"170216070745516754","title":"Venue","url":"venue.php"}],'145650631833651339',"<li class='wsite-nav-more'><a href='#'>more...<\/a><\/li>",'active',false)}
-        if (jQuery) {
-            if (jQuery.browser.msie) window.onload = initFlyouts;
-            else jQuery(initFlyouts)
-        }else{
-            if (Prototype.Browser.IE) window.onload = initFlyouts;
-            else document.observe('dom:loaded', initFlyouts);
-        }
-    })(window._W && _W.jQuery)
-    //-->
+    <script type='text/javascript'>
     </script>
 </head>
 <body class='wsite-theme-dark tall-header-page wsite-page-concerts'>
