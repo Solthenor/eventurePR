@@ -1,5 +1,6 @@
 <?php
 require_once('mobileRedirect.php');
+require_once('logoutHandler.php');
 require_once('db.php');
 require_once('checkAuth.php');
 
@@ -114,14 +115,12 @@ if(isset($_POST['action'])) {
                     <?php if($loggedin) { ?>
                     <tr>
                         <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; ">Profile</a> | 
-
-                            <!-- <a href="index.php" style="color: #32CD32; text-decoration: underline;">Log out</a> -->
-                            <form action="<?php echo $_SERVER['PHP_SELF']; ?><?php echo "?eventID={$eventID}" ?>" method="POST">
-                                <input name="action" type="hidden" value="logout" />
-                                <input href="index.php" value="Log Out" type="submit" style="color: #32CD32; text-decoration: underline;" />
-                            </form>
-                            </span></td>
-
+                                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST"> 
+                                    <input type="hidden" value="logout" name="loggedOut" />
+                                    <input type="submit" style="color: #32CD32; text-decoration: underline;" value="Log out" />
+                                </form>
+                        </td>
+                                
                         <td class="social"></td>
                     </tr>
                     

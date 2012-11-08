@@ -1,5 +1,6 @@
 <?php
 require_once('mobileRedirect.php');
+require_once('logoutHandler.php');
 require_once('db.php');
 require_once('checkAuth.php');
 
@@ -78,7 +79,13 @@ if(!isset($user)){
                 <table>
                     <?php if($loggedin) { ?>
                     <tr>
-                        <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; "><?php echo $user['userName'] ?></a> | <a href="index.php" style="color: #32CD32; text-decoration: underline;">Log out</a></span></td>
+                        <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; ">Profile</a> | 
+                                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST"> 
+                                    <input type="hidden" value="logout" name="loggedOut" />
+                                    <input type="submit" style="color: #32CD32; text-decoration: underline;" value="Log out" />
+                                </form>
+                        </td>
+                                
                         <td class="social"></td>
                     </tr>
                     
@@ -114,7 +121,7 @@ if(!isset($user)){
                                 <div class="btn-toolbar" style="padding: 10px 10px 0 0; display: inline-block;text-align: center; ">
                                     <div class="btn-group">
                                         <a href="create-event.php" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">E-vent it!</span></a>
-                                        <a href="myEvents.html" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">My E-vents</span></a>
+                                        <a href="myEvents.php" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">My E-vents</span></a>
                                         <a href="create-venue.php" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">Create Venue</span></a>
                                         <a href="contacts.html" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">Contacts</span></a>
 

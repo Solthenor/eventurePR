@@ -1,5 +1,6 @@
 <?php
 require_once('mobileRedirect.php');
+require_once('logoutHandler.php');
 require_once('checkAuth.php');
 ?>
 <!DOCTYPE html>
@@ -38,7 +39,13 @@ require_once('checkAuth.php');
                 <table>
                     <?php if($loggedin) { ?>
                     <tr>
-                        <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; ">Profile</a> | <a href="index.php" style="color: #32CD32; text-decoration: underline;">Log out</a></span></td>
+                        <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; ">Profile</a> | 
+                                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST"> 
+                                    <input type="hidden" value="logout" name="loggedOut" />
+                                    <input type="submit" style="color: #32CD32; text-decoration: underline;" value="Log out" />
+                                </form>
+                        </td>
+                                
                         <td class="social"></td>
                     </tr>
                     

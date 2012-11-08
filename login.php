@@ -97,14 +97,13 @@ if ( count($_POST) > 0) {
                     userID,
                     userName,
                     password
-                FROM user
+                FROM User
                 WHERE userName = '{$_POST['username']}'
                 AND password = '{$password}';
         ";
         $stmt = $db->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll();
-
         if(count($result) > 0) {
             $loggedin = true;
             $id = $result[0]['userID'];
@@ -146,8 +145,6 @@ if($loggedin) {
     <script src="js/bootstrap.min.js"></script>
 </head>
 <body class='wsite-theme-dark no-header-page wsite-page-login'>
-
-<?php var_dump($result) ?>
 
 <div id="wrapper">
     <table id="header">
