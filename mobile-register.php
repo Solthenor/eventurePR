@@ -1,4 +1,4 @@
-<?php
+<?php        //This is where the user registers in from his mobile phone fillling his or her account information. This is saved in the database table for Users.
 
 if(isset($_COOKIE['loggedin'])){
     $loggedin = true;
