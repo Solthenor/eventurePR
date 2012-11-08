@@ -1,3 +1,9 @@
+<!-- 
+Welcoming page for EventurePR
+     
+
+-->
+
 <?php
 require_once('mobileRedirect.php');
 require_once('logoutHandler.php');
@@ -7,6 +13,7 @@ require_once('checkAuth.php');
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>E-venturePR - Home</title>
 
@@ -39,6 +46,7 @@ require_once('checkAuth.php');
             <td id="logo"><span class='wsite-logo'><a href='/'><span id="wsite-title">E-venturePR</span></a></span></td>
             <td id="header-right">
                 <table>
+                    <!-- Conditional to check login Status-->
                     <?php if($loggedin) { ?>
                     <tr>
                         <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; ">Profile</a> | 
@@ -113,6 +121,8 @@ require_once('checkAuth.php');
                             <td class='wsite-multicol-col' style='width:50%;padding:0 15px'>
                                  <div id="mainmenu">
                                  	<ul style="font-size: 22px; color: white;">
+
+                                    <!-- Query to randomly select events-->    
                                  	<?php
 
                                     $db = db::getInstance();
