@@ -1,3 +1,9 @@
+<!--
+Profile page
+
+Dynamically changes depending on the user accessing it
+ -->
+
 <?php
 require_once('mobileRedirect.php');
 require_once('logoutHandler.php');
@@ -6,14 +12,18 @@ require_once('checkAuth.php');
 
 $userID = $_GET['userID'];
 
+// Checks if user is logged in, otherwise returns index
 if (!$loggedin && !isset($userID)) {
     header('Location: index.php');
     return;
 }
 
+
 if(isset($userID)) {
     $id = $userID;
 }
+
+// Query to select a profile depending on the userID provided
 
 $db = db::getInstance();
 $sql = "SELECT 
@@ -77,6 +87,8 @@ if(!isset($user)){
             <td id="logo"><span class='wsite-logo'><a href="index.php"><span id="wsite-title">E-venturePR</span></a></span></td>
             <td id="header-right">
                 <table>
+
+                    <!-- Conditional to check login Status-->
                     <?php if($loggedin) { ?>
                     <tr>
                         <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; ">Profile</a> | 
@@ -146,6 +158,10 @@ if(!isset($user)){
 
                                                     <div id="mainmenu">
                                                         <ul style="font-size: 14px; color: white;">
+
+
+                                                            <!-- Selects random events to reccomend to the user-->    
+
                                                                 <?php
 
                                                                $db = db::getInstance();
@@ -208,6 +224,7 @@ if(!isset($user)){
                                 -->
                                 <div id="mainmenu">
                                     <ul style="font-size: 14px; color: white;">
+                                        <!-- Selects events where there user has logged as I wanna go!-->
                                         <?php $db = db::getInstance();
                                             $sql = "SELECT 
                                                         eventID,
@@ -251,6 +268,8 @@ if(!isset($user)){
                                         <div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></div>
                                     <!--<div class="paragraph" style="text-align:left;display:block; color: white; font-size: medium; font-style: italic">: HIIIIIIIIIIII!!! &lt;3</div>-->
                                     <ul style="font-size: 14px; color: white;">
+                                                                
+                                                                <!--  Selects comments posted to user's wall -->
                                                                 <?php
 
                                                                $db = db::getInstance();

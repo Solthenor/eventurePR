@@ -44,6 +44,7 @@ if ( count($_POST) > 0) {
     //TODO: better validation for empty fields
 
   // startHour = '{$_POST['startHour']}',
+              //date = '{$_POST['date']}',
              // endHour = '{$_POST['endHour']}',
               //featured = '{$_POST['featured']}',
               //price = '{$_POST['price']}',     
@@ -51,7 +52,7 @@ if ( count($_POST) > 0) {
             SET
               userID = '{$id}',
               eventName = '{$_POST['event-name']}',
-              date = '{$_POST['date']}',
+              
               venueID = '{$_POST['venue']}',
               eventType = '{$_POST['type']}',
               genre = '{$_POST['genre']}',
@@ -161,13 +162,14 @@ if ( count($_POST) > 0) {
   <div id="instructions-461209313855761342" class="wsite-form-instructions" style="display:none;"></div>
 </div></div>
 
+<!--
 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
   <label class="wsite-form-label" for="date">Date <span class="form-required">*</span></label>
   <div class="wsite-form-input-container">
     <input id="date" class="wsite-form-input wsite-input" type="text" name="date" style="width:200px;" />
   </div>
   <div id="instructions-376105289394483033" class="wsite-form-instructions" style="display:none;"></div>
-</div></div>
+</div></div> -->
 
 <div><div class="wsite-form-field" style="margin:5px 0px 0px 0px;">
     <label class="wsite-form-label" for="venue">Select a Venue: <span class="form-required">*</span></label>
