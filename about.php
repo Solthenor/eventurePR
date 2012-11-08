@@ -1,4 +1,4 @@
-<?php
+<?php       // Loads the aboutUs section of our web page.. redirects to phone web sit if accessed through mobile version.
 require_once('mobileRedirect.php');
 require_once('logoutHandler.php');
 require_once('checkAuth.php');
