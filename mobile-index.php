@@ -1,4 +1,4 @@
-<?php
+<?php            //connects to the DB & checks if user is logged in.. This web page is the main index of the mobile site
 require_once('db.php');
 require_once('checkAuth.php');
 

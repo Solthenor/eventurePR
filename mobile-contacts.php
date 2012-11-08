@@ -1,4 +1,4 @@
-<?php
+<?php                    //adds contacts to the users friends  Database... Looks up users by user Name.
 require_once('db.php');
 require_once('checkAuth.php');
 if (isset($_POST['friendSearch'])) {

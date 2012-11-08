@@ -1,4 +1,4 @@
-<?php
+<?php            //redirects the device, if its a mobile phone, to the mobile site
 	$iphone = strpos($_SERVER['HTTP_USER_AGENT'],"iPhone");
 	$android = strpos($_SERVER['HTTP_USER_AGENT'],"Android");
 	$palmpre = strpos($_SERVER['HTTP_USER_AGENT'],"webOS");
@@ -6,6 +6,6 @@
 	$ipod = strpos($_SERVER['HTTP_USER_AGENT'],"iPod");
 
 	if ($iphone || $android || $palmpre || $ipod || $berry == true) {
-	    header('Location: /mobile-index.html');
+	    header('Location: /mobile-index.php');
 	}
 ?>

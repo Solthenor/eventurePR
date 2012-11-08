@@ -1,4 +1,4 @@
-<?php
+<?php                         // this is where the user can sign in if he or she has an account already registered
 
 if(isset($_COOKIE['loggedin'])){
     $loggedin = true;

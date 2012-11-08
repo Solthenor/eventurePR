@@ -1,4 +1,4 @@
-<?php
+<?php        //loads the events pending on category
 require_once('mobileRedirect.php');
 require_once('db.php');
 require_once('checkAuth.php');
@@ -106,7 +106,7 @@ $events = $stmt->fetchAll();
             <select id="select-choice-1" name="select-choice-1" data-native-menu="true">
                 <option value="">MAIN MENU</option>
                 <option value="mobile-index">HOME</option>
-                <option value="Concerts">CONCERTS</option>
+                <option value="Concert">CONCERTS</option>
                 <option value="Sports">SPORTS</option>
                 <option value="Entertainment">ENTERTAINMENT</option>
                 <option value="Business">BUSINESS & EDUCATION</option>
