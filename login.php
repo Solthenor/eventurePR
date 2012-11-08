@@ -1,4 +1,4 @@
-<?php
+<?php             // User registry & login page displayed in one. If the user has an account, he or she can opt to just log into the system, if not he can fill out his or her information and this will be stored in the User table and the user will be granted access to the system.
 $iphone = strpos($_SERVER['HTTP_USER_AGENT'],"iPhone");
 $android = strpos($_SERVER['HTTP_USER_AGENT'],"Android");
 $palmpre = strpos($_SERVER['HTTP_USER_AGENT'],"webOS");
