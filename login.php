@@ -269,7 +269,7 @@ if($loggedin) {
                                                 </div></div>
 
                                                 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
-                                                    <label class="wsite-form-label" for="age">Age <span class="form-required">*</span></label>
+                                                    <label class="wsite-form-label" for="age">Age </label>
                                                     <div class="wsite-form-input-container">
                                                         <input id="age" class="wsite-form-input wsite-input" type="text" name="age" style="width:370px;" />
                                                     </div>
@@ -277,7 +277,7 @@ if($loggedin) {
                                                 </div></div>
 
                                                 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
-                                                    <label class="wsite-form-label" for="gender">Gender <span class="form-required">*</span></label>
+                                                    <label class="wsite-form-label" for="gender">Gender </label>
                                                     <div class="wsite-form-input-container">
                                                         <input id="gender" class="wsite-form-input wsite-input" type="text" name="gender" style="width:370px;" />
                                                     </div>
@@ -285,7 +285,7 @@ if($loggedin) {
                                                 </div></div>
 
                                                 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
-                                                    <label class="wsite-form-label" for="age">Work <span class="form-required">*</span></label>
+                                                    <label class="wsite-form-label" for="age">Work </label>
                                                     <div class="wsite-form-input-container">
                                                         <input id="work" class="wsite-form-input wsite-input" type="text" name="work" style="width:370px;" />
                                                     </div>
@@ -325,7 +325,7 @@ if($loggedin) {
                                                     <div class="paragraph" style="text-align:left;">Add a Picture:</div>
                                                     <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
 
-                                                        <label class="wsite-form-label" for="photo">Upload File <span class="form-required">*</span></label>
+                                                        <label class="wsite-form-label" for="photo">Upload File </label>
                                                         <div class="wsite-form-input-container">
                                                             <input id="photo" class="wsite-form-input" type="file" name="photo" />
                                                             <div style="font-size:10px;">Max file size: 20MB</div>
