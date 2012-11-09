@@ -1,4 +1,4 @@
-<?php
+<?php                   // Displays the event information on the web page. This view is set from the information of an event created.
 require_once('mobileRedirect.php');
 require_once('logoutHandler.php');
 require_once('db.php');

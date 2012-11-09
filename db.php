@@ -1,4 +1,4 @@
-<?php
+<?php             //connects to the database so it only has to do once per session.
 /**
  * @Singleton to create database connection
  */

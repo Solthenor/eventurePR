@@ -1,4 +1,4 @@
-<?php
+<?php      // Displays the events category browser. Depending on which category the user chooses, the information is displayed for him accordingly.
 require_once('mobileRedirect.php');
 require_once('logoutHandler.php');
 require_once('db.php');

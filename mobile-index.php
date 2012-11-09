@@ -1,6 +1,11 @@
-<?php
+<?php            //connects to the DB & checks if user is logged in.. This web page is the main index of the mobile site
 require_once('db.php');
 require_once('checkAuth.php');
+
+if (isset($_POST['mloggedOut'])) {
+    setcookie('loggedin', false);
+    $id = 0;
+}
 
 ?>
 
@@ -44,16 +49,17 @@ require_once('checkAuth.php');
 	<div id="wrapper" style="height: 100%">
         <div id="header" >
             <span class='wsite-logo'><span id="wsite-title" >E-venturePR</span></span>
-            <div data-role="controlgroup" data-type="horizontal" style="float:left;" >
+            <div data-role="controlgroup" data-type="horizontal" style="float:left; width: 100%" >
                 <?php if($loggedin) { ?>
-                <a  href="mobile-profile.php" rel="external" data-role="button" data-theme="c" style="height: 35px; font-size: 15px;"  >Profile</a>
-                <a  href="mobile-index.php" rel="external" data-role="button" data-theme="c" style="height: 35px; font-size: 15px;" >Log Out!</a>
-
+                <a  href="mobile-profile.php" rel="external" data-role="button" data-theme="c" style="height: 40px; font-size: 15px;"  >Profile</a>
+                <form style="float:left;" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" data-ajax="false">
+                        <input  type='submit' name="mloggedOut" id="mloggedOut" value="logout" class='btn btn-eventPR' />
+                </form>
 
                 <?php }  else {?>
                 <p style="font-size: 16px;font-weight: bold;text-shadow: none;">Dont have an account?</p>
-                <a  href="mobile-register.php"  rel="external" data-role="button" data-theme="c" style="height: 35px; font-size: 15px;"  >Sign up!</a>
-                <a  href="mobile-login.php"  rel="external" data-role="button" data-theme="c" style="height: 35px; font-size: 15px;"  >Log in!</a>
+                <a  href="mobile-register.php"  rel="external" data-role="button" data-theme="c" style="height: 40px; font-size: 15px;"  >Sign up!</a>
+                <a  href="mobile-login.php"  rel="external" data-role="button" data-theme="c" style="height: 40px; font-size: 15px;"  >Log in!</a>
 
                 <?php }?>
             </div>
@@ -74,7 +80,7 @@ require_once('checkAuth.php');
             <div id="label" style="margin: auto;">
                 <span style="font-size: 18px;color: white; font-weight: bold;text-shadow: none">Find an event: </span>
 
-                <form action="results.html" method="post">
+                <form action="results.html" method="post" data>
                     <div data-role="fieldcontain" data-inset="true">
                         <label for="search" style="font-size: 14px;color: white; padding-top: 5px;">Search:</label>
                         <input style="color: black !important;" type="search" name="query" id="search" value=""/>
