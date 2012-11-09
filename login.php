@@ -1,3 +1,9 @@
+<!-- 
+Login/Registration Page
+
+For Login: Extracts user information 
+For Registration: Inserts user Information
+-->
 <?php
 $iphone = strpos($_SERVER['HTTP_USER_AGENT'],"iPhone");
 $android = strpos($_SERVER['HTTP_USER_AGENT'],"Android");
