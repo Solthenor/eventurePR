@@ -14,20 +14,6 @@ if (isset($_POST['friendSearch'])) {
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_OBJ);
 
-    if(isset($_POST['submit']))
-    {
-        $db = db::getInstance();
-
-        $sql = "INSERT INTO AddFriend
-                SET
-                    userID1 = {$id},
-                    userID2 = {$userName}
-                    ;";
-
-        $stmt = $db->prepare($sql);
-        $stmt->execute();
-
-    }
     if(!empty($user)){
         $userID2 = $user->userName;
     }
@@ -35,6 +21,20 @@ if (isset($_POST['friendSearch'])) {
 }
 
 
+if(isset($_POST['submit']))
+{
+    $db = db::getInstance();
+
+    $sql = "INSERT INTO AddFriend
+                SET
+                    userID1 = {$id},
+                    userID2 = {$userName}
+                    ;";
+
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+
+}
 
 
 

@@ -1,4 +1,6 @@
-<?php                         // this is where the user can sign in if he or she has an account already registered
+
+<?php
+
 
 if(isset($_COOKIE['loggedin'])){
     $loggedin = true;
@@ -10,101 +12,101 @@ $loggedin = false;
 $id = 0;
 
 if ( count($_POST) > 0) {
-require_once('db.php');
-$db = db::getInstance();
+    require_once('db.php');
+    $db = db::getInstance();
 
-if($_POST['submit'] != 'Login'){
+    if($_POST['submit'] != 'Login'){
 
+        //TODO: better validation for empty fields
 
-//                age = '{$_POST['age']}',
-// gender = '{$_POST['date']}',
-// work = '{$_POST['date']}'
+        //                age = '{$_POST['age']}',
+        // gender = '{$_POST['date']}',
+        // work = '{$_POST['date']}'
 
-$password = md5 ( $_POST['password'] );
+        $password = md5 ( $_POST['password'] );
 
-$sql = "INSERT INTO User
-SET
-userName = '{$_POST['username']}',
-firstName = '{$_POST['first-name']}',
-lastName = '{$_POST['last-name']}',
-email = '{$_POST['email']}',
-password = '{$password}',
-age = '{$_POST['age']}',
-gender = '{$_POST['gender']}',
-work = '{$_POST['work']}',
-securityQuestion = '{$_POST['question']}',
-securityAnswer = '{$_POST['answer']}'
-";
+        $sql = "INSERT INTO User
+                SET
+                    userName = '{$_POST['username']}',
+                    firstName = '{$_POST['first-name']}',
+                    lastName = '{$_POST['last-name']}',
+                    email = '{$_POST['email']}',
+                    password = '{$password}',
+                    age = '{$_POST['age']}',
+                    gender = '{$_POST['gender']}',
+                    work = '{$_POST['work']}',
+                    securityQuestion = '{$_POST['question']}',
+                    securityAnswer = '{$_POST['answer']}'
+        ";
 
-$stmt = $db->prepare($sql);
-// $stmt->bindValue(':vName', , PDO::PARAM_STR);
-$stmt->execute();
-$loggedin = true;
-$id = $db->lastInsertId();
+        $stmt = $db->prepare($sql);
+        // $stmt->bindValue(':vName', , PDO::PARAM_STR);
+        $stmt->execute();
+        $loggedin = true;
+        $id = $db->lastInsertId();
 
-if ($_FILES["photo"]["error"] == 0) {
+        if ($_FILES["photo"]["error"] == 0) {
 
-$type = str_replace('image/', '', $_FILES['photo']['type']);
+            $type = str_replace('image/', '', $_FILES['photo']['type']);
 
-$fileName = $_FILES['photo']['name'];
-$tmpName  = $_FILES['photo']['tmp_name'];
-$fileSize = $_FILES['photo']['size'];
-$fileType = $_FILES['photo']['type'];
+            $fileName = $_FILES['photo']['name'];
+            $tmpName  = $_FILES['photo']['tmp_name'];
+            $fileSize = $_FILES['photo']['size'];
+            $fileType = $_FILES['photo']['type'];
 
-$fp      = fopen($tmpName, 'r');
-$content = fread($fp, filesize($tmpName));
-$content = addslashes($content);
-fclose($fp);
+            $fp      = fopen($tmpName, 'r');
+            $content = fread($fp, filesize($tmpName));
+            $content = addslashes($content);
+            fclose($fp);
 
-$sql = "INSERT INTO Picture
-SET
-userID = '{$id}',
-ext = '{$type}',
-data = '{$content}'";
+            $sql = "INSERT INTO Picture
+                  SET
+                    userID = '{$id}',
+                    ext = '{$type}',
+                    data = '{$content}'";
 
-$stmt = $db->prepare($sql);
-$stmt->execute();
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
 
-$picID = $db->lastInsertId();
+            $picID = $db->lastInsertId();
 
-$sql = "UPDATE User
-SET
-profilePicture = '{$picID}'
-WHERE userID = '{$id}'";
+            $sql = "UPDATE User
+                  SET
+                    profilePicture = '{$picID}'
+                  WHERE userID = '{$id}'";
 
-$stmt = $db->prepare($sql);
-$stmt->execute();
-}
-else{
-// Default photo
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+        }
+        else{
+            // Default photo
 
-}
-}
-else {
-$password = md5 ( $_POST['password'] );
-$sql = "SELECT
-userID,
-userName,
-password
-FROM user
-WHERE userName = '{$_POST['username']}'
-AND password = '{$password}';
-";
-$stmt = $db->prepare($sql);
-$stmt->execute();
-$result = $stmt->fetchAll();
-
-if(count($result) > 0) {
-$loggedin = true;
-$id = $result[0]['userID'];
-}
-}
+        }
+    }
+    else {
+        $password = md5 ( $_POST['password'] );
+        $sql = "SELECT
+                    userID,
+                    userName,
+                    password
+                FROM User
+                WHERE userName = '{$_POST['username']}'
+                AND password = '{$password}';
+        ";
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        if(count($result) > 0) {
+            $loggedin = true;
+            $id = $result[0]['userID'];
+        }
+    }
 }
 
 if($loggedin) {
-setcookie('loggedin', $id, time() + (86400 * 7)); // 86400 = 1 day
-header('Location: mobile-index.php');
-return;
+    setcookie('loggedin', $id, time() + (86400 * 7)); // 86400 = 1 day
+    header('Location: mobile-index.php');
+    return;
 }
 ?>
 
@@ -122,14 +124,11 @@ return;
 
     <script src="js/jquery-1.8.2.js"></script>
     <script src="js/jquery.mobile-1.2.0.js"></script>
-
-    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js'></script>
-    <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/jquery_effects.js?1346362758'></script>
-    <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.min.js?1346362758'></script>
-    <script type='text/javascript' src='http://cdn1.editmysite.com/editor/images/common/utilities-jq.js?1346362758'></script>
-    <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/flyout_menus_jq.js?1346362758'></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script>
+        $(document).bind("mobileinit", function () {
+            $.mobile.ajaxEnabled = false;
+        });
+    </script>
 
     <script>
         $(document).ready(function(){
@@ -143,13 +142,14 @@ return;
 
     </script>
 
+
 </head>
 <body>
 
 <div id="wrapper" style="height: 100%">
     <div id="header" style="height: 25%">
         <span class='wsite-logo'><span id="wsite-title" >E-venturePR</span></span>
-        <div data-role="controlgroup" data-type="horizontal" style="float:left;" >
+        <div data-role="controlgroup" data-type="horizontal" style="float:left;width:100%" >
              <?php if($loggedin) { ?>
     <a  href="mobile-profile.php" rel="external" data-role="button" data-theme="b" style="height: 35px; font-size: 15px;"  >Profile</a>
     <a  href="mobile-index.php" rel="external" data-role="button" data-theme="b" style="height: 35px; font-size: 15px;" >Log Out!</a>
@@ -163,9 +163,9 @@ return;
             <?php }?>
         </div>
     </div><!-- /header -->
-    <div id="content" style="height: 75%;">
-        <form  action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" id="login">
-        <div data-role="fieldcontain">
+    <div  id="content" style="height: 75%;">
+        <form   action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" data-transition="none" data-ajax="false" >
+        <div  data-role="fieldcontain">
             <div style="width: 100%; margin-bottom: 5%;">
 
                         <label for="username">User Name <span class="form-required">*</span></label>
@@ -177,9 +177,8 @@ return;
             </div>
             <div style="width: 100%; margin-bottom: 5%;">
             </div>
-
-            <a rel="external" type="submit" data-role="button" value="Login" data-theme="c" style="height: 35px; font-size: 15px;"  >Login!</a>
-            </form>
+                   <input  type='submit' name='submit' id='submit' value='Login' class='btn btn-eventPR' />
+        </form>
         </div>
     </div> <!--content-->
 </div>         <!--wrapper-->
