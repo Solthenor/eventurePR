@@ -12,7 +12,8 @@ if (!isset($eventID)) {
 }
 
 $db = db::getInstance();
-$sql = "SELECT 
+$sql = "SELECT
+            E.eventID,
             E.eventName, 
             E.eventType, 
             E.genre, 
@@ -46,6 +47,7 @@ $stmt->execute();
 $result = $stmt->fetchAll();
 
 $event = $result[0];
+$attendees = $event['attendees'];
 
 if(!isset($event)){
     header('Location: index.php');
@@ -66,7 +68,7 @@ if(isset($_POST['action'])) {
                     flag = 1
                 WHERE eventID = {$eventID};";
     }
-    else if($action == 'go'){
+    else if($action == 'I want to go!!!'){
         $sql = "INSERT INTO Attends
                 SET
                     userID = {$id}, 
@@ -75,6 +77,8 @@ if(isset($_POST['action'])) {
 
     $stmt = $db->prepare($sql);
     $stmt->execute();
+
+    $attendees = $event['attendees'];
 }
 
 
@@ -153,7 +157,7 @@ if(isset($_POST['action'])) {
 <div class="paragraph" style="text-align:left;display:block;">
 <?php echo $event['date'] ?>
 <br />
-<span style="line-height: 30px;">Time: </span>
+<span style="line-height: 30px;">Time: <?php echo $event['startHour'] ?></span>
 <br />
 <span style="line-height: 30px;">Location: <a href="venue.php?venueID=<?php echo $event['venueID'] ?>"><?php echo $event['venueName'] ?></a></span>
 <br />
@@ -169,16 +173,14 @@ if(isset($_POST['action'])) {
         <div style="display: inline;"><div style="float:left; display: inline-block;"> </div>
 
     <form action="<?php echo $_SERVER['PHP_SELF']; ?><?php echo "?eventID={$eventID}" ?>" method="POST">
-        <input name="action" type="hidden" name value="flag" />
-        <input value="Flag" type="submit" class="btn btn-eventPR" style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;" />Flag
+        <input name="action" value="flag" type="submit" class="btn btn-eventPR" style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;" />Flag
     </form>
     <form action="<?php echo $_SERVER['PHP_SELF']; ?><?php echo "?eventID={$eventID}" ?>" method="POST">
-        <input name="action" type="hidden" value="go" />
-        <input value="I want to go!!!" type="submit" class="btn btn-eventPR" style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;" />
+        <input name="action" value="I want to go!!!" type="submit" class="btn btn-eventPR" style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;" />
     </form>
     <a href="" class="btn btn-eventPR" style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">See assisting friends</a>
     </div>
-    <p style="display: inline-block; font-style: italic; padding-left: 10px;"><?php echo $event['attendees'] ?> people are going</p>
+    <p style="display: inline-block; font-style: italic; padding-left: 10px;"><?php echo $attendees ?> people are going</p>
 </div>
 <hr style="clear:both;visibility:hidden;width:100%;" />
 

@@ -16,9 +16,22 @@ if(isset($userID)) {
 }
 
 $db = db::getInstance();
-$sql = "SELECT *
-        FROM Event
-        WHERE userID = {$id};
+$sql = "SELECT
+            E.eventName,
+            E.eventType,
+            E.genre,
+            E.flyer,
+            DATE_FORMAT(E.date, '%W, %M %e, %Y') as date,
+            E.startHour,
+            E.endHour,
+            E.status,
+            E.featured,
+            E.price,
+            E.flag,
+            E.description,
+            E.eventID,
+        FROM Event E
+        WHERE E.userID = {$id};
 ";
 
 $stmt = $db->prepare($sql);
