@@ -279,7 +279,10 @@ if($loggedin) {
                                                 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
                                                     <label class="wsite-form-label" for="gender">Gender </label>
                                                     <div class="wsite-form-input-container">
-                                                        <input id="gender" class="wsite-form-input wsite-input" type="text" name="gender" style="width:370px;" />
+                                                        <select name="gender" class="form-select">
+                                                            <option value='Male'>Male</option>
+                                                            <option value='Female'>Female</option>
+                                                        </select>
                                                     </div>
                                                     <div id="instructions-629303063250377115" class="wsite-form-instructions" style="display:none;"></div>
                                                 </div></div>
