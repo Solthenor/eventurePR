@@ -220,9 +220,7 @@ $events = $stmt->fetchAll();
                     </div></div></div>
 
                     <?php
-
                     }
-
                     ?>
                 </div>
                 </div>

@@ -1,7 +1,41 @@
 <?php
+require_once('db.php');
 require_once('mobileRedirect.php');
 require_once('logoutHandler.php');
 require_once('checkAuth.php');
+
+$userID = $_GET['userID'];
+
+// Checks if user is logged in, otherwise returns index
+if (!$loggedin && !isset($userID)) {
+    header('Location: index.php');
+    return;
+}
+
+if(isset($userID)) {
+    $id = $userID;
+}
+
+$db = db::getInstance();
+$sql = "SELECT
+            userName,
+            firstName,
+            lastName,
+            email,
+            profilePicture,
+            age,
+            gender,
+            work
+        FROM AddFriends, User
+        WHERE userID1 = {$id};
+        AND userID2 = 'userID';
+";
+
+$stmt = $db->prepare($sql);
+$stmt->execute();
+
+$result = $stmt->fetchAll();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -77,7 +111,7 @@ require_once('checkAuth.php');
                                 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
                                     <label class="wsite-form-label" for="input-678591696370903029">Search name: <span class="form-not-required">*</span></label>
                                     <div class="wsite-form-input-container">
-                                        <input id="input-678591696370903029" class="wsite-form-input wsite-input" type="text" name="_u678591696370903029" style="width:370px;" />
+                                        <input id="input-678591696370903029" class="wsite-form-input wsite-input" type="text" name="search" style="width:370px;" />
                                     </div>
                                     <div id="instructions-678591696370903029" class="wsite-form-instructions" style="display:none;"></div>
                                 </div></div>
@@ -107,29 +141,8 @@ require_once('checkAuth.php');
                                     <ul style="font-size: 22px; color: white;">
                                     <?php
 
-                                    $db = db::getInstance();
-                                    $sql = "SELECT 
-                                                f1.userID2,
-                                                u2.userName,
-                                                u2.firstName,
-                                                u2.lastName
-
-                                            FROM AddFriend f1,  User u2 
-                                                
-                                            WHERE f1.userID1 = f1.{$id}
-                            
-
-
-                                            
-                                    ";
-
-                                    $stmt = $db->prepare($sql);
-                                    $stmt->execute();
-                                    
-                                    $result = $stmt->fetchAll();
-
-                                    foreach ($result as &$venue) {
-                                            echo "<div><div style="height: 20px; overflow: hidden; width: 100%;"></div>
+                                    foreach ($result as $contact) { ?>
+                                            <div><div style="height: 20px; overflow: hidden; width: 100%;"></div>
                                             <hr class="styled-hr" style="width:100%;"></hr>
                                             <div style="height: 20px; overflow: hidden; width: 100%;"></div></div>
 
@@ -147,8 +160,8 @@ require_once('checkAuth.php');
                                             <hr class="styled-hr" style="width:100%;"></hr>
                                             <div style="height: 20px; overflow: hidden; width: 100%;"></div></div>";
                                     }
-                                    ?>
-                                    </ul>
+
+
                                 </div>
 
                             </td>
@@ -157,7 +170,9 @@ require_once('checkAuth.php');
                         </tbody>
                     </table>
                 </div></div></div>
-
+                                   <?php
+                                    }
+                ?>
 
 
             </div>
