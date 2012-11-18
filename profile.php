@@ -287,7 +287,9 @@ if(!isset($user)){
                                                         </ul>
 
                                     <hr style="clear:both;visibility:hidden;width:100%;">
-                                    <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
+                                    
+                                </div>
+                                <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
                                         <label class="wsite-form-label" for="description">Post to wall: <span class="form-required">*</span></label>
                                         <div class="wsite-form-input-container">
                                             <textarea id="description" class="wsite-form-input wsite-input" name="description" style="width:285px; height: 50px"></textarea>
@@ -297,7 +299,6 @@ if(!isset($user)){
                                     <div style="text-align:left; margin-top:10px; margin-bottom:10px;">
                                         <input type='submit' name="submit" value="Submit" class='btn btn-eventPR' />
                                     </div>
-                                </div>
 
 
                                 </div></div>

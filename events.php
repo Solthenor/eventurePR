@@ -161,10 +161,8 @@ $events = $stmt->fetchAll();
                                 <a class="btn btn-eventPR" href="events.php?category=Sports&subcategory=Baseball"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">BASEBALL</span></a>
                                 <a class="btn btn-eventPR" href="events.php?category=Sports&subcategory=Soccer"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">SOCCER</span></a>
                                 <a class="btn btn-eventPR" href="events.php?category=Sports&subcategory=Volleyball"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">VOLLEYBALL</span></a>
-                                <a class="btn btn-eventPR" href="events.php?category=Sports&subcategory=Tennis"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">TENNIS</span></a>
-                                <a class="btn btn-eventPR" href="events.php?category=Sports&subcategory=Swimming"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">SWIMMING</span></a>
                                 <a class="btn btn-eventPR" href="events.php?category=Sports&subcategory=Boxing"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">BOXING</span></a>
-                                <a class="btn btn-eventPR" href="events.php?category=Sports&subcategory=Cycling"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">CYCLING</span></a>
+                                <a class="btn btn-eventPR" href="events.php?category=Sports&subcategory=Cycling"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">OTHER</span></a>
                                 <?php } ?>
                             </div>
                         </div></div>
