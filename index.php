@@ -88,19 +88,19 @@ require_once('checkAuth.php');
                             <td class='wsite-multicol-col' style='width:34.634492266734%;padding:0 15px'>
                                 <h2 style="text-align:left;">Entertainment<br /></h2>
                                 <span class='imgPusher' style='float:right;height:0px'></span><span style='position:relative;float:right;z-index:10;;clear:right;margin-top:0px;*margin-top:0px'><a href=''><img class="wsite-image galleryImageBorder" src="uploads/1/3/4/4/13443306/147751913.jpg?142" style="margin-top: 5px; margin-bottom: 10px; margin-left: 10px; margin-right: 0px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
-                                <div class="paragraph" style="text-align:left;display:block;"><a href="">"Luis Raul: Que Clase E Lengua!"&nbsp;</a></div>
+                                <div class="paragraph" style="text-align:left;display:block;"><a href="">Fiestas San'Se 2013</a></div>
                                 <hr style="clear:both;visibility:hidden;width:100%;">
                             </td>
                             <td class='wsite-multicol-col' style='width:33.840153244709%;padding:0 15px'>
                                 <h2 style="text-align:left;">Concerts</h2>
-                                <span class='imgPusher' style='float:right;height:0px'></span><span style='position:relative;float:right;z-index:10;;clear:right;margin-top:0px;*margin-top:0px'><a href="#"><img class="wsite-image galleryImageBorder" src="uploads/1/3/4/4/13443306/253613209.jpg?147" style="margin-top: 5px; margin-bottom: 10px; margin-left: 10px; margin-right: 0px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
-                                <div class="paragraph" style="text-align:left;display:block;"><a href="#">"Nightwish: Imaginareum"&nbsp;<br /><br /></a></div>
+                                <span class='imgPusher' style='float:right;height:0px'></span><span style='position:relative;float:right;z-index:10;;clear:right;margin-top:0px;*margin-top:0px'><a href="#"><img class="wsite-image galleryImageBorder" src="img/Calle13-150.jpg" style="margin-top: 5px; margin-bottom: 10px; margin-left: 10px; margin-right: 0px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
+                                <div class="paragraph" style="text-align:left;display:block;"><a href="#">"Calle 13 en PR"&nbsp;<br /><br /></a></div>
                                 <hr style="clear:both;visibility:hidden;width:100%;">
                             </td>
                             <td class='wsite-multicol-col' style='width:31.525354488556%;padding:0 15px'>
                                 <h2 style="text-align:left;">Sports</h2>
                                 <span class='imgPusher' style='float:right;height:0px'></span><span style='position:relative;float:right;z-index:10;;clear:right;margin-top:0px;*margin-top:0px'><a href=''><img class="wsite-image galleryImageBorder" src="uploads/1/3/4/4/13443306/946440671.jpg?147" style="margin-top: 5px; margin-bottom: 10px; margin-left: 10px; margin-right: 0px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
-                                <div class="paragraph" style="text-align:left;display:block;"><a href="">"Baloncesto: Los Piratas de Quebradillas</a></div>
+                                <div class="paragraph" style="text-align:left;display:block;"><a href="">PR Islanders vs LA Galaxy</a></div>
                                 <hr style="clear:both;visibility:hidden;width:100%;">
                             </td>
                         </tr>
