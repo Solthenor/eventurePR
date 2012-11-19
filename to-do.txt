@@ -14,3 +14,5 @@ TODO:
 - myEvents.php debe tirar una lista de tus eventos
 - Contacts list
 - Review de los dbs (Comment en especifico, pq dos id's distintos?)
+- Atribuir el pic con picID = 1 a usuarios q no creen suban foto al crear cuenta
+- memorable eventures en profile.php debe ser lo de fotos o actually ser eventos en los cuales ha ido el usuario
