@@ -188,7 +188,11 @@ if(isset($_POST['action'])) {
 <td class='wsite-multicol-col' style='width:38.257993384785%;padding:0 15px'>
 
 <div class="wsite-map">
-    <iframe allowtransparency="true" frameborder="0" scrolling="no" style="width: 100%; height: 250px; margin-top: 10px; margin-bottom: 10px;" src="http://www.weebly.com/weebly/apps/generateMap.php?map=google&elementid=575069644598800610&ineditor=0&control=3&width=350px&height=250px&overviewmap=0&scalecontrol=0&typecontrol=0&zoom=15&long=-122.418333&lat=37.775&domain=www&point=1&align=1"></iframe>
+    <iframe allowtransparency="true" frameborder="0" scrolling="no" style="width: 100%; height: 250px; margin-top: 10px; margin-bottom: 10px;" 
+
+    src="map.html"
+    ></iframe>
+
 </div>
 
 </td>

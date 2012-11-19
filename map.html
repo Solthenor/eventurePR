@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+
+<div id="map" style="height: 200px"></div>
+<script src="https://maps.googleapis.com/maps/api/js?sensor=true&libraries=weather"></script>
+<script>
+
+navigator.geolocation.getCurrentPosition(function(position){ 
+var map = new google.maps.Map(document.getElementById('map'), {
+center: new google.maps.LatLng(position.coords.latitude,position.coords.longitude),
+zoom: 12,
+mapTypeId: google.maps.MapTypeId.ROADMAP
+});
+var weatherLayer = new google.maps.weather.WeatherLayer({
+temperatureUnits: google.maps.weather.TemperatureUnit.FAHRENHEIT
+});
+weatherLayer.setMap(map);
+
+var cloudLayer = new google.maps.weather.CloudLayer();
+cloudLayer.setMap(map);
+});
+
+</script>
+</body>
+</html>
