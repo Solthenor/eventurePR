@@ -16,3 +16,6 @@ TODO:
 - Review de los dbs (Comment en especifico, pq dos id's distintos?)
 - Atribuir el pic con picID = 1 a usuarios q no creen suban foto al crear cuenta
 - memorable eventures en profile.php debe ser lo de fotos o actually ser eventos en los cuales ha ido el usuario
+- event.php no esta redirecting correctly, no esta creando el evento
+- añadir las columnas q faltan a create event y create venue
+
