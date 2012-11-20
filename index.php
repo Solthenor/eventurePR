@@ -24,6 +24,7 @@ require_once('checkAuth.php');
     <link rel='stylesheet' type='text/css' href='css/main_style.css' title='wsite-theme-css' />
     <link href='http://cdn1.editmysite.com/editor/fonts/Capture_it/font.css?2' rel='stylesheet' type='text/css' />
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/carousel.css" rel="stylesheet">
     <style type='text/css'>
         #wsite-content div.paragraph, #wsite-content p, #wsite-content .product-block .product-title, #wsite-content .product-description, .blog-sidebar div.paragraph, .blog-sidebar p, .wsite-form-field label, .wsite-form-field label {}
         #wsite-content h2, #wsite-content .product-long .product-title, #wsite-content .product-large .product-title, #wsite-content .product-small .product-title, .blog-sidebar h2 {}
@@ -38,6 +39,13 @@ require_once('checkAuth.php');
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/images/common/utilities-jq.js?1346362758'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/flyout_menus_jq.js?1346362758'></script>
     <script src="js/bootstrap.min.js"></script>
+
+    <link rel="shortcut icon" href="../assets/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+
 </head>
 <body class='wsite-theme-dark tall-header-page wsite-page-index'>
 <div id="wrapper">
@@ -78,35 +86,51 @@ require_once('checkAuth.php');
             <div id="banner" >
                 <div class="wsite-header"></div>
             </div>
-            <div class="text"><div id='wsite-content' class='wsite-not-footer'>
-                <h2 style="text-align:left;"><u>Featured Events:</u></h2>
+            <div>
+                <div style="height: 40px; overflow: hidden; width: 100%;"></div>
+                    <hr class="styled-hr" style="width:100%;">
+            </div>
+            <div class="theIndex"><div id='wsite-content' class='wsite-not-footer'>
+                <h2 style="text-align:left;">Featured Events:</h2>
 
-                <div><div class="wsite-multicol"><div class='wsite-multicol-table-wrap' style='margin:0 -15px'>
-                    <table class='wsite-multicol-table'>
-                        <tbody class='wsite-multicol-tbody'>
-                        <tr class='wsite-multicol-tr'>
-                            <td class='wsite-multicol-col' style='width:34.634492266734%;padding:0 15px'>
-                                <h2 style="text-align:left;">Entertainment<br /></h2>
-                                <span class='imgPusher' style='float:right;height:0px'></span><span style='position:relative;float:right;z-index:10;;clear:right;margin-top:0px;*margin-top:0px'><a href=''><img class="wsite-image galleryImageBorder" src="uploads/1/3/4/4/13443306/147751913.jpg?142" style="margin-top: 5px; margin-bottom: 10px; margin-left: 10px; margin-right: 0px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
-                                <div class="paragraph" style="text-align:left;display:block;"><a href="">Fiestas San'Se 2013</a></div>
-                                <hr style="clear:both;visibility:hidden;width:100%;">
-                            </td>
-                            <td class='wsite-multicol-col' style='width:33.840153244709%;padding:0 15px'>
-                                <h2 style="text-align:left;">Concerts</h2>
-                                <span class='imgPusher' style='float:right;height:0px'></span><span style='position:relative;float:right;z-index:10;;clear:right;margin-top:0px;*margin-top:0px'><a href="#"><img class="wsite-image galleryImageBorder" src="img/Calle13-150.jpg" style="margin-top: 5px; margin-bottom: 10px; margin-left: 10px; margin-right: 0px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
-                                <div class="paragraph" style="text-align:left;display:block;"><a href="#">"Calle 13 en PR"&nbsp;<br /><br /></a></div>
-                                <hr style="clear:both;visibility:hidden;width:100%;">
-                            </td>
-                            <td class='wsite-multicol-col' style='width:31.525354488556%;padding:0 15px'>
-                                <h2 style="text-align:left;">Sports</h2>
-                                <span class='imgPusher' style='float:right;height:0px'></span><span style='position:relative;float:right;z-index:10;;clear:right;margin-top:0px;*margin-top:0px'><a href=''><img class="wsite-image galleryImageBorder" src="uploads/1/3/4/4/13443306/946440671.jpg?147" style="margin-top: 5px; margin-bottom: 10px; margin-left: 10px; margin-right: 0px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
-                                <div class="paragraph" style="text-align:left;display:block;"><a href="">PR Islanders vs LA Galaxy</a></div>
-                                <hr style="clear:both;visibility:hidden;width:100%;">
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div></div></div>
+                <div id="myCarousel" class="carousel slide">
+                 
+                  <div class="carousel-inner">
+                    <div class="item active">
+                      <img src="img/sanse3.jpg" alt="">
+                      <div class="container">
+                        <div class="carousel-caption">
+                          <a href="event.php?eventID=202"><h1>San'Se 2013</h1></a>
+                          <p class="lead">Fiestas de la Calle San Sebastián, en el Viejo San Juan</p>
+                          
+                        </div>
+                      </div>
+                    </div>
+                    <div class="item">
+                      <img src="img/c13.jpg" alt="" >
+                      <div class="container">
+                        <div class="carousel-caption">
+                          <a href="event.php?eventID=203"><h1>Calle 13 en PR</h1></a>
+                          <p class="lead">La Calle 13 vuelve a Puerto Rico despues de 3 años girando al rededor del mundo</p>
+                          
+                        </div>
+                      </div>
+                    </div>
+                    <div class="item">
+                      <img src="img/jrl2.jpg" alt="">
+                      <div class="container">
+                        <div class="carousel-caption">
+                          <a href="event.php?eventID=204"><h1>PR Islanders vs LA Galaxy</h1></a>
+                          <p class="lead">Fútbol en Puerto Rico</p>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                  <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+                  <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+                </div><!-- /.carousel -->
+
+            </div>
 
                 <div><div style="height: 20px; overflow: hidden; width: 100%;"></div>
                     <hr class="styled-hr" style="width:100%;">
