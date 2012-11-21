@@ -1,16 +1,13 @@
 TODO:
 
+- Search bar en todas las paginas
 - La pagina de entrada no es index.php
-- Featured Events en index.php (con sus fotos)
 - Post to Wall en profile.php no esta bregando bien
 - User info could be prettified
 - Uploading & displaying pictures on User's profiles and events/venues
-- Limiting the photo size and width
 - Debe haber un link en el Nav-bar para venues?
 - Map functionalities en Event profiles y en Venue profiles
 - Chequiar mobile versions
-- Acceso desde mobile versions tira a mobile-index.html, no a m-i.php
-- Profile y Logout links on the upper right corner aveces se ponen uno arriba del otro
 - myEvents.php debe tirar una lista de tus eventos
 - Contacts list
 - Review de los dbs (Comment en especifico, pq dos id's distintos?)
