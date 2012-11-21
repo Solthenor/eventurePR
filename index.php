@@ -10,6 +10,22 @@ require_once('logoutHandler.php');
 require_once('db.php');
 require_once('checkAuth.php');
 
+    $db = db::getInstance();
+    $sql = "SELECT
+            eventID,
+            eventName,
+            FROM Event AS r1
+                 JOIN (SELECT (RAND() * (SELECT MAX(eventID) FROM Event)) AS id) AS r2
+            WHERE r1.eventID >= r2.id
+            ORDER BY r1.eventID ASC
+            LIMIT 5
+    ";
+
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+
+    $featured = $stmt->fetchAll();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -51,7 +67,7 @@ require_once('checkAuth.php');
 <div id="wrapper">
     <table id="header">
         <tr>
-            <td id="logo"><span class='wsite-logo'><a href='/'><span id="wsite-title">E-venturePR</span></a></span></td>
+            <td id="logo"><span class='wsite-logo'><a href='index.php'><span id="wsite-title">E-venturePR</span></a></span></td>
             <td id="header-right">
                 <table>
                     <!-- Conditional to check login Status-->
@@ -94,13 +110,14 @@ require_once('checkAuth.php');
                 <h2 style="text-align:left;">Featured Events:</h2>
 
                 <div id="myCarousel" class="carousel slide">
-                 
+
+
                   <div class="carousel-inner">
                     <div class="item active">
                       <img src="img/sanse3.jpg" alt="">
                       <div class="container">
                         <div class="carousel-caption">
-                          <a href="event.php?eventID=202"><h1>San'Se 2013</h1></a>
+                          <a href="event.php?eventID=202"><h1><?php echo $featured[0]['eventName'] ?></h1></a>
                           <p class="lead">Fiestas de la Calle San Sebastián, en el Viejo San Juan</p>
                           
                         </div>
