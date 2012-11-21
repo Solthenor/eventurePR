@@ -103,6 +103,32 @@ if ( count($_POST) > 0) {
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/images/common/utilities-jq.js?1346362758'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/flyout_menus_jq.js?1346362758'></script>
     <script src="js/bootstrap.min.js"></script>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript">
+
+        var type = [];
+        type["blank"] = [""];
+        type["Concert"] = ["Alternative", "Rock","Pop", "Hip Hop / Rap","Electronic", "Country", "Classical"];
+        type["Sports"] = ["Basketball","Baseball","Soccer","Volleyball","Tennis","Boxing","Swimming","Cycling"];
+        type["Entertainment"] = ["Culinary","Cinema","Arts","Theater","Comedy","Politics"];
+        type["Business"] = ["Conferences","Meetings","Seminars","JobFairs","Sales"];
+
+        function fillSelect(nValue,nList){
+
+            nList.options.length = 1;
+            var curr = type[nValue];
+            for (each in curr)
+            {
+                var nOption = document.createElement('option');
+                nOption.appendChild(document.createTextNode(curr[each]));
+                nOption.setAttribute("value",curr[each]);
+                nList.appendChild(nOption);
+            }
+        }
+
+    </script>
+
 </head>
 <body class='wsite-theme-dark no-header-page wsite-page-create-event'>
 <div id="wrapper">
@@ -199,7 +225,8 @@ if ( count($_POST) > 0) {
       <div><div class="wsite-form-field" style="margin:5px 0px 0px 0px;">
           <label class="wsite-form-label" for="type">Select a Type: <span class="form-required">*</span></label>
           <div class="wsite-form-radio-container">
-              <select name='type' class='form-select'>
+              <select name='type' class="form-select"  onchange="fillSelect(this.value,this.form['genre'])">
+                  <option value='blank'>Select a Type</option>
                   <option value='Concert'>Concert</option>
                   <option value='Sports'>Sports</option>
                   <option value='Entertainment'>Entertainment</option>
@@ -217,49 +244,7 @@ if ( count($_POST) > 0) {
 
     <select name='genre' class='form-select'>
 
-    <?php if ($eventType == 'Concert') { ?>
-	<option value='Alternative'>Alternative</option>
-	<option value='Rock'>Rock</option>
-    <option value='Pop'>Pop</option>
-    <option value='Rap'>Hip Hop / Rap</option>
-    <option value='Electronic'>Electronic</option>
-    <option value='Country'>Country</option>
-    <option value='Classical'>Classical</option>
-    <?php } ?>
-        <?php if ($eventType == 'Sports') { ?>
-        <option value='Basketball'>Basketball</option>
-        <option value='Baseball'>Baseball</option>
-        <option value='Soccer'>Soccer</option>
-        <option value='Volleyball'>Volleyball</option>
-        <option value='Tennis'>Tennis</option>
-        <option value='Swimming'>Swimming</option>
-        <option value='Boxing'>Boxing</option>
-        <option value='Cycling'>Cycling</option>
-        <?php } ?>
-        <?php if ($eventType == 'Entertainment') { ?>
-        <option value='Culinary'>Culinary</option>
-        <option value='Cinema'>Cinema</option>
-        <option value='Arts'>Arts</option>
-        <option value='Theater'>Theater</option>
-        <option value='Comedy'>Comedy</option>
-        <option value='Politics'>Politics</option>
-        <?php } ?>
-        <?php if ($eventType == 'Business') { ?>
-        <option value='Conferences'>Alternative</option>
-        <option value='Meetings'>Rock</option>
-        <option value='Seminars'>Pop</option>
-        <option value='JobFairs'>Hip Hop / Rap</option>
-        <option value='Sales'>Electronic</option>
-        <?php } ?>
-        <?php if ($eventType == 'Concert') { ?>
-        <option value='Alternative'>Alternative</option>
-        <option value='Rock'>Rock</option>
-        <option value='Pop'>Pop</option>
-        <option value='Rap'>Hip Hop / Rap</option>
-        <option value='Electronic'>Electronic</option>
-        <option value='Country'>Country</option>
-        <option value='Classical'>Classical</option>
-        <?php } ?>
+        <option value="">Select a Genre</option>
 </select>
 
   </div>
