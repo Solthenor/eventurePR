@@ -111,7 +111,7 @@ if ( count($_POST) > 0) {
     <script>
         $(function() {
             $( "#datepicker" ).datepicker({ minDate: 0, maxDate: "+2Y" });
-            $( "#datepicker" ).datepicker( "yy-mm-dd", "dateFormat", $( this ).val() );
+            $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
         });
     </script>
 
@@ -150,17 +150,17 @@ if ( count($_POST) > 0) {
 				<table style="width: 150px;">
           <?php if($loggedin) { ?>
           <tr>
-              <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; ">Profile</a> | 
+              <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; ">Profile</a> |
                       <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" style="float: right;">
                           <input type="hidden" value="logout" name="loggedOut" />
                           <input type="hidden" style="color: #32CD32; text-decoration: underline;" value="Log out" />
                           <a href="#" onclick="this.parentNode.submit()" style="color: #32CD32; text-decoration: underline; ">Logout</a>
                       </form>
               </td>
-                      
+
               <td class="social"></td>
           </tr>
-          
+
           <?php }  else {?>
           <tr>
               <td class="phone-number"><span class='wsite-text'>Don't have an account? Register <a href="login.php" style="color: #32CD32; text-decoration: underline; ">HERE</a> | <a href="login.php" style="color: #32CD32; text-decoration: underline;">Sign in</a></span></td>
