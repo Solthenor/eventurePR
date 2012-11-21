@@ -90,7 +90,13 @@ if(!isset($user)){
                     <!-- Conditional to check login Status-->
                     <?php if($loggedin) { ?>
                     <tr>
-                        <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; "><?php echo $user['userName'] ?></a> | <a href="index.php" style="color: #32CD32; text-decoration: underline;">Log out</a></span></td>
+                        <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; "><?php echo $user['userName'] ?></a>
+                            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" style="float: right;">
+                                <input type="hidden" value="logout" name="loggedOut" />
+                                <input type="hidden" style="color: #32CD32; text-decoration: underline;" value="Log out" />
+                                <a href="#" onclick="this.parentNode.submit()" style="color: #32CD32; text-decoration: underline; ">Logout</a>
+                            </form>
+                        </td>
                         <td class="social"></td>
                     </tr>
                     

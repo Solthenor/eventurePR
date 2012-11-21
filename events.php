@@ -92,14 +92,15 @@ $events = $stmt->fetchAll();
         <tr>
             <td id="logo"><span class='wsite-logo'><a href='/'><span id="wsite-title">E-venturePR</span></a></span></td>
             <td id="header-right">
-                <table>
+                <table style="width: 150px;">
                     <?php if($loggedin) { ?>
                         <tr>
                             <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; ">Profile</a> | 
-                                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST"> 
-                                        <input type="hidden" value="logout" name="loggedOut" />
-                                        <input type="submit" style="color: #32CD32; text-decoration: underline;" value="Log out" />
-                                    </form>
+                                   <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" style="float: right;">
+                                       <input type="hidden" value="logout" name="loggedOut" />
+                                       <input type="hidden" style="color: #32CD32; text-decoration: underline;" value="Log out" />
+                                       <a href="#" onclick="this.parentNode.submit()" style="color: #32CD32; text-decoration: underline; ">Logout</a>
+                                   </form>
                             </td>
                                     
                             <td class="social"></td>
