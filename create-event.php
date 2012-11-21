@@ -8,6 +8,8 @@ if( !$loggedin ){
   header('Location: index.php');
 }
 
+
+
 $picID = 0;
 
 if ( count($_POST) > 0) {
@@ -76,6 +78,21 @@ if ( count($_POST) > 0) {
 
 
 }
+
+/*if(isset($_POST['submit'])){
+    $sql = "SELECT eventID
+    FROM Event
+    WHERE eventName =  '{$_POST['event-name']}';
+
+    ";
+
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+
+    $result = $stmt->fetchAll();
+    header('Location: event.php?'.$result[0]);
+     return;
+}    */
 ?>
 
 <!DOCTYPE html>
