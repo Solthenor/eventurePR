@@ -136,13 +136,14 @@ if ( count($_POST) > 0) {
 		<tr>
 			<td id="logo"><span class='wsite-logo'><a href='/'><span id="wsite-title">E-venturePR</span></a></span></td>
 			<td id="header-right">
-				<table>
+				<table style="width: 150px;">
           <?php if($loggedin) { ?>
           <tr>
               <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; ">Profile</a> | 
-                      <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST"> 
+                      <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" style="float: right;">
                           <input type="hidden" value="logout" name="loggedOut" />
-                          <input type="submit" style="color: #32CD32; text-decoration: underline;" value="Log out" />
+                          <input type="hidden" style="color: #32CD32; text-decoration: underline;" value="Log out" />
+                          <a href="#" onclick="this.parentNode.submit()" style="color: #32CD32; text-decoration: underline; ">Logout</a>
                       </form>
               </td>
                       
@@ -251,7 +252,7 @@ if ( count($_POST) > 0) {
   <div id="instructions-Select a Genre:" class="wsite-form-instructions" style="display:none;"></div>
 </div></div>
 
- <!--     <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
+      <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
           <label class="wsite-form-label" for="date">Date (YYYY-MM-DD) <span class="form-required">*</span></label>
           <div class="wsite-form-input-container">
               <input id="event-name" class="wsite-form-input wsite-input" type="text" name="date" style="width:200px;" />
@@ -273,7 +274,7 @@ if ( count($_POST) > 0) {
               <input id="event-name" class="wsite-form-input wsite-input" type="text" name="end-hour" style="width:200px;" />
           </div>
           <div id="instructions-461209313855761342" class="wsite-form-instructions" style="display:none;"></div>
-      </div></div>  -->
+      </div></div>
 
     <div><div class="wsite-form-field" style="margin:5px 0px 0px 0px;">
           <label class="wsite-form-label" for="private">Public or Private? <span class="form-required">*</span></label>

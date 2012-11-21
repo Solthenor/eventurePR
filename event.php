@@ -15,7 +15,7 @@ $db = db::getInstance();
 $sql = "SELECT
             E.eventID,
             E.eventName, 
-            E.eventType, 
+            E.eventType,
             E.genre, 
             E.flyer, 
             DATE_FORMAT(E.date, '%W, %M %e, %Y') as date, 
@@ -115,13 +115,14 @@ if(isset($_POST['action'])) {
 		<tr>
 			<td id="logo"><span class='wsite-logo'><a href='/'><span id="wsite-title">E-venturePR</span></a></span></td>
 			<td id="header-right">
-				<table>
+				<table style="width: 150px;">
                     <?php if($loggedin) { ?>
                     <tr>
                         <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; ">Profile</a> | 
-                                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST"> 
+                                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" style="float: right;">
                                     <input type="hidden" value="logout" name="loggedOut" />
-                                    <input type="submit" style="color: #32CD32; text-decoration: underline;" value="Log out" />
+                                    <input type="hidden" style="color: #32CD32; text-decoration: underline;" value="Log out" />
+                                    <a href="#" onclick="this.parentNode.submit()" style="color: #32CD32; text-decoration: underline; ">Logout</a>
                                 </form>
                         </td>
                                 
@@ -153,15 +154,18 @@ if(isset($_POST['action'])) {
 
 <h2 style="text-align:left;"><?php echo $event['eventName'] ?></h2>
 <span class='imgPusher' style='float:left;height:0px'></span>
-<span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="picture.php?picID=<?php echo $event['flyer'] ?>" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
+<span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="picture.php?picID=<?php echo $event['flyer'] ?>" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" width="300" height="400"/></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
 <div class="paragraph" style="text-align:left;display:block;">
 <?php echo $event['date'] ?>
 <br />
-<span style="line-height: 30px;">Start Time: <?php echo $event['startHour'] ?></span> </br>
-<span style="line-height: 30px;">End Time: <?php echo $event['endHour'] ?></span> <br />
+<span style="line-height: 30px;">Start Time: <?php echo $event['startHour'] ?></span>
+<br />
+<span style="line-height: 30px;">End Time: <?php echo $event['endHour'] ?></span>
+<br />
 <span style="line-height: 30px;">Location: <a href="venue.php?venueID=<?php echo $event['venueID'] ?>"><?php echo $event['venueName'] ?></a></span>
 <br />
-<span style="line-height: 30px;">Type: <?php echo $event['type'] ?></span>
+<span style="line-height: 30px;">Type: <?php echo $event['eventType'] ?></span>
+<br />
 <span style="line-height: 30px;">Genre: <?php echo $event['genre'] ?></span>
 <br />
 <span style="line-height: 30px;">Entrance Fee: $<?php echo $event['price'] ?><br /></span>
@@ -173,7 +177,7 @@ if(isset($_POST['action'])) {
         <div style="display: inline;"><div style="float:left; display: inline-block;"> </div>
 
     <form action="<?php echo $_SERVER['PHP_SELF']; ?><?php echo "?eventID={$eventID}" ?>" method="POST">
-        <input name="action" value="flag" type="submit" class="btn btn-eventPR" style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;" />Flag
+        <input name="action" value="Flag" type="submit" class="btn btn-eventPR" style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;" />
     </form>
     <form action="<?php echo $_SERVER['PHP_SELF']; ?><?php echo "?eventID={$eventID}" ?>" method="POST">
         <input name="action" value="I want to go!!!" type="submit" class="btn btn-eventPR" style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;" />

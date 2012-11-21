@@ -92,14 +92,15 @@ $events = $stmt->fetchAll();
         <tr>
             <td id="logo"><span class='wsite-logo'><a href='/'><span id="wsite-title">E-venturePR</span></a></span></td>
             <td id="header-right">
-                <table>
+                <table style="width: 150px;">
                     <?php if($loggedin) { ?>
                         <tr>
                             <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; ">Profile</a> | 
-                                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST"> 
-                                        <input type="hidden" value="logout" name="loggedOut" />
-                                        <input type="submit" style="color: #32CD32; text-decoration: underline;" value="Log out" />
-                                    </form>
+                                   <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" style="float: right;">
+                                       <input type="hidden" value="logout" name="loggedOut" />
+                                       <input type="hidden" style="color: #32CD32; text-decoration: underline;" value="Log out" />
+                                       <a href="#" onclick="this.parentNode.submit()" style="color: #32CD32; text-decoration: underline; ">Logout</a>
+                                   </form>
                             </td>
                                     
                             <td class="social"></td>
@@ -183,7 +184,7 @@ $events = $stmt->fetchAll();
                                 <td class='wsite-multicol-col' style='width:79.074889867841%;padding:0 15px'>
 
                                     <h2 style="text-align:left;"><?php echo $event['eventName'] ?></h2>
-                                    <span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="picture.php?picID=<?php echo $event['flyer'] ?>" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
+                                    <span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="picture.php?picID=<?php echo $event['flyer'] ?>" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" width="200" height="300"/></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
                                     <div class="paragraph" style="text-align:left;display:block;"><font size="4"><?php echo $event['date'] ?></font><br /><font size="4"><?php echo $event['venueName'] ?></font><br /><font size="4"><span style="line-height: 27px;"><br /></span></font><br /><font size="4"><span style="line-height: 27px;">Genre: <?php echo $event['genre'] ?></span></font></div>
                                     <hr style="clear:both;visibility:hidden;width:100%;">
 
