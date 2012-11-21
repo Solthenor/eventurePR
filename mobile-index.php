@@ -7,6 +7,22 @@ if (isset($_POST['mloggedOut'])) {
     $id = 0;
 }
 
+if (isset($_POST['eventSearch'])) {
+    $userName = $_POST['eventSearch'];
+
+    $db = db::getInstance();
+    $sql = "SELECT
+        eventID
+    FROM Event
+    WHERE eventName = '{$_POST['eventSearch']}' ; ";
+
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+    $event = $stmt->fetch(PDO::FETCH_OBJ);
+
+   header("Location: mobile-event.php?eventID=.$event" ) ;
+
+}
 ?>
 
 <!DOCTYPE html>
@@ -80,10 +96,10 @@ if (isset($_POST['mloggedOut'])) {
             <div id="label" style="margin: auto;">
                 <span style="font-size: 18px;color: white; font-weight: bold;text-shadow: none">Find an event: </span>
 
-                <form action="results.html" method="post" data>
-                    <div data-role="fieldcontain" data-inset="true">
-                        <label for="search" style="font-size: 14px;color: white; padding-top: 5px;">Search:</label>
-                        <input style="color: black !important;" type="search" name="query" id="search" value=""/>
+                <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
+                <div data-role="fieldcontain" data-inset="true">
+                        <label for="eventSearch" style="font-size: 14px;color: white; padding-top: 5px;">Search:</label>
+                        <input style="color: black !important;" type="search" name="eventSearch" id="eventSearch" value=""/>
                     </div> <!-- /fieldcontain -->
                 </form>
             </div>
