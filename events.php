@@ -65,7 +65,7 @@ $events = $stmt->fetchAll();
     <style type='text/css'>
         .wsite-header {
             <?php if($category == 'Business') { ?>
-            background-image: url(uploads/1/3/4/4/13443306/header_images/1346209457.jpg) !important; 
+            background-image: url(uploads/1/3/4/4/13443306/header_images/1346209457.jpg) !important;
             <?php } ?>
             <?php if($category == 'Entertainment') { ?>
             background-image: url(uploads/1/3/4/4/13443306/header_images/1346209272.jpg) !important;
@@ -95,17 +95,17 @@ $events = $stmt->fetchAll();
                 <table style="width: 150px;">
                     <?php if($loggedin) { ?>
                         <tr>
-                            <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; ">Profile</a> | 
+                            <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; ">Profile</a> |
                                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" style="float: right;">
                                        <input type="hidden" value="logout" name="loggedOut" />
                                        <input type="hidden" style="color: #32CD32; text-decoration: underline;" value="Log out" />
                                        <a href="#" onclick="this.parentNode.submit()" style="color: #32CD32; text-decoration: underline; ">Logout</a>
                                    </form>
                             </td>
-                                    
+
                             <td class="social"></td>
                         </tr>
-                    
+
                     <?php }  else {?>
                     <tr>
                         <td class="phone-number"><span class='wsite-text'>Don't have an account? Register <a href="login.php" style="color: #32CD32; text-decoration: underline; ">HERE</a> | <a href="login.php" style="color: #32CD32; text-decoration: underline;">Sign in</a></span></td>
@@ -181,17 +181,20 @@ $events = $stmt->fetchAll();
                         <table class='wsite-multicol-table'>
                             <tbody class='wsite-multicol-tbody'>
                             <tr class='wsite-multicol-tr'>
-                                <td class='wsite-multicol-col' style='width:79.074889867841%;padding:0 15px'>
+                                <td class='wsite-multicol-col' style='width:35%;padding:0 15px'>
 
                                     <h2 style="text-align:left;"><?php echo $event['eventName'] ?></h2>
                                     <span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="picture.php?picID=<?php echo $event['flyer'] ?>" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" width="200" height="300"/></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
-                                    <div class="paragraph" style="text-align:left;display:block;"><font size="4"><?php echo $event['date'] ?></font><br /><font size="4"><?php echo $event['venueName'] ?></font><br /><font size="4"><span style="line-height: 27px;"><br /></span></font><br /><font size="4"><span style="line-height: 27px;">Genre: <?php echo $event['genre'] ?></span></font></div>
                                     <hr style="clear:both;visibility:hidden;width:100%;">
 
                                     <div style="display: inline;"><div style="float:left; display: inline-block;"> </div>
                                         <a class="btn btn-eventPR" href="event.php?eventID=<?php echo $event['eventID'] ?>"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">MORE INFO</span></a>
                                         <a class="btn btn-eventPR" href="#"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">FLAG</span></a>
                                         <div style="height: 10px; overflow: hidden;"></div></div>
+
+                                </td>
+                                <td>
+                                    <div class="paragraph" style="text-align:left;display:block;"><font size="4"><?php echo $event['date'] ?></font><br /><font size="4"><?php echo $event['venueName'] ?></font><br /><font size="4"><span style="line-height: 27px;"><br /></span></font><br /><font size="4"><span style="line-height: 27px;">Genre: <?php echo $event['genre'] ?></span></font></div>
 
                                 </td>
                                 <td class='wsite-multicol-col' style='width:20.925110132159%;padding:0 15px'>
