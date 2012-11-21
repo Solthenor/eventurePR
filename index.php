@@ -93,6 +93,9 @@ require_once('checkAuth.php');
             <div class="theIndex"><div id='wsite-content' class='wsite-not-footer'>
                 <h2 style="text-align:left;">Featured Events:</h2>
 
+                <?php
+
+                echo '
                 <div id="myCarousel" class="carousel slide">
 
                   <div class="carousel-inner">
@@ -100,7 +103,7 @@ require_once('checkAuth.php');
                       <img src="img/sanse3.jpg" alt="">
                       <div class="container">
                         <div class="carousel-caption">
-                          <a href="event.php?eventID=202"><h1>San'Se 2013</h1></a>
+                          <a href="event.php?eventID=202"><h1>SanSe 2013</h1></a>
                           <p class="lead">Fiestas de la Calle San Sebastián, en el Viejo San Juan</p>
                           
                         </div>
@@ -130,7 +133,7 @@ require_once('checkAuth.php');
                   <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
                 </div><!-- /.carousel -->
 
-            </div>
+            </div>  ' ?>
 
                 <div><div style="height: 20px; overflow: hidden; width: 100%;"></div>
                     <hr class="styled-hr" style="width:100%;">
