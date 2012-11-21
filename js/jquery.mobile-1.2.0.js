@@ -5261,7 +5261,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					.addClass( "ui-corner-top ui-corner-bottom" );
 		}
 
-		/events
+		//events
 		collapsible
 			.bind( "expand collapse", function( event ) {
 				if ( !event.isDefaultPrevented() ) {
