@@ -102,13 +102,29 @@ if (isset($_POST['mloggedOut'])) {
             <div data-role="fieldcontain">
                 <ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
                     <li data-role="list-divider" style="font-size: 16px;color: white;margin-top: 10%  ">Other Events:</li>
-                    <li><a href=""><font size="2" >Mofongo Party</font></a></li>
-                    <li><a href=""><font size="2">Alvaro's Supercalifragilisticexpialidocious Fest</font></a></li>
-                    <li><a href=""><font size="2" >Mofongo Party</font></a></li>
-                    <li><a href=""><font size="2">Improvisacion: TEATRUM</font></a></li>
-                    <li><a href=""><font size="2" >DIGILIFE: Effective Project Management</font></a></li>
-                    <li><a href=""><font size="2">ACM - Basic Python Programming Seminar</font></a></li>
 
+                    <?php
+
+                                    $db = db::getInstance();
+                                    $sql = "SELECT
+                                                eventID,
+                                                eventName
+                                            FROM Event AS r1
+                                                JOIN (SELECT (RAND() * (SELECT MAX(eventID) FROM Event)) AS id) AS r2
+                                            WHERE r1.eventID >= r2.id
+                                            ORDER BY r1.eventID ASC
+                                            LIMIT 5
+                                    ";
+
+                                    $stmt = $db->prepare($sql);
+                                    $stmt->execute();
+
+                                    $result = $stmt->fetchAll();
+
+                                    foreach ($result as &$venue) {
+                     echo "<li><a href='mobile-event.php?eventID={$venue['eventID']}'><font size='2' >{$venue['eventName']}</font></a></li>";
+                    }
+                    ?>
                 </ul>
             </div>
 
