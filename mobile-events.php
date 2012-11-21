@@ -112,13 +112,14 @@ $events = $stmt->fetchAll();
                 <option value="Business">BUSINESS & EDUCATION</option>
             </select>
         </div>
+        <h1 style="color:white; text-shadow: none; text-align: left;">Select an event: </h1>
+
         <?php
 
                     foreach ($events as $event) {
 
                         ?>
         <div id="list">
-            <h1 style="color:white; text-shadow: none; text-align: left;">Select an event: </h1>
             <ul data-role="listview" data-inset="true" data-split-theme="c">
                 <li><a href=""><img src="picture.php?picID=<?php echo $event['flyer'] ?>" class="ui-li-thumb" style="position:absolute !important; top: 10px; left: 10px; height: 80%"><h3><?php echo $event['eventName'] ?></h3></a></li>
             </ul>
