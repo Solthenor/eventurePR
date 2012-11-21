@@ -8,6 +8,7 @@ Dynamically changes depending on the user accessing it
 require_once('mobileRedirect.php');
 require_once('db.php');
 require_once('checkAuth.php');
+require_once('logoutHandler.php');
 
 $userID = $_GET['userID'];
 
