@@ -150,25 +150,25 @@ if(isset($_POST['action'])) {
 <table class='wsite-multicol-table'>
 <tbody class='wsite-multicol-tbody'>
 <tr class='wsite-multicol-tr'>
-<td class='wsite-multicol-col' style='width:61.742006615215%;padding:0 15px'>
+<td class='wsite-multicol-col' style='width:61.742006615215%;'>
 
 <h2 style="text-align:left;"><?php echo $event['eventName'] ?></h2>
 <span class='imgPusher' style='float:left;height:0px'></span>
-<span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="picture.php?picID=<?php echo $event['flyer'] ?>" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" width="300" height="400"/></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
+<span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="picture.php?picID=<?php echo $event['flyer'] ?>" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" width="350" height="350"/></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
 <div class="paragraph" style="text-align:left;display:block;">
 <?php echo $event['date'] ?>
 <br />
-<span style="line-height: 30px;">Start Time: <?php echo $event['startHour'] ?></span>
+<span style="line-height: 30px;">Start Time:  <?php echo $event['startHour'] ?></span>
 <br />
-<span style="line-height: 30px;">End Time: <?php echo $event['endHour'] ?></span>
+<span style="line-height: 30px;">End Time:  <?php echo $event['endHour'] ?></span>
 <br />
-<span style="line-height: 30px;">Location: <a href="venue.php?venueID=<?php echo $event['venueID'] ?>"><?php echo $event['venueName'] ?></a></span>
+<span style="line-height: 30px;">Location:  <a href="venue.php?venueID=<?php echo $event['venueID'] ?>"><?php echo $event['venueName'] ?></a></span>
 <br />
-<span style="line-height: 30px;">Type: <?php echo $event['eventType'] ?></span>
+<span style="line-height: 30px;">Type:  <?php echo $event['eventType'] ?></span>
 <br />
-<span style="line-height: 30px;">Genre: <?php echo $event['genre'] ?></span>
+<span style="line-height: 30px;">Genre:  <?php echo $event['genre'] ?></span>
 <br />
-<span style="line-height: 30px;">Entrance Fee: $<?php echo $event['price'] ?><br /></span>
+<span style="line-height: 30px;">Entrance Fee:  $<?php echo $event['price'] ?><br /></span>
 <br />
 <?php echo $event['description'] ?>
 <span style="line-height: 30px;"><br /></span><br /><span style="font-size: 12px;">posted by <a href=""><?php echo $event['userName'] ?></a></span><br /></div>

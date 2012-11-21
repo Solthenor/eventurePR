@@ -8,8 +8,6 @@ if( !$loggedin ){
   header('Location: index.php');
 }
 
-
-
 $picID = 0;
 
 if ( count($_POST) > 0) {
@@ -76,23 +74,9 @@ if ( count($_POST) > 0) {
     $stmt = $db->prepare($sql);
     $stmt->execute();
 
+    $eID = $db->lastInsertId();
 
 }
-
-/*if(isset($_POST['submit'])){
-    $sql = "SELECT eventID
-    FROM Event
-    WHERE eventName =  '{$_POST['event-name']}';
-
-    ";
-
-    $stmt = $db->prepare($sql);
-    $stmt->execute();
-
-    $result = $stmt->fetchAll();
-    header('Location: event.php?'.$result[0]);
-     return;
-}    */
 ?>
 
 <!DOCTYPE html>
@@ -211,7 +195,7 @@ if ( count($_POST) > 0) {
 <h2 style="text-align:left;">E-Vent it</h2>
 
 <div>
-<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" id="create-event" enctype="multipart/form-data">
+<form action="event.php?eventID=<?php echo $event['eventID'] ?>" method="POST" id="create-event" enctype="multipart/form-data">
 <div id="807999966852778988-form-parent" class="wsite-form-container" style="margin-top:10px;">
   <ul class="formlist" id="807999966852778988-form-list">
     <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
@@ -269,7 +253,6 @@ if ( count($_POST) > 0) {
 <div><div class="wsite-form-field" style="margin:5px 0px 0px 0px;">
   <label class="wsite-form-label" for="genre">Select a Genre: <span class="form-required">*</span></label>
   <div class="wsite-form-radio-container">
-    <?php   $eventType = $_POST['type']; ?>
 
     <select name='genre' class='form-select'>
 
@@ -281,7 +264,7 @@ if ( count($_POST) > 0) {
 </div></div>
 
       <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
-          <label class="wsite-form-label" for="date">Date: <span class="form-required">*</span></label>
+          <label class="wsite-form-label" for="date">Date: (year-month-day)<span class="form-required">*</span></label>
           <div class="wsite-form-input-container">
               <input type="text" id="datepicker" name="date"/>
 
@@ -290,7 +273,7 @@ if ( count($_POST) > 0) {
       </div></div>
 
       <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
-          <label class="wsite-form-label" for="start-hour">Start Hour: (HH:MM)<span class="form-required">*</span></label>
+          <label class="wsite-form-label" for="start-hour">Start Hour: (hour:minutes)<span class="form-required">*</span></label>
           <div class="wsite-form-input-container">
               <input id="event-name" class="wsite-form-input wsite-input" type="text" name="start-hour" style="width:200px;" />
           </div>
@@ -298,7 +281,7 @@ if ( count($_POST) > 0) {
       </div></div>
 
       <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
-          <label class="wsite-form-label" for="end-hour">End Hour: (HH:MM) <span class="form-required">*</span></label>
+          <label class="wsite-form-label" for="end-hour">End Hour: (hour:minutes) <span class="form-required">*</span></label>
           <div class="wsite-form-input-container">
               <input id="event-name" class="wsite-form-input wsite-input" type="text" name="end-hour" style="width:200px;" />
           </div>
