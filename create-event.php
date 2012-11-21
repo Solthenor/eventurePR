@@ -251,7 +251,7 @@ if ( count($_POST) > 0) {
   <div id="instructions-Select a Genre:" class="wsite-form-instructions" style="display:none;"></div>
 </div></div>
 
- <!--     <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
+      <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
           <label class="wsite-form-label" for="date">Date (YYYY-MM-DD) <span class="form-required">*</span></label>
           <div class="wsite-form-input-container">
               <input id="event-name" class="wsite-form-input wsite-input" type="text" name="date" style="width:200px;" />
@@ -273,7 +273,7 @@ if ( count($_POST) > 0) {
               <input id="event-name" class="wsite-form-input wsite-input" type="text" name="end-hour" style="width:200px;" />
           </div>
           <div id="instructions-461209313855761342" class="wsite-form-instructions" style="display:none;"></div>
-      </div></div>  -->
+      </div></div>
 
     <div><div class="wsite-form-field" style="margin:5px 0px 0px 0px;">
           <label class="wsite-form-label" for="private">Public or Private? <span class="form-required">*</span></label>
