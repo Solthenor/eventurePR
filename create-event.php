@@ -51,6 +51,7 @@ if ( count($_POST) > 0) {
     $startHour = $_POST['start-hour'] . ":00";
     $endHour = $_POST['end-hour'] . ":00";
     $date = $_POST['date'];
+    $dateFixed =
     $sql = "INSERT INTO Event
             SET
               userID = '{$id}',
@@ -103,6 +104,16 @@ if ( count($_POST) > 0) {
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/images/common/utilities-jq.js?1346362758'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/flyout_menus_jq.js?1346362758'></script>
     <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/resources/demos/style.css" />
+    <script>
+        $(function() {
+            $( "#datepicker" ).datepicker({ minDate: 0, maxDate: "+2Y" });
+            $( "#datepicker" ).datepicker( "yy-mm-dd", "dateFormat", $( this ).val() );
+        });
+    </script>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <script type="text/javascript">
@@ -253,9 +264,10 @@ if ( count($_POST) > 0) {
 </div></div>
 
       <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
-          <label class="wsite-form-label" for="date">Date (YYYY-MM-DD) <span class="form-required">*</span></label>
+          <label class="wsite-form-label" for="date">Date: <span class="form-required">*</span></label>
           <div class="wsite-form-input-container">
-              <input id="event-name" class="wsite-form-input wsite-input" type="text" name="date" style="width:200px;" />
+              <input type="text" id="datepicker" name="date"/>
+
           </div>
           <div id="instructions-461209313855761342" class="wsite-form-instructions" style="display:none;"></div>
       </div></div>
