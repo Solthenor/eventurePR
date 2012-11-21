@@ -47,17 +47,22 @@ if ( count($_POST) > 0) {
               //date = '{$_POST['date']}',
              // endHour = '{$_POST['endHour']}',
               //featured = '{$_POST['featured']}',
-              //price = '{$_POST['price']}',     
+              //price = '{$_POST['price']}',
+    $startHour = $_POST['start-hour'] . ":00";
+    $endHour = $_POST['end-hour'] . ":00";
+    $date = $_POST['date'];
     $sql = "INSERT INTO Event
             SET
               userID = '{$id}',
               eventName = '{$_POST['event-name']}',
-              
               venueID = '{$_POST['venue']}',
               eventType = '{$_POST['type']}',
               genre = '{$_POST['genre']}',
-              status = '{$_POST['private']}',  
-                  
+              date = '{$date}',
+              startHour = '{$startHour}',
+              endHour = '{$endHour}',
+              featured = '{$_POST['featured']}',
+              price = '{$_POST['price']}',
               description = '{$_POST['description']}'
     ";
 
@@ -261,13 +266,29 @@ if ( count($_POST) > 0) {
   <div id="instructions-Select a Genre:" class="wsite-form-instructions" style="display:none;"></div>
 </div></div>
 
-      <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
-          <label class="wsite-form-label" for="event-name">Date (year- <span class="form-required">*</span></label>
+ <!--     <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
+          <label class="wsite-form-label" for="date">Date (YYYY-MM-DD) <span class="form-required">*</span></label>
           <div class="wsite-form-input-container">
-              <input id="event-name" class="wsite-form-input wsite-input" type="text" name="event-name" style="width:200px;" />
+              <input id="event-name" class="wsite-form-input wsite-input" type="text" name="date" style="width:200px;" />
           </div>
           <div id="instructions-461209313855761342" class="wsite-form-instructions" style="display:none;"></div>
       </div></div>
+
+      <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
+          <label class="wsite-form-label" for="start-hour">Start Hour: (HH:MM)<span class="form-required">*</span></label>
+          <div class="wsite-form-input-container">
+              <input id="event-name" class="wsite-form-input wsite-input" type="text" name="start-hour" style="width:200px;" />
+          </div>
+          <div id="instructions-461209313855761342" class="wsite-form-instructions" style="display:none;"></div>
+      </div></div>
+
+      <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
+          <label class="wsite-form-label" for="end-hour">End Hour: (HH:MM) <span class="form-required">*</span></label>
+          <div class="wsite-form-input-container">
+              <input id="event-name" class="wsite-form-input wsite-input" type="text" name="end-hour" style="width:200px;" />
+          </div>
+          <div id="instructions-461209313855761342" class="wsite-form-instructions" style="display:none;"></div>
+      </div></div>  -->
 
     <div><div class="wsite-form-field" style="margin:5px 0px 0px 0px;">
           <label class="wsite-form-label" for="private">Public or Private? <span class="form-required">*</span></label>
@@ -280,6 +301,24 @@ if ( count($_POST) > 0) {
           </div>
           <div id="instructions-Select a Genre:" class="wsite-form-instructions" style="display:none;"></div>
       </div></div>
+
+      <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
+          <label class="wsite-form-label" for="featured">Featured? <span class="form-required">*</span></label>
+          <div class="wsite-form-radio-container">
+              <select name='featured' class='form-select'>
+                  <option value='0'>No</option>
+                  <option value='1'>Yes</option>
+              </select>
+          <div id="instructions-461209313855761342" class="wsite-form-instructions" style="display:none;"></div>
+      </div></div>
+
+          <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
+              <label class="wsite-form-label" for="price">Entrance Fee: <span class="form-required">*</span></label>
+              <div class="wsite-form-input-container">
+                  <input id="event-name" class="wsite-form-input wsite-input" type="text" name="price" style="width:200px;" />
+              </div>
+              <div id="instructions-461209313855761342" class="wsite-form-instructions" style="display:none;"></div>
+          </div></div>
 
 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
   <label class="wsite-form-label" for="description">Brief Description <span class="form-required">*</span></label>

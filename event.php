@@ -157,11 +157,11 @@ if(isset($_POST['action'])) {
 <div class="paragraph" style="text-align:left;display:block;">
 <?php echo $event['date'] ?>
 <br />
-<span style="line-height: 30px;">Time: <?php echo $event['startHour'] ?></span>
-<br />
+<span style="line-height: 30px;">Start Time: <?php echo $event['startHour'] ?></span> </br>
+<span style="line-height: 30px;">End Time: <?php echo $event['endHour'] ?></span> <br />
 <span style="line-height: 30px;">Location: <a href="venue.php?venueID=<?php echo $event['venueID'] ?>"><?php echo $event['venueName'] ?></a></span>
 <br />
-<span style="line-height: 30px;"></span>
+<span style="line-height: 30px;">Type: <?php echo $event['type'] ?></span>
 <span style="line-height: 30px;">Genre: <?php echo $event['genre'] ?></span>
 <br />
 <span style="line-height: 30px;">Entrance Fee: $<?php echo $event['price'] ?><br /></span>
