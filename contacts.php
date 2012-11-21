@@ -26,7 +26,7 @@ $sql = "SELECT
             age,
             gender,
             work
-        FROM AddFriends, User
+        FROM AddFriend, User
         WHERE userID1 = {$id};
         AND userID2 = 'userID';
 ";
