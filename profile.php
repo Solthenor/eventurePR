@@ -86,12 +86,12 @@ if(!isset($user)){
     <tr>
         <td id="logo"><span class='wsite-logo'><a href="index.php"><span id="wsite-title">E-venturePR</span></a></span></td>
         <td id="header-right">
-            <table>
+            <table style="width: 150px;">
 
                 <!-- Conditional to check login Status-->
                 <?php if($loggedin) { ?>
                 <tr>
-                    <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; "><?php echo $user['userName'] ?></a>
+                    <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; "><?php echo $user['userName'] ?></a> |
                             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" style="float: right;">
                                 <input type="hidden" value="logout" name="loggedOut" />
                                 <input type="hidden" style="color: #32CD32; text-decoration: underline;" value="Log out" />
