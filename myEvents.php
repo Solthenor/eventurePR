@@ -4,15 +4,10 @@ require_once('logoutHandler.php');
 require_once('db.php');
 require_once('checkAuth.php');
 
-$userID = $_GET['userID'];
 
 if (!$loggedin && !isset($userID)) {
     header('Location: index.php');
     return;
-}
-
-if(isset($userID)) {
-    $id = $userID;
 }
 
 $db = db::getInstance();
@@ -29,9 +24,9 @@ $sql = "SELECT
             E.price,
             E.flag,
             E.description,
-            E.eventID,
+            E.eventID
         FROM Event E
-        WHERE E.userID = {$id};
+        WHERE E.userID = {$id}
 ";
 
 $stmt = $db->prepare($sql);
