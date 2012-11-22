@@ -90,7 +90,7 @@ $events = $stmt->fetchAll();
 <div id="wrapper">
     <table id="header">
         <tr>
-            <td id="logo"><span class='wsite-logo'><a href='/'><span id="wsite-title">E-venturePR</span></a></span></td>
+            <td id="logo"><span class='wsite-logo'><a href='index.php'><span id="wsite-title">E-venturePR</span></a></span></td>
             <td id="header-right">
                 <table style="width: 150px;">
                     <?php if($loggedin) { ?>
@@ -206,7 +206,7 @@ $events = $stmt->fetchAll();
                                         <div style="height: 10px; overflow: hidden;"></div></div>
 
                                     <div style="text-align:left;"><div style="height: 10px; overflow: hidden;"></div>
-                                        <a class="wsite-button wsite-button-small wsite-button-highlight" href="share.html" >
+                                        <a class="wsite-button wsite-button-small wsite-button-highlight" href="share.php?eventID=<?php echo $event['eventID'] ?>" >
                                             <span class="wsite-button-inner">Share E-venture</span>
                                         </a>
                                         <div style="height: 10px; overflow: hidden;"></div></div>

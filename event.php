@@ -199,6 +199,24 @@ if(isset($_POST['action'])) {
 
 </div>
 
+    <div style="text-align:left;"><div style="height: 10px; overflow: hidden;"></div>
+        <a class="wsite-button wsite-button-small wsite-button-highlight" href="javascript:;" >
+            <span class="wsite-button-inner">Find tickets</span>
+        </a>
+        <div style="height: 10px; overflow: hidden;"></div></div>
+
+    <div style="text-align:left;"><div style="height: 10px; overflow: hidden;"></div>
+        <a class="wsite-button wsite-button-small wsite-button-highlight" href="share.php?eventID=<?php echo $event['eventID'] ?>">
+            <span class="wsite-button-inner" name="share">Share E-venture</span>
+        </a>
+        <div style="height: 10px; overflow: hidden;"></div></div>
+
+    <div style="text-align:left;"><div style="height: 10px; overflow: hidden;"></div>
+        <a class="wsite-button wsite-button-small wsite-button-highlight" href="javascript:;" >
+            <span class="wsite-button-inner">set calendar</span>
+        </a>
+        <div style="height: 10px; overflow: hidden;"></div></div>
+
 </td>
 </tr>
 </tbody>
