@@ -107,9 +107,9 @@ if (isset($_POST['eventSearch'])) {
             <div data-role="fieldcontain" style="margin-top: 10%;">
                 <ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
                     <li data-role="list-divider" style="font-size: 16px;color: white;  ">Featured Events:</li>
-                    <li><a href=""><font size="2">"Luis Raul: Que Clase E Lengua!"</font></a></li>
-                    <li><a href=""><font size="2">"Nightwish: Imaginareum"</font></a></li>
-                    <li><a href=""><font size="2">"Baloncesto: Los Piratas de Quebradillas</font></a></li>
+                    <li><a href="mobile-event.php?eventID=202"><font size="2">SanSe 2013</font></a></li>
+                    <li><a href="mobile-event.php?eventID=203"><font size="2">Calle 13 en PR</font></a></li>
+                    <li><a href="mobile-event.php?eventID=204"><font size="2">PR Islanders vs LA Galaxy</font></a></li>
 
 
                 </ul>
