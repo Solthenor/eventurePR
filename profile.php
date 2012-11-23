@@ -51,6 +51,19 @@ if(!isset($user)){
     return;
 }
 
+if(isset($_POST['submit'])) {
+    $db = db::getInstance();
+
+    $sql = "INSERT INTO Wall
+            SET
+               userID = {userID};
+               content = '{$_POST['comment-text']}';";
+
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+
+}
+
 
 
 ?>
@@ -168,7 +181,7 @@ if(!isset($user)){
                                                         $sql = "SELECT
                                                                            eventID,
                                                                            eventName
-                                                                       FROM Event AS r1 
+                                                                       FROM Event AS r1
                                                                            JOIN (SELECT (RAND() * (SELECT MAX(eventID) FROM Event)) AS id) AS r2
                                                                        WHERE r1.eventID >= r2.id
                                                                        ORDER BY r1.eventID ASC
@@ -229,11 +242,11 @@ if(!isset($user)){
                                 $sql = "SELECT
                                                         eventID,
                                                         eventName
-                                                    FROM Event AS r1, User AS u1 
+                                                    FROM Event AS r1, User AS u1
                                                         JOIN (SELECT (RAND() * (SELECT MAX(eventID) FROM Attends)) AS id) AS r2
                                                                        WHERE r1.eventID >= r2.id
-                                                                       
-                                                                        AND 
+
+                                                                        AND
                                                                        u1.userID = {$id}
 
                                                                        ORDER BY r1.eventID ASC
@@ -261,12 +274,7 @@ if(!isset($user)){
 
                         <h2 style="text-align:left;">My wall:<br /></h2>
                         <div style="border: 1px solid #f5f5f5; padding: 20px; height: 60%; overflow: auto; background-color:black;">
-                            <span class="imgPusher" style="float:left;height:0px"></span>
-                            <div style="position:relative;float:left;z-index:10;width:70px;clear:left;margin-top:0px;*margin-top:0px">
-                                <a><img class="wsite-image galleryImageBorder" src="http://i3.kym-cdn.com/entries/icons/original/000/010/496/asdf.jpg" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border: 1px double gray;padding:3px; background-color: #1a1a1a;" alt="Picture">
-                                </a>
-                                <div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></div>
-                            <!--<div class="paragraph" style="text-align:left;display:block; color: white; font-size: medium; font-style: italic">: HIIIIIIIIIIII!!! &lt;3</div>-->
+
                             <ul style="font-size: 14px; color: white;">
 
                                 <!--  Selects comments posted to user's wall -->
@@ -274,12 +282,12 @@ if(!isset($user)){
 
                                 $db = db::getInstance();
                                 $sql = "SELECT
-                                                                           userID,
-                                                                           content
-                                                                       FROM Comment c1
-                                                                       WHERE c1.userID={$id}
-                                                                       LIMIT 5;
-                                                               ";
+                                           userID,
+                                           content
+                                       FROM Wall c1
+                                       WHERE c1.userID='{$id}'
+                                       LIMIT 5;
+                                ";
 
                                 $stmt = $db->prepare($sql);
                                 $stmt->execute();
@@ -287,7 +295,7 @@ if(!isset($user)){
                                 $result = $stmt->fetchAll();
 
                                 foreach ($result as &$comment) {
-                                    echo "<li> <span style='color: white'>{$comment['comment']}</span></a></li>
+                                    echo "<li> <span style='color: white'>{$comment['comment']}</span></li>
                                                                    <div style='height: 20px; overflow: hidden; width: 100%;''></div>";
                                 }
                                 ?>
@@ -299,7 +307,7 @@ if(!isset($user)){
                         <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
                             <label class="wsite-form-label" for="description">Post to wall: <span class="form-required">*</span></label>
                             <div class="wsite-form-input-container">
-                                <textarea id="description" class="wsite-form-input wsite-input" name="description" style="width:285px; height: 50px"></textarea>
+                                <textarea id="description" class="wsite-form-input wsite-input" name="comment-text" style="width:285px; height: 50px"></textarea>
                             </div>
                             <div id="instructions-740288841696996782" class="wsite-form-instructions" style="display:none;"></div>
                         </div></div>

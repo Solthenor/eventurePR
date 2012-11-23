@@ -29,6 +29,7 @@ $sql = "SELECT
             V.venueID,
             V.vName as venueName, 
             U.userName,
+            E.userID,
             (SELECT 
                 COUNT(*)
             FROM Attends A
@@ -47,7 +48,37 @@ $stmt->execute();
 $result = $stmt->fetchAll();
 
 $event = $result[0];
+$eventUserID = $event['userID'];
 $attendees = $event['attendees'];
+
+if (isset($_POST['upload'])) {
+    if ($_FILES["photo"]["error"] == 0) {
+
+      $type = str_replace('image/', '', $_FILES['photo']['type']);
+
+      $fileName = $_FILES['photo']['name'];
+      $tmpName  = $_FILES['photo']['tmp_name'];
+      $fileSize = $_FILES['photo']['size'];
+      $fileType = $_FILES['photo']['type'];
+
+      $fp      = fopen($tmpName, 'r');
+      $content = fread($fp, filesize($tmpName));
+      $content = addslashes($content);
+      fclose($fp);
+
+      $sql = "INSERT INTO Gallery
+            SET
+              userID = '{$eventUserID}',
+              eventID = '{$eventID}',
+              ext = '{$type}',
+              data = '{$content}'";
+
+      $stmt = $db->prepare($sql);
+      $stmt->execute();
+
+      // $picID = $db->lastInsertId();
+    }
+}
 
 if(!isset($event)){
     header('Location: index.php');
@@ -228,36 +259,113 @@ if(isset($_POST['action'])) {
 <tbody class='wsite-multicol-tbody'>
 <tr class='wsite-multicol-tr'>
 <td class='wsite-multicol-col' style='width:50%;padding:0 15px'>
-
-<h2 style="text-align:left;">Upload pics of your E-venture!!!</h2>
+    <h2 style="text-align:left;">Upload pics of your E-venture!!!</h2>
 <div>
 <div><div style="height: 20px; overflow: hidden;"></div>
 <div id='139083701912618958-gallery' class='imageGallery' style='line-height: 0px; padding: 0; margin: 0'>
-<div id='139083701912618958-imageContainer0' style='float:left;width:33.28%;margin:0;'><div id='139083701912618958-insideImageContainer0' style='position:relative;margin:5px;padding:0 8px 8px 0'><div style='position:relative;width:100%;padding:0 0 75.08%;'><a href='uploads/1/3/4/4/13443306/7495447_orig.jpg' rel='lightbox[gallery139083701912618958]' onclick='if (!window.lightboxLoaded) return false'><img src='uploads/1/3/4/4/13443306/7495447.jpg' class='galleryImage galleryImageBorder' _width='333' _height='225' style='position:absolute;border-width:1px;padding:3px;width:100%;top:5%;left:0%' /></a></div></div></div><div id='139083701912618958-imageContainer1' style='float:left;width:33.28%;margin:0;'><div id='139083701912618958-insideImageContainer1' style='position:relative;margin:5px;padding:0 8px 8px 0'><div style='position:relative;width:100%;padding:0 0 75.08%;'><a href='uploads/1/3/4/4/13443306/8485349_orig.jpg' rel='lightbox[gallery139083701912618958]' onclick='if (!window.lightboxLoaded) return false'><img src='uploads/1/3/4/4/13443306/8485349.jpg' class='galleryImage galleryImageBorder' _width='333' _height='222' style='position:absolute;border-width:1px;padding:3px;width:100%;top:5.6%;left:0%' /></a></div></div></div><div id='139083701912618958-imageContainer2' style='float:left;width:33.28%;margin:0;'><div id='139083701912618958-insideImageContainer2' style='position:relative;margin:5px;padding:0 8px 8px 0'><div style='position:relative;width:100%;padding:0 0 75.08%;'><a href='uploads/1/3/4/4/13443306/2260870_orig.jpg' rel='lightbox[gallery139083701912618958]' onclick='if (!window.lightboxLoaded) return false'><img src='uploads/1/3/4/4/13443306/2260870.jpg' class='galleryImage galleryImageBorder' _width='279' _height='250' style='position:absolute;border-width:1px;padding:3px;width:83.78%;top:0%;left:8.11%' /></a></div></div></div><div id='139083701912618958-imageContainer3' style='float:left;width:33.28%;margin:0;'><div id='139083701912618958-insideImageContainer3' style='position:relative;margin:5px;padding:0 8px 8px 0'><div style='position:relative;width:100%;padding:0 0 75.08%;'><a href='uploads/1/3/4/4/13443306/817215_orig.jpg' rel='lightbox[gallery139083701912618958]' onclick='if (!window.lightboxLoaded) return false'><img src='uploads/1/3/4/4/13443306/817215.jpg' class='galleryImage galleryImageBorder' _width='333' _height='193' style='position:absolute;border-width:1px;padding:3px;width:100%;top:11.4%;left:0%' /></a></div></div></div><span style='display: block; clear: both; height: 0px; overflow: hidden;'></span>
+
+<?php
+
+/*    $db = db::getInstance();
+    $sql = "SELECT
+                G.userID,
+                G.picID,
+                G.eventID,
+                G.ext,
+                G.data
+            FROM Gallery G
+            WHERE G.eventID = $eventID;
+    ";
+
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+
+    $result = $stmt->fetchAll();
+
+    foreach ($result as &$pic) { ?>
+    <div id='139083701912618958-imageContainer0' style='float:left;width:33.28%;margin:0;'><div id='139083701912618958-insideImageContainer0' style='position:relative;margin:5px;padding:0 8px 8px 0'><div style='position:relative;width:100%;padding:0 0 75.08%;'><a><img src='picture.php?picID=<?php echo $pic['picID']; ?>" class='galleryImage galleryImageBorder' _width='333' _height='225' style='position:absolute;border-width:1px;padding:3px;width:100%;top:5%;left:0%' /></a></div></div></div>;  <!-- <div id='139083701912618958-imageContainer1' style='float:left;width:33.28%;margin:0;'><div id='139083701912618958-insideImageContainer1' style='position:relative;margin:5px;padding:0 8px 8px 0'><div style='position:relative;width:100%;padding:0 0 75.08%;'><a href='uploads/1/3/4/4/13443306/8485349_orig.jpg' rel='lightbox[gallery139083701912618958]' onclick='if (!window.lightboxLoaded) return false'><img src='uploads/1/3/4/4/13443306/8485349.jpg' class='galleryImage galleryImageBorder' _width='333' _height='222' style='position:absolute;border-width:1px;padding:3px;width:100%;top:5.6%;left:0%' /></a></div></div></div><div id='139083701912618958-imageContainer2' style='float:left;width:33.28%;margin:0;'><div id='139083701912618958-insideImageContainer2' style='position:relative;margin:5px;padding:0 8px 8px 0'><div style='position:relative;width:100%;padding:0 0 75.08%;'><a href='uploads/1/3/4/4/13443306/2260870_orig.jpg' rel='lightbox[gallery139083701912618958]' onclick='if (!window.lightboxLoaded) return false'><img src='uploads/1/3/4/4/13443306/2260870.jpg' class='galleryImage galleryImageBorder' _width='279' _height='250' style='position:absolute;border-width:1px;padding:3px;width:83.78%;top:0%;left:8.11%' /></a></div></div></div><div id='139083701912618958-imageContainer3' style='float:left;width:33.28%;margin:0;'><div id='139083701912618958-insideImageContainer3' style='position:relative;margin:5px;padding:0 8px 8px 0'><div style='position:relative;width:100%;padding:0 0 75.08%;'><a href='uploads/1/3/4/4/13443306/817215_orig.jpg' rel='lightbox[gallery139083701912618958]' onclick='if (!window.lightboxLoaded) return false'><img src='uploads/1/3/4/4/13443306/817215.jpg' class='galleryImage galleryImageBorder' _width='333' _height='193' style='position:absolute;border-width:1px;padding:3px;width:100%;top:11.4%;left:0%' /></a></div></div></div><span style='display: block; clear: both; height: 0px; overflow: hidden;'></span>  -->
+    <php } */ ?>
+
+
 </div>
 
 <div style="height: 20px; overflow: hidden;"></div></div>
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                       <div class="paragraph" style="text-align:left;">Add a Picture:</div>
+                       <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
+
+                                                        <label class="wsite-form-label" for="photo">Upload File </label>
+                                                        <div class="wsite-form-input-container">
+                                                            <input id="photo" class="wsite-form-input" type="file" name="photo" />
+                                                            <div style="font-size:10px;">Max file size: 20MB</div>
+                                                        </div>
+                                                        <div id="instructions-436611527555598588" class="wsite-form-instructions" style="display:none;"></div>
+                                                    </div></div>
+
+                                                    <div><div class="wsite-image wsite-image-border-border-width:0 " style="padding-top:10px;padding-bottom:10px;margin-left:10px;margin-right:10px;text-align:right">
+
+                                                        <div style="display:block;font-size:90%"></div>
+                                                    </div></div>
+        </form>
+
 </div>
 
-</td>
-<td class='wsite-multicol-col' style='width:50%;padding:0 15px'>
-
-<h2 style="text-align:left;">Comments:<br /></h2>
-    <div style="border: 1px solid #f5f5f5; padding: 20px; height: 80%; overflow: auto;
-    background: -moz-linear-gradient(-45deg,  rgba(30,87,153,1) 0%, rgba(30,87,153,0.82) 24%, rgba(31,93,160,0.8) 27%, rgba(41,137,216,0.55) 50%, rgba(30,87,153,0.22) 80%, rgba(30,87,153,0) 100%);/* FF3.6+ */
-background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(30,87,153,1)), color-stop(24%,rgba(30,87,153,0.82)), color-stop(27%,rgba(31,93,160,0.8)), color-stop(50%,rgba(41,137,216,0.55)), color-stop(80%,rgba(30,87,153,0.22)), color-stop(100%,rgba(30,87,153,0)));  /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(-45deg,  rgba(30,87,153,1) 0%,rgba(30,87,153,0.82) 24%,rgba(31,93,160,0.8) 27%,rgba(41,137,216,0.55) 50%,rgba(30,87,153,0.22) 80%,rgba(30,87,153,0) 100%);   /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(-45deg,  rgba(30,87,153,1) 0%,rgba(30,87,153,0.82) 24%,rgba(31,93,160,0.8) 27%,rgba(41,137,216,0.55) 50%,rgba(30,87,153,0.22) 80%,rgba(30,87,153,0) 100%);  /* Opera 11.10+ */
-background: -ms-linear-gradient(-45deg,  rgba(30,87,153,1) 0%,rgba(30,87,153,0.82) 24%,rgba(31,93,160,0.8) 27%,rgba(41,137,216,0.55) 50%,rgba(30,87,153,0.22) 80%,rgba(30,87,153,0) 100%); /* IE10+ */
-background: linear-gradient(135deg,  rgba(30,87,153,1) 0%,rgba(30,87,153,0.82) 24%,rgba(31,93,160,0.8) 27%,rgba(41,137,216,0.55) 50%,rgba(30,87,153,0.22) 80%,rgba(30,87,153,0) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#001e5799',GradientType=1 );/* IE6-9 fallback on horizontal gradient */ >
-        <span class="imgPusher  style="float:left;height:0px;"></span><div style="opacity: 1"><span style="opacity: 1; position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px; opacity: 1"><a href="index.php"><img class="wsite-image galleryImageBorder" src="uploads/1/3/4/4/13443306/397974220.jpg?74" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border: 1px double gray;padding:3px; background-color: #1a1a1a;" alt="Picture"></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span></div>
-        <div class="paragraph" style="text-align:left;display:block; color: white; font-size: medium; font-style: italic">OMG!!!! THIS IS SO COOL!!! I LOVE TARJA!! &lt;3<br></div>
-        <hr style="clear:both;visibility:hidden;width:100%;">
-
+    <div style="text-align:left; margin-top:10px; margin-bottom:10px;">
+        <input type="submit" name="upload" value="Upload" class='btn btn-eventPR' />
     </div>
-
 </td>
+    <td class='wsite-multicol-col' style='width:50%;padding:0 15px'>
+
+        <h2 style="text-align:left;">My wall:<br /></h2>
+        <div style="border: 1px solid #f5f5f5; padding: 20px; height: 60%; overflow: auto; background-color:black;">
+            <span class="imgPusher" style="float:left;height:0px"></span>
+            <div style="position:relative;float:left;z-index:10;width:70px;clear:left;margin-top:0px;*margin-top:0px">
+                <a><img class="wsite-image galleryImageBorder" src="http://i3.kym-cdn.com/entries/icons/original/000/010/496/asdf.jpg" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border: 1px double gray;padding:3px; background-color: #1a1a1a;" alt="Picture">
+                </a>
+                <div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></div>
+            <div class="paragraph" style="text-align:left;display:block; color: white; font-size: medium; font-style: italic">: HIIIIIIIIIIII!!! &lt;3</div>
+            <ul style="font-size: 14px; color: white;">
+
+                <!--  Selects comments posted to user's wall -->
+                <?php
+
+                $db = db::getInstance();
+                $sql = "SELECT
+                                                                           userID,
+                                                                           content
+                                                                       FROM Comment c1
+                                                                       WHERE c1.userID='{$id}'
+                                                                       LIMIT 5;
+                                                               ";
+
+                $stmt = $db->prepare($sql);
+                $stmt->execute();
+
+                $result = $stmt->fetchAll();
+
+                foreach ($result as &$comment) {
+                    echo "<li> <span style='color: white'>{$comment['comment']}</span></a></li>
+                                                                   <div style='height: 20px; overflow: hidden; width: 100%;''></div>";
+                }
+                ?>
+            </ul>
+
+            <hr style="clear:both;visibility:hidden;width:100%;">
+
+        </div>
+        <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
+            <label class="wsite-form-label" for="description">Post to wall: <span class="form-required">*</span></label>
+            <div class="wsite-form-input-container">
+                <textarea id="description" class="wsite-form-input wsite-input" name="description" style="width:285px; height: 50px"></textarea>
+            </div>
+            <div id="instructions-740288841696996782" class="wsite-form-instructions" style="display:none;"></div>
+        </div></div>
+        <div style="text-align:left; margin-top:10px; margin-bottom:10px;">
+            <input type='submit' name="submit" value="Submit" class='btn btn-eventPR' />
+        </div>
+
+
+</div></div>
 </tr>
 </tbody>
 </table>
