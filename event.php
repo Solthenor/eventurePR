@@ -144,7 +144,7 @@ if(isset($_POST['action'])) {
 <div id="wrapper">
 	<table id="header">
 		<tr>
-			<td id="logo"><span class='wsite-logo'><a href='/'><span id="wsite-title">E-venturePR</span></a></span></td>
+			<td id="logo"><span class='wsite-logo'><a href='index.php'><span id="wsite-title">E-venturePR</span></a></span></td>
 			<td id="header-right">
 				<table style="width: 150px;">
                     <?php if($loggedin) { ?>
