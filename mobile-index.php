@@ -144,6 +144,9 @@ if (isset($_POST['eventSearch'])) {
                 </ul>
             </div>
 
+<div data-role="controlgroup" data-type="horizontal" style="text-align: center; width: 100%">
+        <a href="index.php" rel="external" data-role="button" data-theme="c" style="height: 40px; font-size: 15px;">Click Here For Desktop Version!</a>
+    </div>
             </div> <!--content-->
     </div>         <!--wrapper-->
 
