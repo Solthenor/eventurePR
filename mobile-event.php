@@ -127,7 +127,7 @@ if(isset($_POST['action'])) {
 
 <div id="wrapper" style="height: 100%">
     <div id="header" >
-        <span class='wsite-logo'><span id="wsite-title" >E-venturePR</span></span>
+        <span class='wsite-logo'><a href='mobile-index.php'><span id="wsite-title">E-venturePR</span></a></span>
         <div data-role="controlgroup" data-type="horizontal" style="float:left; width: 100%" >
             <?php if($loggedin) { ?>
             <a  href="mobile-profile.php" rel="external" data-role="button" data-theme="c" style="height: 40px; font-size: 15px;"  >Profile</a>
