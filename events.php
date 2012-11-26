@@ -134,7 +134,7 @@ $events = $stmt->fetchAll();
                                 <a class="btn btn-eventPR" href="events.php?category=Concert&subcategory=Alternative"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">ALTERNATIVE</span></a>
                                 <a class="btn btn-eventPR" href="events.php?category=Concert&subcategory=Rock"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;"> ROCK</span></a>
                                 <a class="btn btn-eventPR" href="events.php?category=Concert&subcategory=Pop"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">POP</span></a>
-                                <a class="btn btn-eventPR" href="events.php?category=Concert&subcategory=Rap"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;"> HIP HOP/RAP</span></a>
+                                <a class="btn btn-eventPR" href="events.php?category=Concert&subcategory=Urban"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;"> URBAN</span></a>
                                 <a class="btn btn-eventPR" href="events.php?category=Concert&subcategory=Electronic"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;"> ELECTRONIC</span></a>
                                 <a class="btn btn-eventPR" href="events.php?category=Concert&subcategory=Country"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">COUNTRY</span></a>
                                 <a class="btn btn-eventPR" href="events.php?category=Concert&subcategory=Classical"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">CLASSICAL</span></a>
