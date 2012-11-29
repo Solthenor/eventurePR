@@ -1,8 +1,3 @@
-<!--
-Profile page
-
-Dynamically changes depending on the user accessing it
- -->
 
 <?php
 require_once('mobileRedirect.php');
@@ -52,11 +47,14 @@ if(!isset($user)){
 }
 
 if(isset($_POST['submit'])) {
+    
+    
+
     $db = db::getInstance();
 
     $sql = "INSERT INTO Wall
             SET
-               userID = {userID};
+               userID = {$id},
                content = '{$_POST['comment-text']}';";
 
     $stmt = $db->prepare($sql);
@@ -69,6 +67,11 @@ if(isset($_POST['submit'])) {
 ?>
 <!DOCTYPE html>
 <html>
+<!--
+Profile page
+
+Dynamically changes depending on the user accessing it
+ -->
 <head>
     <title>Profile - E-venturePR</title>
 
@@ -294,8 +297,8 @@ if(isset($_POST['submit'])) {
 
                                 $result = $stmt->fetchAll();
 
-                                foreach ($result as &$comment) {
-                                    echo "<li> <span style='color: white'>{$comment['comment']}</span></li>
+                                foreach ($result as $comment) {
+                                    echo "<li> <span style='color: white'>{$comment['content']}</span></li>
                                                                    <div style='height: 20px; overflow: hidden; width: 100%;''></div>";
                                 }
                                 ?>
@@ -304,6 +307,7 @@ if(isset($_POST['submit'])) {
                             <hr style="clear:both;visibility:hidden;width:100%;">
 
                         </div>
+                        <form action="profile.php" method="POST" id="submit" enctype="multipart/form-data">
                         <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
                             <label class="wsite-form-label" for="description">Post to wall: <span class="form-required">*</span></label>
                             <div class="wsite-form-input-container">
@@ -314,6 +318,7 @@ if(isset($_POST['submit'])) {
                         <div style="text-align:left; margin-top:10px; margin-bottom:10px;">
                             <input type='submit' name="submit" value="Submit" class='btn btn-eventPR' />
                         </div>
+                    </form>
 
 
         </div></div>

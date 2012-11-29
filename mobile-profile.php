@@ -1,9 +1,3 @@
-<!--
-Profile page
-
-Dynamically changes depending on the user accessing it
- -->
-
 <?php
 require_once('mobileRedirect.php');
 require_once('db.php');
