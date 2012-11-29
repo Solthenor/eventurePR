@@ -23,6 +23,7 @@ if(isset($userID)) {
 $db = db::getInstance();
 $sql = "SELECT
             userName,
+            userID,
             firstName,
             lastName,
             email,
@@ -62,7 +63,21 @@ if(isset($_POST['submit'])) {
 
 }
 
+if(isset($_POST['addFriend']))
+{
+    $friend = $user['userID'];
+    $db = db::getInstance();
 
+    $sql = "INSERT INTO AddFriend
+                SET
+                    userID1 = '{$id}',
+                    userID2 = '{$friend}'
+                    ;";
+
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+
+}
 
 ?>
 <!DOCTYPE html>
@@ -141,6 +156,11 @@ Dynamically changes depending on the user accessing it
                         <td class='wsite-multicol-col' style='width:61.742006615215%;padding:0 15px'>
 
                             <h2 style="text-align:left;"><?php echo $user['firstName'] ?> <?php echo $user['lastName'] ?></h2>
+
+                            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" ">
+                                <input  style="height: 35px;" type="submit" class="btn btn-eventPR" name="addFriend" id="addFriend" value="Add Friend"/>
+                            </form>
+
                             <span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="picture.php?picID=<?php if ($user['profilePicture'] == false) {echo "defaultPic.jpg";} else {echo $user['profilePicture'];} ?>" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;width:200px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
                             <div class="paragraph" style="text-align:left;display:block;float:left;">Username: <br />Age: <br />Gender: <br />Work: <br />E-mail: </div>
                             <div class="paragraph"style="text-align:center;display:block;float:left;"><?php echo $user['userName'] ?><br /><?php echo $user['age'] ?><br /><?php echo $user['gender'] ?><br /><?php echo $user['work'] ?><br /><?php echo $user['email'] ?></div>
@@ -153,7 +173,9 @@ Dynamically changes depending on the user accessing it
                                     <a href="create-venue.php" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">Create Venue</span></a>
                                     <a href="contacts.php" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">Contacts</span></a>
 
+
                                 </div>
+
                             </div>
 
                         </td>

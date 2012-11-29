@@ -6,6 +6,6 @@
 	$ipod = strpos($_SERVER['HTTP_USER_AGENT'],"iPod");
 
 	if ($iphone || $android || $palmpre || $ipod || $berry == true) {
-	    header('Location: /mobile-index.php');
+	    header('Location: /~g13/mobile-index.php');
 	}
 ?>
