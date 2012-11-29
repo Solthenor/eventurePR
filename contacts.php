@@ -31,7 +31,7 @@ if (isset($_POST['submit'])) {
             gender,
             work
         FROM User
-        WHERE userName = '{$userName}';
+        WHERE userName LIKE '%{$userName}%';
 ";
 
     $stmt = $db->prepare($sql);
