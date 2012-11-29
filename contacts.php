@@ -16,9 +16,13 @@ if(isset($userID)) {
     $id = $userID;
 }
 
-$db = db::getInstance();
-$sql = "SELECT
+if (isset($_POST['submit'])) {
+    $userName = $_POST['submit'];
+
+    $db = db::getInstance();
+    $sql = "SELECT
             userName,
+            userID,
             firstName,
             lastName,
             email,
@@ -26,15 +30,18 @@ $sql = "SELECT
             age,
             gender,
             work
-        FROM AddFriend, User
-        WHERE userID1 = {$id};
-        AND userID2 = 'userID';
+        FROM User
+        WHERE userName = '{$userName}';
 ";
 
-$stmt = $db->prepare($sql);
-$stmt->execute();
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
 
-$result = $stmt->fetchAll();
+    $result = $stmt->fetchAll();
+
+    $user = $result[0];
+
+ }
 
 ?>
 <!DOCTYPE html>
@@ -106,78 +113,38 @@ $result = $stmt->fetchAll();
                 <h2 style="text-align:left;">Search for friends:<br /></h2>
 
                 <div>
-                    <form enctype="multipart/form-data" action="http://www.weebly.com/weebly/apps/formSubmit.php" method="POST" id="form-679517611896646411">
-                        <div id="679517611896646411-form-parent" class="wsite-form-container" style="margin-top:10px;">
-                            <ul class="formlist" id="679517611896646411-form-list">
-                                <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
-                                    <label class="wsite-form-label" for="input-678591696370903029">Search name: <span class="form-not-required">*</span></label>
-                                    <div class="wsite-form-input-container">
-                                        <input id="input-678591696370903029" class="wsite-form-input wsite-input" type="text" name="search" style="width:370px;" />
-                                    </div>
-                                    <div id="instructions-678591696370903029" class="wsite-form-instructions" style="display:none;"></div>
-                                </div></div>
-                            </ul>
-                        </div>
-                        <div style="display:none; visibility:hidden;">
-                            <input type="text" name="wsite_subject" />
-                        </div>
-                        <div style="text-align:left; margin-top:10px; margin-bottom:10px;">
-                            <input type="hidden" name="form_version" value="2" />
-                            <input type="hidden" name="wsite_approved" id="wsite-approved" value="approved" />
-                            <input type="hidden" name="ucfid" value="679517611896646411" />
-                            <input type='submit' style='position:absolute;top:0;left:-9999px;width:1px;height:1px' /><a class='wsite-button' onclick="document.getElementById('form-679517611896646411').submit()"><span class='wsite-button-inner'>Submit</span></a>
-                        </div>
+                    <form class="navbar-form pull-left"  action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
+                        <input type="text" id="submit" name="submit" class="span2">
+                        <button type="submit" class="btn">Submit</button>
                     </form>
 
 
                 </div>
 
+               <div>
 
-                 <div><div class="wsite-multicol"><div class='wsite-multicol-table-wrap' style='margin:0 -15px'>
-                    <table class='wsite-multicol-table'>
-                        <tbody class='wsite-multicol-tbody'>
-                        <tr class='wsite-multicol-tr'>
-                            <td class='wsite-multicol-col' style='width:50%;padding:0 15px'>
-                                 <div id="mainmenu">
-                                    <ul style="font-size: 22px; color: white;">
-                                    <?php
+                        <div><div style="height: 20px; overflow: hidden; width: 100%;"></div>
+                            <hr class="styled-hr" style="width:100%;">
+                            <div style="height: 20px; overflow: hidden; width: 100%;"></div></div>
 
-                                    foreach ($result as $contact) { ?>
-                                            <div><div style="height: 20px; overflow: hidden; width: 100%;"></div>
-                                            <hr class="styled-hr" style="width:100%;"></hr>
-                                            <div style="height: 20px; overflow: hidden; width: 100%;"></div></div>
+                    <?php
+                     if(isset($user)) {?>
+                            <?php echo $user['firstName'] ?>
 
-                                        <h2 style="text-align:left;">{$user['userName']}<br /></h2>
-                                        <div class="paragraph" style="text-align:left;display:block;float: left;">{$user['firstName']} {$user['lastName']}<br /></div>
-                                        <hr style="clear:both;visibility:hidden;width:100%;"></hr>
+                        <hr style="clear:both;visibility:hidden;width:100%;">
 
-                                        <div style="text-align:left;"><div style="height: 10px; overflow: hidden;"></div>
-                                            <a class="wsite-button wsite-button-small wsite-button-normal" href='profile.php' >
-                                                <span class="wsite-button-inner">See profile</span>
-                                            </a>
-                                            <div style="height: 10px; overflow: hidden;"></div></div>
+                        <div style="text-align:left;"><div style="height: 10px; overflow: hidden;"></div>
+                            <a class="wsite-button wsite-button-small wsite-button-normal" href="profile.php?userID=<?php echo $user['userID'] ?>" >
+                                <span class="wsite-button-inner">See profile</span>
+                            </a>
+                            </div>
 
-                                        <div><div style="height: 20px; overflow: hidden; width: 100%;"></div>
-                                            <hr class="styled-hr" style="width:100%;"></hr>
-                                            <div style="height: 20px; overflow: hidden; width: 100%;"></div></div>";
-                                    }
+                         <?php }?>
 
+                </div>
 
-                                </div>
+                 </div>
 
-                            </td>
-
-                        </tr>
-                        </tbody>
-                    </table>
-                </div></div></div>
-                                   <?php
-                                    }
-                ?>
-
-
-            </div>
-            </div>
         </div>
     </div>
     <div id="footer"></div>
