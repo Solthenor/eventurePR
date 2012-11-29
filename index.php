@@ -1,9 +1,3 @@
-<!-- 
-Welcoming page for EventurePR
-     
-
--->
-
 <?php
 require_once('mobileRedirect.php');
 require_once('logoutHandler.php');

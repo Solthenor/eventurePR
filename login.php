@@ -1,9 +1,4 @@
-<!-- 
-Login/Registration Page
 
-For Login: Extracts user information 
-For Registration: Inserts user Information
--->
 <?php
 $iphone = strpos($_SERVER['HTTP_USER_AGENT'],"iPhone");
 $android = strpos($_SERVER['HTTP_USER_AGENT'],"Android");
@@ -126,6 +121,12 @@ if($loggedin) {
 
 <!DOCTYPE html>
 <html>
+<!-- 
+Login/Registration Page
+
+For Login: Extracts user information 
+For Registration: Inserts user Information
+-->
 <head>
     <title>Login - E-venturePR</title>
 
