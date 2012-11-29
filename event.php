@@ -202,7 +202,7 @@ if(isset($_POST['action'])) {
 <span style="line-height: 30px;">Entrance Fee:  $<?php echo $event['price'] ?><br /></span>
 <br />
 <?php echo $event['description'] ?>
-<span style="line-height: 30px;"><br /></span><br /><span style="font-size: 12px;">posted by <a href=""><?php echo $event['userName'] ?></a></span><br /></div>
+<span style="line-height: 30px;"><br /></span><br /><span style="font-size: 12px;">posted by <a href="profile.php?userID=<?php echo $event['userID'] ?>"><?php echo $event['userName'] ?></a></span><br /></div>
 <div class="btn-toolbar" style="padding: 10px 10px 0 0; float: left;">
     <div class="btn-group">
         <div style="display: inline;"><div style="float:left; display: inline-block;"> </div>
