@@ -28,9 +28,20 @@ $sql = "SELECT
 ";
 
 $eventsSql = "SELECT
-    eventID,
-    eventName,
-    DATE_FORMAT(E.date, '%W, %M %e, %Y') as date
+                E.eventID,
+            E.eventName,
+            E.eventType,
+            E.genre,
+            E.flyer,
+            DATE_FORMAT(E.date, '%W, %M %e, %Y') as date,
+            E.startHour,
+            E.endHour,
+            E.status,
+            E.featured,
+            E.price,
+            E.flag,
+            E.description,
+            E.userID
 FROM Event E
     INNER JOIN Venue V
         ON E.venueID = V.venueID
@@ -81,6 +92,67 @@ if(!isset($venue)){
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.min.js?1346362758'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/images/common/utilities-jq.js?1346362758'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/flyout_menus_jq.js?1346362758'></script>
+
+    <script type="text/javascript" language="JavaScript" src="http://j.maxmind.com/app/geoip.js"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript">
+        var directionsDisplay;
+        var directionsService = new google.maps.DirectionsService();
+        var map;
+        function initialize() {
+            directionsDisplay = new google.maps.DirectionsRenderer();
+
+            var options =
+            {
+                zoom: 10,
+                center: new google.maps.LatLng(geoip_latitude(), geoip_longitude()),
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                mapTypeControl: true,
+                mapTypeControlOptions:
+                {
+                    style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+                    position: google.maps.ControlPosition.TOP_RIGHT,
+                    mapTypeIds: [google.maps.MapTypeId.ROADMAP,
+                        google.maps.MapTypeId.TERRAIN,
+                        google.maps.MapTypeId.HYBRID,
+                        google.maps.MapTypeId.SATELLITE]
+                },
+                navigationControl: true,
+                navigationControlOptions:
+                {
+                    style: google.maps.NavigationControlStyle.ZOOM_PAN
+                },
+                scaleControl: true,
+                disableDoubleClickZoom: true,
+                draggable: false,
+                streetViewControl: true,
+                draggableCursor: 'move'
+            };
+            map = new google.maps.Map(document.getElementById("map"), options);
+            directionsDisplay.setMap(map);
+            // Add Marker and Listener
+            var latlng = new google.maps.LatLng(geoip_latitude(), geoip_longitude());
+            calcRoute();
+
+        }
+
+        function calcRoute() {
+            var start = new google.maps.LatLng(geoip_latitude(), geoip_longitude());
+            var end = new google.maps.LatLng(<?php echo $venue['GPS'] ?>);
+            var request = {
+                origin:start,
+                destination:end,
+                travelMode: google.maps.TravelMode.DRIVING
+            };
+            directionsService.route(request, function(result, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    directionsDisplay.setDirections(result);
+                }
+            });
+        }
+        window.onload = initialize;
+    </script>
+
 </head>
 <body class='wsite-theme-dark no-header-page wsite-page-venue'>
 <div id="wrapper">
@@ -130,7 +202,7 @@ if(!isset($venue)){
 <h2 style="text-align:left;"><?php echo $venue['vName'] ?><br /></h2>
 <span class='imgPusher' style='float:left;height:0px'></span>
 <span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'>
-<span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="picture.php?picID=<?php echo $event['flyer'] ?>" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" width="350" height="350"/></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
+<span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="picture.php?picID=<?php echo $venue['profilePic'] ?>" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;width:200px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
     <div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div>
 </span>
 <div class="paragraph" style="text-align:left;display:block;">               
@@ -157,17 +229,20 @@ if(!isset($venue)){
 </td>
 <td class='wsite-multicol-col' style='width:41.299559471366%;padding:0 15px'>
 
-<div class="wsite-map"><iframe allowtransparency="true" frameborder="0" scrolling="no" style="width: 100%; height: 250px; margin-top: 10px; margin-bottom: 10px;" src="http://www.weebly.com/weebly/apps/generateMap.php?map=google&elementid=606276204773137272&ineditor=0&control=3&width=350px&height=250px&overviewmap=0&scalecontrol=0&typecontrol=0&zoom=15&long=-122.418333&lat=37.775&domain=www&point=1&align=1"></iframe></div>
+    <div class="wsite-map" style="padding-top: 100px;" >
+        <div id="map" style="height: 200px; width: 300px" />
+
+    </div>
 
 <h2 style="text-align:left; font-size: 24px;">Upcoming Events at this Venue:<br /></h2>
 
 <?php
     foreach ($events as $event) {
     ?>  
-        <h2 style="text-align:left; font-size: 20px"><?php echo $event['eventName'] ?><br /></h2>
-        <span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="uploads/1/3/4/4/13443306/656669057.jpg?161" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
+        <a href="event.php?eventID=<?php echo $event['eventID'] ?>"><h2 style="text-align:left; font-size: 20px"><?php echo $event['eventName'] ?><br /></h2></a>
+        <span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a href="event.php?eventID=<?php echo $event['eventID'] ?>"><img class="wsite-image galleryImageBorder" src="picture.php?picID=<?php echo $event['flyer'] ?>" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" width="200" height="300"/><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span></a>
         <div class="paragraph" style="text-align:left;display:block;"><?php echo $event['date'] ?><br /></div>
-        <hr style="clear:both;visibility:hidden;width:100%;"></hr>
+        <hr style="clear:both;visibility:hidden;width:100%;" />
     <?php
     }
 ?>
@@ -177,12 +252,7 @@ if(!isset($venue)){
 </table>
 </div></div></div>
 
-<div><div style="height: 20px; overflow: hidden; width: 100%;"></div>
-<hr class="styled-hr" style="width:100%;"></hr>
-<div style="height: 20px; overflow: hidden; width: 100%;"></div></div>
-
-<h2 style="text-align:left;">Comments:<br /></h2>
-<div class="paragraph" style="text-align:left;display:block;">No new Comments yet...<br /></div></div>
+</div>
 </div>
 		</div>
 	</div>
