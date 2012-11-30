@@ -265,18 +265,18 @@ Dynamically changes depending on the user accessing it
                                 <!-- Selects events where there user has logged as I wanna go!-->
                                 <?php $db = db::getInstance();
                                 $sql = "SELECT
-                                                        eventID,
-                                                        eventName
-                                                    FROM Event AS r1, User AS u1
-                                                        JOIN (SELECT (RAND() * (SELECT MAX(eventID) FROM Attends)) AS id) AS r2
-                                                                       WHERE r1.eventID >= r2.id
+                                        eventID,
+                                        eventName
+                                    FROM Event AS r1, User AS u1
+                                        JOIN (SELECT (RAND() * (SELECT MAX(eventID) FROM Attends)) AS id) AS r2
+                                               WHERE r1.eventID >= r2.id
 
-                                                                        AND
-                                                                       u1.userID = {$id}
+                                                AND
+                                               u1.userID = {$id}
 
-                                                                       ORDER BY r1.eventID ASC
-                                                                       LIMIT 5;
-                                                               ";
+                                               ORDER BY r1.eventID ASC
+                                               LIMIT 5;
+                                               ";
 
                                 $stmt = $db->prepare($sql);
                                 $stmt->execute();
@@ -298,7 +298,7 @@ Dynamically changes depending on the user accessing it
                     <td class='wsite-multicol-col' style='width:50%;padding:0 15px'>
 
                         <h2 style="text-align:left;">My wall:<br /></h2>
-                        <div style="border: 1px solid #f5f5f5; padding: 20px; height: 60%; overflow: auto; background-color:black;">
+                        <div class="media" style="border: 1px solid #f5f5f5; padding: 20px; height: 60%; overflow: auto; background-color:black;">
 
                             <ul style="font-size: 14px; color: white;">
 
@@ -310,8 +310,7 @@ Dynamically changes depending on the user accessing it
                                            userID,
                                            content
                                        FROM Wall c1
-                                       WHERE c1.userID='{$id}'
-                                       LIMIT 5;
+                                       WHERE c1.userID='{$id}';
                                 ";
 
                                 $stmt = $db->prepare($sql);
@@ -321,7 +320,11 @@ Dynamically changes depending on the user accessing it
 
                                 foreach ($result as $comment) {
                                     echo "<li> <span style='color: white'>: {$comment['content']}</span></li>
-                                                                   <div style='height: 20px; overflow: hidden; width: 100%;''></div>";
+                                           <div style='height: 20px; overflow: hidden; width: 100%;''></div>";
+
+                                           
+
+
                                 }
                                 ?>
                             </ul>
