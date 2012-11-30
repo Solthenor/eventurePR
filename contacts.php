@@ -39,7 +39,7 @@ if (isset($_POST['submit'])) {
 
     $result = $stmt->fetchAll();
 
-    $user = $result[0];
+
 
  }
 
@@ -114,32 +114,32 @@ if (isset($_POST['submit'])) {
 
                 <div>
                     <form class="navbar-form pull-left"  action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
-                        <input type="text" id="submit" name="submit" class="span2">
+                        <input type="text" id="submit" name="submit">
                         <button type="submit" class="btn">Submit</button>
                     </form>
 
-
+                   <br />
                 </div>
 
                <div>
 
-                        <div><div style="height: 20px; overflow: hidden; width: 100%;"></div>
-                            <hr class="styled-hr" style="width:100%;">
-                            <div style="height: 20px; overflow: hidden; width: 100%;"></div></div>
+                    <?php if(isset($result)) {?>
+                        <?php foreach ($result as $user) { ?>
 
-                    <?php
-                     if(isset($user)) {?>
-                            <?php echo $user['firstName'] ?>
+                       <div><div style="height: 20px; overflow: hidden; width: 100%;"></div>
+                           <hr class="styled-hr" style="width:100%;">
+                           <div style="height: 20px; overflow: hidden; width: 100%;"></div></div>
+                       <span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="picture.php?picID=<?php echo $user['profilePicture'] ?>" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;width:200px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
+                       <div class="paragraph" style="text-align:left;display:block;float:left;">Username: <br />Age: <br />Gender: <br />Work: <br />E-mail: </div>
+                       <div class="paragraph"style="text-align:center;display:block;float:left;"><?php echo $user['userName'] ?><br /><?php echo $user['age'] ?><br /><?php echo $user['gender'] ?><br /><?php echo $user['work'] ?><br /><?php echo $user['email'] ?></div>
 
-                        <hr style="clear:both;visibility:hidden;width:100%;">
-
-                        <div style="text-align:left;"><div style="height: 10px; overflow: hidden;"></div>
                             <a class="wsite-button wsite-button-small wsite-button-normal" href="profile.php?userID=<?php echo $user['userID'] ?>" >
                                 <span class="wsite-button-inner">See profile</span>
                             </a>
                             </div>
 
                          <?php }?>
+                    <?php } ?>
 
                 </div>
 
