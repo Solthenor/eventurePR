@@ -156,8 +156,62 @@ if(isset($_POST['submit'])) {
 <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.min.js?1346362758'></script>
 <script type='text/javascript' src='http://cdn1.editmysite.com/editor/images/common/utilities-jq.js?1346362758'></script>
 <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/flyout_menus_jq.js?1346362758'></script>
+
+    <script type="text/javascript" language="JavaScript" src="http://j.maxmind.com/app/geoip.js"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 </head>
 <body class='wsite-theme-dark no-header-page wsite-page-nightwish-detail'>
+
+<script type="text/javascript">
+    var map;
+    function initialize() {
+        var options =
+        {
+            zoom: 10,
+            center: new google.maps.LatLng(geoip_latitude(), geoip_longitude()),
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            mapTypeControl: true,
+            mapTypeControlOptions:
+            {
+                style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+                poistion: google.maps.ControlPosition.TOP_RIGHT,
+                mapTypeIds: [google.maps.MapTypeId.ROADMAP,
+                    google.maps.MapTypeId.TERRAIN,
+                    google.maps.MapTypeId.HYBRID,
+                    google.maps.MapTypeId.SATELLITE]
+            },
+            navigationControl: true,
+            navigationControlOptions:
+            {
+                style: google.maps.NavigationControlStyle.ZOOM_PAN
+            },
+            scaleControl: true,
+            disableDoubleClickZoom: true,
+            draggable: false,
+            streetViewControl: true,
+            draggableCursor: 'move'
+        };
+        map = new google.maps.Map(document.getElementById("map"), options);
+        // Add Marker and Listener
+        var latlng = new google.maps.LatLng(geoip_latitude(), geoip_longitude());
+        var marker = new google.maps.Marker
+            (
+                {
+                    position: latlng,
+                    map: map,
+                    title: 'Click me'
+                }
+            );
+        var infowindow = new google.maps.InfoWindow({
+            content: 'You Are Here'
+        });
+        google.maps.event.addListener(marker, 'click', function () {
+            // Calling the open method of the infoWindow
+            infowindow.open(map, marker);
+        });
+    }
+    window.onload = initialize;
+</script>
 <div id="wrapper">
 	<table id="header">
 		<tr>
@@ -239,11 +293,8 @@ if(isset($_POST['submit'])) {
 </td>
 <td class='wsite-multicol-col' style='width:38.257993384785%;padding:0 15px'>
 
-<div class="wsite-map">
-    <iframe allowtransparency="true" frameborder="0" scrolling="no" style="width: 100%; height: 250px; margin-top: 10px; margin-bottom: 10px;" 
-
-    src="map.html"
-    ></iframe>
+<div class="wsite-map" style="padding-top: 100px;" >
+    <div id="map" style="height: 200px; width: 300px" />
 
 </div>
 
