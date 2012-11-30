@@ -51,7 +51,6 @@ if ( count($_POST) > 0) {
     $startHour = $_POST['start-hour'] . ":00";
     $endHour = $_POST['end-hour'] . ":00";
     $date = $_POST['date'];
-    $dateFixed =
     $sql = "INSERT INTO Event
             SET
               userID = '{$id}',
@@ -146,7 +145,7 @@ if ( count($_POST) > 0) {
 <div id="wrapper">
 	<table id="header">
 		<tr>
-			<td id="logo"><span class='wsite-logo'><a href='/'><span id="wsite-title">E-venturePR</span></a></span></td>
+			<td id="logo"><span class='wsite-logo'><a href='index.php'><span id="wsite-title">E-venturePR</span></a></span></td>
 			<td id="header-right">
 				<table style="width: 150px;">
           <?php if($loggedin) { ?>
@@ -195,7 +194,7 @@ if ( count($_POST) > 0) {
 <h2 style="text-align:left;">E-Vent it</h2>
 
 <div>
-<form action="event.php?eventID=<?php echo $event['eventID'] ?>" method="POST" id="create-event" enctype="multipart/form-data">
+<form action="event.php?eventID=<?php echo $eID ?>" method="POST" id="create-event" enctype="multipart/form-data">
 <div id="807999966852778988-form-parent" class="wsite-form-container" style="margin-top:10px;">
   <ul class="formlist" id="807999966852778988-form-list">
     <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
@@ -325,12 +324,23 @@ if ( count($_POST) > 0) {
   </div>
   <div id="instructions-740288841696996782" class="wsite-form-instructions" style="display:none;"></div>
 </div></div>
+          <div class="paragraph" style="text-align:left;">Add a Picture:</div>
+          <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
+
+              <label class="wsite-form-label" for="photo">Upload File <span class="form-required">*</span></label>
+              <div class="wsite-form-input-container">
+                  <input id="photo" class="wsite-form-input" type="file" name="photo" />
+                  <div style="font-size:10px;">Max file size: 20MB</div>
+              </div>
+              <div id="instructions-436611527555598588" class="wsite-form-instructions" style="display:none;"></div>
+          </div></div>
   </ul>
 </div>
 <div style="text-align:left; margin-top:10px; margin-bottom:10px;">
   <input type='submit' name="submit" value="Submit" class='btn btn-eventPR' />
 </div>
 
+</form>
 
 </div>
 
@@ -353,19 +363,11 @@ if ( count($_POST) > 0) {
 <div class="paragraph" style="text-align:left;">Add a Picture:</div>
 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
 
-  <label class="wsite-form-label" for="photo">Upload File <span class="form-required">*</span></label>
-  <div class="wsite-form-input-container">
-    <input id="photo" class="wsite-form-input" type="file" name="photo" />
-    <div style="font-size:10px;">Max file size: 20MB</div> 
-  </div>
-  <div id="instructions-436611527555598588" class="wsite-form-instructions" style="display:none;"></div>
-</div></div>
 
 <div><div class="wsite-image wsite-image-border-border-width:0 " style="padding-top:10px;padding-bottom:10px;margin-left:10px;margin-right:10px;text-align:right">
 
 <div style="display:block;font-size:90%"></div>
 </div></div>
-</form>
 
 </tr>
 </tbody>

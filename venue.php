@@ -150,7 +150,7 @@ if(!isset($venue)){
 <hr style="clear:both;visibility:hidden;width:100%;"></hr>
 
 <div style="text-align:left;"><div style="height: 10px; overflow: hidden;"></div>
-<a class="wsite-button wsite-button-small wsite-button-highlight btn-eventurePR" href="create-event.php?venueID=<?php echo $venueID ?>" >
+<a class="wsite-button wsite-button-small wsite-button-highlight btn-eventurePR" href="create-event.php" >
 <span class="wsite-button-inner">Create an event for this venue</span>
 </a>
 <div style="height: 10px; overflow: hidden;"></div></div>
