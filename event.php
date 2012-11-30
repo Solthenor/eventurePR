@@ -27,7 +27,8 @@ $sql = "SELECT
             E.flag,
             E.description,
             V.venueID,
-            V.vName as venueName, 
+            V.vName as venueName,
+            V.GPS,
             U.userName,
             E.userID,
             (SELECT 
@@ -51,7 +52,6 @@ $event = $result[0];
 $eventUserID = $event['userID'];
 $attendees = $event['attendees'];
 
-$venueID = $event['venueID'] ;
 if (isset($_POST['upload'])) {
     if ($_FILES["photo"]["error"] == 0) {
 
@@ -116,7 +116,6 @@ if(isset($_POST['action'])) {
 
 if(isset($_POST['submit'])) {
     
-    
 
     $db = db::getInstance();
 
@@ -130,21 +129,6 @@ if(isset($_POST['submit'])) {
     $stmt->execute();
 
 }
-$db = db::getInstance();
-$sql = "SELECT
-
-           GPS
-        FROM Venue
-
-        WHERE venueID = {$venueID};
-";
-
-$stmt = $db->prepare($sql);
-$stmt->execute();
-
-$result = $stmt->fetchAll();
-
-$gps = $result[0];
 
 ?>
 <!DOCTYPE html>
@@ -191,7 +175,7 @@ $gps = $result[0];
                 mapTypeControlOptions:
                 {
                     style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
-                    poistion: google.maps.ControlPosition.TOP_RIGHT,
+                    position: google.maps.ControlPosition.TOP_RIGHT,
                     mapTypeIds: [google.maps.MapTypeId.ROADMAP,
                         google.maps.MapTypeId.TERRAIN,
                         google.maps.MapTypeId.HYBRID,
@@ -218,7 +202,7 @@ $gps = $result[0];
 
         function calcRoute() {
             var start = new google.maps.LatLng(geoip_latitude(), geoip_longitude());
-            var end = new google.maps.LatLng(<?php echo $gps ?>);
+            var end = new google.maps.LatLng(<?php echo $event['GPS'] ?>);
             var request = {
                 origin:start,
                 destination:end,
@@ -344,12 +328,6 @@ $gps = $result[0];
     <div style="text-align:left;"><div style="height: 10px; overflow: hidden;"></div>
         <a class="wsite-button wsite-button-small wsite-button-highlight" href="share.php?eventID=<?php echo $event['eventID'] ?>">
             <span class="wsite-button-inner" name="share">Share E-venture</span>
-        </a>
-        <div style="height: 10px; overflow: hidden;"></div></div>
-
-    <div style="text-align:left;"><div style="height: 10px; overflow: hidden;"></div>
-        <a class="wsite-button wsite-button-small wsite-button-highlight" href="javascript:;" >
-            <span class="wsite-button-inner">set calendar</span>
         </a>
         <div style="height: 10px; overflow: hidden;"></div></div>
 
