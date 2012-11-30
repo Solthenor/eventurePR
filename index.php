@@ -4,6 +4,56 @@ require_once('logoutHandler.php');
 require_once('db.php');
 require_once('checkAuth.php');
 
+if (isset($_POST['submit'])) {
+    $search = $_POST['submit'];
+
+    $db = db::getInstance();
+    $sql = "SELECT
+            userName,
+            userID,
+            firstName,
+            lastName,
+            email,
+            profilePicture,
+            age,
+            gender,
+            work
+        FROM User
+        WHERE userName LIKE '%{$userName}%'";
+
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+
+    $result = $stmt->fetchAll();
+}
+
+/*
+
+(SELECT 
+            U.userName,
+            userID,
+            firstName,
+            lastName,
+            email,
+            profilePicture,
+            age,
+            gender,
+            work
+        FROM User U
+        WHERE U.userName LIKE '%{$search}%')
+        UNION
+        (SELECT *
+        FROM Event E, Venue V 
+        WHERE E.eventName LIKE '%{$search}%')
+        UNION
+        (SELECT *
+        FROM Venue V 
+        WHERE V.vName LIKE '%{$search}%')
+        
+";
+
+*/
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -46,6 +96,8 @@ require_once('checkAuth.php');
     <table id="header">
         <tr>
             <td id="logo"><span class='wsite-logo'><a href='index.php'><span id="wsite-title">E-venturePR</span></a></span></td>
+            
+            
             <td id="header-right">
                 <table style="width: 150px;">
                     <!-- Conditional to check login Status-->
@@ -81,7 +133,54 @@ require_once('checkAuth.php');
     <div id="container">
         <div id="content">
             <div id="banner" >
-                <div class="wsite-header"></div>
+                <div class="wsite-header" >
+                    
+                                <span style="float:right; margin-right:300px; margin-top:15px;">
+                                    <form class="navbar-form pull-left"  action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
+                                        <input type="text" id="submit" name="submit">
+                                        <button href="#myModal" role="button" data-toggle="modal" type="submit" class="btn btn-eventPR">Search</button>
+                                        <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="background-color:black;">
+                                              <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                <h3>Search Results</h3>
+                                              </div>
+                                              <div class="modal-body">
+                                                <?php if(isset($result)) {?>
+                                                    <?php foreach ($result as $user) { ?>
+
+                                                        <div><div style="height: 20px; overflow: hidden; width: 100%;"></div>
+                                                            <hr class="styled-hr" style="width:100%;">
+                                                            <div style="height: 20px; overflow: hidden; width: 100%;"></div></div>
+
+                                                        <div><div class="wsite-multicol">
+                                                                        <h3 style="text-align:left;"><?php echo $user['userName'] ?></h3>
+
+                                                                        <span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="picture.php?picID=<?php echo $user['profilePicture'] ?>" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;width:200px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
+                                                                        <div class="paragraph" style="text-align:left;display:block;float:left;">Username: <br />Age: <br />Gender: <br />Work: <br />E-mail: </div>
+                                                                        <div class="paragraph"style="text-align:center;display:block;float:left;"><?php echo $user['userName'] ?><br /><?php echo $user['age'] ?><br /><?php echo $user['gender'] ?><br /><?php echo $user['work'] ?><br /><?php echo $user['email'] ?></div>
+
+                                                                        <a class="wsite-button wsite-button-small wsite-button-normal" href="profile.php?userID=<?php echo $user['userID'] ?>" >
+                                                                            <span class="wsite-button-inner">See profile</span>
+                                                                        </a>
+                                                                        <a class="wsite-button wsite-button-small wsite-button-normal" href="profile.php?userID=<?php echo $user['userID'] ?>" >
+                                                                            <span class="wsite-button-inner">Add as friend</span>
+                                                                        </a>
+                                                                    </div></div>
+
+                                                     <?php }?>
+                                                <?php } ?>
+                                              </div>
+                                              <div class="modal-footer" style= "background-color:darkgray;">
+                                                <button class="btn btn-eventPR" data-dismiss="modal" aria-hidden="true">Close</button>
+                                                
+                                              </div>
+                                            </div>
+                                    </form>
+                                </span>
+
+                            
+                            
+                </div>
             </div>
             <div>
                 <div style="height: 40px; overflow: hidden; width: 100%;"></div>
