@@ -130,17 +130,20 @@ $events = $stmt->fetchAll();
                             <table class='wsite-multicol-table'>
                                 <tbody class='wsite-multicol-tbody'>
                                 <tr class='wsite-multicol-tr'>
-                                    <td class='wsite-multicol-col' style='width:79.074889867841%;padding:0 15px'>
+                                    <td class='wsite-multicol-col' style='width:35%;padding:0 15px'>
 
                                         <h2 style="text-align:left;"><?php echo $event['eventName'] ?></h2>
-                                        <span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="picture.php?picID=<?php echo $event['flyer'] ?>" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" width="50%" height="50%"/></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
-                                        <div class="paragraph" style="text-align:left;display:block;"><font size="4"><?php echo $event['date'] ?></font><br /><font size="4"><?php echo $event['venueName'] ?></font><br /><font size="4"><span style="line-height: 27px;"><br /></span></font><br /><font size="4"><span style="line-height: 27px;">Genre: <?php echo $event['genre'] ?></span></font></div>
+                                        <span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a href="event.php?eventID=<?php echo $event['eventID'] ?>"><img class="wsite-image galleryImageBorder" src="picture.php?picID=<?php echo $event['flyer'] ?>" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" width="200" height="300"/></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
                                         <hr style="clear:both;visibility:hidden;width:100%;">
 
                                         <div style="display: inline;"><div style="float:left; display: inline-block;"> </div>
                                             <a class="btn btn-eventPR" href="event.php?eventID=<?php echo $event['eventID'] ?>"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">MORE INFO</span></a>
                                             <a class="btn btn-eventPR" href="#"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">FLAG</span></a>
                                             <div style="height: 10px; overflow: hidden;"></div></div>
+
+                                    </td>
+                                    <td>
+                                        <div class="paragraph" style="text-align:left;display:block;"><font size="4"><?php echo $event['date'] ?></font><br /><font size="4"><?php echo $event['venueName'] ?></font><br /><font size="4"><span style="line-height: 27px;"><br /></span></font><br /><font size="4"><span style="line-height: 27px;">Genre: <?php echo $event['genre'] ?></span></font></div>
 
                                     </td>
                                     <td class='wsite-multicol-col' style='width:20.925110132159%;padding:0 15px'>
@@ -152,14 +155,8 @@ $events = $stmt->fetchAll();
                                             <div style="height: 10px; overflow: hidden;"></div></div>
 
                                         <div style="text-align:left;"><div style="height: 10px; overflow: hidden;"></div>
-                                            <a class="wsite-button wsite-button-small wsite-button-highlight" href="share.html" >
+                                            <a class="wsite-button wsite-button-small wsite-button-highlight" href="share.php?eventID=<?php echo $event['eventID'] ?>" >
                                                 <span class="wsite-button-inner">Share E-venture</span>
-                                            </a>
-                                            <div style="height: 10px; overflow: hidden;"></div></div>
-
-                                        <div style="text-align:left;"><div style="height: 10px; overflow: hidden;"></div>
-                                            <a class="wsite-button wsite-button-small wsite-button-highlight" href="javascript:;" >
-                                                <span class="wsite-button-inner">set calendar</span>
                                             </a>
                                             <div style="height: 10px; overflow: hidden;"></div></div>
 
@@ -170,9 +167,7 @@ $events = $stmt->fetchAll();
                         </div></div></div>
 
                         <?php
-
                     }
-
                     ?>
 
                 </div>
