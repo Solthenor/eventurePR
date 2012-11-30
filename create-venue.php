@@ -48,6 +48,7 @@ if ( count($_POST) > 0) {
             city = '{$_POST['city']}',
             state = '{$_POST['state']}',
             zipcode = '{$_POST['zipcode']}',
+            GPS = '{$_POST['gps']}',
             pNumber = '{$_POST['telephone']}',
             website = '{$_POST['website']}',
             description = '{$_POST['description']}'
@@ -68,6 +69,15 @@ if ( count($_POST) > 0) {
     $stmt->execute();
 
     $venueID = $db->lastInsertId();
+}
+
+function redirect(){
+
+    global $venueID;
+
+    if(isset($_POST['submit']))
+        echo "<script>".PHP_EOL."window.location='venue.php?venueID={$venueID}'".PHP_EOL."</script>";
+
 }
 
 ?>
@@ -99,6 +109,11 @@ if ( count($_POST) > 0) {
     <script src="js/bootstrap.min.js"></script>
 </head>
 <body class='wsite-theme-dark no-header-page wsite-page-create-event'>
+<?php
+
+redirect();
+
+?>
 <div id="wrapper">
     <table id="header">
         <tr>
@@ -151,7 +166,7 @@ if ( count($_POST) > 0) {
                                                 <h2 style="text-align:left;">Create Venue</h2>
 
                                                 <div>
-                                                    <form  action="venue.php?venueID=<?php echo $venueID ?>" method="POST" id="create-event" enctype="multipart/form-data">
+                                                    <form  action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" id="create-event" enctype="multipart/form-data">
                                                         <div id="807999966852778988-form-parent" class="wsite-form-container" style="margin-top:10px;">
                                                             <ul class="formlist" id="807999966852778988-form-list">
                                                                 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
@@ -203,6 +218,14 @@ if ( count($_POST) > 0) {
                                                                 </div></div>
 
                                                                 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
+                                                                    <label class="wsite-form-label" for="gps">Coordinates: (Latitude,Longitude) <span class="form-required">*</span></label>
+                                                                    <div class="wsite-form-input-container">
+                                                                        <input id="gps" class="wsite-form-input wsite-input" type="text" name="gps" style="width:200px;" />
+                                                                    </div>
+                                                                    <div id="instructions-935462346745001510" class="wsite-form-instructions" style="display:none;"></div>
+                                                                </div></div>
+
+                                                                <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
                                                                     <label class="wsite-form-label" for="website">Website: <span class="form-required">*</span></label>
                                                                     <div class="wsite-form-input-container">
                                                                         <input id="website" class="wsite-form-input wsite-input" type="text" name="website" style="width:200px;" />
@@ -218,10 +241,22 @@ if ( count($_POST) > 0) {
                                                                     <div id="instructions-740288841696996782" class="wsite-form-instructions" style="display:none;"></div>
                                                                 </div></div>
 
+                                                                <div class="paragraph" style="text-align:left;">Add a Picture:</div>
+                                                                <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
+
+                                                                    <label class="wsite-form-label" for="photo">Upload File <span class="form-required">*</span></label>
+                                                                    <div class="wsite-form-input-container">
+                                                                        <input id="photo" class="wsite-form-input" type="file" name="photo" />
+                                                                        <div style="font-size:10px;">Max file size: 20MB</div>
+                                                                    </div>
+                                                                    <div id="instructions-436611527555598588" class="wsite-form-instructions" style="display:none;"></div>
+                                                                </div></div>
+
+
                                                             </ul>
                                                         </div>
                                                         <div style="text-align:left; margin-top:10px; margin-bottom:10px;">
-                                                            <input type='submit' name="submit" value="Submit" class='btn btn-eventPR' />
+                                                            <input type='submit' name='submit' value="Submit" class='btn btn-eventPR' />
                                                         </div>
 
 
@@ -243,16 +278,6 @@ if ( count($_POST) > 0) {
                                         <tr class='wsite-multicol-tr'>
 
 
-                                            <div class="paragraph" style="text-align:left;">Add a Picture:</div>
-                                            <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
-
-                                                <label class="wsite-form-label" for="photo">Upload File <span class="form-required">*</span></label>
-                                                <div class="wsite-form-input-container">
-                                                    <input id="photo" class="wsite-form-input" type="file" name="photo" />
-                                                    <div style="font-size:10px;">Max file size: 20MB</div>
-                                                </div>
-                                                <div id="instructions-436611527555598588" class="wsite-form-instructions" style="display:none;"></div>
-                                            </div></div>
 
                                             <div><div class="wsite-image wsite-image-border-border-width:0 " style="padding-top:10px;padding-bottom:10px;margin-left:10px;margin-right:10px;text-align:right">
 

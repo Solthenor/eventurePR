@@ -39,7 +39,7 @@ if (isset($_POST['submit'])) {
 
     $result = $stmt->fetchAll();
 
-    $user = $result[0];
+
 
  }
 
@@ -110,36 +110,53 @@ if (isset($_POST['submit'])) {
 
             <div class="text"><div id='wsite-content' class='wsite-not-footer'>
                 <div style="text-align: left;"><a class="btn btn-eventPR" href="profile.php"><span style="font-weight: bold; font-size: 14px; font-family: Arial sans-serif;">GO BACK TO PROFILE</span></a></div>
-                <h2 style="text-align:left;">Search for friends:<br /></h2>
+                <h2 style="text-align:left;">Search for people:<br /></h2>
 
                 <div>
                     <form class="navbar-form pull-left"  action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
-                        <input type="text" id="submit" name="submit" class="span2">
+                        <input type="text" id="submit" name="submit">
                         <button type="submit" class="btn">Submit</button>
                     </form>
 
-
+                   <br />
                 </div>
 
                <div>
 
-                        <div><div style="height: 20px; overflow: hidden; width: 100%;"></div>
-                            <hr class="styled-hr" style="width:100%;">
-                            <div style="height: 20px; overflow: hidden; width: 100%;"></div></div>
+                    <?php if(isset($result)) {?>
+                        <?php foreach ($result as $user) { ?>
 
-                    <?php
-                     if(isset($user)) {?>
-                            <?php echo $user['firstName'] ?>
+                    <div><div style="height: 20px; overflow: hidden; width: 100%;"></div>
+                        <hr class="styled-hr" style="width:100%;">
+                        <div style="height: 20px; overflow: hidden; width: 100%;"></div></div>
 
-                        <hr style="clear:both;visibility:hidden;width:100%;">
+                    <div><div class="wsite-multicol"><div class='wsite-multicol-table-wrap' style='margin:0 -15px'>
+                        <table class='wsite-multicol-table'>
+                            <tbody class='wsite-multicol-tbody'>
+                            <tr class='wsite-multicol-tr'>
+                                <td class='wsite-multicol-col' style="padding:15px 15px">
+                                    <h3 style="text-align:left;"><?php echo $user['firstName'] ?> <?php echo $user['lastName'] ?></h3>
 
-                        <div style="text-align:left;"><div style="height: 10px; overflow: hidden;"></div>
-                            <a class="wsite-button wsite-button-small wsite-button-normal" href="profile.php?userID=<?php echo $user['userID'] ?>" >
-                                <span class="wsite-button-inner">See profile</span>
-                            </a>
-                            </div>
+                                    <span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="picture.php?picID=<?php echo $user['profilePicture'] ?>" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;width:200px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
+                                    <div class="paragraph" style="text-align:left;display:block;float:left;">Username: <br />Age: <br />Gender: <br />Work: <br />E-mail: </div>
+                                    <div class="paragraph"style="text-align:center;display:block;float:left;"><?php echo $user['userName'] ?><br /><?php echo $user['age'] ?><br /><?php echo $user['gender'] ?><br /><?php echo $user['work'] ?><br /><?php echo $user['email'] ?></div>
+
+                                    <a class="wsite-button wsite-button-small wsite-button-normal" href="profile.php?userID=<?php echo $user['userID'] ?>" >
+                                        <span class="wsite-button-inner">See profile</span>
+                                    </a>
+                                    <a class="wsite-button wsite-button-small wsite-button-normal" href="profile.php?userID=<?php echo $user['userID'] ?>" >
+                                        <span class="wsite-button-inner">Add as friend</span>
+                                    </a>
+                                </td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div></div></div>
 
                          <?php }?>
+                    <?php } ?>
 
                 </div>
 

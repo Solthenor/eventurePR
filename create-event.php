@@ -9,6 +9,7 @@ if( !$loggedin ){
 }
 
 $picID = 0;
+$eID = 0;
 
 if ( count($_POST) > 0) {
 
@@ -74,6 +75,16 @@ if ( count($_POST) > 0) {
     $stmt->execute();
 
     $eID = $db->lastInsertId();
+
+
+}
+
+function redirect(){
+
+    global $eID;
+
+    if(isset($_POST['submit']))
+        echo "<script>".PHP_EOL."window.location='event.php?eventID={$eID}'".PHP_EOL."</script>";
 
 }
 ?>
@@ -142,6 +153,11 @@ if ( count($_POST) > 0) {
 
 </head>
 <body class='wsite-theme-dark no-header-page wsite-page-create-event'>
+<?php
+
+redirect();
+
+?>
 <div id="wrapper">
 	<table id="header">
 		<tr>
@@ -194,7 +210,7 @@ if ( count($_POST) > 0) {
 <h2 style="text-align:left;">E-Vent it</h2>
 
 <div>
-<form action="event.php?eventID=<?php echo $eID ?>" method="POST" id="create-event" enctype="multipart/form-data">
+<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" id="create-event" enctype="multipart/form-data">
 <div id="807999966852778988-form-parent" class="wsite-form-container" style="margin-top:10px;">
   <ul class="formlist" id="807999966852778988-form-list">
     <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">

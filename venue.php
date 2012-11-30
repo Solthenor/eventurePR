@@ -130,8 +130,7 @@ if(!isset($venue)){
 <h2 style="text-align:left;"><?php echo $venue['vName'] ?><br /></h2>
 <span class='imgPusher' style='float:left;height:0px'></span>
 <span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'>
-    <a>
-        <img class="wsite-image galleryImageBorder" src="uploads/1/3/4/4/13443306/218451771.jpg" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" /></a>
+<span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="picture.php?picID=<?php echo $event['flyer'] ?>" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" width="350" height="350"/></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
     <div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div>
 </span>
 <div class="paragraph" style="text-align:left;display:block;">               

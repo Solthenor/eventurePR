@@ -51,6 +51,7 @@ $event = $result[0];
 $eventUserID = $event['userID'];
 $attendees = $event['attendees'];
 
+$venueID = $event['venueID'] ;
 if (isset($_POST['upload'])) {
     if ($_FILES["photo"]["error"] == 0) {
 
@@ -92,14 +93,15 @@ if(isset($_POST['action'])) {
     $db = db::getInstance();
 
     $sql = "";
-
-    if($action == 'flag'){
+    $flag= 0;
+    if($action == 'Flag'){
+        $flag = 1;
         $sql = "UPDATE Event
                 SET
                     flag = 1
                 WHERE eventID = {$eventID};";
     }
-    else if($action == 'I want to go!!!'){
+    else if($action == 'I want to go'){
         $sql = "INSERT INTO Attends
                 SET
                     userID = {$id}, 
@@ -109,7 +111,7 @@ if(isset($_POST['action'])) {
     $stmt = $db->prepare($sql);
     $stmt->execute();
 
-    $attendees = $event['attendees'];
+    $attendees = $attendees + 1;
 }
 
 if(isset($_POST['submit'])) {
@@ -128,7 +130,21 @@ if(isset($_POST['submit'])) {
     $stmt->execute();
 
 }
+$db = db::getInstance();
+$sql = "SELECT
 
+           GPS
+        FROM Venue
+
+        WHERE venueID = {$venueID};
+";
+
+$stmt = $db->prepare($sql);
+$stmt->execute();
+
+$result = $stmt->fetchAll();
+
+$gps = $result[0];
 
 ?>
 <!DOCTYPE html>
@@ -202,7 +218,7 @@ if(isset($_POST['submit'])) {
 
         function calcRoute() {
             var start = new google.maps.LatLng(geoip_latitude(), geoip_longitude());
-            var end = new google.maps.LatLng(18.1843, -67.1575);
+            var end = new google.maps.LatLng(<?php echo $gps ?>);
             var request = {
                 origin:start,
                 destination:end,
@@ -289,35 +305,25 @@ if(isset($_POST['submit'])) {
 
     <form action="<?php echo $_SERVER['PHP_SELF']; ?><?php echo "?eventID={$eventID}" ?>" method="POST">
         
-        <input name="action" value="Count me in" type="submit" class="btn btn-eventPR" style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;"  />
+         <input name="action" value="I want to go" type="submit" class="btn btn-eventPR" style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;"/>
     </form>
     
     
-    <!--
-    <a href="contacts.php" class="btn btn-eventPR" style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">See assisting friends</a>
-    -->
 
-        <div id="example" class="modal hide fade in" style="display: none; ">  
-        <div class="modal-header">  
-        <a class="close" data-dismiss="modal">×</a>  
-        <h3>This is a Modal Heading</h3>  
-        </div>  
-        <div class="modal-body">  
-        <h4>Text in a modal</h4>  
-        <p>You can add some text here.</p>                
-        </div>  
-        <div class="modal-footer">  
-        <a href="#" class="btn btn-success">Call to action</a>  
-        <a href="#" class="btn" data-dismiss="modal">Close</a>  
-        </div>  
-        </div>  
-        <a data-toggle="modal" href="#example" class="btn btn-eventPR">Who's going</a>
+    <a href="contacts.php" class="btn btn-eventPR" style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">See assisting friends</a>
+
+
+
         
     <p style="display: inline-block; font-style: italic; padding-left: 10px;"><?php echo $attendees ?> people are going</p>
 
     <form action="<?php echo $_SERVER['PHP_SELF']; ?><?php echo "?eventID={$eventID}" ?>" method="POST">
         <input name="action" value="Flag" type="submit" class="btn btn-eventPR" style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;" />
     </form>
+
+    <?php if ($event['flag'] == 1 || $flag == 1) { ?>
+            <p style="display: inline-block; font-style: italic; padding-left: 10px;">This event has been reported.</p>
+     <?php } ?>
 </div>
 <hr style="clear:both;visibility:hidden;width:100%;" />
 
