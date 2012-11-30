@@ -152,7 +152,6 @@ if(isset($_POST['submit'])) {
     #wsite-content a:visited, .blog-sidebar a:visited{color:#FFFFFF !important;}
     #wsite-content a:hover, .blog-sidebar a:hover{color:#FFFFFF !important;}
 </style>
-<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js'></script>
 <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/jquery_effects.js?1346362758'></script>
 <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.min.js?1346362758'></script>
 <script type='text/javascript' src='http://cdn1.editmysite.com/editor/images/common/utilities-jq.js?1346362758'></script>
@@ -279,53 +278,38 @@ if(isset($_POST['submit'])) {
     <div class="btn-group">
         <div style="display: inline;"><div style="float:left; display: inline-block;"> </div>
 
+
     <form action="<?php echo $_SERVER['PHP_SELF']; ?><?php echo "?eventID={$eventID}" ?>" method="POST">
-        <input name="action" value="Flag" type="submit" class="btn btn-eventPR" style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;" />
+        
+        <input name="action" value="Count me in" type="submit" class="btn btn-eventPR" style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;"  />
     </form>
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?><?php echo "?eventID={$eventID}" ?>" method="POST">
-        <input name="action" value="I want to go!!!" type="submit" class="btn btn-eventPR" style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;" />
-    </form>
+    
     
     <!--
     <a href="contacts.php" class="btn btn-eventPR" style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">See assisting friends</a>
     -->
 
-   <a data-toggle="modal" href="#myModal" class="btn btn-eventPR" style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">Who's going</a>
-
-
-    <div id="myModal" class="modal hide fade" style="display: none; ">
-                <div class="modal-header">
-                  <button class="close" data-dismiss="modal">×</button>
-                  <h3>Modal Heading</h3>
-                </div>
-                <div class="modal-body">
-                  <h4>Text in a modal</h4>
-                  <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem.</p>
-
-                  <h4>Popover in a modal</h4>
-                  <p>This <a href="#" class="btn popover-test" data-content="And here's some amazing content. It's very engaging. right?" data-original-title="A Title">button</a> should trigger a popover on hover.</p>
-
-                  <h4>Tooltips in a modal</h4>
-                  <p><a href="#" class="tooltip-test" data-original-title="Tooltip">This link</a> and <a href="#" class="tooltip-test" data-original-title="Tooltip">that link</a> should have tooltips on hover.</p>
-
-                  <hr>
-
-                  <h4>Overflowing text to show optional scrollbar</h4>
-                  <p>We set a fixed <code>max-height</code> on the <code>.modal-body</code>. Watch it overflow with all this extra lorem ipsum text we've included.</p>
-                  <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                  <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                  <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                  <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                  <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                  <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                </div>
-                <div class="modal-footer">
-                  <a href="#" class="btn" data-dismiss="modal">Close</a>
-                  <a href="#" class="btn btn-primary">Save changes</a>
-                </div>
-              </div>​
+        <div id="example" class="modal hide fade in" style="display: none; ">  
+        <div class="modal-header">  
+        <a class="close" data-dismiss="modal">×</a>  
+        <h3>This is a Modal Heading</h3>  
+        </div>  
+        <div class="modal-body">  
+        <h4>Text in a modal</h4>  
+        <p>You can add some text here.</p>                
+        </div>  
+        <div class="modal-footer">  
+        <a href="#" class="btn btn-success">Call to action</a>  
+        <a href="#" class="btn" data-dismiss="modal">Close</a>  
+        </div>  
+        </div>  
+        <a data-toggle="modal" href="#example" class="btn btn-eventPR">Who's going</a>
         
     <p style="display: inline-block; font-style: italic; padding-left: 10px;"><?php echo $attendees ?> people are going</p>
+
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?><?php echo "?eventID={$eventID}" ?>" method="POST">
+        <input name="action" value="Flag" type="submit" class="btn btn-eventPR" style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;" />
+    </form>
 </div>
 <hr style="clear:both;visibility:hidden;width:100%;" />
 
@@ -401,18 +385,18 @@ if(isset($_POST['submit'])) {
                        <div class="paragraph" style="text-align:left;">Add a Picture:</div>
                        <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
 
-                                                        <label class="wsite-form-label" for="photo">Upload File </label>
-                                                        <div class="wsite-form-input-container">
-                                                            <input id="photo" class="wsite-form-input" type="file" name="photo" />
-                                                            <div style="font-size:10px;">Max file size: 20MB</div>
-                                                        </div>
-                                                        <div id="instructions-436611527555598588" class="wsite-form-instructions" style="display:none;"></div>
-                                                    </div></div>
+                        <label class="wsite-form-label" for="photo">Upload File </label>
+                        <div class="wsite-form-input-container">
+                            <input id="photo" class="wsite-form-input" type="file" name="photo" />
+                            <div style="font-size:10px;">Max file size: 20MB</div>
+                        </div>
+                        <div id="instructions-436611527555598588" class="wsite-form-instructions" style="display:none;"></div>
+                    </div></div>
 
-                                                    <div><div class="wsite-image wsite-image-border-border-width:0 " style="padding-top:10px;padding-bottom:10px;margin-left:10px;margin-right:10px;text-align:right">
+                    <div><div class="wsite-image wsite-image-border-border-width:0 " style="padding-top:10px;padding-bottom:10px;margin-left:10px;margin-right:10px;text-align:right">
 
-                                                        <div style="display:block;font-size:90%"></div>
-                                                    </div></div>
+                        <div style="display:block;font-size:90%"></div>
+                    </div></div>
         </form>
 
 </div>
@@ -465,7 +449,10 @@ if(isset($_POST['submit'])) {
     <div id="footer"></div>
     <div class="clear"></div>
 </div>
-<script type="text/javascript"> $('#myModal').modal();</script>
-<script src="bootstrap/js/bootstrap-modal.js"></script>
+
+
+<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js'></script>
+  
+<script type="text/javascript" src="bootstrap/js/bootstrap-modal.js"></script>
 </body>
 </html>
