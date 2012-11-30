@@ -159,59 +159,67 @@ if(isset($_POST['submit'])) {
 
     <script type="text/javascript" language="JavaScript" src="http://j.maxmind.com/app/geoip.js"></script>
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript">
+        var directionsDisplay;
+        var directionsService = new google.maps.DirectionsService();
+        var map;
+        function initialize() {
+            directionsDisplay = new google.maps.DirectionsRenderer();
+
+            var options =
+            {
+                zoom: 10,
+                center: new google.maps.LatLng(geoip_latitude(), geoip_longitude()),
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                mapTypeControl: true,
+                mapTypeControlOptions:
+                {
+                    style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+                    poistion: google.maps.ControlPosition.TOP_RIGHT,
+                    mapTypeIds: [google.maps.MapTypeId.ROADMAP,
+                        google.maps.MapTypeId.TERRAIN,
+                        google.maps.MapTypeId.HYBRID,
+                        google.maps.MapTypeId.SATELLITE]
+                },
+                navigationControl: true,
+                navigationControlOptions:
+                {
+                    style: google.maps.NavigationControlStyle.ZOOM_PAN
+                },
+                scaleControl: true,
+                disableDoubleClickZoom: true,
+                draggable: false,
+                streetViewControl: true,
+                draggableCursor: 'move'
+            };
+            map = new google.maps.Map(document.getElementById("map"), options);
+            directionsDisplay.setMap(map);
+            // Add Marker and Listener
+            var latlng = new google.maps.LatLng(geoip_latitude(), geoip_longitude());
+            calcRoute();
+
+        }
+
+        function calcRoute() {
+            var start = new google.maps.LatLng(geoip_latitude(), geoip_longitude());
+            var end = new google.maps.LatLng(18.1843, -67.1575);
+            var request = {
+                origin:start,
+                destination:end,
+                travelMode: google.maps.TravelMode.DRIVING
+            };
+            directionsService.route(request, function(result, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    directionsDisplay.setDirections(result);
+                }
+            });
+        }
+        window.onload = initialize;
+    </script>
 </head>
 <body class='wsite-theme-dark no-header-page wsite-page-nightwish-detail'>
 
-<script type="text/javascript">
-    var map;
-    function initialize() {
-        var options =
-        {
-            zoom: 10,
-            center: new google.maps.LatLng(geoip_latitude(), geoip_longitude()),
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-            mapTypeControl: true,
-            mapTypeControlOptions:
-            {
-                style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
-                poistion: google.maps.ControlPosition.TOP_RIGHT,
-                mapTypeIds: [google.maps.MapTypeId.ROADMAP,
-                    google.maps.MapTypeId.TERRAIN,
-                    google.maps.MapTypeId.HYBRID,
-                    google.maps.MapTypeId.SATELLITE]
-            },
-            navigationControl: true,
-            navigationControlOptions:
-            {
-                style: google.maps.NavigationControlStyle.ZOOM_PAN
-            },
-            scaleControl: true,
-            disableDoubleClickZoom: true,
-            draggable: false,
-            streetViewControl: true,
-            draggableCursor: 'move'
-        };
-        map = new google.maps.Map(document.getElementById("map"), options);
-        // Add Marker and Listener
-        var latlng = new google.maps.LatLng(geoip_latitude(), geoip_longitude());
-        var marker = new google.maps.Marker
-            (
-                {
-                    position: latlng,
-                    map: map,
-                    title: 'Click me'
-                }
-            );
-        var infowindow = new google.maps.InfoWindow({
-            content: 'You Are Here'
-        });
-        google.maps.event.addListener(marker, 'click', function () {
-            // Calling the open method of the infoWindow
-            infowindow.open(map, marker);
-        });
-    }
-    window.onload = initialize;
-</script>
+
 <div id="wrapper">
 	<table id="header">
 		<tr>
