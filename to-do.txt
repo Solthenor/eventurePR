@@ -15,4 +15,8 @@ TODO:
 - memorable eventures en profile.php debe ser lo de fotos o actually ser eventos en los cuales ha ido el usuario
 - event.php no esta redirecting correctly, no esta creando el evento
 - añadir las columnas q faltan a create event y create venue
+- añadir comments a otros walls
+- my contacts q te tire tus friends
+- que el boton de addfriend no te salga si es tu profile
+
 

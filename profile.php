@@ -210,7 +210,7 @@ Dynamically changes depending on the user accessing it
                                                                            JOIN (SELECT (RAND() * (SELECT MAX(eventID) FROM Event)) AS id) AS r2
                                                                        WHERE r1.eventID >= r2.id
                                                                        ORDER BY r1.eventID ASC
-                                                                       LIMIT 3
+                                                                       LIMIT 3;
                                                                ";
 
                                                         $stmt = $db->prepare($sql);
@@ -218,7 +218,7 @@ Dynamically changes depending on the user accessing it
 
                                                         $result = $stmt->fetchAll();
 
-                                                        foreach ($result as &$event) {
+                                                        foreach ($result as $event) {
                                                             echo "<li><a href='event.php?eventID={$event['eventID']}'> <span style='color: white'>{$event['eventName']}</span></a></li>
                                                                    <div style='height: 20px; overflow: hidden; width: 100%;''></div>";
                                                         }
@@ -275,7 +275,7 @@ Dynamically changes depending on the user accessing it
                                                                        u1.userID = {$id}
 
                                                                        ORDER BY r1.eventID ASC
-                                                                       LIMIT 5
+                                                                       LIMIT 5;
                                                                ";
 
                                 $stmt = $db->prepare($sql);
@@ -283,7 +283,7 @@ Dynamically changes depending on the user accessing it
 
                                 $result = $stmt->fetchAll();
 
-                                foreach ($result as &$event) {
+                                foreach ($result as $event) {
                                     echo "<li><a href='event.php?eventID={$event['eventID']}'> <span style='color: white'>{$event['eventName']}</span></a></li>
                                                 <div style='height: 20px; overflow: hidden; width: 100%;''></div>";
                                 }
@@ -320,7 +320,7 @@ Dynamically changes depending on the user accessing it
                                 $result = $stmt->fetchAll();
 
                                 foreach ($result as $comment) {
-                                    echo "<li> <span style='color: white'>{$comment['content']}</span></li>
+                                    echo "<li> <span style='color: white'>: {$comment['content']}</span></li>
                                                                    <div style='height: 20px; overflow: hidden; width: 100%;''></div>";
                                 }
                                 ?>

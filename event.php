@@ -143,6 +143,7 @@ if(isset($_POST['submit'])) {
 <link rel='stylesheet' type='text/css' href='css/main_style.css' title='wsite-theme-css' />
 <link href='http://cdn1.editmysite.com/editor/fonts/Capture_it/font.css?2' rel='stylesheet' type='text/css' />
 <link href="css/bootstrap.min.css" rel="stylesheet">
+
 <style type='text/css'>
     #wsite-content div.paragraph, #wsite-content p, #wsite-content .product-block .product-title, #wsite-content .product-description, .blog-sidebar div.paragraph, .blog-sidebar p, .wsite-form-field label, .wsite-form-field label {}
     #wsite-content h2, #wsite-content .product-long .product-title, #wsite-content .product-large .product-title, #wsite-content .product-small .product-title, .blog-sidebar h2 {}
@@ -230,8 +231,46 @@ if(isset($_POST['submit'])) {
     <form action="<?php echo $_SERVER['PHP_SELF']; ?><?php echo "?eventID={$eventID}" ?>" method="POST">
         <input name="action" value="I want to go!!!" type="submit" class="btn btn-eventPR" style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;" />
     </form>
+    
+    <!--
     <a href="contacts.php" class="btn btn-eventPR" style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">See assisting friends</a>
-    </div>
+    -->
+
+   <a data-toggle="modal" href="#myModal" class="btn btn-eventPR" style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">Who's going</a>
+
+
+    <div id="myModal" class="modal hide fade" style="display: none; ">
+                <div class="modal-header">
+                  <button class="close" data-dismiss="modal">×</button>
+                  <h3>Modal Heading</h3>
+                </div>
+                <div class="modal-body">
+                  <h4>Text in a modal</h4>
+                  <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem.</p>
+
+                  <h4>Popover in a modal</h4>
+                  <p>This <a href="#" class="btn popover-test" data-content="And here's some amazing content. It's very engaging. right?" data-original-title="A Title">button</a> should trigger a popover on hover.</p>
+
+                  <h4>Tooltips in a modal</h4>
+                  <p><a href="#" class="tooltip-test" data-original-title="Tooltip">This link</a> and <a href="#" class="tooltip-test" data-original-title="Tooltip">that link</a> should have tooltips on hover.</p>
+
+                  <hr>
+
+                  <h4>Overflowing text to show optional scrollbar</h4>
+                  <p>We set a fixed <code>max-height</code> on the <code>.modal-body</code>. Watch it overflow with all this extra lorem ipsum text we've included.</p>
+                  <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                  <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                  <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                  <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                  <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+                  <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+                </div>
+                <div class="modal-footer">
+                  <a href="#" class="btn" data-dismiss="modal">Close</a>
+                  <a href="#" class="btn btn-primary">Save changes</a>
+                </div>
+              </div>​
+        
     <p style="display: inline-block; font-style: italic; padding-left: 10px;"><?php echo $attendees ?> people are going</p>
 </div>
 <hr style="clear:both;visibility:hidden;width:100%;" />
@@ -336,37 +375,6 @@ if(isset($_POST['submit'])) {
         <h2 style="text-align:left;">Wall:<br /></h2>
         <div style="border: 1px solid #f5f5f5; padding: 20px; height: 60%; overflow: auto; background-color:black;">
             
-            <ul style="font-size: 14px; color: white;">
-
-                                <!--  Selects comments posted to user's wall -->
-                                <?php
-
-                                $db = db::getInstance();
-                                $sql = "SELECT
-                                           c1.userID,
-                                           c1.content,
-                                           u1.profilePicture
-
-                                       FROM Comment c1, User u1
-                                       WHERE u1.profilePicture = c1.userID=;
-                                ";
-
-                                $stmt = $db->prepare($sql);
-                                $stmt->execute();
-
-                                $result = $stmt->fetchAll();
-
-                                foreach ($result as $comment) {
-                                    echo "
-
-
-                                    <li> <span style='color: white; float:left;'>{$comment['content']}</span></li>
-                                                                   <div style='height: 20px; overflow: hidden; width: 100%;'></div>";
-                                }
-                                ?>
-                            </ul>
-
-            
             <!--
 
                                     <span class="imgPusher" style="float:left;height:0px"></span>
@@ -389,7 +397,7 @@ if(isset($_POST['submit'])) {
                             <div id="instructions-740288841696996782" class="wsite-form-instructions" style="display:none;"></div>
                         </div></div>
                         <div style="text-align:left; margin-top:10px; margin-bottom:10px;">
-                            <input type='submit' name="submit" value="Submit" class='btn btn-eventPR' />
+                            <input type='submit' name="submit" value="Post" class='btn btn-eventPR' />
                         </div>
                     </form>
 
@@ -406,6 +414,7 @@ if(isset($_POST['submit'])) {
     <div id="footer"></div>
     <div class="clear"></div>
 </div>
-
+<script type="text/javascript"> $('#myModal').modal();</script>
+<script src="bootstrap/js/bootstrap-modal.js"></script>
 </body>
 </html>
