@@ -109,7 +109,7 @@ if (isset($_POST['submit'])) {
         <div id="content">
 
             <div class="text"><div id='wsite-content' class='wsite-not-footer'>
-
+                <div style="text-align: left;"><a class="btn btn-eventPR" href="profile.php"><span style="font-weight: bold; font-size: 14px; font-family: Arial sans-serif;">GO BACK TO PROFILE</span></a></div>
                 <h2 style="text-align:left;">Search for friends:<br /></h2>
 
                 <div>

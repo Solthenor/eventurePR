@@ -66,6 +66,8 @@ if ( count($_POST) > 0) {
     // $stmt->bindValue(':website', $_POST['website'], PDO::PARAM_STR);
     // $stmt->bindValue(':description', $_POST['description'], PDO::PARAM_STR);
     $stmt->execute();
+
+    $venueID = $db->lastInsertId();
 }
 
 ?>
@@ -100,7 +102,7 @@ if ( count($_POST) > 0) {
 <div id="wrapper">
     <table id="header">
         <tr>
-            <td id="logo"><span class='wsite-logo'><a href='/'><span id="wsite-title">E-venturePR</span></a></span></td>
+            <td id="logo"><span class='wsite-logo'><a href='index.php'><span id="wsite-title">E-venturePR</span></a></span></td>
             <td id="header-right">
                 <table style="width: 150px;">
                     <?php if($loggedin) { ?>
@@ -149,7 +151,7 @@ if ( count($_POST) > 0) {
                                                 <h2 style="text-align:left;">Create Venue</h2>
 
                                                 <div>
-                                                    <form  action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" id="create-event" enctype="multipart/form-data">
+                                                    <form  action="venue.php?venueID=<?php echo $venueID ?>" method="POST" id="create-event" enctype="multipart/form-data">
                                                         <div id="807999966852778988-form-parent" class="wsite-form-container" style="margin-top:10px;">
                                                             <ul class="formlist" id="807999966852778988-form-list">
                                                                 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
