@@ -136,6 +136,16 @@ if (isset($_POST['submit'])) {
                             <a class="wsite-button wsite-button-small wsite-button-normal" href="profile.php?userID=<?php echo $user['userID'] ?>" >
                                 <span class="wsite-button-inner">See profile</span>
                             </a>
+                    <a class="wsite-button wsite-button-small wsite-button-normal" href="profile.php?userID=<?php echo $user['userID'] ?>" >
+                        <span class="wsite-button-inner">Add as friend</span>
+                    </a>
+                    <a class="wsite-button wsite-button-small wsite-button-normal" href="profile.php?userID=<?php echo $user['userID'] ?>" >
+                        <span class="wsite-button-inner">See profile</span>
+                    </a>
+
+                    <a class="wsite-button wsite-button-small wsite-button-normal" href="profile.php?userID=<?php echo $user['userID'] ?>" >
+                        <span class="wsite-button-inner">Add as friend</span>
+                    </a>
                             </div>
 
                          <?php }?>

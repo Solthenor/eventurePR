@@ -171,7 +171,8 @@ Dynamically changes depending on the user accessing it
                                     <a href="create-event.php" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">E-vent it!</span></a>
                                     <a href="myEvents.php" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">My E-vents</span></a>
                                     <a href="create-venue.php" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">Create Venue</span></a>
-                                    <a href="contacts.php" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">Contacts</span></a>
+                                    <a href="friends.php" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">Friends</span></a>
+                                    <a href="contacts.php" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">People</span></a>
 
 
                                 </div>
