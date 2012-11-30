@@ -51,31 +51,32 @@ $result = $stmt->fetchAll();
 $event = $result[0];
 $eventUserID = $event['userID'];
 $attendees = $event['attendees'];
+if(isset($_POST['upload'])) {
+    $db = db::getInstance();
 
-if (isset($_POST['upload'])) {
     if ($_FILES["photo"]["error"] == 0) {
 
-      $type = str_replace('image/', '', $_FILES['photo']['type']);
+        $type = str_replace('image/', '', $_FILES['photo']['type']);
 
-      $fileName = $_FILES['photo']['name'];
-      $tmpName  = $_FILES['photo']['tmp_name'];
-      $fileSize = $_FILES['photo']['size'];
-      $fileType = $_FILES['photo']['type'];
+        $fileName = $_FILES['photo']['name'];
+        $tmpName  = $_FILES['photo']['tmp_name'];
+        $fileSize = $_FILES['photo']['size'];
+        $fileType = $_FILES['photo']['type'];
 
-      $fp      = fopen($tmpName, 'r');
-      $content = fread($fp, filesize($tmpName));
-      $content = addslashes($content);
-      fclose($fp);
+        $fp      = fopen($tmpName, 'r');
+        $content = fread($fp, filesize($tmpName));
+        $content = addslashes($content);
+        fclose($fp);
 
-      $sql = "INSERT INTO Gallery
+        $sql = "INSERT INTO Picture
             SET
-              userID = '{$eventUserID}',
+              userID = '{$id}',
               eventID = '{$eventID}',
               ext = '{$type}',
               data = '{$content}'";
 
-      $stmt = $db->prepare($sql);
-      $stmt->execute();
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
 
       // $picID = $db->lastInsertId();
     }
@@ -373,7 +374,7 @@ if(isset($_POST['submit'])) {
 </div>
 
 <div style="height: 20px; overflow: hidden;"></div></div>
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?><?php echo "?eventID={$eventID}" ?>" method="POST">
                        <div class="paragraph" style="text-align:left;">Add a Picture:</div>
                        <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
 
@@ -389,13 +390,14 @@ if(isset($_POST['submit'])) {
 
                         <div style="display:block;font-size:90%"></div>
                     </div></div>
-        </form>
+
+        <div style="text-align:left; margin-top:10px; margin-bottom:10px;">
+            <input type="submit" name="upload" value="Upload" class='btn btn-eventPR' />
+        </div> </form>
+
 
 </div>
 
-    <div style="text-align:left; margin-top:10px; margin-bottom:10px;">
-        <input type="submit" name="upload" value="Upload" class='btn btn-eventPR' />
-    </div>
 </td>
     <td class='wsite-multicol-col' style='width:50%;padding:0 15px'>
 
