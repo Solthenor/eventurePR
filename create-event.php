@@ -76,6 +76,16 @@ if ( count($_POST) > 0) {
 
     $eID = $db->lastInsertId();
 
+
+}
+
+function redirect(){
+
+    global $eID;
+
+    if(isset($_POST['submit']))
+        echo "<script>".PHP_EOL."window.location='event.php?eventID={$eID}'".PHP_EOL."</script>";
+
 }
 ?>
 
@@ -143,6 +153,11 @@ if ( count($_POST) > 0) {
 
 </head>
 <body class='wsite-theme-dark no-header-page wsite-page-create-event'>
+<?php
+
+redirect();
+
+?>
 <div id="wrapper">
 	<table id="header">
 		<tr>

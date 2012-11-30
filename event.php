@@ -135,7 +135,7 @@ $sql = "SELECT
            GPS
         FROM Venue
 
-        WHERE venueID = {$venueID}
+        WHERE venueID = {$venueID};
 ";
 
 $stmt = $db->prepare($sql);

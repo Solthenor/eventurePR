@@ -71,6 +71,15 @@ if ( count($_POST) > 0) {
     $venueID = $db->lastInsertId();
 }
 
+function redirect(){
+
+    global $venueID;
+
+    if(isset($_POST['submit']))
+        echo "<script>".PHP_EOL."window.location='venue.php?venueID={$venueID}'".PHP_EOL."</script>";
+
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -100,6 +109,11 @@ if ( count($_POST) > 0) {
     <script src="js/bootstrap.min.js"></script>
 </head>
 <body class='wsite-theme-dark no-header-page wsite-page-create-event'>
+<?php
+
+redirect();
+
+?>
 <div id="wrapper">
     <table id="header">
         <tr>
@@ -242,7 +256,7 @@ if ( count($_POST) > 0) {
                                                             </ul>
                                                         </div>
                                                         <div style="text-align:left; margin-top:10px; margin-bottom:10px;">
-                                                            <input type='submit' name="submit" value="Submit" class='btn btn-eventPR' />
+                                                            <input type='submit' name='submit' value="Submit" class='btn btn-eventPR' />
                                                         </div>
 
 
