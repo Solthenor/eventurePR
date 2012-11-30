@@ -38,10 +38,8 @@ if (isset($_POST['submit'])) {
     $stmt->execute();
 
     $result = $stmt->fetchAll();
-
-
-
  }
+
 
 ?>
 <!DOCTYPE html>
@@ -144,9 +142,13 @@ if (isset($_POST['submit'])) {
                                     <a class="wsite-button wsite-button-small wsite-button-normal" href="profile.php?userID=<?php echo $user['userID'] ?>" >
                                         <span class="wsite-button-inner">See profile</span>
                                     </a>
+                                    <form action="friendAdded.php" method="POST">
                                     <a class="wsite-button wsite-button-small wsite-button-normal" href="profile.php?userID=<?php echo $user['userID'] ?>" >
-                                        <span class="wsite-button-inner">Add as friend</span>
+                                        <input type='submit' name="addFriend" value="Add Friend" class="wsite-button-inner" />
+
                                     </a>
+                                    </form>
+
                                 </td>
 
                             </tr>
