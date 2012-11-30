@@ -189,7 +189,7 @@ if(isset($_POST['submit'])) {
                 },
                 scaleControl: true,
                 disableDoubleClickZoom: true,
-                draggable: false,
+                draggable: true,
                 streetViewControl: true,
                 draggableCursor: 'move'
             };
