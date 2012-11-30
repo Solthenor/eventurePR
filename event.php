@@ -51,6 +51,7 @@ $event = $result[0];
 $eventUserID = $event['userID'];
 $attendees = $event['attendees'];
 
+$venueID = $event['venueID'] ;
 if (isset($_POST['upload'])) {
     if ($_FILES["photo"]["error"] == 0) {
 
@@ -128,7 +129,21 @@ if(isset($_POST['submit'])) {
     $stmt->execute();
 
 }
+$db = db::getInstance();
+$sql = "SELECT
 
+           GPS
+        FROM Venue
+
+        WHERE venueID = {$venueID}
+";
+
+$stmt = $db->prepare($sql);
+$stmt->execute();
+
+$result = $stmt->fetchAll();
+
+$gps = $result[0];
 
 ?>
 <!DOCTYPE html>
@@ -202,7 +217,7 @@ if(isset($_POST['submit'])) {
 
         function calcRoute() {
             var start = new google.maps.LatLng(geoip_latitude(), geoip_longitude());
-            var end = new google.maps.LatLng(18.1843, -67.1575);
+            var end = new google.maps.LatLng(<?php echo $gps ?>);
             var request = {
                 origin:start,
                 destination:end,

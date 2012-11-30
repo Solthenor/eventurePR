@@ -48,6 +48,7 @@ if ( count($_POST) > 0) {
             city = '{$_POST['city']}',
             state = '{$_POST['state']}',
             zipcode = '{$_POST['zipcode']}',
+            GPS = '{$_POST['gps']}',
             pNumber = '{$_POST['telephone']}',
             website = '{$_POST['website']}',
             description = '{$_POST['description']}'
@@ -198,6 +199,14 @@ if ( count($_POST) > 0) {
                                                                     <label class="wsite-form-label" for="telephone">Telephone: <span class="form-required">*</span></label>
                                                                     <div class="wsite-form-input-container">
                                                                         <input id="telephone" class="wsite-form-input wsite-input" type="text" name="telephone" style="width:200px;" />
+                                                                    </div>
+                                                                    <div id="instructions-935462346745001510" class="wsite-form-instructions" style="display:none;"></div>
+                                                                </div></div>
+
+                                                                <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
+                                                                    <label class="wsite-form-label" for="gps">Coordinates: (Latitude,Longitude) <span class="form-required">*</span></label>
+                                                                    <div class="wsite-form-input-container">
+                                                                        <input id="gps" class="wsite-form-input wsite-input" type="text" name="gps" style="width:200px;" />
                                                                     </div>
                                                                     <div id="instructions-935462346745001510" class="wsite-form-instructions" style="display:none;"></div>
                                                                 </div></div>
