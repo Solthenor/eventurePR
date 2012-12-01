@@ -95,7 +95,7 @@ if (isset($_POST['submit'])) {
 <div id="wrapper">
     <table id="header">
         <tr>
-            <td id="logo"><span class='wsite-logo'><a href='index.php'><span id="wsite-title">E-venturePR</span></a></span></td>
+            <td id="logo"><span class='wsite-logo'><a href='index.php'><span id="wsite-title" style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">E-venturePR</span></a></span></td>
             
             
             <td id="header-right">
@@ -134,7 +134,7 @@ if (isset($_POST['submit'])) {
         <div id="content">
             <div id="banner" >
                 <div class="wsite-header" >
-                    
+                    <!--
                                 <span style="float:right; margin-right:300px; margin-top:15px;">
                                     <form class="navbar-form pull-left"  action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
                                         <input type="text" id="submit" name="submit">
@@ -179,7 +179,7 @@ if (isset($_POST['submit'])) {
                                 </span>
 
                             
-                            
+                            -->
                 </div>
             </div>
             <div>
