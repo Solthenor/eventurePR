@@ -48,11 +48,6 @@ if(!isset($user)){
 }
 
 if(isset($_POST['submit'])) {
-    
-    
-
-    $db = db::getInstance();
-
     $sql = "INSERT INTO Wall
             SET
                userID = {$id},
@@ -60,13 +55,10 @@ if(isset($_POST['submit'])) {
 
     $stmt = $db->prepare($sql);
     $stmt->execute();
-
 }
 
-if(isset($_POST['addFriend']))
-{
+if(isset($_POST['addFriend'])) {
     $friend = $user['userID'];
-    $db = db::getInstance();
 
     $sql = "INSERT INTO AddFriend
                 SET
@@ -76,7 +68,6 @@ if(isset($_POST['addFriend']))
 
     $stmt = $db->prepare($sql);
     $stmt->execute();
-
 }
 
 ?>

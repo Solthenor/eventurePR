@@ -1,5 +1,4 @@
 <?php         // Creates events and loads them into the Event table in our Database
-require_once('mobileRedirect.php');
 require_once('logoutHandler.php');
 require_once('db.php');
 require_once('checkAuth.php');
