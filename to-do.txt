@@ -15,19 +15,4 @@ TODO:
 - memorable eventures en profile.php debe ser lo de fotos o actually ser eventos en los cuales ha ido el usuario
 - event.php no esta redirecting correctly, no esta creando el evento
 - añadir las columnas q faltan a create event y create venue
-- añadir comments a otros walls
-- my contacts q te tire tus friends
-- que el boton de addfriend no te salga si es tu profile
 
-
-KEVIN:
-
--Falta:
-    -Los featured events en el index sean sacados de la base de datos
-    -create-event.php y create-venue.php cuando se crea el evento o el venue no redirige a la pagina del evento/venue recien creado.
-     Se queda en la misma pagina de create. (EL evento si lo crea so eso sirve bien)
-    -El gallery de fotos en la esquina abajo a la izquierda no esta mostrando las fotos. Verifique en la base de datos y el problema
-     es que no esta guardando la informacion de ext y data de la foto. (las otras columnas las guarda bien.)
-    -Los comments de el evento no esta funcionando. Tampoco los del user profile.
-    -Hay que arreglar contacts para que busque gente y para que muestre los amigos*
-    -Falta lo del google maps

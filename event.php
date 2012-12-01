@@ -52,7 +52,6 @@ $event = $result[0];
 $eventUserID = $event['userID'];
 $attendees = $event['attendees'];
 if(isset($_POST['upload'])) {
-    $db = db::getInstance();
 
     if ($_FILES["photo"]["error"] == 0) {
 
@@ -68,7 +67,7 @@ if(isset($_POST['upload'])) {
         $content = addslashes($content);
         fclose($fp);
 
-        $sql = "INSERT INTO Picture
+        $sql = "INSERT INTO Gallery
             SET
               userID = '{$id}',
               eventID = '{$eventID}',
@@ -130,6 +129,21 @@ if(isset($_POST['submit'])) {
     $stmt->execute();
 
 }
+
+$sql2 = "SELECT
+             picID,
+             userID,
+             eventID,
+             ext,
+             data
+        FROM Gallery
+        WHERE eventID='{$eventID}';
+";
+
+$stmt2 = $db->prepare($sql2);
+$stmt2->execute();
+
+$gallery = $stmt2->fetchAll();
 
 ?>
 <!DOCTYPE html>
@@ -348,27 +362,12 @@ if(isset($_POST['submit'])) {
 <div><div style="height: 20px; overflow: hidden;"></div>
 <div id='139083701912618958-gallery' class='imageGallery' style='line-height: 0px; padding: 0; margin: 0'>
 
-<?php
+    <?php
+    foreach ($gallery as $pic) {
+        ?>
 
-/*    $db = db::getInstance();
-    $sql = "SELECT
-                G.userID,
-                G.picID,
-                G.eventID,
-                G.ext,
-                G.data
-            FROM Gallery G
-            WHERE G.eventID = $eventID;
-    ";
-
-    $stmt = $db->prepare($sql);
-    $stmt->execute();
-
-    $result = $stmt->fetchAll();
-
-    foreach ($result as &$pic) { ?>
-    <div id='139083701912618958-imageContainer0' style='float:left;width:33.28%;margin:0;'><div id='139083701912618958-insideImageContainer0' style='position:relative;margin:5px;padding:0 8px 8px 0'><div style='position:relative;width:100%;padding:0 0 75.08%;'><a><img src='picture.php?picID=<?php echo $pic['picID']; ?>" class='galleryImage galleryImageBorder' _width='333' _height='225' style='position:absolute;border-width:1px;padding:3px;width:100%;top:5%;left:0%' /></a></div></div></div>;  <!-- <div id='139083701912618958-imageContainer1' style='float:left;width:33.28%;margin:0;'><div id='139083701912618958-insideImageContainer1' style='position:relative;margin:5px;padding:0 8px 8px 0'><div style='position:relative;width:100%;padding:0 0 75.08%;'><a href='uploads/1/3/4/4/13443306/8485349_orig.jpg' rel='lightbox[gallery139083701912618958]' onclick='if (!window.lightboxLoaded) return false'><img src='uploads/1/3/4/4/13443306/8485349.jpg' class='galleryImage galleryImageBorder' _width='333' _height='222' style='position:absolute;border-width:1px;padding:3px;width:100%;top:5.6%;left:0%' /></a></div></div></div><div id='139083701912618958-imageContainer2' style='float:left;width:33.28%;margin:0;'><div id='139083701912618958-insideImageContainer2' style='position:relative;margin:5px;padding:0 8px 8px 0'><div style='position:relative;width:100%;padding:0 0 75.08%;'><a href='uploads/1/3/4/4/13443306/2260870_orig.jpg' rel='lightbox[gallery139083701912618958]' onclick='if (!window.lightboxLoaded) return false'><img src='uploads/1/3/4/4/13443306/2260870.jpg' class='galleryImage galleryImageBorder' _width='279' _height='250' style='position:absolute;border-width:1px;padding:3px;width:83.78%;top:0%;left:8.11%' /></a></div></div></div><div id='139083701912618958-imageContainer3' style='float:left;width:33.28%;margin:0;'><div id='139083701912618958-insideImageContainer3' style='position:relative;margin:5px;padding:0 8px 8px 0'><div style='position:relative;width:100%;padding:0 0 75.08%;'><a href='uploads/1/3/4/4/13443306/817215_orig.jpg' rel='lightbox[gallery139083701912618958]' onclick='if (!window.lightboxLoaded) return false'><img src='uploads/1/3/4/4/13443306/817215.jpg' class='galleryImage galleryImageBorder' _width='333' _height='193' style='position:absolute;border-width:1px;padding:3px;width:100%;top:11.4%;left:0%' /></a></div></div></div><span style='display: block; clear: both; height: 0px; overflow: hidden;'></span>  -->
-    <php } */ ?>
+        <span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><img class="wsite-image galleryImageBorder" src="picture.php?picID=20" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" width="100" height="100"/><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
+        <?php } ?>
 
 
 </div>
