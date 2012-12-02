@@ -173,37 +173,37 @@ if (isset($_POST['submit'])) {
             <div id="banner" >
                 <div class="wsite-header" >
                     
-                                <span style="float:right; margin-right:300px; margin-top:15px;">
-                                        <form class="form-search" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
-                                          
-                                          <div class="input-append">
-                                           <!-- <input type="text" class="span2 search-query input-xlarge" id="submit" name="submit">-->
-                                            <div><input class="input-xlarge" type="text" id="submit" name="submit" placeholder="Search events, venues, friends"></div>
+                    <span style="float:right; margin-right:300px; margin-top:15px;">
+                        <form class="form-search" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
+                          
+                          <div class="input-append">
+                           <!-- <input type="text" class="span2 search-query input-xlarge" id="submit" name="submit">-->
+                            <div><input class="input-xlarge" type="text" id="submit" name="submit" placeholder="Search events, venues, friends"></div>
 
-                                            <!--<div><button href="#myModal" role="button" data-toggle="modal" type="submit" class="btn btn-eventPR" style="text-align:center">Search</button></div>
-                                            
+                            <!--<div><button href="#myModal" role="button" data-toggle="modal" type="submit" class="btn btn-eventPR" style="text-align:center">Search</button></div>
+                            
 
 
-                                         -->
-                                          </div>
-                                        
+                         -->
+                          </div>
+                        
 <!--
-                                        <input type="text" id="submit" name="submit">
-                                        <button href="#myModal" role="button" data-toggle="modal" type="submit" class="btn btn-eventPR">Search</button>
-                                        
+                        <input type="text" id="submit" name="submit">
+                        <button href="#myModal" role="button" data-toggle="modal" type="submit" class="btn btn-eventPR">Search</button>
+                        
 -->
-                                        <div id="eModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="background-color:black;">
-                                              <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                <h3>Search Results</h3>
-                                              </div>
-                                              <div class="modal-body"></div>
-                                              <div class="modal-footer" style= "background-color:darkgray;">
-                                                <button class="btn btn-eventPR" data-dismiss="modal" aria-hidden="true">Close</button>
-                                              </div>
-                                            </div>
-                                    </form>
-                                </span>
+                        <div id="eModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="background-color:black;">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h3>Search Results</h3>
+                              </div>
+                              <div class="modal-body"></div>
+                              <div class="modal-footer" style= "background-color:darkgray;">
+                                <button class="btn btn-eventPR" data-dismiss="modal" aria-hidden="true">Close</button>
+                              </div>
+                            </div>
+                        </form>
+                    </span>
 
                             
                             
