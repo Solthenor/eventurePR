@@ -74,7 +74,7 @@ require_once('checkAuth.php');
 
                 <h4>About us:<br /></h4>
                 <p>E-venturePR is a means of staying in tune with the eccentricities of life.
-                    Wether it be music, cinema, theater, or of a professional nature,
+                    Wether it be music, cinema, theater, or a professional matter,
                     E-venturePR's goal is to raise awareness of cultural events that would have otherwise gone unnoticed,
                     to improve community interaction, and to make life a bit more fun!
 
@@ -93,7 +93,7 @@ require_once('checkAuth.php');
                             <td class='wsite-multicol-col' style='width:34.634492266734%;padding:0 15px'>
 
                                 <h4 style="margin-left:10px;text-align:left;">Álvaro Calderón<br /></h4>
-                                <span class='imgPusher' style='float:right;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:right;margin-top:0px;*margin-top:0px'><a href=''><img class="wsite-image galleryImageBorder" src="http://i.imgur.com/hPGUi.jpg?1" style="margin-top: 5px; margin-bottom: 10px; margin-left: 10px; margin-right: 0px; border-width:1px;padding:3px;width:150px;height: 225px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
+                                <span class='imgPusher' style='float:right;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:right;margin-top:0px;*margin-top:0px'><a href=''><img class="wsite-image galleryImageBorder" src="http://i.imgur.com/hPGUi.jpg?1" style="margin-top: 5px; margin-bottom: 10px; margin-left: 10px; margin-right: 0px; border-width:1px;padding:3px; height: 225px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
                                 <div class="paragraph" style="text-align:left;display:inline-table;margin-left: 25px;"><a href="profile.php">Amateur astronaut.&nbsp;</a></div>
                                 <hr style="clear:both;visibility:hidden;width:100%;">
 
