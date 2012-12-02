@@ -135,6 +135,8 @@ Dynamically changes depending on the user accessing it
     <link rel='stylesheet' type='text/css' href='css/main_style.css' title='wsite-theme-css' />
     <link href='http://cdn1.editmysite.com/editor/fonts/Capture_it/font.css?2' rel='stylesheet' type='text/css' />
     <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    
     <style type='text/css'>
         #wsite-content div.paragraph, #wsite-content p, #wsite-content .product-block .product-title, #wsite-content .product-description, .blog-sidebar div.paragraph, .blog-sidebar p, .wsite-form-field label, .wsite-form-field label {}
         #wsite-content h2, #wsite-content .product-long .product-title, #wsite-content .product-large .product-title, #wsite-content .product-small .product-title, .blog-sidebar h2 {}
@@ -148,6 +150,44 @@ Dynamically changes depending on the user accessing it
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.min.js?1346362758'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/images/common/utilities-jq.js?1346362758'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/flyout_menus_jq.js?1346362758'></script>
+    <script src="js/bootstrap.min.js"></script>
+     <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    
+    <style type="text/css">@import "jquery.themes.css";</style> 
+    <script type="text/javascript" src="jquery.themes.js"></script>
+    <link href="css/dark-hive/jquery-ui-1.9.2.custom.css" rel="stylesheet">
+    <script src="js/jquery-1.8.3.js"></script>
+    <script src="js/jquery-ui-1.9.2.custom.js"></script>
+    <script>
+    $(function() {
+        $( "#accordion" ).accordion({ heightStyle: "fill" });
+    });
+    </script>
+     <style>
+    #accordion-resizer {
+        padding: 10px;
+        width: 350px;
+        height: 220px;
+    }
+    </style>
+    <script>
+    $(function() {
+        $( "#accordion" ).accordion({
+            heightStyle: "fill"
+        });
+    });
+    $(function() {
+        $( "#accordion-resizer" ).resizable({
+            minHeight: 140,
+            minWidth: 200,
+            resize: function() {
+                $( "#accordion" ).accordion( "refresh" );
+            }
+        });
+    });
+    </script>
 </head>
 <body class='wsite-theme-dark no-header-page wsite-page-nightwish-detail'>
 <div id="wrapper">
@@ -211,11 +251,12 @@ Dynamically changes depending on the user accessing it
                             <hr style="clear:both;visibility:hidden;width:100%;" />
                             <div class="btn-toolbar" style="padding: 10px 10px 0 0; display: inline-block;text-align: center; ">
                                 <div class="btn-group">
-                                    <a href="create-event.php" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">E-vent it!</span></a>
-                                    <a href="myEvents.php" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">My E-vents</span></a>
-                                    <a href="create-venue.php" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">Create Venue</span></a>
+
                                     <a href="friends.php" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">Friends</span></a>
-                                    <a href="contacts.php" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">Find People</span></a>
+                                    <a href="myEvents.php" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">My E-vents</span></a>
+                                    <a href="create-event.php" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">Create Event</span></a>
+                                    <a href="create-venue.php" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">Create Venue</span></a>                                    
+                                    <a href="editProfile.php" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">Edit Profile</span></a>
 
 
                                 </div>
@@ -293,7 +334,7 @@ Dynamically changes depending on the user accessing it
                 <tr class='wsite-multicol-tr'>
                     <td class='wsite-multicol-col' style='width:50%;padding:0 15px'>
 
-                        <h2 style="text-align:center;">Memorable E-ventures</h2>
+                        <h2 style="text-align:center;">Upcoming Events</h2>
                         <!--
                         <div>
                             <div><div style="height: 20px; overflow: hidden;"></div>
@@ -305,34 +346,77 @@ Dynamically changes depending on the user accessing it
                         </div>
                         -->
                         <div id="mainmenu">
-                            <ul style="font-size: 14px; color: white;">
-                                <!-- Selects events where there user has logged as I wanna go!-->
-                                <?php $db = db::getInstance();
-                                $sql = "SELECT
-                                        eventID,
-                                        eventName
-                                    FROM Event AS r1, User AS u1
-                                        JOIN (SELECT (RAND() * (SELECT MAX(eventID) FROM Attends)) AS id) AS r2
-                                               WHERE r1.eventID >= r2.id
+                            <div class="ui-widget-content">
+                                    <div id="accordion">
+                                    <!-- Selects events where there user has logged as I wanna go!-->
+                                    <?php $db = db::getInstance();
+                                    $sql = "SELECT
+                                            E.eventID,
+                                            E.eventName,
+                                            E.eventType,
+                                            E.genre,
+                                            E.flyer,
+                                            DATE_FORMAT(E.date, '%W, %M %e, %Y') as date,
+                                            E.startHour,
+                                            E.endHour,
+                                            E.status,
+                                            E.featured,
+                                            E.price,
+                                            E.flag,
+                                            E.description,
+                                            E.userID
+                                        FROM Event AS E
+                                        INNER JOIN Attends A ON E.eventID=A.eventID
+                                        WHERE A.userID={$id};
+                                                   ";
 
-                                                AND
-                                               u1.userID = {$id}
+                                    $stmt = $db->prepare($sql);
+                                    $stmt->execute();
 
-                                               ORDER BY r1.eventID ASC
-                                               LIMIT 5;
-                                               ";
+                                    $result = $stmt->fetchAll();
 
-                                $stmt = $db->prepare($sql);
-                                $stmt->execute();
+                                    foreach ($result as $event) { ?>
 
-                                $result = $stmt->fetchAll();
 
-                                foreach ($result as $event) {
-                                    echo "<li><a href='event.php?eventID={$event['eventID']}'> <span style='color: white'>{$event['eventName']}</span></a></li>
-                                                <div style='height: 20px; overflow: hidden; width: 100%;''></div>";
-                                }
-                                ?>
-                            </ul>
+                                        <h3><?php echo $event['eventName'] ?></h3>
+                                        <div>
+                                            <a href='event.php?eventID=<?php echo $event['eventID']?>'><img src='picture.php?picID=<?php echo $event['flyer']?>' alt='img/No-image-available.jpg' style="max-width: 30%; float:left;"></a>
+                                            <p style="float:left"><?php echo $event['description'] ?></p>
+                                        </div>
+                                        
+                                    
+                                    
+                                    
+                                    
+                                          
+                                <?php } ?>
+                                </div>
+                                </div>
+                                                                <!--
+                                <li><a href='event.php?eventID={$event['eventID']}'> <span style='color: white'>{$event['eventName']}</span></a></li>
+                                                <div style='height: 20px; overflow: hidden; width: 100%;''></div>
+
+                                        
+
+
+                                    <div id="list">
+                                        <ul data-role="listview" data-inset="true" data-split-theme="c">
+                                            <li><a href=""><img src="picture.php?picID=<?php echo $event['flyer'] ?>" class="ui-li-thumb" style="position:absolute !important; top: 10px; left: 10px; height: 80%"><h3><?php echo $event['eventName'] ?></h3></a></li>
+                                        </ul>
+
+                                    </div>
+
+
+
+                                                <li class='span4'>
+                                            <div class='thumbnail' >
+                                              <img src='picture.php?picID=<?php echo $event['flyer']?>' alt='img/No-image-available.jpg'>
+                                              <a href='event.php?eventID=<?php echo $event['eventID'] ?>'><h4><?php echo $event['eventName'] ?></h4></a>
+                                              <p style='color: white'><?php echo $event['description'] ?></p>
+                                            </div>
+                                          </li>
+                            -->
+                            
 
 
 

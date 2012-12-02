@@ -1,3 +1,19 @@
+/*
+ rix-kun was here
+ --------------------------------------------------------------------------------------------
+*/
+
+#accordion .ui-accordion-header.ui-accordion-header-active {
+    background-image: -moz-linear-gradient(top, #227289, #123B47) !important;
+    background-image: -webkit-linear-gradient(top, #227289, #123B47) !important;
+    background-image: linear-gradient(top, #227289, #123B47) !important;
+}
+
+#accordion .ui-accordion-content {
+    height: auto !important;
+    min-height: 40px !important;
+}
+
 /* Resets
 --------------------------------------------------------------------------------*/
 
