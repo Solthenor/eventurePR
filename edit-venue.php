@@ -1,19 +1,63 @@
 <?php              // Used to create venues and load them into the venue table of our database
 require_once('logoutHandler.php');
 require_once('checkAuth.php');
+require_once('db.php');
 
 if( !$loggedin ){
   header('Location: index.php');
   return;
 }
 
-if ( count($_POST) > 0) {
-    require_once('db.php');
+$venueID = $_GET['venueID'];
 
-    $db = db::getInstance();
+if (!isset($venueID)) {
+    header('Location: index.php');
+    return;
+}
+
+$db = db::getInstance();
+
+$sql = "SELECT 
+            V.vName, 
+            V.website, 
+            V.GPS, 
+            V.pNumber, 
+            V.street,
+            V.city, 
+            V.state, 
+            V.zipcode, 
+            V.profilePic, 
+            V.description
+        FROM Venue V
+        WHERE V.venueID = {$venueID};
+";
+
+$stmt = $db->prepare($sql);
+$stmt->execute();
+$result = $stmt->fetchAll();
+$venue = $result[0];
+
+if ( count($_POST) > 0) {
+    $name = addslashes($_POST['venue-name']);
+    $description = addslashes($_POST['description']);
+    $sql = "UPDATE Venue 
+            SET 
+                userID = {$id},
+                vName = '{$name}',
+                street = '{$_POST['street']}',
+                city = '{$_POST['city']}',
+                state = '{$_POST['state']}',
+                zipcode = '{$_POST['zipcode']}',
+                pNumber = '{$_POST['telephone']}',
+                website = '{$_POST['website']}',
+                description = '{$description}'
+            WHERE venueID = {$venueID}
+    ";
+    
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
 
     if ($_FILES["photo"]["error"] == 0) {
-
       $type = str_replace('image/', '', $_FILES['photo']['type']);
 
       $fileName = $_FILES['photo']['name'];
@@ -36,48 +80,16 @@ if ( count($_POST) > 0) {
       $stmt->execute();
 
       $picID = $db->lastInsertId();
+
+      $sql = "UPDATE Venue
+              SET
+                profilePic = {$picID}
+              WHERE venueID = {$venueID}
+      ";
+
+      $stmt = $db->prepare($sql);
+      $stmt->execute();
     }
-
-    //TODO: better validation for empty fields
-
-    $sql = "INSERT INTO Venue 
-        SET 
-            userID = {$id},
-            vName = '{$_POST['venue-name']}',
-            street = '{$_POST['street']}',
-            city = '{$_POST['city']}',
-            state = '{$_POST['state']}',
-            zipcode = '{$_POST['zipcode']}',
-            GPS = '{$_POST['gps']}',
-            pNumber = '{$_POST['telephone']}',
-            website = '{$_POST['website']}',
-            description = '{$_POST['description']}'
-    ";
-
-    if(isset($picID)) {
-      $sql .= ", profilePic= {$picID}";
-    }
-    
-    $stmt = $db->prepare($sql);
-    // $stmt->bindValue(':vName', , PDO::PARAM_STR);
-    // $stmt->bindValue(':street', $_POST['location'], PDO::PARAM_STR);
-    // $stmt->bindValue(':city', $_POST['location'], PDO::PARAM_STR);
-    // $stmt->bindValue(':zipcode', $_POST['location'], PDO::PARAM_STR);
-    // $stmt->bindValue(':pNumber', $_POST['telephone'], PDO::PARAM_STR);
-    // $stmt->bindValue(':website', $_POST['website'], PDO::PARAM_STR);
-    // $stmt->bindValue(':description', $_POST['description'], PDO::PARAM_STR);
-    $stmt->execute();
-
-    $venueID = $db->lastInsertId();
-}
-
-function redirect(){
-
-    global $venueID;
-
-    if(isset($_POST['submit']))
-        echo "<script>".PHP_EOL."window.location='venue.php?venueID={$venueID}'".PHP_EOL."</script>";
-
 }
 
 ?>
@@ -109,11 +121,6 @@ function redirect(){
     <script src="js/bootstrap.min.js"></script>
 </head>
 <body class='wsite-theme-dark no-header-page wsite-page-create-event'>
-<?php
-
-redirect();
-
-?>
 <div id="wrapper">
     <table id="header">
         <tr>
@@ -162,17 +169,16 @@ redirect();
                                         <tr class='wsite-multicol-tr'>
 
                                             <td class='wsite-multicol-col' style='width:68.805309734513%;padding:0 15px'>
-                                                <div style="text-align: left;"><a class="btn btn-eventPR" href="profile.php"><span style="font-weight: bold; font-size: 14px; font-family: Arial sans-serif;">GO BACK TO PROFILE</span></a></div>
-                                                <h2 style="text-align:left;">Create Venue</h2>
+                                                <h2 style="text-align:left;">Edit Venue</h2>
 
                                                 <div>
-                                                    <form  action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" id="create-event" enctype="multipart/form-data">
+                                                    <form  action="<?php echo $_SERVER['PHP_SELF'] . "?venueID={$venueID}" ?>" method="POST" id="edit-venue" enctype="multipart/form-data">
                                                         <div id="807999966852778988-form-parent" class="wsite-form-container" style="margin-top:10px;">
                                                             <ul class="formlist" id="807999966852778988-form-list">
                                                                 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
                                                                     <label class="wsite-form-label" for="venue-name">Venue Name: <span class="form-required">*</span></label>
                                                                     <div class="wsite-form-input-container">
-                                                                        <input id="venue-name" class="wsite-form-input wsite-input" type="text" name="venue-name" style="width:200px;" />
+                                                                        <input id="venue-name" class="wsite-form-input wsite-input" type="text" name="venue-name" style="width:200px;" value="<?php echo $venue['vName'] ?>" />
                                                                     </div>
                                                                     <div id="instructions-461209313855761342" class="wsite-form-instructions" style="display:none;"></div>
                                                                 </div></div>
@@ -180,7 +186,7 @@ redirect();
                                                                 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
                                                                     <label class="wsite-form-label" for="street">Street: <span class="form-required">*</span></label>
                                                                     <div class="wsite-form-input-container">
-                                                                        <input id="street" class="wsite-form-input wsite-input" type="text" name="street" style="width:200px;" />
+                                                                        <input id="street" class="wsite-form-input wsite-input" type="text" name="street" value="<?php echo $venue['street'] ?>" style="width:200px;" />
                                                                     </div>
                                                                     <div id="instructions-935462346745001510" class="wsite-form-instructions" style="display:none;"></div>
                                                                 </div></div>
@@ -188,7 +194,7 @@ redirect();
                                                                 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
                                                                     <label class="wsite-form-label" for="city">City: <span class="form-required">*</span></label>
                                                                     <div class="wsite-form-input-container">
-                                                                        <input id="city" class="wsite-form-input wsite-input" type="text" name="city" style="width:200px;" />
+                                                                        <input id="city" class="wsite-form-input wsite-input" type="text" name="city" value="<?php echo $venue['city'] ?>" style="width:200px;" />
                                                                     </div>
                                                                     <div id="instructions-935462346745001510" class="wsite-form-instructions" style="display:none;"></div>
                                                                 </div></div>
@@ -196,7 +202,7 @@ redirect();
                                                                 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
                                                                     <label class="wsite-form-label" for="state">State: <span class="form-required">*</span></label>
                                                                     <div class="wsite-form-input-container">
-                                                                        <input id="state" class="wsite-form-input wsite-input" type="text" name="state" style="width:200px;" />
+                                                                        <input id="state" class="wsite-form-input wsite-input" type="text" name="state" value="<?php echo $venue['state'] ?>" style="width:200px;" />
                                                                     </div>
                                                                     <div id="instructions-935462346745001510" class="wsite-form-instructions" style="display:none;"></div>
                                                                 </div></div>
@@ -204,7 +210,7 @@ redirect();
                                                                 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
                                                                     <label class="wsite-form-label" for="zipcode">Zip code: <span class="form-required">*</span></label>
                                                                     <div class="wsite-form-input-container">
-                                                                        <input id="zipcode" class="wsite-form-input wsite-input" type="text" name="zipcode" style="width:200px;" />
+                                                                        <input id="zipcode" class="wsite-form-input wsite-input" type="text" name="zipcode" value="<?php echo $venue['zipcode'] ?>" style="width:200px;" />
                                                                     </div>
                                                                     <div id="instructions-935462346745001510" class="wsite-form-instructions" style="display:none;"></div>
                                                                 </div></div>
@@ -212,7 +218,7 @@ redirect();
                                                                 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
                                                                     <label class="wsite-form-label" for="telephone">Telephone: <span class="form-required">*</span></label>
                                                                     <div class="wsite-form-input-container">
-                                                                        <input id="telephone" class="wsite-form-input wsite-input" type="text" name="telephone" style="width:200px;" />
+                                                                        <input id="telephone" class="wsite-form-input wsite-input" type="text" name="telephone" value="<?php echo $venue['pNumber'] ?>" style="width:200px;" />
                                                                     </div>
                                                                     <div id="instructions-935462346745001510" class="wsite-form-instructions" style="display:none;"></div>
                                                                 </div></div>
@@ -220,7 +226,7 @@ redirect();
                                                                 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
                                                                     <label class="wsite-form-label" for="gps">Coordinates: (Latitude,Longitude) <span class="form-required">*</span></label>
                                                                     <div class="wsite-form-input-container">
-                                                                        <input id="gps" class="wsite-form-input wsite-input" type="text" name="gps" style="width:200px;" />
+                                                                        <input id="gps" class="wsite-form-input wsite-input" type="text" name="gps" value="<?php echo $venue['GPS'] ?>" style="width:200px;" />
                                                                     </div>
                                                                     <div id="instructions-935462346745001510" class="wsite-form-instructions" style="display:none;"></div>
                                                                 </div></div>
@@ -228,7 +234,7 @@ redirect();
                                                                 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
                                                                     <label class="wsite-form-label" for="website">Website: <span class="form-required">*</span></label>
                                                                     <div class="wsite-form-input-container">
-                                                                        <input id="website" class="wsite-form-input wsite-input" type="text" name="website" style="width:200px;" />
+                                                                        <input id="website" class="wsite-form-input wsite-input" type="text" name="website" value="<?php echo $venue['website'] ?>" style="width:200px;" />
                                                                     </div>
                                                                     <div id="instructions-935462346745001510" class="wsite-form-instructions" style="display:none;"></div>
                                                                 </div></div>
@@ -236,7 +242,7 @@ redirect();
                                                                 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
                                                                     <label class="wsite-form-label" for="description">Description: <span class="form-required">*</span></label>
                                                                     <div class="wsite-form-input-container">
-                                                                        <textarea id="description" class="wsite-form-input wsite-input" name="description" style="width:285px; height: 50px"></textarea>
+                                                                        <textarea id="description" class="wsite-form-input wsite-input" name="description" style="width:285px; height: 50px"><?php echo $venue['description'] ?></textarea>
                                                                     </div>
                                                                     <div id="instructions-740288841696996782" class="wsite-form-instructions" style="display:none;"></div>
                                                                 </div></div>
