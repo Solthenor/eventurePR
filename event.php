@@ -315,7 +315,7 @@ $gallery = $stmt2->fetchAll();
         
     <p style="display: inline-block; font-style: italic; padding-left: 10px;"><?php echo $attendees ?> people are going</p>
 
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?><?php echo "?eventID={$eventID}" ?>" method="POST">
+    <form action="<?php echo $_SERVER['PHP_SELF'] . "?eventID={$eventID}" ?>" method="POST">
         <input name="action" value="Flag" type="submit" class="btn btn-eventPR" style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;" />
     </form>
 
@@ -394,32 +394,50 @@ $gallery = $stmt2->fetchAll();
 
         <h2 style="text-align:left;">Wall:<br /></h2>
         <div style="border: 1px solid #f5f5f5; padding: 20px; height: 60%; overflow: auto; background-color:black;">
-            
-            <!--
 
-                                    <span class="imgPusher" style="float:left;height:0px"></span>
-                                    <div style="position:relative;float:left;z-index:10;width:70px;clear:left;margin-top:0px;*margin-top:0px">
-                                    <a><img class="wsite-image galleryImageBorder" src="picture.php?picID={$comment['profilePicture'] }" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border: 1px double gray;padding:3px; background-color: #1a1a1a;" alt="Picture">
-                                    </a>
-                                    <div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></div>
-                                    -->
-            
+            <ul style="font-size: 14px; color: white;">
 
+                <!--  Selects comments posted to user's wall -->
+                <?php
+
+                $db = db::getInstance();
+                if(!$friendProfile) { 
+                    $sql = "SELECT
+                               userID,
+                               content
+                           FROM Comment c1
+                           WHERE c1.eventID='{$eventID}';
+                    ";
+                }
+
+                $stmt = $db->prepare($sql);
+                $stmt->execute();
+
+                $result = $stmt->fetchAll();
+
+                foreach ($result as $comment) {
+                    echo "<li> 
+                            <span style='color: white'>: {$comment['content']}</span>
+                          </li>
+                        <div style='height: 20px; overflow: hidden; width: 100%;''></div>";
+                }
+                ?>
+            </ul>
             <hr style="clear:both;visibility:hidden;width:100%;">
 
         </div>
-        <form action="event.php" method="POST" id="submit" enctype="multipart/form-data">
-                        <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
-                            <label class="wsite-form-label" for="description">Post to wall: <span class="form-required">*</span></label>
-                            <div class="wsite-form-input-container">
-                                <textarea id="description" class="wsite-form-input wsite-input" name="comment-text" style="width:285px; height: 50px"></textarea>
-                            </div>
-                            <div id="instructions-740288841696996782" class="wsite-form-instructions" style="display:none;"></div>
-                        </div></div>
-                        <div style="text-align:left; margin-top:10px; margin-bottom:10px;">
-                            <input type='submit' name="submit" value="Post" class='btn btn-eventPR' />
-                        </div>
-                    </form>
+        <form action="<?php echo $_SERVER['PHP_SELF'] . "?eventID={$eventID}" ?>" method="POST" id="submit" enctype="multipart/form-data">
+            <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
+                <label class="wsite-form-label" for="description">Post to wall: <span class="form-required">*</span></label>
+                <div class="wsite-form-input-container">
+                    <textarea id="description" class="wsite-form-input wsite-input" name="comment-text" style="width:285px; height: 50px"></textarea>
+                </div>
+                <div id="instructions-740288841696996782" class="wsite-form-instructions" style="display:none;"></div>
+            </div></div>
+            <div style="text-align:left; margin-top:10px; margin-bottom:10px;">
+                <input type='submit' name="submit" value="Post" class='btn btn-eventPR' />
+            </div>
+        </form>
 
 
 </div></div>
