@@ -1,5 +1,4 @@
 <?php                   // Displays the event information on the web page. This view is set from the information of an event created.
-require_once('mobileRedirect.php');
 require_once('logoutHandler.php');
 require_once('db.php');
 require_once('checkAuth.php');
@@ -51,10 +50,9 @@ $result = $stmt->fetchAll();
 $event = $result[0];
 $eventUserID = $event['userID'];
 $attendees = $event['attendees'];
+
 if(isset($_POST['upload'])) {
-
     if ($_FILES["photo"]["error"] == 0) {
-
         $type = str_replace('image/', '', $_FILES['photo']['type']);
 
         $fileName = $_FILES['photo']['name'];
@@ -67,17 +65,25 @@ if(isset($_POST['upload'])) {
         $content = addslashes($content);
         fclose($fp);
 
-        $sql = "INSERT INTO Gallery
-            SET
-              userID = '{$id}',
-              eventID = '{$eventID}',
-              ext = '{$type}',
-              data = '{$content}'";
+        $sql = "INSERT INTO Picture
+                SET
+                  userID = '{$id}',
+                  ext = '{$type}',
+                  data = '{$content}'";
 
         $stmt = $db->prepare($sql);
         $stmt->execute();
 
-      // $picID = $db->lastInsertId();
+        $picID = $db->lastInsertId();
+
+        $sql = "INSERT INTO Gallery
+                SET
+                  userID = '{$id}',
+                  eventID = '{$eventID}',
+                  picID = '{$picID}'";
+
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
     }
 }
 
@@ -115,10 +121,6 @@ if(isset($_POST['action'])) {
 }
 
 if(isset($_POST['submit'])) {
-    
-
-    $db = db::getInstance();
-
     $sql = "INSERT INTO Comment
             SET
                userID = {$id},
@@ -127,15 +129,12 @@ if(isset($_POST['submit'])) {
 
     $stmt = $db->prepare($sql);
     $stmt->execute();
-
 }
 
 $sql2 = "SELECT
              picID,
              userID,
-             eventID,
-             ext,
-             data
+             eventID
         FROM Gallery
         WHERE eventID='{$eventID}';
 ";
@@ -363,38 +362,31 @@ $gallery = $stmt2->fetchAll();
 <div id='139083701912618958-gallery' class='imageGallery' style='line-height: 0px; padding: 0; margin: 0'>
 
     <?php
-    foreach ($gallery as $pic) {
-        ?>
-
-        <span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><img class="wsite-image galleryImageBorder" src="picture.php?picID=20" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" width="100" height="100"/><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
-        <?php } ?>
-
+    foreach ($gallery as $pic) { ?>
+        <span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><img class="wsite-image galleryImageBorder" src="picture.php?picID=<?php echo $pic['picID'] ?>" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" width="100" height="100"/><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
+    <?php } ?>
 
 </div>
 
 <div style="height: 20px; overflow: hidden;"></div></div>
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?><?php echo "?eventID={$eventID}" ?>" method="POST">
-                       <div class="paragraph" style="text-align:left;">Add a Picture:</div>
-                       <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
-
-                        <label class="wsite-form-label" for="photo">Upload File </label>
-                        <div class="wsite-form-input-container">
-                            <input id="photo" class="wsite-form-input" type="file" name="photo" />
-                            <div style="font-size:10px;">Max file size: 20MB</div>
-                        </div>
-                        <div id="instructions-436611527555598588" class="wsite-form-instructions" style="display:none;"></div>
-                    </div></div>
-
-                    <div><div class="wsite-image wsite-image-border-border-width:0 " style="padding-top:10px;padding-bottom:10px;margin-left:10px;margin-right:10px;text-align:right">
-
-                        <div style="display:block;font-size:90%"></div>
-                    </div></div>
-
+    <form action="<?php echo $_SERVER['PHP_SELF'] . "?eventID={$eventID}" ?>" method="POST" enctype="multipart/form-data">
+        <div class="paragraph" style="text-align:left;">Add a Picture:</div>
+        <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
+            <label class="wsite-form-label" for="photo">Upload File </label>
+            <div class="wsite-form-input-container">
+                <input id="photo" class="wsite-form-input" type="file" name="photo" />
+                <div style="font-size:10px;">Max file size: 20MB</div>
+            </div>
+            <div id="instructions-436611527555598588" class="wsite-form-instructions" style="display:none;"></div>
+        </div></div>
+        <div>
+            <div class="wsite-image wsite-image-border-border-width:0 " style="padding-top:10px;padding-bottom:10px;margin-left:10px;margin-right:10px;text-align:right">
+            <div style="display:block;font-size:90%"></div>
+        </div></div>
         <div style="text-align:left; margin-top:10px; margin-bottom:10px;">
             <input type="submit" name="upload" value="Upload" class='btn btn-eventPR' />
-        </div> </form>
-
-
+        </div> 
+    </form>
 </div>
 
 </td>

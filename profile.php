@@ -1,6 +1,4 @@
-
 <?php
-require_once('mobileRedirect.php');
 require_once('db.php');
 require_once('checkAuth.php');
 require_once('logoutHandler.php');
@@ -13,34 +11,74 @@ if (!$loggedin && !isset($userID)) {
     return;
 }
 
-
-if(isset($userID)) {
-    $id = $userID;
-}
-
-// Query to select a profile depending on the userID provided
+$friendProfile = false;
 
 $db = db::getInstance();
-$sql = "SELECT
-            userName,
-            userID,
-            firstName,
-            lastName,
-            email,
-            profilePicture,
-            age,
-            gender,
-            work
-        FROM User
-        WHERE userID = {$id};
-";
 
-$stmt = $db->prepare($sql);
-$stmt->execute();
+if(isset($userID) && $id != $userID) {
+    $friendProfile = true;
+    $friendID = $userID;
+    $isFriend = false;
 
-$result = $stmt->fetchAll();
+    $sql = "SELECT
+                userID2
+            FROM AddFriend
+            WHERE userID1 = {$id}
+            AND userID2 = {$friendID};
+    ";
 
-$user = $result[0];
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+
+    $result = $stmt->fetchAll();
+
+    if(count($result[0]) > 0) {
+        $isFriend = true;
+    }
+
+    $sql = "SELECT
+                userName,
+                userID,
+                firstName,
+                lastName,
+                email,
+                profilePicture,
+                age,
+                gender,
+                work
+            FROM User
+            WHERE userID = {$friendID};
+    ";
+
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+
+    $result = $stmt->fetchAll();
+
+    $user = $result[0];
+}
+else {
+    $sql = "SELECT
+                userName,
+                userID,
+                firstName,
+                lastName,
+                email,
+                profilePicture,
+                age,
+                gender,
+                work
+            FROM User
+            WHERE userID = {$id};
+    ";
+
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+
+    $result = $stmt->fetchAll();
+
+    $user = $result[0];
+}
 
 if(!isset($user)){
     header('Location: index.php');
@@ -48,35 +86,35 @@ if(!isset($user)){
 }
 
 if(isset($_POST['submit'])) {
-    
-    
-
-    $db = db::getInstance();
-
-    $sql = "INSERT INTO Wall
-            SET
-               userID = {$id},
-               content = '{$_POST['comment-text']}';";
+    if($friendProfile) {
+        $sql = "INSERT INTO Wall
+                SET
+                   userID = {$friendID},
+                   content = '{$_POST['comment-text']}',
+                   posterID = {$id};";
+    }
+    else {
+        $sql = "INSERT INTO Wall
+                SET
+                   userID = {$id},
+                   content = '{$_POST['comment-text']}',
+                   posterID = {$id};";
+    }
 
     $stmt = $db->prepare($sql);
     $stmt->execute();
-
 }
 
-if(isset($_POST['addFriend']))
-{
-    $friend = $user['userID'];
-    $db = db::getInstance();
-
+if(isset($_POST['addFriend'])) {
     $sql = "INSERT INTO AddFriend
-                SET
-                    userID1 = '{$id}',
-                    userID2 = '{$friend}'
-                    ;";
+            SET
+                userID1 = '{$id}',
+                userID2 = '{$friendID}'
+                ;";
 
     $stmt = $db->prepare($sql);
     $stmt->execute();
-
+    $isFriend = true;
 }
 
 ?>
@@ -122,7 +160,7 @@ Dynamically changes depending on the user accessing it
                 <!-- Conditional to check login Status-->
                 <?php if($loggedin) { ?>
                 <tr>
-                    <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; "><?php echo $user['userName'] ?></a> |
+                    <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; ">Profile</a> |
                             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" style="float: right;">
                                 <input type="hidden" value="logout" name="loggedOut" />
                                 <input type="hidden" style="color: #32CD32; text-decoration: underline;" value="Log out" />
@@ -157,14 +195,19 @@ Dynamically changes depending on the user accessing it
 
                             <h2 style="text-align:left;"><?php echo $user['firstName'] ?> <?php echo $user['lastName'] ?></h2>
 
-                            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" ">
+                            <?php if($friendProfile && !$isFriend) { ?>
+
+                            <form action="<?php echo $_SERVER['PHP_SELF'] . "?userID={$friendID}"; ?>" method="POST">
                                 <input  style="height: 35px;" type="submit" class="btn btn-eventPR" name="addFriend" id="addFriend" value="Add Friend"/>
                             </form>
+
+                            <?php }?>
 
                             <span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="picture.php?picID=<?php if ($user['profilePicture'] == false) {echo "defaultPic.jpg";} else {echo $user['profilePicture'];} ?>" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;width:200px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
                             <div class="paragraph" style="text-align:left;display:block;float:left;">Username: <br />Age: <br />Gender: <br />Work: <br />E-mail: </div>
                             <div class="paragraph"style="text-align:center;display:block;float:left;"><?php echo $user['userName'] ?><br /><?php echo $user['age'] ?><br /><?php echo $user['gender'] ?><br /><?php echo $user['work'] ?><br /><?php echo $user['email'] ?></div>
 
+                            <?php if(!$friendProfile) { ?>
                             <hr style="clear:both;visibility:hidden;width:100%;" />
                             <div class="btn-toolbar" style="padding: 10px 10px 0 0; display: inline-block;text-align: center; ">
                                 <div class="btn-group">
@@ -178,6 +221,7 @@ Dynamically changes depending on the user accessing it
                                 </div>
 
                             </div>
+                            <?php } ?>
 
                         </td>
                         <td class='wsite-multicol-col' style='width:38.257993384785%;padding:0 15px'>
@@ -203,7 +247,6 @@ Dynamically changes depending on the user accessing it
 
                                                         <?php
 
-                                                        $db = db::getInstance();
                                                         $sql = "SELECT
                                                                            eventID,
                                                                            eventName
@@ -307,12 +350,22 @@ Dynamically changes depending on the user accessing it
                                 <?php
 
                                 $db = db::getInstance();
-                                $sql = "SELECT
-                                           userID,
-                                           content
-                                       FROM Wall c1
-                                       WHERE c1.userID='{$id}';
-                                ";
+                                if(!$friendProfile) { 
+                                    $sql = "SELECT
+                                               userID,
+                                               content
+                                           FROM Wall c1
+                                           WHERE c1.userID='{$id}';
+                                    ";
+                                }
+                                else {
+                                    $sql = "SELECT
+                                               userID,
+                                               content
+                                           FROM Wall c1
+                                           WHERE c1.userID='{$friendID}';
+                                    ";
+                                }
 
                                 $stmt = $db->prepare($sql);
                                 $stmt->execute();
@@ -320,8 +373,10 @@ Dynamically changes depending on the user accessing it
                                 $result = $stmt->fetchAll();
 
                                 foreach ($result as $comment) {
-                                    echo "<li> <span style='color: white'>: {$comment['content']}</span></li>
-                                           <div style='height: 20px; overflow: hidden; width: 100%;''></div>";
+                                    echo "<li> 
+                                            <span style='color: white'>: {$comment['content']}</span>
+                                          </li>
+                                        <div style='height: 20px; overflow: hidden; width: 100%;''></div>";
 
                                            
 
@@ -333,7 +388,11 @@ Dynamically changes depending on the user accessing it
                             <hr style="clear:both;visibility:hidden;width:100%;">
 
                         </div>
+                        <?php if($friendProfile) { ?>
+                        <form action="<?php echo "profile.php?userID={$friendID}" ?>" method="POST" id="submit" enctype="multipart/form-data">
+                        <?php } else {?>
                         <form action="profile.php" method="POST" id="submit" enctype="multipart/form-data">
+                        <?php } ?>
                         <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
                             <label class="wsite-form-label" for="description">Post to wall: <span class="form-required">*</span></label>
                             <div class="wsite-form-input-container">

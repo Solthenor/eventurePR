@@ -1,5 +1,4 @@
 <?php              // Used to create venues and load them into the venue table of our database
-require_once('mobileRedirect.php');
 require_once('logoutHandler.php');
 require_once('checkAuth.php');
 
