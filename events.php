@@ -324,7 +324,7 @@ if (isset($_POST['submit'])) {
                                 <td class='wsite-multicol-col' style='width:20.925110132159%;padding:0 15px'>
 
                                     <div style="text-align:left;"><div style="height: 10px; overflow: hidden;"></div>
-                                        <a class="wsite-button wsite-button-small wsite-button-highlight" href="javascript:;" >
+                                        <a class="wsite-button wsite-button-small wsite-button-highlight" href="http://www.google.com/search?q=<?php echo $event['eventName'] ?>+tickets" >
                                             <span class="wsite-button-inner">Find tickets</span>
                                         </a>
                                         <div style="height: 10px; overflow: hidden;"></div></div>
