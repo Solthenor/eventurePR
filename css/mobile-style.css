@@ -40,7 +40,7 @@
 
 	
     margin: 0 auto;
-    background: url('wrapper-scaled.jpg') top no-repeat;
+    /*background: url('wrapper-scaled.jpg') top no-repeat;*/
 }
 
 .ui-content {

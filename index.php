@@ -282,7 +282,7 @@ if (isset($_POST['submit'])) {
                                             FROM Event AS r1 
                                                 JOIN (SELECT (RAND() * (SELECT MAX(eventID) FROM Event)) AS id) AS r2
                                             WHERE r1.eventID >= r2.id
-                                            ORDER BY r1.eventID ASC
+                                            
                                             LIMIT 5
                                     ";
 

@@ -425,7 +425,7 @@ Dynamically changes depending on the user accessing it
                     </td>
                     <td class='wsite-multicol-col' style='width:50%;padding:0 15px'>
 
-                        <h2 style="text-align:left;">My wall:<br /></h2>
+                        <h2 style="text-align:left;"><?php echo $user['userName']?>'s wall:<br /></h2>
                         <div class="media" style="border: 1px solid #f5f5f5; padding: 20px; height: 60%; overflow: auto; background-color:black;">
 
                             <ul style="font-size: 14px; color: white;">
@@ -436,17 +436,20 @@ Dynamically changes depending on the user accessing it
                                 $db = db::getInstance();
                                 if(!$friendProfile) { 
                                     $sql = "SELECT
-                                               userID,
-                                               content
-                                           FROM Wall c1
+                                               c1.userID,
+                                               c1.content,
+                                               U.profilePicture
+                                           FROM Wall c1 INNER JOIN User U ON c1.userID=U.userID 
                                            WHERE c1.userID='{$id}';
                                     ";
                                 }
                                 else {
                                     $sql = "SELECT
-                                               userID,
-                                               content
-                                           FROM Wall c1
+                                               c1.userID,
+                                               c1.content,
+                                               U.profilePicture
+                                           FROM Wall c1 INNER JOIN User U ON c1.userID=U.userID
+                                           
                                            WHERE c1.userID='{$friendID}';
                                     ";
                                 }
@@ -458,9 +461,10 @@ Dynamically changes depending on the user accessing it
 
                                 foreach ($result as $comment) {
                                     echo "<li> 
-                                            <span style='color: white'>: {$comment['content']}</span>
+                                            <a href='event.php?eventID={$comment['userID']}'><img class='wsite-image galleryImageBorder' src='picture.php?picID={$comment['profilePicture']}' alt='img/default-profile.jpg' style='max-width: 15%; float:left; border-width:1px;'></a>
+                                            <span style='color: white; display:inline-block;margin-top:7px;'> : {$comment['content']}</span>
                                           </li>
-                                        <div style='height: 20px; overflow: hidden; width: 100%;''></div>";
+                                        <div style='height: 20px; overflow: hidden; width: 100%;'></div>";
 
                                            
 
@@ -477,14 +481,14 @@ Dynamically changes depending on the user accessing it
                         <?php } else {?>
                         <form action="profile.php" method="POST" id="submit" enctype="multipart/form-data">
                         <?php } ?>
-                        <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
+                        <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px; text-align:right;">
                             <label class="wsite-form-label" for="description">Post to wall: <span class="form-required">*</span></label>
                             <div class="wsite-form-input-container">
                                 <textarea id="description" class="wsite-form-input wsite-input" name="comment-text" style="width:285px; height: 50px"></textarea>
                             </div>
                             <div id="instructions-740288841696996782" class="wsite-form-instructions" style="display:none;"></div>
                         </div></div>
-                        <div style="text-align:left; margin-top:10px; margin-bottom:10px;">
+                        <div style="text-align:right; margin-top:10px; margin-bottom:10px;">
                             <input type='submit' name="submit" value="Submit" class='btn btn-eventPR' />
                         </div>
                     </form>
