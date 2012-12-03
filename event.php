@@ -1,5 +1,4 @@
 <?php                   // Displays the event information on the web page. This view is set from the information of an event created.
-require_once('mobileRedirect.php');
 require_once('logoutHandler.php');
 require_once('db.php');
 require_once('checkAuth.php');
@@ -51,11 +50,9 @@ $result = $stmt->fetchAll();
 $event = $result[0];
 $eventUserID = $event['userID'];
 $attendees = $event['attendees'];
+
 if(isset($_POST['upload'])) {
-    $db = db::getInstance();
-
     if ($_FILES["photo"]["error"] == 0) {
-
         $type = str_replace('image/', '', $_FILES['photo']['type']);
 
         $fileName = $_FILES['photo']['name'];
@@ -69,16 +66,24 @@ if(isset($_POST['upload'])) {
         fclose($fp);
 
         $sql = "INSERT INTO Picture
-            SET
-              userID = '{$id}',
-              eventID = '{$eventID}',
-              ext = '{$type}',
-              data = '{$content}'";
+                SET
+                  userID = '{$id}',
+                  ext = '{$type}',
+                  data = '{$content}'";
 
         $stmt = $db->prepare($sql);
         $stmt->execute();
 
-      // $picID = $db->lastInsertId();
+        $picID = $db->lastInsertId();
+
+        $sql = "INSERT INTO Gallery
+                SET
+                  userID = '{$id}',
+                  eventID = '{$eventID}',
+                  picID = '{$picID}'";
+
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
     }
 }
 
@@ -116,10 +121,6 @@ if(isset($_POST['action'])) {
 }
 
 if(isset($_POST['submit'])) {
-    
-
-    $db = db::getInstance();
-
     $sql = "INSERT INTO Comment
             SET
                userID = {$id},
@@ -128,8 +129,20 @@ if(isset($_POST['submit'])) {
 
     $stmt = $db->prepare($sql);
     $stmt->execute();
-
 }
+
+$sql2 = "SELECT
+             picID,
+             userID,
+             eventID
+        FROM Gallery
+        WHERE eventID='{$eventID}';
+";
+
+$stmt2 = $db->prepare($sql2);
+$stmt2->execute();
+
+$gallery = $stmt2->fetchAll();
 
 ?>
 <!DOCTYPE html>
@@ -189,7 +202,7 @@ if(isset($_POST['submit'])) {
                 },
                 scaleControl: true,
                 disableDoubleClickZoom: true,
-                draggable: true,
+                draggable: false,
                 streetViewControl: true,
                 draggableCursor: 'move'
             };
@@ -302,7 +315,7 @@ if(isset($_POST['submit'])) {
         
     <p style="display: inline-block; font-style: italic; padding-left: 10px;"><?php echo $attendees ?> people are going</p>
 
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?><?php echo "?eventID={$eventID}" ?>" method="POST">
+    <form action="<?php echo $_SERVER['PHP_SELF'] . "?eventID={$eventID}" ?>" method="POST">
         <input name="action" value="Flag" type="submit" class="btn btn-eventPR" style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;" />
     </form>
 
@@ -348,54 +361,32 @@ if(isset($_POST['submit'])) {
 <div><div style="height: 20px; overflow: hidden;"></div>
 <div id='139083701912618958-gallery' class='imageGallery' style='line-height: 0px; padding: 0; margin: 0'>
 
-<?php
-
-/*    $db = db::getInstance();
-    $sql = "SELECT
-                G.userID,
-                G.picID,
-                G.eventID,
-                G.ext,
-                G.data
-            FROM Gallery G
-            WHERE G.eventID = $eventID;
-    ";
-
-    $stmt = $db->prepare($sql);
-    $stmt->execute();
-
-    $result = $stmt->fetchAll();
-
-    foreach ($result as &$pic) { ?>
-    <div id='139083701912618958-imageContainer0' style='float:left;width:33.28%;margin:0;'><div id='139083701912618958-insideImageContainer0' style='position:relative;margin:5px;padding:0 8px 8px 0'><div style='position:relative;width:100%;padding:0 0 75.08%;'><a><img src='picture.php?picID=<?php echo $pic['picID']; ?>" class='galleryImage galleryImageBorder' _width='333' _height='225' style='position:absolute;border-width:1px;padding:3px;width:100%;top:5%;left:0%' /></a></div></div></div>;  <!-- <div id='139083701912618958-imageContainer1' style='float:left;width:33.28%;margin:0;'><div id='139083701912618958-insideImageContainer1' style='position:relative;margin:5px;padding:0 8px 8px 0'><div style='position:relative;width:100%;padding:0 0 75.08%;'><a href='uploads/1/3/4/4/13443306/8485349_orig.jpg' rel='lightbox[gallery139083701912618958]' onclick='if (!window.lightboxLoaded) return false'><img src='uploads/1/3/4/4/13443306/8485349.jpg' class='galleryImage galleryImageBorder' _width='333' _height='222' style='position:absolute;border-width:1px;padding:3px;width:100%;top:5.6%;left:0%' /></a></div></div></div><div id='139083701912618958-imageContainer2' style='float:left;width:33.28%;margin:0;'><div id='139083701912618958-insideImageContainer2' style='position:relative;margin:5px;padding:0 8px 8px 0'><div style='position:relative;width:100%;padding:0 0 75.08%;'><a href='uploads/1/3/4/4/13443306/2260870_orig.jpg' rel='lightbox[gallery139083701912618958]' onclick='if (!window.lightboxLoaded) return false'><img src='uploads/1/3/4/4/13443306/2260870.jpg' class='galleryImage galleryImageBorder' _width='279' _height='250' style='position:absolute;border-width:1px;padding:3px;width:83.78%;top:0%;left:8.11%' /></a></div></div></div><div id='139083701912618958-imageContainer3' style='float:left;width:33.28%;margin:0;'><div id='139083701912618958-insideImageContainer3' style='position:relative;margin:5px;padding:0 8px 8px 0'><div style='position:relative;width:100%;padding:0 0 75.08%;'><a href='uploads/1/3/4/4/13443306/817215_orig.jpg' rel='lightbox[gallery139083701912618958]' onclick='if (!window.lightboxLoaded) return false'><img src='uploads/1/3/4/4/13443306/817215.jpg' class='galleryImage galleryImageBorder' _width='333' _height='193' style='position:absolute;border-width:1px;padding:3px;width:100%;top:11.4%;left:0%' /></a></div></div></div><span style='display: block; clear: both; height: 0px; overflow: hidden;'></span>  -->
-    <php } */ ?>
-
+    <?php
+    foreach ($gallery as $pic) { ?>
+        <span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><img class="wsite-image galleryImageBorder" src="picture.php?picID=<?php echo $pic['picID'] ?>" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" width="100" height="100"/><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
+    <?php } ?>
 
 </div>
 
 <div style="height: 20px; overflow: hidden;"></div></div>
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?><?php echo "?eventID={$eventID}" ?>" method="POST">
-                       <div class="paragraph" style="text-align:left;">Add a Picture:</div>
-                       <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
-
-                        <label class="wsite-form-label" for="photo">Upload File </label>
-                        <div class="wsite-form-input-container">
-                            <input id="photo" class="wsite-form-input" type="file" name="photo" />
-                            <div style="font-size:10px;">Max file size: 20MB</div>
-                        </div>
-                        <div id="instructions-436611527555598588" class="wsite-form-instructions" style="display:none;"></div>
-                    </div></div>
-
-                    <div><div class="wsite-image wsite-image-border-border-width:0 " style="padding-top:10px;padding-bottom:10px;margin-left:10px;margin-right:10px;text-align:right">
-
-                        <div style="display:block;font-size:90%"></div>
-                    </div></div>
-
+    <form action="<?php echo $_SERVER['PHP_SELF'] . "?eventID={$eventID}" ?>" method="POST" enctype="multipart/form-data">
+        <div class="paragraph" style="text-align:left;">Add a Picture:</div>
+        <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
+            <label class="wsite-form-label" for="photo">Upload File </label>
+            <div class="wsite-form-input-container">
+                <input id="photo" class="wsite-form-input" type="file" name="photo" />
+                <div style="font-size:10px;">Max file size: 20MB</div>
+            </div>
+            <div id="instructions-436611527555598588" class="wsite-form-instructions" style="display:none;"></div>
+        </div></div>
+        <div>
+            <div class="wsite-image wsite-image-border-border-width:0 " style="padding-top:10px;padding-bottom:10px;margin-left:10px;margin-right:10px;text-align:right">
+            <div style="display:block;font-size:90%"></div>
+        </div></div>
         <div style="text-align:left; margin-top:10px; margin-bottom:10px;">
             <input type="submit" name="upload" value="Upload" class='btn btn-eventPR' />
-        </div> </form>
-
-
+        </div> 
+    </form>
 </div>
 
 </td>
@@ -403,32 +394,50 @@ if(isset($_POST['submit'])) {
 
         <h2 style="text-align:left;">Wall:<br /></h2>
         <div style="border: 1px solid #f5f5f5; padding: 20px; height: 60%; overflow: auto; background-color:black;">
-            
-            <!--
 
-                                    <span class="imgPusher" style="float:left;height:0px"></span>
-                                    <div style="position:relative;float:left;z-index:10;width:70px;clear:left;margin-top:0px;*margin-top:0px">
-                                    <a><img class="wsite-image galleryImageBorder" src="picture.php?picID={$comment['profilePicture'] }" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border: 1px double gray;padding:3px; background-color: #1a1a1a;" alt="Picture">
-                                    </a>
-                                    <div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></div>
-                                    -->
-            
+            <ul style="font-size: 14px; color: white;">
 
+                <!--  Selects comments posted to user's wall -->
+                <?php
+
+                $db = db::getInstance();
+                if(!$friendProfile) { 
+                    $sql = "SELECT
+                               userID,
+                               content
+                           FROM Comment c1
+                           WHERE c1.eventID='{$eventID}';
+                    ";
+                }
+
+                $stmt = $db->prepare($sql);
+                $stmt->execute();
+
+                $result = $stmt->fetchAll();
+
+                foreach ($result as $comment) {
+                    echo "<li> 
+                            <span style='color: white'>: {$comment['content']}</span>
+                          </li>
+                        <div style='height: 20px; overflow: hidden; width: 100%;''></div>";
+                }
+                ?>
+            </ul>
             <hr style="clear:both;visibility:hidden;width:100%;">
 
         </div>
-        <form action="event.php" method="POST" id="submit" enctype="multipart/form-data">
-                        <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
-                            <label class="wsite-form-label" for="description">Post to wall: <span class="form-required">*</span></label>
-                            <div class="wsite-form-input-container">
-                                <textarea id="description" class="wsite-form-input wsite-input" name="comment-text" style="width:285px; height: 50px"></textarea>
-                            </div>
-                            <div id="instructions-740288841696996782" class="wsite-form-instructions" style="display:none;"></div>
-                        </div></div>
-                        <div style="text-align:left; margin-top:10px; margin-bottom:10px;">
-                            <input type='submit' name="submit" value="Post" class='btn btn-eventPR' />
-                        </div>
-                    </form>
+        <form action="<?php echo $_SERVER['PHP_SELF'] . "?eventID={$eventID}" ?>" method="POST" id="submit" enctype="multipart/form-data">
+            <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
+                <label class="wsite-form-label" for="description">Post to wall: <span class="form-required">*</span></label>
+                <div class="wsite-form-input-container">
+                    <textarea id="description" class="wsite-form-input wsite-input" name="comment-text" style="width:285px; height: 50px"></textarea>
+                </div>
+                <div id="instructions-740288841696996782" class="wsite-form-instructions" style="display:none;"></div>
+            </div></div>
+            <div style="text-align:left; margin-top:10px; margin-bottom:10px;">
+                <input type='submit' name="submit" value="Post" class='btn btn-eventPR' />
+            </div>
+        </form>
 
 
 </div></div>

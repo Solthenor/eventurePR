@@ -1,5 +1,4 @@
 <?php      // Displays the events category browser. Depending on which category the user chooses, the information is displayed for him accordingly.
-require_once('mobileRedirect.php');
 require_once('logoutHandler.php');
 require_once('db.php');
 require_once('checkAuth.php');
@@ -43,6 +42,51 @@ $stmt->execute();
 
 $events = $stmt->fetchAll();
 
+if (isset($_POST['submit'])) {
+    $search = $_POST['submit'];
+
+    $db = db::getInstance();
+
+    $userSql = "SELECT 
+            U.userName,
+            U.userID,
+            U.firstName,
+            U.lastName
+        FROM User U
+        WHERE U.userName LIKE '%{$search}%'";
+
+    $stmt = $db->prepare($userSql);
+    $stmt->execute();
+    $users = $stmt->fetchAll();
+
+    $eventSql = "SELECT 
+            E.eventID,
+            E.eventName
+        FROM Event E
+        WHERE E.eventName LIKE '%{$search}%'";
+
+    $stmt = $db->prepare($eventSql);
+    $stmt->execute();
+    $events = $stmt->fetchAll();
+
+    $venueSql = "SELECT 
+            V.venueID,
+            V.vName
+        FROM Venue V 
+        WHERE V.vName LIKE '%{$search}%'";
+
+    $stmt = $db->prepare($venueSql);
+    $stmt->execute();
+    $venues = $stmt->fetchAll();
+
+    echo json_encode(array(
+        "users" => $users,
+        "events" => $events,
+        "venues" => $venues
+    ));
+    return;
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -51,6 +95,7 @@ $events = $stmt->fetchAll();
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
+    <link rel="shortcut icon" href="../assets/ico/favicon.ico">
     <link rel='stylesheet' type='text/css' href='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.css?1346362758'>
     <link rel='stylesheet' href='http://cdn1.editmysite.com/editor/images/common/common-v2.css?buildTime=1346362758' type='text/css' />
     <link rel='stylesheet' type='text/css' href='css/main_style.css' title='wsite-theme-css' />
@@ -85,9 +130,62 @@ $events = $stmt->fetchAll();
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/images/common/utilities-jq.js?1346362758'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/flyout_menus_jq.js?1346362758'></script>
     <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+    window.$ = jQuery;
+    $(function(){
+        $('.form-search').submit(function(e){
+            e.preventDefault();
+
+            $.ajax({
+              type: 'POST',
+              url: 'index.php',
+              data: $(e.currentTarget).serialize(),
+              dataType: 'json',
+              success: function(data){
+                $('#eModal .modal-body').empty();
+
+                $('#eModal .modal-body').append('<h2>Users:</h2>');
+
+                $.each(data.users, function(index, value){
+                    $('#eModal .modal-body').append('<li><a href="profile.php?userID=' + value.userID +'">' + value.userName + '</a></li>');
+                });
+
+                $('#eModal .modal-body').append('<h2>Events:</h2>');
+
+                $.each(data.events, function(index, value){
+                    $('#eModal .modal-body').append('<li><a href="event.php?eventID=' + value.eventID +'">' + value.eventName + '</a></li>');
+                });
+
+                $('#eModal .modal-body').append('<h2>Venues:</h2>');
+
+                $.each(data.venues, function(index, value){
+                    $('#eModal .modal-body').append('<li><a href="venue.php?venueID=' + value.venueID +'">' + value.vName + '</a></li>');
+                });
+                
+                $('#eModal').modal({
+                    show: true
+                });
+              }
+            });
+
+            
+        });
+    });
+    </script>
+
 </head>
 <body class='wsite-theme-dark tall-header-page wsite-page-concerts'>
 <div id="wrapper">
+<div id="eModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="background-color:black;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>Search Results</h3>
+      </div>
+      <div class="modal-body"></div>
+      <div class="modal-footer" style= "background-color:darkgray;">
+        <button class="btn btn-eventPR" data-dismiss="modal" aria-hidden="true">Close</button>
+      </div>
+    </div>
     <table id="header">
         <tr>
             <td id="logo"><span class='wsite-logo'><a href='index.php'><span id="wsite-title">E-venturePR</span></a></span></td>
@@ -117,12 +215,38 @@ $events = $stmt->fetchAll();
             </td>
         </tr>
     </table>
+
     <div id="navigation">
         <ul><li id='active'><a href='index.php'>Home</a></li><li id='pg145650631833651339'><a href='events.php?category=Concert'>Music</a></li><li id='pg404778243583026952'><a href='events.php?category=Sports'>Sports</a></li><li id='pg441792526610757515'><a href='events.php?category=Entertainment'>Entertainment</a></li><li id='pg269210016325162137'><a href='events.php?category=Business'>Business & Education</a></li><li id="pgabout_us"><a href="about.php">About Us</a></li></ul>
         <div id="container" style="margin-top: 29px;">
             <div id="content">
                 <div id="banner">
-                    <div class="wsite-header"></div>
+                    <div class="wsite-header">
+
+                        <span style="float:right; margin-right:300px; margin-top:15px;">
+                        <form class="form-search" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
+                          
+                          <div class="input-append">
+                           <!-- <input type="text" class="span2 search-query input-xlarge" id="submit" name="submit">-->
+                            <div><input class="input-xlarge" type="text" id="submit" name="submit" placeholder="Search events, venues, friends"></div>
+
+                            <!--<div><button href="#myModal" role="button" data-toggle="modal" type="submit" class="btn btn-eventPR" style="text-align:center">Search</button></div>
+                            
+
+
+                         -->
+                          </div>
+                        
+<!--
+                        <input type="text" id="submit" name="submit">
+                        <button href="#myModal" role="button" data-toggle="modal" type="submit" class="btn btn-eventPR">Search</button>
+                        
+-->
+                       
+                        </form>
+                    </span>
+
+                    </div>
                 </div>
                 <div class="text"><div id='wsite-content' class='wsite-not-footer'>
                     <div>

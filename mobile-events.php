@@ -1,5 +1,5 @@
 <?php        //loads the events pending on category
-require_once('mobileRedirect.php');
+
 require_once('db.php');
 require_once('checkAuth.php');
 
@@ -85,7 +85,7 @@ $events = $stmt->fetchAll();
 <body>
 <div id="wrapper" style="height: 100%">
     <div id="header" style="height: 25%">
-        <span class='wsite-logo'><span id="wsite-title" >E-venturePR</span></span>
+        <span class='wsite-logo'><a href="mobile-index.php"><span id="wsite-title" >E-venturePR</span></a></span>
         <div data-role="controlgroup" data-type="horizontal" style="float:left;" >
             <?php if($loggedin) { ?>
             <a  href="mobile-profile.php" rel="external" data-role="button" data-theme="c" style="height: 35px; font-size: 15px;"  >Profile</a>

@@ -1,6 +1,4 @@
-
 <?php
-require_once('mobileRedirect.php');
 require_once('db.php');
 require_once('checkAuth.php');
 require_once('logoutHandler.php');
@@ -13,34 +11,74 @@ if (!$loggedin && !isset($userID)) {
     return;
 }
 
-
-if(isset($userID)) {
-    $id = $userID;
-}
-
-// Query to select a profile depending on the userID provided
+$friendProfile = false;
 
 $db = db::getInstance();
-$sql = "SELECT
-            userName,
-            userID,
-            firstName,
-            lastName,
-            email,
-            profilePicture,
-            age,
-            gender,
-            work
-        FROM User
-        WHERE userID = {$id};
-";
 
-$stmt = $db->prepare($sql);
-$stmt->execute();
+if(isset($userID) && $id != $userID) {
+    $friendProfile = true;
+    $friendID = $userID;
+    $isFriend = false;
 
-$result = $stmt->fetchAll();
+    $sql = "SELECT
+                userID2
+            FROM AddFriend
+            WHERE userID1 = {$id}
+            AND userID2 = {$friendID};
+    ";
 
-$user = $result[0];
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+
+    $result = $stmt->fetchAll();
+
+    if(count($result[0]) > 0) {
+        $isFriend = true;
+    }
+
+    $sql = "SELECT
+                userName,
+                userID,
+                firstName,
+                lastName,
+                email,
+                profilePicture,
+                age,
+                gender,
+                work
+            FROM User
+            WHERE userID = {$friendID};
+    ";
+
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+
+    $result = $stmt->fetchAll();
+
+    $user = $result[0];
+}
+else {
+    $sql = "SELECT
+                userName,
+                userID,
+                firstName,
+                lastName,
+                email,
+                profilePicture,
+                age,
+                gender,
+                work
+            FROM User
+            WHERE userID = {$id};
+    ";
+
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+
+    $result = $stmt->fetchAll();
+
+    $user = $result[0];
+}
 
 if(!isset($user)){
     header('Location: index.php');
@@ -48,35 +86,35 @@ if(!isset($user)){
 }
 
 if(isset($_POST['submit'])) {
-    
-    
-
-    $db = db::getInstance();
-
-    $sql = "INSERT INTO Wall
-            SET
-               userID = {$id},
-               content = '{$_POST['comment-text']}';";
+    if($friendProfile) {
+        $sql = "INSERT INTO Wall
+                SET
+                   userID = {$friendID},
+                   content = '{$_POST['comment-text']}',
+                   posterID = {$id};";
+    }
+    else {
+        $sql = "INSERT INTO Wall
+                SET
+                   userID = {$id},
+                   content = '{$_POST['comment-text']}',
+                   posterID = {$id};";
+    }
 
     $stmt = $db->prepare($sql);
     $stmt->execute();
-
 }
 
-if(isset($_POST['addFriend']))
-{
-    $friend = $user['userID'];
-    $db = db::getInstance();
-
+if(isset($_POST['addFriend'])) {
     $sql = "INSERT INTO AddFriend
-                SET
-                    userID1 = '{$id}',
-                    userID2 = '{$friend}'
-                    ;";
+            SET
+                userID1 = '{$id}',
+                userID2 = '{$friendID}'
+                ;";
 
     $stmt = $db->prepare($sql);
     $stmt->execute();
-
+    $isFriend = true;
 }
 
 ?>
@@ -97,6 +135,8 @@ Dynamically changes depending on the user accessing it
     <link rel='stylesheet' type='text/css' href='css/main_style.css' title='wsite-theme-css' />
     <link href='http://cdn1.editmysite.com/editor/fonts/Capture_it/font.css?2' rel='stylesheet' type='text/css' />
     <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    
     <style type='text/css'>
         #wsite-content div.paragraph, #wsite-content p, #wsite-content .product-block .product-title, #wsite-content .product-description, .blog-sidebar div.paragraph, .blog-sidebar p, .wsite-form-field label, .wsite-form-field label {}
         #wsite-content h2, #wsite-content .product-long .product-title, #wsite-content .product-large .product-title, #wsite-content .product-small .product-title, .blog-sidebar h2 {}
@@ -110,6 +150,44 @@ Dynamically changes depending on the user accessing it
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.min.js?1346362758'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/images/common/utilities-jq.js?1346362758'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/flyout_menus_jq.js?1346362758'></script>
+    <script src="js/bootstrap.min.js"></script>
+     <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    
+    <style type="text/css">@import "jquery.themes.css";</style> 
+    <script type="text/javascript" src="jquery.themes.js"></script>
+    <link href="css/dark-hive/jquery-ui-1.9.2.custom.css" rel="stylesheet">
+    <script src="js/jquery-1.8.3.js"></script>
+    <script src="js/jquery-ui-1.9.2.custom.js"></script>
+    <script>
+    $(function() {
+        $( "#accordion" ).accordion({ heightStyle: "fill" });
+    });
+    </script>
+     <style>
+    #accordion-resizer {
+        padding: 10px;
+        width: 350px;
+        height: 220px;
+    }
+    </style>
+    <script>
+    $(function() {
+        $( "#accordion" ).accordion({
+            heightStyle: "fill"
+        });
+    });
+    $(function() {
+        $( "#accordion-resizer" ).resizable({
+            minHeight: 140,
+            minWidth: 200,
+            resize: function() {
+                $( "#accordion" ).accordion( "refresh" );
+            }
+        });
+    });
+    </script>
 </head>
 <body class='wsite-theme-dark no-header-page wsite-page-nightwish-detail'>
 <div id="wrapper">
@@ -122,7 +200,7 @@ Dynamically changes depending on the user accessing it
                 <!-- Conditional to check login Status-->
                 <?php if($loggedin) { ?>
                 <tr>
-                    <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; "><?php echo $user['userName'] ?></a> |
+                    <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; ">Profile</a> |
                             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" style="float: right;">
                                 <input type="hidden" value="logout" name="loggedOut" />
                                 <input type="hidden" style="color: #32CD32; text-decoration: underline;" value="Log out" />
@@ -157,27 +235,34 @@ Dynamically changes depending on the user accessing it
 
                             <h2 style="text-align:left;"><?php echo $user['firstName'] ?> <?php echo $user['lastName'] ?></h2>
 
-                            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" ">
+                            <?php if($friendProfile && !$isFriend) { ?>
+
+                            <form action="<?php echo $_SERVER['PHP_SELF'] . "?userID={$friendID}"; ?>" method="POST">
                                 <input  style="height: 35px;" type="submit" class="btn btn-eventPR" name="addFriend" id="addFriend" value="Add Friend"/>
                             </form>
+
+                            <?php }?>
 
                             <span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="picture.php?picID=<?php if ($user['profilePicture'] == false) {echo "defaultPic.jpg";} else {echo $user['profilePicture'];} ?>" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;width:200px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
                             <div class="paragraph" style="text-align:left;display:block;float:left;">Username: <br />Age: <br />Gender: <br />Work: <br />E-mail: </div>
                             <div class="paragraph"style="text-align:center;display:block;float:left;"><?php echo $user['userName'] ?><br /><?php echo $user['age'] ?><br /><?php echo $user['gender'] ?><br /><?php echo $user['work'] ?><br /><?php echo $user['email'] ?></div>
 
+                            <?php if(!$friendProfile) { ?>
                             <hr style="clear:both;visibility:hidden;width:100%;" />
                             <div class="btn-toolbar" style="padding: 10px 10px 0 0; display: inline-block;text-align: center; ">
                                 <div class="btn-group">
-                                    <a href="create-event.php" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">E-vent it!</span></a>
-                                    <a href="myEvents.php" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">My E-vents</span></a>
-                                    <a href="create-venue.php" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">Create Venue</span></a>
+
                                     <a href="friends.php" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">Friends</span></a>
-                                    <a href="contacts.php" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">Find People</span></a>
+                                    <a href="myEvents.php" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">My E-vents</span></a>
+                                    <a href="create-event.php" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">Create Event</span></a>
+                                    <a href="create-venue.php" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">Create Venue</span></a>                                    
+                                    <a href="editProfile.php" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">Edit Profile</span></a>
 
 
                                 </div>
 
                             </div>
+                            <?php } ?>
 
                         </td>
                         <td class='wsite-multicol-col' style='width:38.257993384785%;padding:0 15px'>
@@ -203,7 +288,6 @@ Dynamically changes depending on the user accessing it
 
                                                         <?php
 
-                                                        $db = db::getInstance();
                                                         $sql = "SELECT
                                                                            eventID,
                                                                            eventName
@@ -250,7 +334,7 @@ Dynamically changes depending on the user accessing it
                 <tr class='wsite-multicol-tr'>
                     <td class='wsite-multicol-col' style='width:50%;padding:0 15px'>
 
-                        <h2 style="text-align:center;">Memorable E-ventures</h2>
+                        <h2 style="text-align:center;">Upcoming Events</h2>
                         <!--
                         <div>
                             <div><div style="height: 20px; overflow: hidden;"></div>
@@ -262,34 +346,77 @@ Dynamically changes depending on the user accessing it
                         </div>
                         -->
                         <div id="mainmenu">
-                            <ul style="font-size: 14px; color: white;">
-                                <!-- Selects events where there user has logged as I wanna go!-->
-                                <?php $db = db::getInstance();
-                                $sql = "SELECT
-                                        eventID,
-                                        eventName
-                                    FROM Event AS r1, User AS u1
-                                        JOIN (SELECT (RAND() * (SELECT MAX(eventID) FROM Attends)) AS id) AS r2
-                                               WHERE r1.eventID >= r2.id
+                            <div class="ui-widget-content">
+                                    <div id="accordion">
+                                    <!-- Selects events where there user has logged as I wanna go!-->
+                                    <?php $db = db::getInstance();
+                                    $sql = "SELECT
+                                            E.eventID,
+                                            E.eventName,
+                                            E.eventType,
+                                            E.genre,
+                                            E.flyer,
+                                            DATE_FORMAT(E.date, '%W, %M %e, %Y') as date,
+                                            E.startHour,
+                                            E.endHour,
+                                            E.status,
+                                            E.featured,
+                                            E.price,
+                                            E.flag,
+                                            E.description,
+                                            E.userID
+                                        FROM Event AS E
+                                        INNER JOIN Attends A ON E.eventID=A.eventID
+                                        WHERE A.userID={$id};
+                                                   ";
 
-                                                AND
-                                               u1.userID = {$id}
+                                    $stmt = $db->prepare($sql);
+                                    $stmt->execute();
 
-                                               ORDER BY r1.eventID ASC
-                                               LIMIT 5;
-                                               ";
+                                    $result = $stmt->fetchAll();
 
-                                $stmt = $db->prepare($sql);
-                                $stmt->execute();
+                                    foreach ($result as $event) { ?>
 
-                                $result = $stmt->fetchAll();
 
-                                foreach ($result as $event) {
-                                    echo "<li><a href='event.php?eventID={$event['eventID']}'> <span style='color: white'>{$event['eventName']}</span></a></li>
-                                                <div style='height: 20px; overflow: hidden; width: 100%;''></div>";
-                                }
-                                ?>
-                            </ul>
+                                        <h3><?php echo $event['eventName'] ?></h3>
+                                        <div>
+                                            <a href='event.php?eventID=<?php echo $event['eventID']?>'><img src='picture.php?picID=<?php echo $event['flyer']?>' alt='img/No-image-available.jpg' style="max-width: 30%; float:left;"></a>
+                                            <p style="float:left"><?php echo $event['description'] ?></p>
+                                        </div>
+                                        
+                                    
+                                    
+                                    
+                                    
+                                          
+                                <?php } ?>
+                                </div>
+                                </div>
+                                                                <!--
+                                <li><a href='event.php?eventID={$event['eventID']}'> <span style='color: white'>{$event['eventName']}</span></a></li>
+                                                <div style='height: 20px; overflow: hidden; width: 100%;''></div>
+
+                                        
+
+
+                                    <div id="list">
+                                        <ul data-role="listview" data-inset="true" data-split-theme="c">
+                                            <li><a href=""><img src="picture.php?picID=<?php echo $event['flyer'] ?>" class="ui-li-thumb" style="position:absolute !important; top: 10px; left: 10px; height: 80%"><h3><?php echo $event['eventName'] ?></h3></a></li>
+                                        </ul>
+
+                                    </div>
+
+
+
+                                                <li class='span4'>
+                                            <div class='thumbnail' >
+                                              <img src='picture.php?picID=<?php echo $event['flyer']?>' alt='img/No-image-available.jpg'>
+                                              <a href='event.php?eventID=<?php echo $event['eventID'] ?>'><h4><?php echo $event['eventName'] ?></h4></a>
+                                              <p style='color: white'><?php echo $event['description'] ?></p>
+                                            </div>
+                                          </li>
+                            -->
+                            
 
 
 
@@ -307,12 +434,22 @@ Dynamically changes depending on the user accessing it
                                 <?php
 
                                 $db = db::getInstance();
-                                $sql = "SELECT
-                                           userID,
-                                           content
-                                       FROM Wall c1
-                                       WHERE c1.userID='{$id}';
-                                ";
+                                if(!$friendProfile) { 
+                                    $sql = "SELECT
+                                               userID,
+                                               content
+                                           FROM Wall c1
+                                           WHERE c1.userID='{$id}';
+                                    ";
+                                }
+                                else {
+                                    $sql = "SELECT
+                                               userID,
+                                               content
+                                           FROM Wall c1
+                                           WHERE c1.userID='{$friendID}';
+                                    ";
+                                }
 
                                 $stmt = $db->prepare($sql);
                                 $stmt->execute();
@@ -320,8 +457,10 @@ Dynamically changes depending on the user accessing it
                                 $result = $stmt->fetchAll();
 
                                 foreach ($result as $comment) {
-                                    echo "<li> <span style='color: white'>: {$comment['content']}</span></li>
-                                           <div style='height: 20px; overflow: hidden; width: 100%;''></div>";
+                                    echo "<li> 
+                                            <span style='color: white'>: {$comment['content']}</span>
+                                          </li>
+                                        <div style='height: 20px; overflow: hidden; width: 100%;''></div>";
 
                                            
 
@@ -333,7 +472,11 @@ Dynamically changes depending on the user accessing it
                             <hr style="clear:both;visibility:hidden;width:100%;">
 
                         </div>
+                        <?php if($friendProfile) { ?>
+                        <form action="<?php echo "profile.php?userID={$friendID}" ?>" method="POST" id="submit" enctype="multipart/form-data">
+                        <?php } else {?>
                         <form action="profile.php" method="POST" id="submit" enctype="multipart/form-data">
+                        <?php } ?>
                         <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
                             <label class="wsite-form-label" for="description">Post to wall: <span class="form-required">*</span></label>
                             <div class="wsite-form-input-container">
