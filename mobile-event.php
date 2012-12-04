@@ -127,18 +127,18 @@ if(isset($_POST['action'])) {
 
 <div id="wrapper" style="height: 100%">
     <div id="header" >
-        <span class='wsite-logo'><a href='mobile-index.php'><span id="wsite-title">E-venturePR</span></a></span>
+        <span class='wsite-logo'><a href='mobile-index.php'><span id="wsite-title">EventurePR</span></a></span>
         <div data-role="controlgroup" data-type="horizontal" style="float:left; width: 100%" >
             <?php if($loggedin) { ?>
             <a  href="mobile-profile.php" rel="external" data-role="button" data-theme="c" style="height: 40px; font-size: 15px;"  >Profile</a>
             <form style="float:left;" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" data-ajax="false">
-                <input  type='submit' name="mloggedOut" id="mloggedOut" value="logout" class='btn btn-eventPR' />
+                <input  type='submit' name="mloggedOut" id="mloggedOut" value="Log out" class='btn btn-eventPR' />
             </form>
 
             <?php }  else {?>
-            <p style="font-size: 16px;font-weight: bold;text-shadow: none;">Dont have an account?</p>
-            <a  href="mobile-register.php"  rel="external" data-role="button" data-theme="c" style="height: 40px; font-size: 15px;"  >Sign up!</a>
-            <a  href="mobile-login.php"  rel="external" data-role="button" data-theme="c" style="height: 40px; font-size: 15px;"  >Log in!</a>
+            <p style="font-size: 16px;font-weight: bold;text-shadow: none;">Don't have an account?</p>
+            <a  href="mobile-register.php"  rel="external" data-role="button" data-theme="c" style="height: 40px; font-size: 15px;"  >Sign Up</a>
+            <a  href="mobile-login.php"  rel="external" data-role="button" data-theme="c" style="height: 40px; font-size: 15px;"  >Log In</a>
 
             <?php }?>
         </div>
@@ -154,32 +154,40 @@ if(isset($_POST['action'])) {
                 <option value="Entertainment">ENTERTAINMENT</option>
                 <option value="Business">BUSINESS & EDUCATION</option>
             </select>
-        </div> <!--fieldcontain-->
+        </div> 
 
         <div id="label" style="margin: auto;padding-top:20px;">
 
-            <span style="font-size: 22px;color: white; font-weight: bold;text-shadow: none">Event Name:</span>  <span style="font-size: 18px;font-weight: bold;text-shadow: none; color: #32CD32; text-decoration: underline;"><?php echo $event['eventName'] ?></span>
+            <span style="position:relative;">
+                <a href="mobile-event.php?eventID=<?php echo $event['eventID'] ?>">
+                    <img src="picture.php?picID=<?php echo $event['flyer'] ?>" class=" galleryImageBorder" style="width:100%;" >
+                </a>
+            </span>
             <br>
             <br>
-            <span style="font-size: 22px;color: white; font-weight: bold;text-shadow: none">Date:</span>  <span style="font-size: 18px;font-weight: bold;text-shadow: none; color: #32CD32; text-decoration: underline;"><?php echo $event['date'] ?></span>
+
+            <span style="position:relative; font-size: 22px;color: white; font-weight: bold;text-shadow: none">Event Name:</span>  <span style="font-size: 18px;font-weight: bold;text-shadow: none; color: #32CD32; text-decoration: underline;"><?php echo $event['eventName'] ?></span>
             <br>
             <br>
-            <span style="font-size: 22px;color: white; font-weight: bold;text-shadow: none">Start Time:</span>  <span style="font-size: 18px;font-weight: bold;text-shadow: none; color: #32CD32; text-decoration: underline;"><?php echo $event['startHour'] ?></span>
+            <span style="position:relative; font-size: 22px;color: white; font-weight: bold;text-shadow: none">Date:</span>  <span style="font-size: 18px;font-weight: bold;text-shadow: none; color: #32CD32; text-decoration: underline;"><?php echo $event['date'] ?></span>
             <br>
             <br>
-            <span style="font-size: 22px;color: white; font-weight: bold;text-shadow: none">End Time:</span>  <span style="font-size: 18px;font-weight: bold;text-shadow: none; color: #32CD32; text-decoration: underline;"><?php echo $event['endHour'] ?></span>
+            <span style="position:relative; font-size: 22px;color: white; font-weight: bold;text-shadow: none">Start Time:</span>  <span style="font-size: 18px;font-weight: bold;text-shadow: none; color: #32CD32; text-decoration: underline;"><?php echo $event['startHour'] ?></span>
             <br>
             <br>
-            <span style="font-size: 22px;color: white; font-weight: bold;text-shadow: none">Location:</span>  <span style="font-size: 18px;font-weight: bold;text-shadow: none; color: #32CD32 !important; text-decoration: underline;"><?php echo $event['venueName'] ?></span>
+            <span style="position:relative; font-size: 22px;color: white; font-weight: bold;text-shadow: none">End Time:</span>  <span style="font-size: 18px;font-weight: bold;text-shadow: none; color: #32CD32; text-decoration: underline;"><?php echo $event['endHour'] ?></span>
             <br>
             <br>
-            <span style="font-size: 22px;color: white; font-weight: bold;text-shadow: none">Type:</span>  <span style="font-size: 18px;font-weight: bold;text-shadow: none; color: #32CD32; text-decoration: underline;"><?php echo $event['eventType'] ?></span>
+            <span style="position:relative; font-size: 22px;color: white; font-weight: bold;text-shadow: none">Location:</span>  <span style="font-size: 18px;font-weight: bold;text-shadow: none; color: #32CD32 !important; text-decoration: underline;"><?php echo $event['venueName'] ?></span>
             <br>
             <br>
-            <span style="font-size: 22px;color: white; font-weight: bold;text-shadow: none">Genre:</span>  <span style="font-size: 18px;font-weight: bold;text-shadow: none; color: #32CD32; text-decoration: underline;"><?php echo $event['genre'] ?></span>
+            <span style="position:relative; font-size: 22px;color: white; font-weight: bold;text-shadow: none">Type:</span>  <span style="font-size: 18px;font-weight: bold;text-shadow: none; color: #32CD32; text-decoration: underline;"><?php echo $event['eventType'] ?></span>
             <br>
             <br>
-            <span style="font-size: 22px;color: white; font-weight: bold;text-shadow: none">Entrance Fee:</span>  <span style="font-size: 18px;font-weight: bold;text-shadow: none; color: #32CD32; text-decoration: underline;"><?php echo $event['price'] ?></span>
+            <span style="position:relative; font-size: 22px;color: white; font-weight: bold;text-shadow: none">Genre:</span>  <span style="font-size: 18px;font-weight: bold;text-shadow: none; color: #32CD32; text-decoration: underline;"><?php echo $event['genre'] ?></span>
+            <br>
+            <br>
+            <span style="position:relative; font-size: 22px;color: white; font-weight: bold;text-shadow: none">Entrance Fee:</span>  <span style="font-size: 18px;font-weight: bold;text-shadow: none; color: #32CD32; text-decoration: underline;"><?php echo $event['price'] ?></span>
             <br>
 
 

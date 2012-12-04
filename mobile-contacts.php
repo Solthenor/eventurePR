@@ -80,17 +80,17 @@ if(isset($_POST['submit']))
 
 <div id="wrapper" style="height: 100%">
     <div id="header" >
-        <span class='wsite-logo'><span id="wsite-title" >E-venturePR</span></span>
+        <span class='wsite-logo'><span id="wsite-title" >EventurePR</span></span>
         <div data-role="controlgroup" data-type="horizontal" style="float:left;" >
             <?php if($loggedin) { ?>
             <a  href="mobile-profile.php" rel="external" data-role="button" data-theme="c" style="height: 35px; font-size: 15px;"  >Profile</a>
-            <a  href="mobile-index.php" rel="external" data-role="button" data-theme="c" style="height: 35px; font-size: 15px;" >Log Out!</a>
+            <a  href="mobile-index.php" rel="external" data-role="button" data-theme="c" style="height: 35px; font-size: 15px;" >Log out</a>
 
 
             <?php }  else {?>
             <p style="font-size: 16px;font-weight: bold;text-shadow: none;">Dont have an account?</p>
-            <a  href="mobile-register.php"  rel="external" data-role="button" data-theme="c" style="height: 35px; font-size: 15px;"  >Sign up!</a>
-            <a  href="mobile-login.php"  rel="external" data-role="button" data-theme="c" style="height: 35px; font-size: 15px;"  >Log in!</a>
+            <a  href="mobile-register.php"  rel="external" data-role="button" data-theme="c" style="height: 35px; font-size: 15px;"  >Sign up</a>
+            <a  href="mobile-login.php"  rel="external" data-role="button" data-theme="c" style="height: 35px; font-size: 15px;"  >Log in</a>
 
             <?php }?>
         </div>
@@ -115,9 +115,9 @@ if(isset($_POST['submit']))
                 <div data-role="fieldcontain" data-inset="true">
                     <label for="friendSearch" style="font-size: 14px;color: white; padding-top: 5px;">Search:</label>
                     <input style="color: black !important;" type="search" name="friendSearch" id="friendSearch" value=""/>
-                </div> <!-- /fieldcontain -->
+                </div> 
             </form>
-        </div>
+        </div> 
         <?php
 
 

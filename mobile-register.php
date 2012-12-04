@@ -146,18 +146,18 @@ if($loggedin) {
 
 <div id="wrapper" style="height: 100%">
     <div id="header" style="height: 25%">
-        <span class='wsite-logo'><span id="wsite-title" >E-venturePR</span></span>
+        <span class='wsite-logo'><span id="wsite-title" >EventurePR</span></span>
         <div data-role="controlgroup" data-type="horizontal" style="float:left;" >
             <?php if($loggedin) { ?>
             <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" data-theme="c">
             <a  href="mobile-profile.php" rel="external" data-role="button" data-theme="c" style="height: 35px; font-size: 15px;"  >Profile</a>
-            <input value="Logout" rel="external" data-role="button" data-theme="c" style="height: 35px; font-size: 15px;" >Log Out!
+            <input value="Logout" rel="external" data-role="button" data-theme="c" style="height: 35px; font-size: 15px;" >Log Out
 
             </form>
             <?php }  else {?>
-            <p style="font-size: 16px;font-weight: bold;text-shadow: none;">Dont have an account?</p>
-            <a  href="mobile-register.php"  rel="external" data-role="button" data-theme="c" style="height: 35px; font-size: 15px;"  >Sign up!</a>
-            <a  href="mobile-login.php"  rel="external" data-role="button" data-theme="c" style="height: 35px; font-size: 15px;"  >Log in!</a>
+            <p style="font-size: 16px;font-weight: bold;text-shadow: none;">Don't have an account?</p>
+            <a  href="mobile-register.php"  rel="external" data-role="button" data-theme="c" style="height: 35px; font-size: 15px;"  >Sign Up</a>
+            <a  href="mobile-login.php"  rel="external" data-role="button" data-theme="c" style="height: 35px; font-size: 15px;"  >Log In</a>
 
             <?php }?>
         </div>
@@ -166,9 +166,9 @@ if($loggedin) {
         <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" data-theme="c">
             <div data-role="fieldcontain">
                 <div style="width: 100%;margin-bottom: 5%;">
-                    <label for="email">E-mail:<span class="form-required">*</span></label>
+                    <label for="email">E-mail: <span class="form-required">*</span></label>
                     <input style="color: black !important;" type="text" name="email" id="email" value="" style="padding-left: 40%; margin-left: 13%"  />
-                    <label for="username">User Name <span class="form-required">*</span></label>
+                    <label for="username">User Name: <span class="form-required">*</span></label>
                     <input style="color: black !important;" id="username" type="text" name="username" " />
                     <label for="password">Password:<span class="form-required">*</span></label>
                     <input style="color: black !important;" type="password" name="password" id="password" value=""  />

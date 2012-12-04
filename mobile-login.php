@@ -148,17 +148,17 @@ if($loggedin) {
 
 <div id="wrapper" style="height: 100%">
     <div id="header" style="height: 25%">
-        <span class='wsite-logo'><span id="wsite-title" >E-venturePR</span></span>
+        <span class='wsite-logo'><span id="wsite-title" >EventurePR</span></span>
         <div data-role="controlgroup" data-type="horizontal" style="float:left;width:100%" >
              <?php if($loggedin) { ?>
     <a  href="mobile-profile.php" rel="external" data-role="button" data-theme="b" style="height: 35px; font-size: 15px;"  >Profile</a>
-    <a  href="mobile-index.php" rel="external" data-role="button" data-theme="b" style="height: 35px; font-size: 15px;" >Log Out!</a>
+    <a  href="mobile-index.php" rel="external" data-role="button" data-theme="b" style="height: 35px; font-size: 15px;" >Log Out</a>
 
 
     <?php }  else {?>
             <p style="font-size: 16px;font-weight: bold;text-shadow: none;">Dont have an account?</p>
-            <a  href="mobile-register.php"  rel="external" data-role="button" data-theme="c" style="height: 35px; font-size: 15px;"  >Sign up!</a>
-            <a  href="mobile-login.php"  rel="external" data-role="button" data-theme="c" style="height: 35px; font-size: 15px;"  >Log in!</a>
+            <a  href="mobile-register.php"  rel="external" data-role="button" data-theme="c" style="height: 35px; font-size: 15px;"  >Sign Up</a>
+            <a  href="mobile-login.php"  rel="external" data-role="button" data-theme="c" style="height: 35px; font-size: 15px;"  >Log In</a>
 
             <?php }?>
         </div>

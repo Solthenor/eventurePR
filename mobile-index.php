@@ -64,18 +64,18 @@ if (isset($_POST['eventSearch'])) {
 
 	<div id="wrapper" style="height: 100%">
         <div id="header" >
-            <span class='wsite-logo'><a href='mobile-index.php'><span id="wsite-title">E-venturePR</span></a></span>
+            <span class='wsite-logo'><a href='mobile-index.php'><span id="wsite-title">EventurePR</span></a></span>
             <div data-role="controlgroup" data-type="horizontal" style="float:left; width: 100%" >
                 <?php if($loggedin) { ?>
                 <a  href="mobile-profile.php" rel="external" data-role="button" data-theme="c" style="height: 40px; font-size: 15px;"  >Profile</a>
                 <form style="float:left;" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" data-ajax="false">
-                        <input  type='submit' name="mloggedOut" id="mloggedOut" value="logout" class='btn btn-eventPR' />
+                        <input  type='submit' name="mloggedOut" id="mloggedOut" value="Log Out" class='btn btn-eventPR' />
                 </form>
 
                 <?php }  else {?>
-                <p style="font-size: 16px;font-weight: bold;text-shadow: none;">Dont have an account?</p>
-                <a  href="mobile-register.php"  rel="external" data-role="button" data-theme="c" style="height: 40px; font-size: 15px;"  >Sign up!</a>
-                <a  href="mobile-login.php"  rel="external" data-role="button" data-theme="c" style="height: 40px; font-size: 15px;"  >Log in!</a>
+                <p style="font-size: 16px;font-weight: bold;text-shadow: none;">Don't have an account?</p>
+                <a  href="mobile-register.php"  rel="external" data-role="button" data-theme="c" style="height: 40px; font-size: 15px;"  >Sign Up</a>
+                <a  href="mobile-login.php"  rel="external" data-role="button" data-theme="c" style="height: 40px; font-size: 15px;"  >Log In</a>
 
                 <?php }?>
             </div>
@@ -85,7 +85,7 @@ if (isset($_POST['eventSearch'])) {
                 <label for="select-choice-1" class="select" style="text-shadow: none;">Select an Option:</label>
                 <select id="select-choice-1" name="select-choice-1" data-native-menu="true">
                     <option value="">MAIN MENU</option>
-                    <option value="mobile-index">HOME</option>
+                    
                     <option value="Concert">CONCERTS</option>
                     <option value="Sports">SPORTS</option>
                     <option value="Entertainment">ENTERTAINMENT</option>
@@ -93,6 +93,7 @@ if (isset($_POST['eventSearch'])) {
               </select>
             </div> <!--fieldcontain-->
 
+            <!--
             <div id="label" style="margin: auto;">
                 <span style="font-size: 18px;color: white; font-weight: bold;text-shadow: none">Find an event: </span>
 
@@ -100,9 +101,10 @@ if (isset($_POST['eventSearch'])) {
                 <div data-role="fieldcontain" data-inset="true">
                         <label for="eventSearch" style="font-size: 14px;color: white; padding-top: 5px;">Search:</label>
                         <input style="color: black !important;" type="search" name="eventSearch" id="eventSearch" value=""/>
-                    </div> <!-- /fieldcontain -->
+                    </div> 
                 </form>
             </div>
+        -->
 
             <div data-role="fieldcontain" style="margin-top: 10%;">
                 <ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
@@ -128,7 +130,7 @@ if (isset($_POST['eventSearch'])) {
                                             FROM Event AS r1
                                                 JOIN (SELECT (RAND() * (SELECT MAX(eventID) FROM Event)) AS id) AS r2
                                             WHERE r1.eventID >= r2.id
-                                            ORDER BY r1.eventID ASC
+                                            
                                             LIMIT 5
                                     ";
 
@@ -145,7 +147,7 @@ if (isset($_POST['eventSearch'])) {
             </div>
 
 <div data-role="controlgroup" data-type="horizontal" style="text-align: center; width: 100%">
-        <a href="index.php" rel="external" data-role="button" data-theme="c" style="height: 40px; font-size: 15px;">Click Here For Desktop Version!</a>
+        <a href="index.php" rel="external" data-role="button" data-theme="c" style="height: 40px; font-size: 15px;">Click Here For Desktop Version</a>
     </div>
             </div> <!--content-->
     </div>         <!--wrapper-->

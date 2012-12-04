@@ -92,6 +92,8 @@ if(!isset($event)){
     return;
 }
 
+
+
 if(isset($_POST['action'])) {
 
     $action = $_POST['action'];
@@ -153,6 +155,21 @@ $stmt2 = $db->prepare($sql2);
 $stmt2->execute();
 
 $gallery = $stmt2->fetchAll();
+
+$sql3 = "SELECT
+            count(*)
+            FROM Attends
+            WHERE
+            userID = {$id} AND 
+            eventID = {$eventID};
+";
+
+$stmt3 = $db->prepare($sql3);
+$stmt3->execute();
+
+$atts = $stmt3->fetchAll();
+$isAttending = $atts[0];
+
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -324,11 +341,19 @@ $gallery = $stmt2->fetchAll();
 
                         </td>
                         <td class='wsite-multicol-col' style='width:45%;padding:0 15px'>
-                            <a  class="btn btn-eventPR" style="float:right;"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">
+                            
+                           
+                            <a  class="btn btn-eventPR" style="float:right;">
+                                <span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">
+                                    
                                     <form action="<?php echo $_SERVER['PHP_SELF']; ?><?php echo "?eventID={$eventID}" ?>" method="POST">
 
-                                     <input name="action" value="I want to go" type="submit"  class="btn-eventPR" style="font-weight: bold; font-size: 15px; font-family: arial sans-serif; border-color: #227289 !important; text-transform: capitalize;"/>
-                                     </form></span></a>
+                                     <input name="action" value="I want to go!" type="submit"  class="btn-eventPR" style="font-weight: bold; font-size: 15px; font-family: arial sans-serif; border-color: #227289 !important; text-transform: capitalize;"/>
+                                     </form>
+                                 </span>
+                             </a>
+
+                             
 
                             <!--
                             <hr style="clear:both;visibility:hidden;width:100%;" />
@@ -351,6 +376,10 @@ $gallery = $stmt2->fetchAll();
                             <!--<div style="text-align:center;"><div style="height: 10px; margin-top:15px; overflow: hidden;"></div>-->
                                 <a class="btn btn-eventPR" href="index.php">
                                     <span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-align:right; text-transform: capitalize;" name="share">Share E-venture</span>
+                                </a>
+
+                                <a class="btn btn-eventPR" href="http://www.google.com/search?q=<?php echo $event['eventName'] ?>+tickets" >
+                                            <span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-align:right; text-transform: capitalize;" name="tickets">Find tickets</span>
                                 </a>
                                 </div>
                                 <div style="height: 10px; overflow: hidden;"></div>
@@ -419,7 +448,7 @@ $gallery = $stmt2->fetchAll();
 
                     </td>
                     <td class='wsite-multicol-col' style='width:50%;padding:0 15px'>
-
+                        <div style='margin-bottom:125px'>
                         <h2 style="text-align:left;">Wall:<br /></h2>
                         <div style="border: 1px solid #f5f5f5; padding: 20px; height: 60%; overflow: auto; background-color:black;">
 
@@ -471,7 +500,7 @@ $gallery = $stmt2->fetchAll();
                                 <input type='submit' name="submit" value="Post" class='btn btn-eventPR' />
                             </div>
                         </form>
-
+                    </div>
 
                     </div></div>
                 </td>

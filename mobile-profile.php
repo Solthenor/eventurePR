@@ -1,5 +1,5 @@
 <?php
-require_once('mobileRedirect.php');
+
 require_once('db.php');
 require_once('checkAuth.php');
 require_once('logoutHandler.php');
@@ -83,18 +83,18 @@ if(isset($_POST['submit'])) {
 
 <div id="wrapper" style="height: 100%">
     <div id="header" >
-        <span class='wsite-logo'><a href='mobile-index.php'><span id="wsite-title">E-venturePR</span></a></span>
+        <span class='wsite-logo'><a href='mobile-index.php'><span id="wsite-title">EventurePR</span></a></span>
         <div data-role="controlgroup" data-type="horizontal" style="float:left; width: 100%" >
             <?php if($loggedin) { ?>
             <a  href="mobile-profile.php" rel="external" data-role="button" data-theme="c" style="height: 40px; font-size: 15px;"  >Profile</a>
             <form style="float:left;" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" data-ajax="false">
-                <input  type='submit' name="mloggedOut" id="mloggedOut" value="logout" class='btn btn-eventPR' />
+                <input  type='submit' name="mloggedOut" id="mloggedOut" value="Log Out" class='btn btn-eventPR' />
             </form>
 
             <?php }  else {?>
-            <p style="font-size: 16px;font-weight: bold;text-shadow: none;">Dont have an account?</p>
-            <a  href="mobile-register.php"  rel="external" data-role="button" data-theme="c" style="height: 40px; font-size: 15px;"  >Sign up!</a>
-            <a  href="mobile-login.php"  rel="external" data-role="button" data-theme="c" style="height: 40px; font-size: 15px;"  >Log in!</a>
+            <p style="font-size: 16px;font-weight: bold;text-shadow: none;">Don't have an account?</p>
+            <a  href="mobile-register.php"  rel="external" data-role="button" data-theme="c" style="height: 40px; font-size: 15px;"  >Sign Up</a>
+            <a  href="mobile-login.php"  rel="external" data-role="button" data-theme="c" style="height: 40px; font-size: 15px;"  >Log In</a>
 
             <?php }?>
         </div>
@@ -102,6 +102,13 @@ if(isset($_POST['submit'])) {
 
 
 <div id="label" style="margin: auto;padding-top:20px;">
+            <span style="position:relative;">
+                <a href="mobile-event.php?eventID=<?php echo $user['userID'] ?>">
+                    <img src="picture.php?picID=<?php echo $user['profilePicture'] ?>" class=" galleryImageBorder" style="width:100%;" >
+                </a>
+            </span>
+            <br>
+            <br>
 
             <span style="font-size: 22px;color: white; font-weight: bold;text-shadow: none">Username:</span>  <span style="font-size: 18px;font-weight: bold;text-shadow: none; color: #32CD32; text-decoration: underline;"><?php echo $user['userName'] ?></span>
             <br>
@@ -119,6 +126,45 @@ if(isset($_POST['submit'])) {
 
 
         </div>
+        <h1 style="color:white; text-shadow: none; text-align: left;">My Upcoming Events: </h1>
+        <?php $db = db::getInstance();
+                                    $sql = "SELECT
+                                            E.eventID,
+                                            E.eventName,
+                                            E.eventType,
+                                            E.genre,
+                                            E.flyer,
+                                            DATE_FORMAT(E.date, '%W, %M %e, %Y') as date,
+                                            E.startHour,
+                                            E.endHour,
+                                            E.status,
+                                            E.featured,
+                                            E.price,
+                                            E.flag,
+                                            E.description,
+                                            E.userID
+                                        FROM Event AS E
+                                        INNER JOIN Attends A ON E.eventID=A.eventID
+                                        WHERE A.userID={$id};
+                                                   ";
+
+                                    $stmt = $db->prepare($sql);
+                                    $stmt->execute();
+
+                                    $result = $stmt->fetchAll();
+
+                                    foreach ($result as $event) { ?>
+                                    <div id="list">
+                                        <ul data-role="listview" data-inset="true" data-split-theme="c">
+                                            <li><a href=""><img src="picture.php?picID=<?php echo $event['flyer'] ?>" class="ui-li-thumb" style="position:absolute !important; top: 10px; left: 10px; height: 80%"><h3><?php echo $event['eventName'] ?></h3></a></li>
+                                        </ul>
+
+                                    </div>
+                                                    <?php
+
+                                                }
+
+                                    ?>
 <!--        
 <div>
 

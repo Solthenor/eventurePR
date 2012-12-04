@@ -322,18 +322,19 @@ if (isset($_POST['submit'])) {
 
                                 </td>
                                 <td class='wsite-multicol-col' style='width:20.925110132159%;padding:0 15px'>
-
                                     <div style="text-align:left;"><div style="height: 10px; overflow: hidden;"></div>
-                                        <a class="wsite-button wsite-button-small wsite-button-highlight" href="http://www.google.com/search?q=<?php echo $event['eventName'] ?>+tickets" >
-                                            <span class="wsite-button-inner">Find tickets</span>
-                                        </a>
-                                        <div style="height: 10px; overflow: hidden;"></div></div>
-
-                                    <div style="text-align:left;"><div style="height: 10px; overflow: hidden;"></div>
-                                        <a class="wsite-button wsite-button-small wsite-button-highlight" href="share.php?eventID=<?php echo $event['eventID'] ?>" >
-                                            <span class="wsite-button-inner">Share E-venture</span>
-                                        </a>
-                                        <div style="height: 10px; overflow: hidden;"></div></div>
+                                    <div class="btn-toolbar" style=" position:relative; padding: 60px 10px 0 0; text-align:center; ">
+                                        <div class="btn-group btn-group-vertical"  >
+                                            
+                                                <a class="btn btn-eventPR" href="http://www.google.com/search?q=<?php echo $event['eventName'] ?>+tickets" >
+                                                    <span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;  text-transform: capitalize;">Find tickets</span>
+                                                </a>
+                                                
+                                                <a class="btn btn-eventPR" href="share.php?eventID=<?php echo $event['eventID'] ?>" >
+                                                    <span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;  text-transform: capitalize;">Share E-venture</span>
+                                                </a>
+                                        </div>
+                                    </div>
 
                                 </td>
                             </tr>
