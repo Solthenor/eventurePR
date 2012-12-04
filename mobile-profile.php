@@ -126,6 +126,10 @@ if(isset($_POST['submit'])) {
 
 
         </div>
+        <div data-role="controlgroup" data-type="horizontal" style="width:100%;" >
+                        <a  href="mobile-friends.php" rel="external" data-role="button" data-theme="c" style="height: 40px; font-size: 15px;"  >Friends</a>
+
+        </div>
         <h1 style="color:white; text-shadow: none; text-align: left;">My Upcoming Events: </h1>
         <?php $db = db::getInstance();
                                     $sql = "SELECT
