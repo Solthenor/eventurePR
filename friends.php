@@ -107,7 +107,10 @@ if(isset($userID)) {
     </div>
     <div id="container">
         <div id="content">
-                <div style="text-align: left;"><a class="btn btn-eventPR" href="profile.php"><span style="font-weight: bold; font-size: 14px; font-family: Arial sans-serif;">GO BACK TO PROFILE</span></a></div>
+                <div style="text-align: left;">
+                    <a class="btn btn-eventPR" href="profile.php"><span style="font-weight: bold; font-size: 14px; font-family: Arial sans-serif;">GO BACK TO PROFILE</span></a>
+                    <a href="contacts.php" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">FIND PEOPLE</span></a>
+                </div>
 
                 <?php if(isset($result)) {?>
                 <?php foreach ($result as $user) { ?>

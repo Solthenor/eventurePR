@@ -262,7 +262,7 @@ Dynamically changes depending on the user accessing it
                                 </div>
 
                             </div>
-                            <a href="contacts.php" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-transform: capitalize">Find People</span></a>
+
                             <?php } ?>
 
                         </td>

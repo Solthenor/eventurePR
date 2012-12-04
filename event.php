@@ -372,12 +372,12 @@ $isAttending = $atts[0];
                                  </a>
 
                             <!--<div style="text-align:center;"><div style="height: 10px; margin-top:15px; overflow: hidden;"></div>-->
-                                    <a class="btn btn-eventPR">
+                            <!--        <a class="btn btn-eventPR">
                                         <form action="inviteFriend.php<?php echo "?eventID={$eventID}" ?>"  method="POST">
                                             <input name="action" value="Share E-venture" type="submit"  class="btn-eventPR" style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;  border-color: #227289 !important; text-transform: capitalize;"/>
                                         </form>
                                     </a>
-
+                                  -->
                                 <a class="btn btn-eventPR" href="http://www.google.com/search?q=<?php echo $event['eventName'] ?>+tickets" >
                                             <span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-align:right; text-transform: capitalize;" name="tickets">Find tickets</span>
                                 </a>
