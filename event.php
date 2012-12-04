@@ -343,15 +343,7 @@ $isAttending = $atts[0];
                         <td class='wsite-multicol-col' style='width:45%;padding:0 15px'>
                             
                            
-                            <a  class="btn btn-eventPR" style="float:right;">
-                                <span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">
-                                    
-                                    <form action="<?php echo $_SERVER['PHP_SELF']; ?><?php echo "?eventID={$eventID}" ?>" method="POST">
-
-                                     <input name="action" value="I want to go!" type="submit"  class="btn-eventPR" style="font-weight: bold; font-size: 15px; font-family: arial sans-serif; border-color: #227289 !important; text-transform: capitalize;"/>
-                                     </form>
-                                 </span>
-                             </a>
+                            
 
                              
 
@@ -363,10 +355,19 @@ $isAttending = $atts[0];
                                 <div id="map" style="height: 250px; width: 380px; clear:both;" /></div>
 
                             </div>
-                            <div class="btn-toolbar" style=" position:relative; padding: 60px 10px 0 0; text-align:center; ">
+                            <div class="btn-toolbar" style=" position:relative; padding: 70px 10px 0 0; text-align:center; ">
                                 <div class="btn-group btn-group-vertical"  >
                                     
-                            
+                                <a  class="btn btn-eventPR" >
+                                <span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-align:center; text-transform: capitalize;">
+                                    
+                                    <form action="<?php echo $_SERVER['PHP_SELF']; ?><?php echo "?eventID={$eventID}" ?>" method="POST">
+
+                                     <input name="action" value="I want to go!" type="submit"  class="btn-eventPR" style="font-weight: bold; font-size: 15px; font-family: arial sans-serif; border-color: #227289 !important; text-transform: capitalize;"/>
+                                     </form>
+                                 </span>
+                                 </a>
+
                                  <a href="contacts.php" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;  text-transform: capitalize;">See assisting friends</span></a>
 
                                 
