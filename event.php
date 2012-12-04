@@ -308,20 +308,23 @@ $isAttending = $atts[0];
                         <span class='imgPusher' style='float:left;height:0px'></span>
                         <span style='position:relative;float:left;z-index:10;clear:left;margin-top:0px;margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="picture.php?picID=<?php echo $event['flyer'] ?>" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" width="350" height="350"/></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
                         <div class="paragraph" style="text-align:left;display:block; clear:left;">
-                            <?php echo $event['date'] ?>
+                            <span style="line-height: 30px;"><b>Date: </b>  <?php echo $event['date'] ?></span>
                             <br />
                             <span style="line-height: 30px;"><b>Start Time:</b>   <?php echo $event['startHour'] ?></span>
                             <br />
-                            <span style="line-height: 30px;"><b>End Time:</b>  <?php echo $event['endHour'] ?></span>
+                            <span style="line-height: 30px;"><b>End Time:</b>   <?php echo $event['endHour'] ?></span>
                             <br />
-                            <span style="line-height: 30px;"><b>Location:</b>  <a href="venue.php?venueID=<?php echo $event['venueID'] ?>"><?php echo $event['venueName'] ?></a></span>
+                            <span style="line-height: 30px;"><b>Location:</b>   <a href="venue.php?venueID=<?php echo $event['venueID'] ?>"><?php echo $event['venueName'] ?></a></span>
                             <br />
-                            <span style="line-height: 30px;"><b>Type:</b>  <?php echo $event['eventType'] ?></span>
+                            <span style="line-height: 30px;"><b>Type:</b>   <?php echo $event['eventType'] ?></span>
                             <br />
-                            <span style="line-height: 30px;"><b>Genre:</b>  <?php echo $event['genre'] ?></span>
+                            <span style="line-height: 30px;"><b>Genre:</b>   <?php echo $event['genre'] ?></span>
                             <br />
-                            <span style="line-height: 30px;"><b>Entrance Fee:</b>  $<?php echo $event['price'] ?><br /></span>
+                            <span style="line-height: 30px;"><b>Entrance Fee:</b>   $<?php echo $event['price'] ?><br /></span>
                             <br />
+                            <span style="line-height: 30px;"><b>People attending:</b>   <?php echo $attendees ?><br /></span>
+                            <br />
+                            <span style="line-height: 30px;"><b>Description:</b>  </span> <br />
                             <?php echo $event['description'] ?>
                             <span style="line-height: 30px;"><br /></span><br /><span style="font-size: 12px;">posted by <a href="profile.php?userID=<?php echo $event['userID'] ?>"><?php echo $event['userName'] ?></a></span><br /></div>
 
@@ -341,38 +344,32 @@ $isAttending = $atts[0];
 
                         </td>
                         <td class='wsite-multicol-col' style='width:45%;padding:0 15px'>
-                            
-                           
-                            
 
-                             
 
-                            <!--
-                            <hr style="clear:both;visibility:hidden;width:100%;" />
-                            
--->
                             <div class="wsite-map" style=" margin-top:85px !important; " >
                                 <div id="map" style="height: 250px; width: 380px; clear:both;" /></div>
 
                             </div>
-                            <div class="btn-toolbar" style=" position:relative; padding: 70px 10px 0 0; text-align:center; ">
+
+
+                            <div class="btn-toolbar" style=" position:relative; padding: 60px 10px 0 0; text-align:center; ">
                                 <div class="btn-group btn-group-vertical"  >
-                                    
-                                <a  class="btn btn-eventPR" >
-                                <span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-align:center; text-transform: capitalize;">
-                                    
+
+                                    <a  class="btn btn-eventPR">
+                                <span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">
+
                                     <form action="<?php echo $_SERVER['PHP_SELF']; ?><?php echo "?eventID={$eventID}" ?>" method="POST">
 
-                                     <input name="action" value="I want to go!" type="submit"  class="btn-eventPR" style="font-weight: bold; font-size: 15px; font-family: arial sans-serif; border-color: #227289 !important; text-transform: capitalize;"/>
-                                     </form>
+                                        <input name="action" value="I want to go!" type="submit"  class="btn-eventPR" style="font-weight: bold; font-size: 15px; font-family: arial sans-serif; border-color: #227289 !important; text-transform: capitalize;"/>
+                                    </form>
                                  </span>
+                                    </a>
+
+                                 <a class="btn btn-eventPR">
+                                 <form action="friendsAssisting.php<?php echo "?eventID={$eventID}" ?>"  method="POST">
+                                     <input name="action" value="See assisting friends" type="submit"  class="btn-eventPR" style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;"/>
+                                 </form>
                                  </a>
-
-                                 <a href="contacts.php" class="btn btn-eventPR"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;  text-transform: capitalize;">See assisting friends</span></a>
-
-                                
-                            
-
 
                             <!--<div style="text-align:center;"><div style="height: 10px; margin-top:15px; overflow: hidden;"></div>-->
                                 <a class="btn btn-eventPR" href="index.php">
@@ -383,10 +380,7 @@ $isAttending = $atts[0];
                                             <span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-align:right; text-transform: capitalize;" name="tickets">Find tickets</span>
                                 </a>
                                 </div>
-                                <div style="height: 10px; overflow: hidden;"></div>
-
-<!--            
-                                 <p style="display: inline-block; font-style: italic; padding-left: 10px;"><?php echo $attendees ?> people are going</p>
+                                <div style="height: 10px; overflow: hidden;"></div><!--
 -->
                                  
                             </div>
