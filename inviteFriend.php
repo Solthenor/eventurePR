@@ -12,18 +12,6 @@ if (!$loggedin && !isset($userID)) {
     return;
 }
 
-if(isset($_POST['invite'])) {
-    $db = db::getInstance();
-
-    $sql = "INSERT INTO Invite
-            SET
-               userID1 = '{$id}',
-               userID2 = '{$userID}',
-               eventID = '{$eventID}'";
-
-    $stmt = $db->prepare($sql);
-    $stmt->execute();
-}
 
 $db = db::getInstance();
 $sql = "SELECT
@@ -50,7 +38,17 @@ $stmt->execute();
 
 $result = $stmt->fetchAll();
 
+if(isset($_POST['action'])) {
 
+    $sql = "INSERT INTO Invite
+            SET
+               userID1 = '{$id}',
+               userID2 = '{$userID}',
+               eventID = '{$eventID}'";
+
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+}
 
 
 ?>
@@ -137,13 +135,15 @@ $result = $stmt->fetchAll();
                                 <div class="paragraph" style="text-align:left;display:block;float:left;">Username: <br />Age: <br />Gender: <br />Work: <br />E-mail: </div>
                                 <div class="paragraph"style="text-align:center;display:block;float:left;"><?php echo $user['userName'] ?><br /><?php echo $user['age'] ?><br /><?php echo $user['gender'] ?><br /><?php echo $user['work'] ?><br /><?php echo $user['email'] ?></div>
 
-                                <span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">
+
+
 
                                     <form action="<?php echo $_SERVER['PHP_SELF']; ?><?php echo "?eventID={$eventID}" ?>" method="POST">
 
-                                        <input name="invite" value="Invite" type="submit"  class="btn btn-eventPR" style="font-weight: bold; font-size: 15px; font-family: arial sans-serif; border-color: #227289 !important; text-transform: capitalize;"/>
+                                        <input name="action" value="Invite" type="submit"  class="btn-eventPR" style="font-weight: bold; font-size: 15px; font-family: arial sans-serif; border-color: #227289 !important; text-transform: capitalize;"/>
                                     </form>
-                                 </span>
+
+
                             </td>
 
                         </tr>
