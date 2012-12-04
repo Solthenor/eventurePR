@@ -437,18 +437,20 @@ Dynamically changes depending on the user accessing it
                                 if(!$friendProfile) { 
                                     $sql = "SELECT
                                                c1.userID,
+                                               c1.posterID,
                                                c1.content,
                                                U.profilePicture
-                                           FROM Wall c1 INNER JOIN User U ON c1.userID=U.userID 
+                                           FROM Wall c1 INNER JOIN User U ON c1.posterID=U.userID
                                            WHERE c1.userID='{$id}';
                                     ";
                                 }
                                 else {
                                     $sql = "SELECT
                                                c1.userID,
+                                               c1.posterID,
                                                c1.content,
                                                U.profilePicture
-                                           FROM Wall c1 INNER JOIN User U ON c1.userID=U.userID
+                                           FROM Wall c1 INNER JOIN User U ON c1.posterID=U.userID
                                            
                                            WHERE c1.userID='{$friendID}';
                                     ";
@@ -461,7 +463,7 @@ Dynamically changes depending on the user accessing it
 
                                 foreach ($result as $comment) {
                                     echo "<li> 
-                                            <a href='event.php?eventID={$comment['userID']}'><img class='wsite-image galleryImageBorder' src='picture.php?picID={$comment['profilePicture']}' alt='img/default-profile.jpg' style='max-width: 15%; float:left; border-width:1px;'></a>
+                                            <a href='profile.php?userID={$comment['posterID']}'><img class='wsite-image galleryImageBorder' src='picture.php?picID={$comment['profilePicture']}' alt='img/default-profile.jpg' style='max-width: 15%; float:left; border-width:1px;'></a>
                                             <span style='color: white; display:inline-block;margin-top:7px;'> : {$comment['content']}</span>
                                           </li>
                                         <div style='height: 20px; overflow: hidden; width: 100%;'></div>";
