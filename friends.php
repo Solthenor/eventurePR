@@ -75,7 +75,7 @@ if(isset($userID)) {
 <div id="wrapper">
     <table id="header">
         <tr>
-            <td id="logo"><span class='wsite-logo'><a href='/'><span id="wsite-title">E-venturePR</span></a></span></td>
+            <td id="logo"><span class='wsite-logo'><a href='index.php'><span id="wsite-title">E-venturePR</span></a></span></td>
             <td id="header-right">
                 <table style="width: 150px;">
                     <?php if($loggedin) { ?>
@@ -107,6 +107,7 @@ if(isset($userID)) {
     </div>
     <div id="container">
         <div id="content">
+                <div style="text-align: left;"><a class="btn btn-eventPR" href="profile.php"><span style="font-weight: bold; font-size: 14px; font-family: Arial sans-serif;">GO BACK TO PROFILE</span></a></div>
 
                 <?php if(isset($result)) {?>
                 <?php foreach ($result as $user) { ?>

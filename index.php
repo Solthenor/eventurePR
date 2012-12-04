@@ -178,7 +178,7 @@ if (isset($_POST['submit'])) {
                           
                           <div class="input-append">
                            <!-- <input type="text" class="span2 search-query input-xlarge" id="submit" name="submit">-->
-                            <div><input class="input-xlarge" type="text" id="submit" name="submit" placeholder="Search events, venues, friends"></div>
+                            <div><input class="input-xlarge" type="text" id="submit" name="submit" placeholder="Search events, venues, usernames" ></div>
 
                             <!--<div><button href="#myModal" role="button" data-toggle="modal" type="submit" class="btn btn-eventPR" style="text-align:center">Search</button></div>
                             
@@ -192,13 +192,13 @@ if (isset($_POST['submit'])) {
                         <button href="#myModal" role="button" data-toggle="modal" type="submit" class="btn btn-eventPR">Search</button>
                         
 -->
-                        <div id="eModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="background-color:black;">
-                              <div class="modal-header">
+                        <div id="eModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+                              <div class="modal-header" style= "background-image:url('css/wrapper-scaled.jpg');">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                 <h3>Search Results</h3>
                               </div>
-                              <div class="modal-body"></div>
-                              <div class="modal-footer" style= "background-color:darkgray;">
+                              <div class="modal-body" style="background-image:url('css/bodybg.jpg');"></div>
+                              <div class="modal-footer" style= "background-image:url('css/bodybg.jpg');">
                                 <button class="btn btn-eventPR" data-dismiss="modal" aria-hidden="true">Close</button>
                               </div>
                             </div>

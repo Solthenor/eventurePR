@@ -81,7 +81,7 @@ $events = $stmt->fetchAll();
 <div id="wrapper">
     <table id="header">
         <tr>
-            <td id="logo"><span class='wsite-logo'><a href='/'><span id="wsite-title">E-venturePR</span></a></span></td>
+            <td id="logo"><span class='wsite-logo'><a href='index.php'><span id="wsite-title">E-venturePR</span></a></span></td>
             <td id="header-right">
                 <table style="width:150px;">
                     <?php if($loggedin) { ?>
@@ -148,17 +148,18 @@ $events = $stmt->fetchAll();
                                     </td>
                                     <td class='wsite-multicol-col' style='width:20.925110132159%;padding:0 15px'>
 
-                                        <div style="text-align:left;"><div style="height: 10px; overflow: hidden;"></div>
-                                            <a class="wsite-button wsite-button-small wsite-button-highlight" href="javascript:;" >
-                                                <span class="wsite-button-inner">Find tickets</span>
-                                            </a>
-                                            <div style="height: 10px; overflow: hidden;"></div></div>
-
-                                        <div style="text-align:left;"><div style="height: 10px; overflow: hidden;"></div>
-                                            <a class="wsite-button wsite-button-small wsite-button-highlight" href="share.php?eventID=<?php echo $event['eventID'] ?>" >
-                                                <span class="wsite-button-inner">Share E-venture</span>
-                                            </a>
-                                            <div style="height: 10px; overflow: hidden;"></div></div>
+                                        <div class="btn-toolbar" style=" position:relative; padding: 60px 10px 0 0; text-align:center; ">
+                                        <div class="btn-group btn-group-vertical"  >
+                                            
+                                                <a class="btn btn-eventPR" href="http://www.google.com/search?q=<?php echo $event['eventName'] ?>+tickets" >
+                                                    <span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;  text-transform: capitalize;">Find tickets</span>
+                                                </a>
+                                                
+                                                <a class="btn btn-eventPR" href="event.php?eventID=<?php echo $event['eventID'] ?>" >
+                                                    <span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;  text-transform: capitalize;">Share E-venture</span>
+                                                </a>
+                                        </div>
+                                    </div>
 
                                     </td>
                                 </tr>

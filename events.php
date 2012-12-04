@@ -330,7 +330,7 @@ if (isset($_POST['submit'])) {
                                                     <span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;  text-transform: capitalize;">Find tickets</span>
                                                 </a>
                                                 
-                                                <a class="btn btn-eventPR" href="share.php?eventID=<?php echo $event['eventID'] ?>" >
+                                                <a class="btn btn-eventPR" href="event.php?eventID=<?php echo $event['eventID'] ?>" >
                                                     <span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;  text-transform: capitalize;">Share E-venture</span>
                                                 </a>
                                         </div>
