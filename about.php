@@ -93,8 +93,8 @@ require_once('checkAuth.php');
                             <td class='wsite-multicol-col' style='width:34.634492266734%;padding:0 15px'>
 
                                 <h4 style="margin-left:10px;text-align:left;">Álvaro Calderón<br /></h4>
-                                <span class='imgPusher' style='float:right;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:right;margin-top:0px;*margin-top:0px'><a href=''><img class="wsite-image galleryImageBorder" src="http://i.imgur.com/hPGUi.jpg?1" style="margin-top: 5px; margin-bottom: 10px; margin-left: 10px; margin-right: 0px; border-width:1px;padding:3px; height: 225px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
-                                <div class="paragraph" style="text-align:left;display:inline-table;margin-left: 25px;"><a href="profile.php">Amateur astronaut.&nbsp;</a></div>
+                                <span class='imgPusher' style='float:right;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:right;margin-top:0px;*margin-top:0px'><a href='profile.php?userID=27'><img class="wsite-image galleryImageBorder" src="img/alvaro.jpg" style="margin-top: 5px; margin-bottom: 10px; margin-left: 10px; margin-right: 0px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
+                                <div class="paragraph" style="text-align:left;display:inline-table;margin-left: 25px;"><a href="profile.php?userID=27">Amateur astronaut.&nbsp;</a></div>
                                 <hr style="clear:both;visibility:hidden;width:100%;">
 
                             </td>
