@@ -177,7 +177,7 @@ if ( count($_POST) > 0) {
                 </div>
 
                 <div><div style="height: 20px; overflow: hidden; width: 100%;"></div>
-                    <hr class="styled-hr" style="width:100%;"></hr>
+                    <hr class="styled-hr" style="width:100%;" />
                     <div style="height: 20px; overflow: hidden; width: 100%;"></div></div>
 
 

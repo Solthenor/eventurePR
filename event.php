@@ -310,17 +310,17 @@ $isAttending = $atts[0];
                         <div class="paragraph" style="text-align:left;display:block; clear:left;">
                             <?php echo $event['date'] ?>
                             <br />
-                            <span style="line-height: 30px;">Start Time:  <?php echo $event['startHour'] ?></span>
+                            <span style="line-height: 30px;"><b>Start Time:</b>   <?php echo $event['startHour'] ?></span>
                             <br />
-                            <span style="line-height: 30px;">End Time:  <?php echo $event['endHour'] ?></span>
+                            <span style="line-height: 30px;"><b>End Time:</b>  <?php echo $event['endHour'] ?></span>
                             <br />
-                            <span style="line-height: 30px;">Location:  <a href="venue.php?venueID=<?php echo $event['venueID'] ?>"><?php echo $event['venueName'] ?></a></span>
+                            <span style="line-height: 30px;"><b>Location:</b>  <a href="venue.php?venueID=<?php echo $event['venueID'] ?>"><?php echo $event['venueName'] ?></a></span>
                             <br />
-                            <span style="line-height: 30px;">Type:  <?php echo $event['eventType'] ?></span>
+                            <span style="line-height: 30px;"><b>Type:</b>  <?php echo $event['eventType'] ?></span>
                             <br />
-                            <span style="line-height: 30px;">Genre:  <?php echo $event['genre'] ?></span>
+                            <span style="line-height: 30px;"><b>Genre:</b>  <?php echo $event['genre'] ?></span>
                             <br />
-                            <span style="line-height: 30px;">Entrance Fee:  $<?php echo $event['price'] ?><br /></span>
+                            <span style="line-height: 30px;"><b>Entrance Fee:</b>  $<?php echo $event['price'] ?><br /></span>
                             <br />
                             <?php echo $event['description'] ?>
                             <span style="line-height: 30px;"><br /></span><br /><span style="font-size: 12px;">posted by <a href="profile.php?userID=<?php echo $event['userID'] ?>"><?php echo $event['userName'] ?></a></span><br /></div>
@@ -413,7 +413,7 @@ $isAttending = $atts[0];
         <tbody class='wsite-multicol-tbody'>
             <tr class='wsite-multicol-tr'>
                 <td class='wsite-multicol-col' style='width:50%;padding:0 15px'>
-                    <h2 style="text-align:left;">Pics taken at <?php echo $event['eventName']?></h2>
+                    <h2 style="text-align:left;">Pics taken at <?php echo $event['eventName']?>: </h2>
                     <div>
                         <div><div style="height: 20px; overflow: hidden;"></div>
                         <div id='139083701912618958-gallery' class='imageGallery' style='line-height: 0px; padding: 0; margin: 0'>
