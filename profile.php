@@ -351,7 +351,9 @@ Dynamically changes depending on the user accessing it
                                     <div id="accordion">
                                     <!-- Selects events where there user has logged as I wanna go!-->
                                     <?php $db = db::getInstance();
-                                    $sql = "SELECT
+                                        
+                                        if(!$friendProfile) {
+                                        $sql = "SELECT
                                             E.eventID,
                                             E.eventName,
                                             E.eventType,
@@ -370,6 +372,28 @@ Dynamically changes depending on the user accessing it
                                         INNER JOIN Attends A ON E.eventID=A.eventID
                                         WHERE A.userID={$id};
                                                    ";
+                                               }
+                                               else {
+                                                $sql = "SELECT
+                                            E.eventID,
+                                            E.eventName,
+                                            E.eventType,
+                                            E.genre,
+                                            E.flyer,
+                                            DATE_FORMAT(E.date, '%W, %M %e, %Y') as date,
+                                            E.startHour,
+                                            E.endHour,
+                                            E.status,
+                                            E.featured,
+                                            E.price,
+                                            E.flag,
+                                            E.description,
+                                            E.userID
+                                        FROM Event AS E
+                                        INNER JOIN Attends A ON E.eventID=A.eventID
+                                        WHERE A.userID={$friendID};";
+
+                                               }
 
                                     $stmt = $db->prepare($sql);
                                     $stmt->execute();
