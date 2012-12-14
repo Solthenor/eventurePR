@@ -10,6 +10,10 @@ if (!isset($eventID)) {
     header('Location: index.php');
     return;
 }
+if (!$loggedin) {
+    header('Location: login.php');
+    return;
+}
 //Query for getting the event's info from the database
 $db = db::getInstance();
 $sql = "SELECT
