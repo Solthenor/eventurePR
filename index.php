@@ -1,14 +1,21 @@
-<?php
+<?php  // This is the main page
+
+//Checks if the user is connected from a mobile phone
 require_once('mobileRedirect.php');
+// For handling the logout process
 require_once('logoutHandler.php');
+// For initializing the database
 require_once('db.php');
+// For checking if the user is logged in or returning
 require_once('checkAuth.php');
 
+// Checks if the submit button was pressed on the search bar.
 if (isset($_POST['submit'])) {
     $search = $_POST['submit'];
 
     $db = db::getInstance();
 
+    // Query to find users with similar names to the input value
     $userSql = "SELECT 
             U.userName,
             U.userID,
@@ -21,6 +28,7 @@ if (isset($_POST['submit'])) {
     $stmt->execute();
     $users = $stmt->fetchAll();
 
+    // Query to find events with similar names to the input value
     $eventSql = "SELECT 
             E.eventID,
             E.eventName
@@ -31,6 +39,7 @@ if (isset($_POST['submit'])) {
     $stmt->execute();
     $events = $stmt->fetchAll();
 
+    // Query to find venues with similar names to the input value
     $venueSql = "SELECT 
             V.venueID,
             V.vName
@@ -57,7 +66,7 @@ if (isset($_POST['submit'])) {
     <title>E-venturePR - Home</title>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-
+    <!-- Links to the CSS stylesheets, Bootstrap, etc. -->
     <link rel='stylesheet' type='text/css' href='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.css?1346362758'>
     <link rel='stylesheet' href='http://cdn1.editmysite.com/editor/images/common/common-v2.css?buildTime=1346362758' type='text/css' />
     <link rel='stylesheet' type='text/css' href='css/main_style.css' title='wsite-theme-css' />
@@ -72,6 +81,8 @@ if (isset($_POST['submit'])) {
         #wsite-content a:visited, .blog-sidebar a:visited{color:#FFFFFF }
         #wsite-content a:hover, .blog-sidebar a:hover{color:#FFFFFF }
     </style>
+
+    <!-- Links to the javasripts, JQuery, etc, scripts -->
     <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/jquery_effects.js?1346362758'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.min.js?1346362758'></script>
@@ -85,6 +96,7 @@ if (isset($_POST['submit'])) {
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
 
+    <!-- Script for the search bar function -->
     <script type="text/javascript">
     window.$ = jQuery;
     $(function(){
@@ -132,13 +144,13 @@ if (isset($_POST['submit'])) {
 <body class='wsite-theme-dark tall-header-page wsite-page-index'>
 <div id="wrapper">
     <table id="header">
-        <tr>
+        <tr> <!-- Website logo -->
             <td id="logo"><span class='wsite-logo'><a href='index.php'><span id="wsite-title" style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">E-venturePR</span></a></span></td>
             
             
             <td id="header-right">
                 <table style="width: 150px;">
-                    <!-- Conditional to check login Status-->
+                    <!-- Checks if the user is logged to show the "Profile | Sign out" links, if not it shows "Register | Login" links -->
                     <?php if($loggedin) { ?>
                     <tr>
                         <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; ">Profile</a> | 
@@ -165,9 +177,13 @@ if (isset($_POST['submit'])) {
             </td>
         </tr>
     </table>
+
+    <!-- This shows the navigation bar. -->
     <div id="navigation">
       <ul><li id='active'><a href='index.php'>Home</a></li><li id='pg145650631833651339'><a href='events.php?category=Concert'>Music</a></li><li id='pg404778243583026952'><a href='events.php?category=Sports'>Sports</a></li><li id='pg441792526610757515'><a href='events.php?category=Entertainment'>Entertainment</a></li><li id='pg269210016325162137'><a href='events.php?category=Business'>Business & Education</a></li><li id="pgabout_us"><a href="about.php">About Us</a></li></ul>
     </div>
+
+    <!-- Here starts the container of all the main things -->
     <div id="container">
         <div id="content">
             <div id="banner" >
@@ -175,23 +191,13 @@ if (isset($_POST['submit'])) {
                     
                     <span style="float:right; margin-right:300px; margin-top:15px;">
                         <form class="form-search" action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
-                          
+
+                            <!-- Input box for the search bar -->
                           <div class="input-append">
-                           <!-- <input type="text" class="span2 search-query input-xlarge" id="submit" name="submit">-->
                             <div><input class="input-xlarge" type="text" id="submit" name="submit" placeholder="Search events, venues, usernames" ></div>
-
-                            <!--<div><button href="#myModal" role="button" data-toggle="modal" type="submit" class="btn btn-eventPR" style="text-align:center">Search</button></div>
-                            
-
-
-                         -->
                           </div>
-                        
-<!--
-                        <input type="text" id="submit" name="submit">
-                        <button href="#myModal" role="button" data-toggle="modal" type="submit" class="btn btn-eventPR">Search</button>
-                        
--->
+
+                        <!-- Code for displaying the search bar results -->
                         <div id="eModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
                               <div class="modal-header" style= "background-image:url('css/wrapper-scaled.jpg');">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -204,20 +210,18 @@ if (isset($_POST['submit'])) {
                             </div>
                         </form>
                     </span>
-
-                            
-                            
                 </div>
             </div>
             <div>
                 <div style="height: 40px; overflow: hidden; width: 100%;"></div>
                     <hr class="styled-hr" style="width:100%;">
             </div>
+
+            <!-- Code for displaying featured events -->
             <div class="theIndex"><div id='wsite-content' class='wsite-not-footer'>
                 <h2 style="text-align:left;">Featured Events:</h2>
 
                 <?php
-
                 echo '
                 <div id="myCarousel" class="carousel slide">
 
@@ -262,6 +266,7 @@ if (isset($_POST['submit'])) {
                     <hr class="styled-hr" style="width:100%;">
                     <div style="height: 20px; overflow: hidden; width: 100%;"></div></div>
 
+                <!-- Here other events are randomly displayed -->
                 <h2 style="text-align:left;"><u>Other Events:</u></h2>
 
                <div><div class="wsite-multicol"><div class='wsite-multicol-table-wrap' style='margin:0 -15px'>
@@ -311,6 +316,8 @@ if (isset($_POST['submit'])) {
     </div>
 
     <div id="footer">
+
+    <!-- Button to redirect to the mobile version -->
     <div id="mobileLink" style="text-align: center;position: relative; ">
         <a href="mobile-index.php"><button class="btn btn-eventPR" style="height:60px; font-weight: bold;">Click Here For Mobile Version!</button></a>
     </div>
