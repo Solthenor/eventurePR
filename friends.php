@@ -1,4 +1,4 @@
-<?php
+<?php  // This page shows the user's friends
 require_once('db.php');
 require_once('logoutHandler.php');
 require_once('checkAuth.php');

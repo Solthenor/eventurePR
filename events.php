@@ -3,6 +3,7 @@ require_once('logoutHandler.php');
 require_once('db.php');
 require_once('checkAuth.php');
 
+//Gets the category and subcategory of the events the user wants to see.
 $category = $_GET['category'];
 $subCategory = $_GET['subcategory'];
 
@@ -10,7 +11,8 @@ if (!isset($category)) {
     header('Location: index.php');
     return;
 }
-
+// Query to get all the events from the database where the event type is the same as the category selected,
+// and some columns from the Venue table are added.
 $db = db::getInstance();
 $sql = "SELECT 
             E.eventName, 
@@ -42,6 +44,7 @@ $stmt->execute();
 
 $events = $stmt->fetchAll();
 
+// Gets the info the user requested in the search bar
 if (isset($_POST['submit'])) {
     $search = $_POST['submit'];
 
@@ -94,7 +97,7 @@ if (isset($_POST['submit'])) {
     <title>Concerts - E-venturePR</title>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-
+    <!-- Links to the CSS stylesheets, Bootstrap, etc. -->
     <link rel="shortcut icon" href="../assets/ico/favicon.ico">
     <link rel='stylesheet' type='text/css' href='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.css?1346362758'>
     <link rel='stylesheet' href='http://cdn1.editmysite.com/editor/images/common/common-v2.css?buildTime=1346362758' type='text/css' />
@@ -107,6 +110,7 @@ if (isset($_POST['submit'])) {
         #wsite-content h2, #wsite-content .product-long .product-title, #wsite-content .product-large .product-title, #wsite-content .product-small .product-title, .blog-sidebar h2 {}
         #wsite-title{font-family:'Capture it' !important;color:#009900 !important;}
     </style>
+    <!-- Changes the header picture depending on the category (type of event) selected. -->
     <style type='text/css'>
         .wsite-header {
             <?php if($category == 'Business') { ?>
@@ -124,12 +128,14 @@ if (isset($_POST['submit'])) {
             background-position: 0 0 !important;
         }
     </style>
+    <!-- Links to the javasripts, JQuery, etc, scripts -->
     <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/jquery_effects.js?1346362758'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.min.js?1346362758'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/images/common/utilities-jq.js?1346362758'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/flyout_menus_jq.js?1346362758'></script>
     <script src="js/bootstrap.min.js"></script>
+    <!-- Script for showing the popup with the results of the search bar -->
     <script type="text/javascript">
     window.$ = jQuery;
     $(function(){
@@ -176,6 +182,7 @@ if (isset($_POST['submit'])) {
 </head>
 <body class='wsite-theme-dark tall-header-page wsite-page-concerts'>
 <div id="wrapper">
+    <!-- Code for the search bar -->
 <div id="eModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="background-color:black;">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -191,6 +198,7 @@ if (isset($_POST['submit'])) {
             <td id="logo"><span class='wsite-logo'><a href='index.php'><span id="wsite-title">E-venturePR</span></a></span></td>
             <td id="header-right">
                 <table style="width: 150px;">
+                    <!-- Checks if the user is logged to show the "Profile | Sign out" links, if not it shows "Register | Login" links -->
                     <?php if($loggedin) { ?>
                         <tr>
                             <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; ">Profile</a> |
@@ -216,8 +224,11 @@ if (isset($_POST['submit'])) {
         </tr>
     </table>
 
+    <!-- This shows the navigation bar. -->
     <div id="navigation">
         <ul><li id='active'><a href='index.php'>Home</a></li><li id='pg145650631833651339'><a href='events.php?category=Concert'>Music</a></li><li id='pg404778243583026952'><a href='events.php?category=Sports'>Sports</a></li><li id='pg441792526610757515'><a href='events.php?category=Entertainment'>Entertainment</a></li><li id='pg269210016325162137'><a href='events.php?category=Business'>Business & Education</a></li><li id="pgabout_us"><a href="about.php">About Us</a></li></ul>
+
+        <!-- Here starts the container of all the main things -->
         <div id="container" style="margin-top: 29px;">
             <div id="content">
                 <div id="banner">
@@ -250,7 +261,7 @@ if (isset($_POST['submit'])) {
                 </div>
                 <div class="text"><div id='wsite-content' class='wsite-not-footer'>
                     <div>
-
+                        <!-- This code shows the Genre (Subcategory) toolbar depending on the Type (Category) chosen. -->
                         <div class="btn-toolbar" style="text-align: center">
                             <div class="btn-group">
                                 <?php if($category == 'Concert') { ?>
@@ -293,6 +304,7 @@ if (isset($_POST['submit'])) {
                         </div></div>
                     <?php
 
+                    // This is a loop that shows the results depending on the type and genre chosen.
                     foreach ($events as $event) {
 
                     ?>
@@ -307,17 +319,22 @@ if (isset($_POST['submit'])) {
                             <tr class='wsite-multicol-tr'>
                                 <td class='wsite-multicol-col' style='width:35%;padding:0 15px'>
 
+                                    <!-- Shows the event's name -->
                                     <h2 style="text-align:left;"><?php echo $event['eventName'] ?></h2>
+                                    <!-- Shows the event's picture -->
                                     <span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a href="event.php?eventID=<?php echo $event['eventID'] ?>"><img class="wsite-image galleryImageBorder" src="picture.php?picID=<?php echo $event['flyer'] ?>" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" width="200" height="300"/></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
                                     <hr style="clear:both;visibility:hidden;width:100%;">
 
                                     <div style="display: inline;"><div style="float:left; display: inline-block;"> </div>
+                                        <!-- Button to redirect to the event's profile so the user can see more info -->
                                         <a class="btn btn-eventPR" href="event.php?eventID=<?php echo $event['eventID'] ?>"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">MORE INFO</span></a>
+                                        <!-- Button to flag the event if it is innapropiate -->
                                         <a class="btn btn-eventPR" href="#"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">FLAG</span></a>
                                         <div style="height: 10px; overflow: hidden;"></div></div>
 
                                 </td>
                                 <td>
+                                    <!-- Displays some of the event's info -->
                                     <div class="paragraph" style="text-align:left;display:block;"><font size="4"><?php echo $event['date'] ?></font><br /><font size="4"><?php echo $event['venueName'] ?></font><br /><font size="4"><span style="line-height: 27px;"><br /></span></font><br /><font size="4"><span style="line-height: 27px;">Genre: <?php echo $event['genre'] ?></span></font></div>
 
                                 </td>
@@ -325,11 +342,11 @@ if (isset($_POST['submit'])) {
                                     <div style="text-align:left;"><div style="height: 10px; overflow: hidden;"></div>
                                     <div class="btn-toolbar" style=" position:relative; padding: 60px 10px 0 0; text-align:center; ">
                                         <div class="btn-group btn-group-vertical"  >
-                                            
+
+                                                <!-- This button redirects to Google search with results of places to find tickets for the event -->
                                                 <a class="btn btn-eventPR" href="http://www.google.com/search?q=<?php echo $event['eventName'] ?>+tickets" >
                                                     <span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;  text-transform: capitalize;">Find tickets</span>
                                                 </a>
-                                                
                                                 <a class="btn btn-eventPR" href="event.php?eventID=<?php echo $event['eventID'] ?>" >
                                                     <span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;  text-transform: capitalize;">Share E-venture</span>
                                                 </a>
