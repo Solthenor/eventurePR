@@ -1,15 +1,16 @@
-<?php                   // Displays the event information on the web page. This view is set from the information of an event created.
+<?php   // Displays the event information on the web page.
 require_once('logoutHandler.php');
 require_once('db.php');
 require_once('checkAuth.php');
 
+//Gets the event ID
 $eventID = $_GET['eventID'];
 
 if (!isset($eventID)) {
     header('Location: index.php');
     return;
 }
-
+//Query for getting the event's info from the database
 $db = db::getInstance();
 $sql = "SELECT
 E.eventID,
@@ -48,9 +49,12 @@ $stmt->execute();
 $result = $stmt->fetchAll();
 
 $event = $result[0];
+//Gets the ID of the user who created the event
 $eventUserID = $event['userID'];
+// Gets the list of people who want to attend to the event
 $attendees = $event['attendees'];
 
+// Code for uploading a picture to the event's gallery
 if(isset($_POST['upload'])) {
     if ($_FILES["photo"]["error"] == 0) {
         $type = str_replace('image/', '', $_FILES['photo']['type']);
@@ -92,8 +96,7 @@ if(!isset($event)){
     return;
 }
 
-
-
+// Code for updating the flag, or if a user pressed the "I want to go" button
 if(isset($_POST['action'])) {
 
     $action = $_POST['action'];
@@ -132,6 +135,7 @@ if(isset($_POST['action'])) {
     }
 }
 
+// Code for uploading a comment into the databse
 if(isset($_POST['submit'])) {
     $sql = "INSERT INTO Comment
     SET
@@ -179,7 +183,7 @@ $isAttending = $atts[0];
     <title><?php echo $event['eventName'] ?> - E-venturePR</title>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-
+    <!-- Links to the CSS stylesheets, Bootstrap, etc. -->
     <link rel='stylesheet' type='text/css' href='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.css?1346362758'>
     <link rel='stylesheet' href='http://cdn1.editmysite.com/editor/images/common/common-v2.css?buildTime=1346362758' type='text/css' />
     <link rel='stylesheet' type='text/css' href='css/main_style.css' title='wsite-theme-css' />
@@ -194,11 +198,14 @@ $isAttending = $atts[0];
     #wsite-content a:visited, .blog-sidebar a:visited{color:#FFFFFF !important;}
     #wsite-content a:hover, .blog-sidebar a:hover{color:#FFFFFF !important;}
     </style>
+    <!-- Links to the javasripts, JQuery, etc, scripts -->
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/jquery_effects.js?1346362758'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.min.js?1346362758'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/images/common/utilities-jq.js?1346362758'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/flyout_menus_jq.js?1346362758'></script>
 
+    <!-- Script for the google map. The map shows the location of the user (finds it by IP address) and shows the
+         location of the event -->
     <script type="text/javascript" language="JavaScript" src="http://j.maxmind.com/app/geoip.js"></script>
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <script type="text/javascript">
@@ -259,8 +266,8 @@ $isAttending = $atts[0];
         window.onload = initialize;
         </script>
     </head>
-    <body class='wsite-theme-dark no-header-page wsite-page-nightwish-detail'>
 
+    <body class='wsite-theme-dark no-header-page wsite-page-nightwish-detail'>
 
         <div id="wrapper">
          <table id="header">
@@ -268,6 +275,7 @@ $isAttending = $atts[0];
            <td id="logo"><span class='wsite-logo'><a href='index.php'><span id="wsite-title">E-venturePR</span></a></span></td>
            <td id="header-right">
             <table style="width: 150px;">
+                <!-- Checks if the user is logged to show the "Profile | Sign out" links, if not it shows "Register | Login" links -->
                 <?php if($loggedin) { ?>
                 <tr>
                     <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; ">Profile</a> | 
@@ -292,9 +300,11 @@ $isAttending = $atts[0];
         </td>
     </tr>
 </table>
+<!-- This shows the navigation bar. -->
 <div id="navigation">
     <ul><li id='active'><a href='index.php'>Home</a></li><li id='pg145650631833651339'><a href='events.php?category=Concert'>Music</a></li><li id='pg404778243583026952'><a href='events.php?category=Sports'>Sports</a></li><li id='pg441792526610757515'><a href='events.php?category=Entertainment'>Entertainment</a></li><li id='pg269210016325162137'><a href='events.php?category=Business'>Business & Education</a></li><li id="pgabout_us"><a href="about.php">About Us</a></li></ul>
 </div>
+         <!-- Here starts the container of all the main things -->
 <div id="container">
   <div id="content">
    <div class="text"><div id='wsite-content' class='wsite-not-footer'>
@@ -304,10 +314,13 @@ $isAttending = $atts[0];
                 <tr class='wsite-multicol-tr'>
                     <td class='wsite-multicol-col' style='width:55%;'>
 
+                        <!-- Shows the event name -->
                         <h2 style="text-align:left;"><?php echo $event['eventName'] ?></h2>
                         <span class='imgPusher' style='float:left;height:0px'></span>
+                        <!-- Sends the event's picture ID to picture.php to get the event's flyer. -->
                         <span style='position:relative;float:left;z-index:10;clear:left;margin-top:0px;margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="picture.php?picID=<?php echo $event['flyer'] ?>" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" width="350" height="350"/></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
                         <div class="paragraph" style="text-align:left;display:block; clear:left;">
+                            <!-- Show the event's info -->
                             <span style="line-height: 30px;"><b>Date: </b>  <?php echo $event['date'] ?></span>
                             <br />
                             <span style="line-height: 30px;"><b>Start Time:</b>   <?php echo $event['startHour'] ?></span>
@@ -359,7 +372,7 @@ $isAttending = $atts[0];
                                 <span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">
 
                                     <form action="<?php echo $_SERVER['PHP_SELF']; ?><?php echo "?eventID={$eventID}" ?>" method="POST">
-
+                                        <!-- The "I wanna go" button inserts the user ID to the Assisting table in the database-->
                                         <input name="action" value="I want to go!" type="submit"  class="btn-eventPR" style="font-weight: bold; font-size: 15px; font-family: arial sans-serif; border-color: #227289 !important; text-transform: capitalize;"/>
                                     </form>
                                  </span>
@@ -367,6 +380,8 @@ $isAttending = $atts[0];
 
                                  <a class="btn btn-eventPR">
                                  <form action="friendsAssisting.php<?php echo "?eventID={$eventID}" ?>"  method="POST">
+                                     <!-- The "See assisting friends" button redirects the user to friendsAssisting.php
+                                          so he can see which friends are assisting to the event.-->
                                      <input name="action" value="See assisting friends" type="submit"  class="btn-eventPR" style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;  border-color: #227289 !important; text-transform: capitalize;"/>
                                  </form>
                                  </a>
@@ -378,6 +393,8 @@ $isAttending = $atts[0];
                                         </form>
                                     </a>
                                   -->
+
+                                <!-- The "Find Tickets" button redirects the user to google with search results for tickets -->
                                 <a class="btn btn-eventPR" href="http://www.google.com/search?q=<?php echo $event['eventName'] ?>+tickets" >
                                             <span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif; text-align:right; text-transform: capitalize;" name="tickets">Find tickets</span>
                                 </a>
@@ -410,6 +427,7 @@ $isAttending = $atts[0];
         <tbody class='wsite-multicol-tbody'>
             <tr class='wsite-multicol-tr'>
                 <td class='wsite-multicol-col' style='width:50%;padding:0 15px'>
+                    <!-- This code shows pictures taken at this event -->
                     <h2 style="text-align:left;">Pics taken at <?php echo $event['eventName']?>: </h2>
                     <div>
                         <div><div style="height: 20px; overflow: hidden;"></div>
@@ -423,6 +441,7 @@ $isAttending = $atts[0];
                         </div>
 
                         <div style="height: 20px; overflow: hidden;"></div></div>
+                        <!-- This code is for uploading new pictuers to the gallery -->
                         <form action="<?php echo $_SERVER['PHP_SELF'] . "?eventID={$eventID}" ?>" method="POST" enctype="multipart/form-data">
                             <div class="paragraph" style="text-align:left;">Add a Picture:</div>
                             <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
@@ -451,7 +470,7 @@ $isAttending = $atts[0];
 
                             <ul style="font-size: 14px; color: white; margin:0 !important;">
 
-                                <!--  Selects comments posted to user's wall -->
+                                <!--  Selects comments posted to the event's page -->
                                 <?php
 
                                 $db = db::getInstance();
@@ -470,6 +489,7 @@ $isAttending = $atts[0];
 
                                 $result = $stmt->fetchAll();
 
+                                // Loop for showing the comments
                                 foreach ($result as $comment) {
                                     echo "<li>
 
@@ -493,6 +513,7 @@ $isAttending = $atts[0];
                                 </div>
                                 <div id="instructions-740288841696996782" class="wsite-form-instructions" style="display:none;"></div>
                             </div></div>
+                            <!-- button for uploading new comments -->
                             <div style="text-align:left; margin-top:10px; margin-bottom:10px;">
                                 <input type='submit' name="submit" value="Post" class='btn btn-eventPR' />
                             </div>

@@ -36,6 +36,7 @@ require_once('checkAuth.php');
             <td id="logo"><span class='wsite-logo'><a href='index.php'><span id="wsite-title">E-venturePR</span></a></span></td>
             <td id="header-right">
                 <table style="width:150px;">
+                    <!-- Checks if the user is logged to show the "Profile | Sign out" links, if not it shows "Register | Login" links -->
                     <?php if($loggedin) { ?>
                     <tr>
                         <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; ">Profile</a> | 
@@ -60,9 +61,11 @@ require_once('checkAuth.php');
             </td>
         </tr>
     </table>
+    <!-- This shows the navigation bar. -->
     <div id="navigation">
         <ul><li id='active'><a href='index.php'>Home</a></li><li id='pg145650631833651339'><a href='events.php?category=Concert'>Music</a></li><li id='pg404778243583026952'><a href='events.php?category=Sports'>Sports</a></li><li id='pg441792526610757515'><a href='events.php?category=Entertainment'>Entertainment</a></li><li id='pg269210016325162137'><a href='events.php?category=Business'>Business & Education</a></li><li id="pgabout_us"><a href="about.php">About Us</a></li></ul>
     </div>
+    <!-- Here starts the container of all the main things -->
     <div id="container">
         <div id="content">
 
@@ -72,6 +75,7 @@ require_once('checkAuth.php');
                     <hr class="styled-hr" style="width:100%;">
                     <div style="height: 20px; overflow: hidden; width: 100%;"></div></div>
 
+                <!-- About us info -->
                 <h4>About us:<br /></h4>
                 <p>E-venturePR is a means of staying in tune with the eccentricities of life.
                     Wether it be music, cinema, theater, or a professional matter,
@@ -90,8 +94,9 @@ require_once('checkAuth.php');
                     <table class='wsite-multicol-table'>
                         <tbody class='wsite-multicol-tbody'>
                         <tr class='wsite-multicol-tr'>
-                            <td class='wsite-multicol-col' style='width:34.634492266734%;padding:0 15px'>
 
+                            <!-- Info about us -->
+                            <td class='wsite-multicol-col' style='width:34.634492266734%;padding:0 15px'>
                                 <h4 style="margin-left:10px;text-align:left;">Álvaro Calderón<br /></h4>
                                 <span class='imgPusher' style='float:right;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:right;margin-top:0px;*margin-top:0px'><a href='profile.php?userID=27'><img class="wsite-image galleryImageBorder" src="img/alvaro.jpg" style="margin-top: 5px; margin-bottom: 10px; margin-left: 10px; margin-right: 0px; border-width:1px;padding:3px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
                                 <div class="paragraph" style="text-align:left;display:inline-table;margin-left: 25px;"><a href="profile.php?userID=27">Amateur astronaut.&nbsp;</a></div>

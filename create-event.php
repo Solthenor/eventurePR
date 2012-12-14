@@ -10,12 +10,13 @@ if( !$loggedin ){
 $picID = 0;
 $eID = 0;
 
+// If the user filled the info and pressed submit run this code
 if ( count($_POST) > 0) {
 
   $db = db::getInstance();
-
+  //If the user wants to upload a picture for the event run this code
   if ($_FILES["photo"]["error"] == 0) {
-
+     // This code prepares the picture to the proper format to save it in the database
     $type = str_replace('image/', '', $_FILES['photo']['type']);
 
     $fileName = $_FILES['photo']['name'];
@@ -28,6 +29,7 @@ if ( count($_POST) > 0) {
     $content = addslashes($content);
     fclose($fp);
 
+    // Inserts the picture in the database
     $sql = "INSERT INTO Picture
             SET
               userID = '{$id}',
@@ -37,20 +39,17 @@ if ( count($_POST) > 0) {
     $stmt = $db->prepare($sql);
     $stmt->execute();
 
+    // Gets the ID of the last inserted picture
     $picID = $db->lastInsertId();
   }
-
-
-    //TODO: better validation for empty fields
-
-  // startHour = '{$_POST['startHour']}',
-              //date = '{$_POST['date']}',
-             // endHour = '{$_POST['endHour']}',
-              //featured = '{$_POST['featured']}',
-              //price = '{$_POST['price']}',
+    // Gets the start-hour and end hour of the event and concatenates seconds to it
     $startHour = $_POST['start-hour'] . ":00";
     $endHour = $_POST['end-hour'] . ":00";
+
+    // Gets the date of the event
     $date = $_POST['date'];
+
+    // Insert the info the user has submitted into the Event table
     $sql = "INSERT INTO Event
             SET
               userID = '{$id}',
@@ -66,6 +65,7 @@ if ( count($_POST) > 0) {
               description = '{$_POST['description']}'
     ";
 
+    // If the user uploaded a picture, set the flyer (profile picture) of the event
     if(isset($picID)) {
       $sql .= ", flyer= {$picID}";
     }
@@ -78,6 +78,7 @@ if ( count($_POST) > 0) {
 
 }
 
+// This function is for redirecting to the page of the event that was just created, after submitting the info
 function redirect(){
 
     global $eID;
@@ -95,6 +96,7 @@ function redirect(){
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
+    <!-- Links to the CSS stylesheets, Bootstrap, etc. -->
     <link rel='stylesheet' type='text/css' href='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.css?1346362758'>
     <link rel='stylesheet' href='http://cdn1.editmysite.com/editor/images/common/common-v2.css?buildTime=1346362758' type='text/css' />
     <link rel='stylesheet' type='text/css' href='css/main_style.css' title='wsite-theme-css' />
@@ -108,6 +110,8 @@ function redirect(){
         #wsite-content a:visited, .blog-sidebar a:visited{color:#FFFFFF }
         #wsite-content a:hover, .blog-sidebar a:hover{color:#FFFFFF }
     </style>
+
+    <!-- Links to the javasripts, JQuery, etc, scripts -->
     <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/jquery_effects.js?1346362758'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.min.js?1346362758'></script>
@@ -118,6 +122,8 @@ function redirect(){
     <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
     <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="/resources/demos/style.css" />
+
+    <!-- This script is for the date picker to work -->
     <script>
         $(function() {
             $( "#datepicker" ).datepicker({ minDate: 0, maxDate: "+2Y" });
@@ -126,6 +132,8 @@ function redirect(){
     </script>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <!-- This script is for changing the Genre selection in the dropdown, according to what was selected as the Type of event. -->
     <script type="text/javascript">
 
         var type = [];
@@ -153,7 +161,7 @@ function redirect(){
 </head>
 <body class='wsite-theme-dark no-header-page wsite-page-create-event'>
 <?php
-
+// Before the body is displayed, run the redirect function to check if the event was submitted.
 redirect();
 
 ?>
@@ -163,6 +171,7 @@ redirect();
 			<td id="logo"><span class='wsite-logo'><a href='index.php'><span id="wsite-title">E-venturePR</span></a></span></td>
 			<td id="header-right">
 				<table style="width: 150px;">
+          <!-- Checks if the user is logged to show the "Profile | Sign out" links, if not it shows "Register | Login" links -->
           <?php if($loggedin) { ?>
           <tr>
               <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; ">Profile</a> |
@@ -187,9 +196,12 @@ redirect();
 			</td>
 		</tr>
 	</table>
+    <!-- This shows the navigation bar. -->
 	<div id="navigation">
         <ul><li id='active'><a href='index.php'>Home</a></li><li id='pg145650631833651339'><a href='events.php?category=Concert'>Music</a></li><li id='pg404778243583026952'><a href='events.php?category=Sports'>Sports</a></li><li id='pg441792526610757515'><a href='events.php?category=Entertainment'>Entertainment</a></li><li id='pg269210016325162137'><a href='events.php?category=Business'>Business & Education</a></li><li id="pgabout_us"><a href="about.php">About Us</a></li></ul>
     </div>
+
+    <!-- Here starts the container of all the main things -->
 	<div id="container">
 		<div id="content">
 			<div class="text"><div id='wsite-content' class='wsite-not-footer'>
@@ -205,14 +217,19 @@ redirect();
 <tr class='wsite-multicol-tr'>
 
 <td class='wsite-multicol-col' style='width:68.805309734513%;padding:0 15px'>
+    <!-- SHow the "Back to Profile" button -->
     <div style="text-align: left;"><a class="btn btn-eventPR" href="profile.php"><span style="font-weight: bold; font-size: 14px; font-family: Arial sans-serif;">GO BACK TO PROFILE</span></a></div>
-<h2 style="text-align:left;">E-Vent it</h2>
+    <!-- Show the "E-vent" it title -->
+    <h2 style="text-align:left;">E-Vent it</h2>
 
 <div>
+    <!-- Here start the input fields for the user to enter the info for creating the event -->
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" id="create-event" enctype="multipart/form-data">
 <div id="807999966852778988-form-parent" class="wsite-form-container" style="margin-top:10px;">
   <ul class="formlist" id="807999966852778988-form-list">
     <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
+
+  <!-- Here the user enters the event name -->
   <label class="wsite-form-label" for="event-name">Event Name <span class="form-required">*</span></label>
   <div class="wsite-form-input-container">
     <input id="event-name" class="wsite-form-input wsite-input" type="text" name="event-name" style="width:200px;" />
@@ -220,15 +237,7 @@ redirect();
   <div id="instructions-461209313855761342" class="wsite-form-instructions" style="display:none;"></div>
 </div></div>
 
-<!--
-<div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
-  <label class="wsite-form-label" for="date">Date <span class="form-required">*</span></label>
-  <div class="wsite-form-input-container">
-    <input id="date" class="wsite-form-input wsite-input" type="text" name="date" style="width:200px;" />
-  </div>
-  <div id="instructions-376105289394483033" class="wsite-form-instructions" style="display:none;"></div>
-</div></div> -->
-
+<!-- Here the user selects a venue -->
 <div><div class="wsite-form-field" style="margin:5px 0px 0px 0px;">
     <label class="wsite-form-label" for="venue">Select a Venue: <span class="form-required">*</span></label>
     <div class="wsite-form-radio-container">
@@ -248,6 +257,11 @@ redirect();
     </div>
     <div id="instructions-Select a Genre:" class="wsite-form-instructions" style="display:none;"></div>
 </div></div>
+
+      <div style="text-align:left;"><div style="height: 10px; overflow: hidden;"></div>
+          <a class="wsite-button wsite-button-small wsite-button-highlight btn-eventurePR" href="create-venue.php" >
+              <span class="wsite-button-inner">Don't see your venue? Click here!</span>
+          </a>
 
       <div><div class="wsite-form-field" style="margin:5px 0px 0px 0px;">
           <label class="wsite-form-label" for="type">Select a Type: <span class="form-required">*</span></label>

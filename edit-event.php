@@ -1,4 +1,6 @@
-<?php         // Creates events and loads them into the Event table in our Database
+<?php
+// Edits an event, basically the same page for creating an event but it uploads the existing info instead of
+// creating a new one.
 require_once('logoutHandler.php');
 require_once('db.php');
 require_once('checkAuth.php');

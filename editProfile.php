@@ -1,4 +1,5 @@
 <?php
+// basically the same code as login.php for creating a profile, but it uploads the user info instead of creating a new one.
 require_once('checkAuth.php');
 require_once('db.php');
 
