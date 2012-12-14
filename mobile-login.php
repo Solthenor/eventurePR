@@ -17,12 +17,6 @@ if ( count($_POST) > 0) {
 
     if($_POST['submit'] != 'Login'){
 
-        //TODO: better validation for empty fields
-
-        //                age = '{$_POST['age']}',
-        // gender = '{$_POST['date']}',
-        // work = '{$_POST['date']}'
-
         $password = md5 ( $_POST['password'] );
 
         $sql = "INSERT INTO User
