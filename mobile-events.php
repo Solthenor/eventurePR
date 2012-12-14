@@ -1,8 +1,9 @@
-<?php        //loads the events pending on category
+<?php        // Displays the events category browser. Depending on which category the user chooses, the information is displayed for him accordingly.
 
 require_once('db.php');
 require_once('checkAuth.php');
 
+//Gets the category and subcategory of the events the user wants to see.
 $category = $_GET['category'];
 $subCategory = $_GET['subcategory'];
 
@@ -11,6 +12,8 @@ if (!isset($category)) {
     return;
 }
 
+// Query to get all the events from the database where the event type is the same as the category selected,
+// and some columns from the Venue table are added.
 $db = db::getInstance();
 $sql = "SELECT
             E.eventName,

@@ -1,7 +1,6 @@
+<?php // Page for logging in and for registering if you are a new user.
 
-<?php
-
-
+// Checks if the user is logged in and redirects to index
 if(isset($_COOKIE['loggedin'])){
     $loggedin = true;
     header('Location: mobile-index.php');
@@ -11,10 +10,12 @@ if(isset($_COOKIE['loggedin'])){
 $loggedin = false;
 $id = 0;
 
+// When the user presses the submit button this code will run
 if ( count($_POST) > 0) {
     require_once('db.php');
     $db = db::getInstance();
 
+    // If the Sign Up button was pressed run this code
     if($_POST['submit'] != 'Login'){
 
         //TODO: better validation for empty fields
@@ -23,8 +24,12 @@ if ( count($_POST) > 0) {
         // gender = '{$_POST['date']}',
         // work = '{$_POST['date']}'
 
+
+        // Encrypts the password the user entered
         $password = md5 ( $_POST['password'] );
 
+
+        // Creates a new tuple in the table User with the info entered
         $sql = "INSERT INTO User
                 SET
                     userName = '{$_POST['username']}',
@@ -43,8 +48,10 @@ if ( count($_POST) > 0) {
         // $stmt->bindValue(':vName', , PDO::PARAM_STR);
         $stmt->execute();
         $loggedin = true;
+        // Gets the ID of the new created user        
         $id = $db->lastInsertId();
 
+        // If the user wanted to upload a picture run this code
         if ($_FILES["photo"]["error"] == 0) {
 
             $type = str_replace('image/', '', $_FILES['photo']['type']);
@@ -112,6 +119,12 @@ if($loggedin) {
 
 <!DOCTYPE html>
 <html>
+<!-- 
+Mobile Login/Registration Page
+
+For Login: Extracts user information 
+For Registration: Inserts user Information
+-->
 <head>
     <meta content="width=device-width, minimum-scale=1, maximum-scale=1" name="viewport">
 

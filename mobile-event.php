@@ -1,4 +1,4 @@
-<?php            //connects to the DB & checks if user is logged in.. This web page is the main index of the mobile site
+<?php            // Displays the event information on the mobile web page.
 require_once('db.php');
 require_once('checkAuth.php');
 
@@ -7,6 +7,7 @@ if (isset($_POST['mloggedOut'])) {
     $id = 0;
 }
 
+//Gets the event ID
 $eventID = $_GET['eventID'];
 
 if (!isset($eventID)) {
@@ -15,6 +16,7 @@ if (!isset($eventID)) {
 }
 
 $db = db::getInstance();
+//Query for getting the event's info from the database
 $sql = "SELECT
             E.eventID,
             E.eventName,
@@ -50,6 +52,9 @@ $stmt->execute();
 $result = $stmt->fetchAll();
 
 $event = $result[0];
+//Gets the ID of the user who created the event
+$eventUserID = $event['userID'];
+// Gets the list of people who want to attend to the event
 $attendees = $event['attendees'];
 
 if(!isset($event)){
@@ -57,6 +62,7 @@ if(!isset($event)){
     return;
 }
 
+// Code for updating the flag, or if a user pressed the "I want to go" button
 if(isset($_POST['action'])) {
 
     $action = $_POST['action'];

@@ -1,4 +1,4 @@
-<?php
+<?php              // This page displays the user's mobile profile
 
 require_once('db.php');
 require_once('checkAuth.php');
@@ -63,6 +63,11 @@ if(isset($_POST['submit'])) {
 ?>
 <!DOCTYPE html>
 <html>
+<!--
+Mobile Profile page
+
+Dynamically changes depending on the user accessing it
+ -->
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 

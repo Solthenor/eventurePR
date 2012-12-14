@@ -1,10 +1,10 @@
-<?php        //loads the events pending on category
+<?php        // Mobile version of a User's Friend's List
 
 require_once('db.php');
 require_once('checkAuth.php');
 
 
-
+// This query gets all the user's friends
 $db = db::getInstance();
     $sql = "SELECT
             U.userName,

@@ -20,7 +20,7 @@ if (isset($_POST['friendSearch'])) {
 
 }
 
-
+// If the submit button was pressed, look for the user whose name has a similar character pattern
 if(isset($_POST['submit']))
 {
     $db = db::getInstance();
