@@ -1,5 +1,6 @@
-<?php
+<?php // Page for logging in and for registering if you are a new user.
 
+// Checks if the user is logged in and redirects to index
 if(isset($_COOKIE['loggedin'])){
     $loggedin = true;
     header('Location: index.php');
@@ -9,20 +10,18 @@ if(isset($_COOKIE['loggedin'])){
 $loggedin = false;
 $id = 0;
 
+// When the user presses the submit button this code will run
 if ( count($_POST) > 0) {
     require_once('db.php');
     $db = db::getInstance();
 
+    // If the Sign Up button was pressed run this code
     if($_POST['submit'] != 'Login'){
 
-        //TODO: better validation for empty fields
-
-        //                age = '{$_POST['age']}',
-                    // gender = '{$_POST['date']}',
-                    // work = '{$_POST['date']}'
-
+        // Encrypts the password the user entered
         $password = md5 ( $_POST['password'] );
 
+        // Creates a new tuple in the table User with the info entered
         $sql = "INSERT INTO User
                 SET
                     userName = '{$_POST['username']}',
@@ -41,10 +40,12 @@ if ( count($_POST) > 0) {
         // $stmt->bindValue(':vName', , PDO::PARAM_STR);
         $stmt->execute();
         $loggedin = true;
+        // Gets the ID of the new created user
         $id = $db->lastInsertId();
 
+        // If the user wanted to upload a picture run this code
         if ($_FILES["photo"]["error"] == 0) {
-
+          // Code for preparing the picture for sotring in the database
           $type = str_replace('image/', '', $_FILES['photo']['type']);
 
           $fileName = $_FILES['photo']['name'];
@@ -57,6 +58,7 @@ if ( count($_POST) > 0) {
           $content = addslashes($content);
           fclose($fp);
 
+          // Query to insert the info into the table Picture
           $sql = "INSERT INTO Picture
                   SET
                     userID = '{$id}',
@@ -65,9 +67,10 @@ if ( count($_POST) > 0) {
 
           $stmt = $db->prepare($sql);
           $stmt->execute();
-
+          // Gets the ID of the inserted picture
           $picID = $db->lastInsertId();
 
+          // Updates the user's info with the id of the picture
           $sql = "UPDATE User
                   SET
                     profilePicture = '{$picID}'
@@ -81,7 +84,10 @@ if ( count($_POST) > 0) {
 
         }
     }
+
+    // If the user pressed the Login button
     else {
+        // Query to get the user's info according to the username and password provided
         $password = md5 ( $_POST['password'] );
         $sql = "SELECT 
                     userID,
@@ -94,6 +100,8 @@ if ( count($_POST) > 0) {
         $stmt = $db->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll();
+
+        // If a matching user was found set loggedin to true, and get the user's ID
         if(count($result) > 0) {
             $loggedin = true;
             $id = $result[0]['userID'];
@@ -101,6 +109,7 @@ if ( count($_POST) > 0) {
     }
 }
 
+// Set a cookie for maintaining the session with the user. Expires in a day.
 if($loggedin) { 
     setcookie('loggedin', $id, time() + (86400 * 7)); // 86400 = 1 day
     header('Location: index.php');
@@ -119,6 +128,7 @@ For Registration: Inserts user Information
 <head>
     <title>Login - E-venturePR</title>
 
+    <!-- Links to the CSS stylesheets, Bootstrap, etc. -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel='stylesheet' type='text/css' href='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.css?1346362758'>
     <link rel='stylesheet' href='http://cdn1.editmysite.com/editor/images/common/common-v2.css?buildTime=1346362758' type='text/css' />
@@ -133,6 +143,7 @@ For Registration: Inserts user Information
         #wsite-content a:visited, .blog-sidebar a:visited{color:#FFFFFF }
         #wsite-content a:hover, .blog-sidebar a:hover{color:#FFFFFF }
     </style>
+    <!-- Links to the javasripts, JQuery, etc, scripts -->
     <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/jquery_effects.js?1346362758'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.min.js?1346362758'></script>
@@ -144,10 +155,11 @@ For Registration: Inserts user Information
 
 <div id="wrapper">
     <table id="header">
-        <tr>
+        <tr> <!-- Website logo -->
             <td id="logo"><span class='wsite-logo'><a href='index.php'><span id="wsite-title">E-venturePR</span></a></span></td>
             <td id="header-right">
                 <table>
+                    <!-- Checks if the user is logged to show the "Profile | Sign out" links, if not it shows "Register | Login" links -->
                     <?php if($loggedin) { ?>
                     <tr>
                         <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; ">Profile</a> | <a href="index.php" style="color: #32CD32; text-decoration: underline;">Log out</a></span></td>
@@ -165,9 +177,13 @@ For Registration: Inserts user Information
             </td>
         </tr>
     </table>
+
+    <!-- This shows the navigation bar. -->
     <div id="navigation">
         <ul><li id='active'><a href="index.php">Home</a></li><li id='pg145650631833651339'><a href='events.php?category=Concert'>Music</a></li><li id='pg404778243583026952'><a href='events.php?category=Sports'>Sports</a></li><li id='pg441792526610757515'><a href='events.php?category=Entertainment'>Entertainment</a></li><li id='pg269210016325162137'><a href='events.php?category=Business'>Business & Education</a></li><li id="pgabout_us"><a href="about.php">About Us</a></li></ul>
     </div>
+
+    <!-- Here starts the container of all the main things -->
     <div id="container">
         <div id="content">
             <div class="text"><div id='wsite-content' class='wsite-not-footer'>
@@ -181,11 +197,14 @@ For Registration: Inserts user Information
                                     <form  action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" id="login">
                                         <div id="443797706409102200-form-parent" class="wsite-form-container" style="margin-top:10px;">
                                             <ul class="formlist" id="443797706409102200-form-list">
+
+                                                <!-- If the user has an account he should enter his username and password to log in here -->
                                                 <h2 style="text-align:left;">Already have an account? Login!</h2>
 
                                                 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
                                                     <label class="wsite-form-label" for="username">Username<span class="form-required">*</span></label>
                                                     <div class="wsite-form-input-container">
+                                                        <!-- Input box for entering the username -->
                                                         <input id="username" class="wsite-form-input wsite-input" type="text" name="username" style="width:370px;" />
                                                     </div>
                                                     <div id="instructions-338008156977822324" class="wsite-form-instructions" style="display:none;"></div>
@@ -194,12 +213,15 @@ For Registration: Inserts user Information
                                                 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
                                                     <label class="wsite-form-label" for="password">Password<span class="form-required">*</span></label>
                                                     <div class="wsite-form-input-container">
+                                                        <!-- Input box for entering the password -->
                                                         <input id="password" class="wsite-form-input wsite-input" type="password" name="password" style="width:285px;" />
                                                     </div>
                                                     <div id="instructions-190128962344944659" class="wsite-form-instructions" style="display:none;"></div>
                                                 </div></div>
                                             </ul>
                                         </div>
+
+                                        <!-- Submit button for existing user to log in -->
                                         <div style="text-align:left; margin-top:10px; margin-bottom:10px;">
                                             <input type='submit' name="submit" value="Login" class='btn btn-eventPR' />
                                         </div>
@@ -211,6 +233,7 @@ For Registration: Inserts user Information
                             </td>
                             <td class='wsite-multicol-col' style='width:50%;padding:0 15px'>
 
+                                <!-- If the user doesn't have an account he shoul register here -->
                                 <div>
                                     <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" id="create-user" enctype="multipart/form-data">
                                         <div id="729044906853205765-form-parent" class="wsite-form-container" style="margin-top:10px;">
@@ -221,10 +244,12 @@ For Registration: Inserts user Information
                                                     <label class="wsite-form-label" for="first-name">Name <span class="form-required">*</span></label>
                                                     <div style="clear:both;"></div>
                                                     <div class="wsite-form-input-container wsite-form-left">
+                                                        <!-- Input box for entering the first name -->
                                                         <input id="first-name" class="wsite-form-input wsite-input" type="text" name="first-name" style="width:138px;" />
                                                         <label class="wsite-form-sublabel" for="first-name">First</label>
                                                     </div>
                                                     <div class="wsite-form-input-container wsite-form-right">
+                                                        <!-- input box for entering the last name -->
                                                         <input id="last-name" class="wsite-form-input wsite-input" type="text" name="last-name" style="width:205px;" />
                                                         <label class="wsite-form-sublabel" for="last-name">Last</label>
                                                     </div>
@@ -237,6 +262,7 @@ For Registration: Inserts user Information
                                                 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
                                                     <label class="wsite-form-label" for="email">Email <span class="form-required">*</span></label>
                                                     <div class="wsite-form-input-container">
+                                                        <!-- Input box for entering the email -->
                                                         <input id="email" class="wsite-form-input wsite-input" type="text" name="email" style="width:370px;" />
                                                     </div>
                                                     <div id="instructions-499740599228294603" class="wsite-form-instructions" style="display:none;"></div>
@@ -245,6 +271,7 @@ For Registration: Inserts user Information
                                                 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
                                                     <label class="wsite-form-label" for="username">User Name <span class="form-required">*</span></label>
                                                     <div class="wsite-form-input-container">
+                                                        <!-- Input box for entering the username -->
                                                         <input id="username" class="wsite-form-input wsite-input" type="text" name="username" style="width:370px;" />
                                                     </div>
                                                     <div id="instructions-629303063250377115" class="wsite-form-instructions" style="display:none;"></div>
@@ -253,6 +280,7 @@ For Registration: Inserts user Information
                                                 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
                                                     <label class="wsite-form-label" for="input-703964987851636371">Password <span class="form-required">*</span></label>
                                                     <div class="wsite-form-input-container">
+                                                        <!-- Input box for entering the password -->
                                                         <input id="password" class="wsite-form-input wsite-input" type="password" name="password" style="width:370px;" />
                                                     </div>
                                                     <div id="instructions-703964987851636371" class="wsite-form-instructions" style="display:none;"></div>
@@ -261,11 +289,13 @@ For Registration: Inserts user Information
                                                 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
                                                     <label class="wsite-form-label" for="age">Age </label>
                                                     <div class="wsite-form-input-container">
+                                                        <!-- Input box for entering the age -->
                                                         <input id="age" class="wsite-form-input wsite-input" type="text" name="age" style="width:370px;" />
                                                     </div>
                                                     <div id="instructions-629303063250377115" class="wsite-form-instructions" style="display:none;"></div>
                                                 </div></div>
 
+                                                <!-- Dropdown for selecting the Gender: male or female -->
                                                 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
                                                     <label class="wsite-form-label" for="gender">Gender </label>
                                                     <div class="wsite-form-input-container">
@@ -277,6 +307,7 @@ For Registration: Inserts user Information
                                                     <div id="instructions-629303063250377115" class="wsite-form-instructions" style="display:none;"></div>
                                                 </div></div>
 
+                                                <!-- Input box for entering the work -->
                                                 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
                                                     <label class="wsite-form-label" for="age">Work </label>
                                                     <div class="wsite-form-input-container">
@@ -285,7 +316,7 @@ For Registration: Inserts user Information
                                                     <div id="instructions-629303063250377115" class="wsite-form-instructions" style="display:none;"></div>
                                                 </div></div>
 
-
+                                                <!-- Dropdown for choosing a security question -->
                                                 <div><div class="wsite-form-field" style="margin:5px 0px 0px 0px;">
                                                     <label class="wsite-form-label" for="question">Security Question <span class="form-required">*</span></label>
                                                     <div class="wsite-form-radio-container">
@@ -299,6 +330,7 @@ For Registration: Inserts user Information
                                                     <div id="instructions-Security Question" class="wsite-form-instructions" style="display:none;"></div>
                                                 </div></div>
 
+                                                <!-- Input box for entering the answer to the security question -->
                                                 <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
                                                     <label class="wsite-form-label" for="answer">Answer: <span class="form-required">*</span></label>
                                                     <div class="wsite-form-input-container">
@@ -314,7 +346,7 @@ For Registration: Inserts user Information
                                                 <tbody class='wsite-multicol-tbody'>
                                                 <tr class='wsite-multicol-tr'>
 
-
+                                                    <!-- This code is for uploading a picture -->
                                                     <div class="paragraph" style="text-align:left;">Add a Picture:</div>
                                                     <div><div class="wsite-form-field" style="margin:5px 0px 5px 0px;">
 
@@ -336,6 +368,7 @@ For Registration: Inserts user Information
                                             </table>
                                         </div></div></div>
 
+                                        <!-- Submit button for registering the user -->
                                         <div style="text-align:left; margin-top:10px; margin-bottom:10px;">
                                             <input type='submit' name="submit" value="Sign up" class='btn btn-eventPR' />
                                         </div>

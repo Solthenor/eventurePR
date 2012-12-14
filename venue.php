@@ -1,4 +1,4 @@
-<?php
+<?php  // This page displays a Venue's profile
 require_once('logoutHandler.php');
 require_once('db.php');
 require_once('checkAuth.php');
@@ -10,6 +10,7 @@ if (!isset($venueID)) {
     return;
 }
 
+// Query to get the venue's info
 $db = db::getInstance();
 $sql = "SELECT 
             V.vName, 
@@ -26,6 +27,7 @@ $sql = "SELECT
         WHERE V.venueID = {$venueID};
 ";
 
+// Query to get event's that are going to be on this venue
 $eventsSql = "SELECT
                 E.eventID,
             E.eventName,
@@ -73,6 +75,7 @@ if(!isset($venue)){
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
+    <!-- Links to the CSS stylesheets, Bootstrap, etc. -->
     <link rel='stylesheet' type='text/css' href='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.css?1346362758'>
     <link rel='stylesheet' href='http://cdn1.editmysite.com/editor/images/common/common-v2.css?buildTime=1346362758' type='text/css' />
     <link rel='stylesheet' type='text/css' href='css/main_style.css' title='wsite-theme-css' />
@@ -86,12 +89,15 @@ if(!isset($venue)){
         #wsite-content a:visited, .blog-sidebar a:visited{color:#FFFFFF !important;}
         #wsite-content a:hover, .blog-sidebar a:hover{color:#FFFFFF !important;}
     </style>
+
+    <!-- Links to the javasripts, JQuery, etc, scripts -->
     <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/jquery_effects.js?1346362758'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.min.js?1346362758'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/images/common/utilities-jq.js?1346362758'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/flyout_menus_jq.js?1346362758'></script>
 
+    <!-- Script to display the venue's location on a map, and a route toe get ther from the user's ip location -->
     <script type="text/javascript" language="JavaScript" src="http://j.maxmind.com/app/geoip.js"></script>
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <script type="text/javascript">
@@ -156,10 +162,12 @@ if(!isset($venue)){
 <body class='wsite-theme-dark no-header-page wsite-page-venue'>
 <div id="wrapper">
     <table id="header">
-        <tr>
+        <tr> <!-- Website logo -->
             <td id="logo"><span class='wsite-logo'><a href='index.php'><span id="wsite-title">E-venturePR</span></a></span></td>
             <td id="header-right">
                 <table style="width:150px;">
+
+                    <!-- Checks if the user is logged to show the "Profile | Sign out" links, if not it shows "Register | Login" links -->
                     <?php if($loggedin) { ?>
                     <tr>
                         <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; ">Profile</a> | 
@@ -184,9 +192,13 @@ if(!isset($venue)){
             </td>
         </tr>
     </table>
+
+    <!-- This shows the navigation bar. -->
 	<div id="navigation">
         <ul><li id='active'><a href='index.php'>Home</a></li><li id='pg145650631833651339'><a href='events.php?category=Concert'>Music</a></li><li id='pg404778243583026952'><a href='events.php?category=Sports'>Sports</a></li><li id='pg441792526610757515'><a href='events.php?category=Entertainment'>Entertainment</a></li><li id='pg269210016325162137'><a href='events.php?category=Business'>Business & Education</a></li><li id="pgabout_us"><a href="about.php">About Us</a></li></ul>
 	</div>
+
+    <!-- Here starts the container of all the main things -->
 	<div id="container">
 		<div id="content">
 			<div class="text"><div id='wsite-content' class='wsite-not-footer'>
@@ -198,12 +210,16 @@ if(!isset($venue)){
 <tr class='wsite-multicol-tr'>
 <td class='wsite-multicol-col' style='width:58.700440528634%;padding:0 15px'>
 
+<!-- Displays the venue name -->
 <h2 style="text-align:left;"><?php echo $venue['vName'] ?><br /></h2>
 <span class='imgPusher' style='float:left;height:0px'></span>
 <span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'>
+<!-- Displays the venue's profile picture -->
 <span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="picture.php?picID=<?php echo $venue['profilePic'] ?>" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;width:200px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
     <div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div>
 </span>
+
+<!-- Displays the venue's info -->
 <div class="paragraph" style="text-align:left;display:block;">               
     <font size="3"><strong>Location:</strong></font>
     <br />                 
@@ -219,6 +235,7 @@ if(!isset($venue)){
     </div>
 <hr style="clear:both;visibility:hidden;width:100%;"></hr>
 
+    <!-- Button to create an event for this venue -->
 <div style="text-align:left;"><div style="height: 10px; overflow: hidden;"></div>
 <a class="wsite-button wsite-button-small wsite-button-highlight btn-eventurePR" href="create-event.php" >
 <span class="wsite-button-inner">Create an event for this venue</span>
@@ -228,13 +245,16 @@ if(!isset($venue)){
 </td>
 <td class='wsite-multicol-col' style='width:41.299559471366%;padding:0 15px'>
 
+    <!-- Displays the map with the location of the venue -->
     <div class="wsite-map" style="padding-top: 100px;" >
         <div id="map" style="height: 200px; width: 300px" />
 
     </div>
 
+<!-- Displays upcoming event's at this venue -->
 <h2 style="text-align:left; font-size: 24px;">Upcoming Events at this Venue:<br /></h2>
 
+    <!-- Loop that show's upcoming event's at this venue -->
 <?php
     foreach ($events as $event) {
     ?>  

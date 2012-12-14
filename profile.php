@@ -1,4 +1,4 @@
-<?php
+<?php  // This page displays the user's profile
 require_once('db.php');
 require_once('checkAuth.php');
 require_once('logoutHandler.php');
@@ -15,11 +15,13 @@ $friendProfile = false;
 
 $db = db::getInstance();
 
+// Checks if this is another user's profile
 if(isset($userID) && $id != $userID) {
     $friendProfile = true;
     $friendID = $userID;
     $isFriend = false;
 
+    // Query to check if this person is a friend or not
     $sql = "SELECT
                 userID2
             FROM AddFriend
@@ -36,6 +38,7 @@ if(isset($userID) && $id != $userID) {
         $isFriend = true;
     }
 
+    // Query to get the info of the owner of the profile if it's not the user
     $sql = "SELECT
                 userName,
                 userID,
@@ -58,6 +61,7 @@ if(isset($userID) && $id != $userID) {
     $user = $result[0];
 }
 else {
+    // Query to get the user's info if it's his/her own profile
     $sql = "SELECT
                 userName,
                 userID,
@@ -84,7 +88,7 @@ if(!isset($user)){
     header('Location: index.php');
     return;
 }
-
+// If the submit button for uploading a comment to the wall was pressed, run this code.
 if(isset($_POST['submit'])) {
     if($friendProfile) {
         $sql = "INSERT INTO Wall
@@ -105,6 +109,7 @@ if(isset($_POST['submit'])) {
     $stmt->execute();
 }
 
+// If the add Friend button is pressed run this query.
 if(isset($_POST['addFriend'])) {
     $sql = "INSERT INTO AddFriend
             SET
@@ -129,7 +134,7 @@ Dynamically changes depending on the user accessing it
     <title>Profile - E-venturePR</title>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-
+    <!-- Links to the CSS stylesheets, Bootstrap, etc. -->
     <link rel='stylesheet' type='text/css' href='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.css?1346362758'>
     <link rel='stylesheet' href='http://cdn1.editmysite.com/editor/images/common/common-v2.css?buildTime=1346362758' type='text/css' />
     <link rel='stylesheet' type='text/css' href='css/main_style.css' title='wsite-theme-css' />
@@ -145,6 +150,8 @@ Dynamically changes depending on the user accessing it
         #wsite-content a:visited, .blog-sidebar a:visited{color:#FFFFFF}
         #wsite-content a:hover, .blog-sidebar a:hover{color:#FFFFFF}
     </style>
+
+    <!-- Links to the javasripts, JQuery, etc, scripts -->
     <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/jquery_effects.js?1346362758'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.min.js?1346362758'></script>
@@ -160,6 +167,7 @@ Dynamically changes depending on the user accessing it
     <link href="css/dark-hive/jquery-ui-1.9.2.custom.css" rel="stylesheet">
     <script src="js/jquery-1.8.3.js"></script>
     <script src="js/jquery-ui-1.9.2.custom.js"></script>
+    <!-- Script for showing the Upcoming event's the user wants to go -->
     <script>
     $(function() {
         $( "#accordion" ).accordion({ heightStyle: "fill" });
@@ -192,12 +200,12 @@ Dynamically changes depending on the user accessing it
 <body class='wsite-theme-dark no-header-page wsite-page-nightwish-detail'>
 <div id="wrapper">
 <table id="header">
-    <tr>
+    <tr> <!-- Website logo -->
         <td id="logo"><span class='wsite-logo'><a href="index.php"><span id="wsite-title">E-venturePR</span></a></span></td>
         <td id="header-right">
             <table style="width: 150px;">
 
-                <!-- Conditional to check login Status-->
+                <!-- Checks if the user is logged to show the "Profile | Sign out" links, if not it shows "Register | Login" links -->
                 <?php if($loggedin) { ?>
                 <tr>
                     <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; ">Profile</a> |
@@ -221,9 +229,13 @@ Dynamically changes depending on the user accessing it
         </td>
     </tr>
 </table>
+
+<!-- This shows the navigation bar. -->
 <div id="navigation">
     <ul><li id='active'><a href='index.php'>Home</a></li><li id='pg145650631833651339'><a href='events.php?category=Concert'>Music</a></li><li id='pg404778243583026952'><a href='events.php?category=Sports'>Sports</a></li><li id='pg441792526610757515'><a href='events.php?category=Entertainment'>Entertainment</a></li><li id='pg269210016325162137'><a href='events.php?category=Business'>Business & Education</a></li><li id="pgabout_us"><a href="about.php">About Us</a></li></ul>
 </div>
+
+<!-- Here starts the container of all the main things -->
 <div id="container">
     <div id="content">
         <div class="text"><div id='wsite-content' class='wsite-not-footer'>
@@ -232,9 +244,11 @@ Dynamically changes depending on the user accessing it
                     <tbody class='wsite-multicol-tbody'>
                     <tr class='wsite-multicol-tr'>
                         <td class='wsite-multicol-col' style='width:61.742006615215%;padding:0 15px'>
-
+                            <!-- Display the user's name -->
                             <h2 style="text-align:left;"><?php echo $user['firstName'] ?> <?php echo $user['lastName'] ?></h2>
 
+                            <!-- Checks to see if this is another user's profile and if he/she is not a frined yet,
+                                 it shows the "Add Friend" button -->
                             <?php if($friendProfile && !$isFriend) { ?>
 
                             <form action="<?php echo $_SERVER['PHP_SELF'] . "?userID={$friendID}"; ?>" method="POST">
@@ -243,10 +257,15 @@ Dynamically changes depending on the user accessing it
 
                             <?php }?>
 
+                            <!-- Displays the user's profile picture -->
                             <span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a><img class="wsite-image galleryImageBorder" src="picture.php?picID=<?php if ($user['profilePicture'] == false) {echo "defaultPic.jpg";} else {echo $user['profilePicture'];} ?>" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;width:200px;" alt="Picture" /></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
+                            <!-- Displays teh user's info -->
                             <div class="paragraph" style="text-align:left;display:block;float:left;">Username: <br />Age: <br />Gender: <br />Work: <br />E-mail: </div>
                             <div class="paragraph"style="text-align:center;display:block;float:left;"><?php echo $user['userName'] ?><br /><?php echo $user['age'] ?><br /><?php echo $user['gender'] ?><br /><?php echo $user['work'] ?><br /><?php echo $user['email'] ?></div>
 
+                            <!-- If this is not a friends profile, it is my own. Displays the button-toolbar for
+                                 seeing friends, seeing my created events, creating a new event, creating a new venue,
+                                 or editing my profile info. -->
                             <?php if(!$friendProfile) { ?>
                             <hr style="clear:both;visibility:hidden;width:100%;" />
                             <div class="btn-toolbar" style="padding: 10px 10px 0 0; display: inline-block;text-align: center; ">
@@ -268,6 +287,7 @@ Dynamically changes depending on the user accessing it
                         </td>
                         <td class='wsite-multicol-col' style='width:38.257993384785%;padding:0 15px'>
 
+                            <!-- Displays recommended events with links to those events -->
                             <div class="friends_list">
                                 <div>
                                     <h4>Recommended E-ventures:</h4>
@@ -335,21 +355,13 @@ Dynamically changes depending on the user accessing it
                 <tr class='wsite-multicol-tr'>
                     <td class='wsite-multicol-col' style='width:50%;padding:0 15px'>
 
+                        <!-- Show upcomming events -->
                         <h2 style="text-align:center;">Upcoming Events</h2>
-                        <!--
-                        <div>
-                            <div><div style="height: 20px; overflow: hidden;"></div>
-                                <div id='139083701912618958-gallery' class='imageGallery' style='line-height: 0px; padding: 0; margin: 0'>
-                                    <div id='139083701912618958-imageContainer0' style='float:left;width:33.28%;margin:0;'><div id='139083701912618958-insideImageContainer0' style='position:relative;margin:5px;padding:0 8px 8px 0'><div style='position:relative;width:100%;padding:0 0 75.08%;'><a href='uploads/1/3/4/4/13443306/7495447_orig.jpg' rel='lightbox[gallery139083701912618958]' onclick='if (!window.lightboxLoaded) return false'><img src='uploads/1/3/4/4/13443306/7495447.jpg' class='galleryImage galleryImageBorder' _width='333' _height='225' style='position:absolute;border-width:1px;padding:3px;width:100%;top:5%;left:0%' /></a></div></div></div><div id='139083701912618958-imageContainer1' style='float:left;width:33.28%;margin:0;'><div id='139083701912618958-insideImageContainer1' style='position:relative;margin:5px;padding:0 8px 8px 0'><div style='position:relative;width:100%;padding:0 0 75.08%;'><a href='uploads/1/3/4/4/13443306/8485349_orig.jpg' rel='lightbox[gallery139083701912618958]' onclick='if (!window.lightboxLoaded) return false'><img src='uploads/1/3/4/4/13443306/8485349.jpg' class='galleryImage galleryImageBorder' _width='333' _height='222' style='position:absolute;border-width:1px;padding:3px;width:100%;top:5.6%;left:0%' /></a></div></div></div><div id='139083701912618958-imageContainer2' style='float:left;width:33.28%;margin:0;'><div id='139083701912618958-insideImageContainer2' style='position:relative;margin:5px;padding:0 8px 8px 0'><div style='position:relative;width:100%;padding:0 0 75.08%;'><a href='uploads/1/3/4/4/13443306/2260870_orig.jpg' rel='lightbox[gallery139083701912618958]' onclick='if (!window.lightboxLoaded) return false'><img src='uploads/1/3/4/4/13443306/2260870.jpg' class='galleryImage galleryImageBorder' _width='279' _height='250' style='position:absolute;border-width:1px;padding:3px;width:83.78%;top:0%;left:8.11%' /></a></div></div></div><div id='139083701912618958-imageContainer3' style='float:left;width:33.28%;margin:0;'><div id='139083701912618958-insideImageContainer3' style='position:relative;margin:5px;padding:0 8px 8px 0'><div style='position:relative;width:100%;padding:0 0 75.08%;'><a href='uploads/1/3/4/4/13443306/817215_orig.jpg' rel='lightbox[gallery139083701912618958]' onclick='if (!window.lightboxLoaded) return false'><img src='uploads/1/3/4/4/13443306/817215.jpg' class='galleryImage galleryImageBorder' _width='333' _height='193' style='position:absolute;border-width:1px;padding:3px;width:100%;top:11.4%;left:0%' /></a></div></div></div><span style='display: block; clear: both; height: 0px; overflow: hidden;'></span>
-                                </div>
 
-                                <div style="height: 20px; overflow: hidden;"></div></div>
-                        </div>
-                        -->
                         <div id="mainmenu">
                             <div class="ui-widget-content">
                                     <div id="accordion">
-                                    <!-- Selects events where there user has logged as I wanna go!-->
+                                    <!-- Selects events where there user has clicked as I wanna go!-->
                                     <?php $db = db::getInstance();
                                         
                                         if(!$friendProfile) {
@@ -400,6 +412,7 @@ Dynamically changes depending on the user accessing it
 
                                     $result = $stmt->fetchAll();
 
+                                    // Loop that displays the events.
                                     foreach ($result as $event) { ?>
 
 
@@ -417,33 +430,6 @@ Dynamically changes depending on the user accessing it
                                 <?php } ?>
                                 </div>
                                 </div>
-                                                                <!--
-                                <li><a href='event.php?eventID={$event['eventID']}'> <span style='color: white'>{$event['eventName']}</span></a></li>
-                                                <div style='height: 20px; overflow: hidden; width: 100%;''></div>
-
-                                        
-
-
-                                    <div id="list">
-                                        <ul data-role="listview" data-inset="true" data-split-theme="c">
-                                            <li><a href=""><img src="picture.php?picID=<?php echo $event['flyer'] ?>" class="ui-li-thumb" style="position:absolute !important; top: 10px; left: 10px; height: 80%"><h3><?php echo $event['eventName'] ?></h3></a></li>
-                                        </ul>
-
-                                    </div>
-
-
-
-                                                <li class='span4'>
-                                            <div class='thumbnail' >
-                                              <img src='picture.php?picID=<?php echo $event['flyer']?>' alt='img/No-image-available.jpg'>
-                                              <a href='event.php?eventID=<?php echo $event['eventID'] ?>'><h4><?php echo $event['eventName'] ?></h4></a>
-                                              <p style='color: white'><?php echo $event['description'] ?></p>
-                                            </div>
-                                          </li>
-                            -->
-                            
-
-
 
                         </div>
 
@@ -486,6 +472,7 @@ Dynamically changes depending on the user accessing it
 
                                 $result = $stmt->fetchAll();
 
+                                // Display the comments on user's wall -->
                                 foreach ($result as $comment) {
                                     echo "<li> 
                                             <a href='profile.php?userID={$comment['posterID']}'><img class='wsite-image galleryImageBorder' src='picture.php?picID={$comment['profilePicture']}' alt='img/default-profile.jpg' style='max-width: 15%; float:left; border-width:1px;'></a>
@@ -503,6 +490,8 @@ Dynamically changes depending on the user accessing it
                             <hr style="clear:both;visibility:hidden;width:100%;">
 
                         </div>
+
+                        <!-- Textbox and button for uploading a comment to friend's wall -->
                         <?php if($friendProfile) { ?>
                         <form action="<?php echo "profile.php?userID={$friendID}" ?>" method="POST" id="submit" enctype="multipart/form-data">
                         <?php } else {?>

@@ -1,4 +1,4 @@
-<?php
+<?php  // THis code is for getting the picture to display in the event gallery, depending on the picID
 
 require_once('db.php');
 

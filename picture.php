@@ -1,4 +1,4 @@
-<?php
+<?php  // This code is for getting the picture to display depending on the picID provided
 
 require_once('db.php');
 

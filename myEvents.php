@@ -1,16 +1,18 @@
-<?php
+<?php  // In this page the user can see a list of the events he/she has created.
 require_once('mobileRedirect.php');
 require_once('logoutHandler.php');
 require_once('db.php');
 require_once('checkAuth.php');
 
-
+// If the user is not logged in, redirect to the main page.
 if (!$loggedin && !isset($userID)) {
     header('Location: index.php');
     return;
 }
 
 $db = db::getInstance();
+
+// Query to get all the events that match the user's ID as the creator
 $sql = "SELECT
             E.eventName,
             E.eventType,
@@ -41,7 +43,7 @@ $events = $stmt->fetchAll();
     <title>Concerts - E-venturePR</title>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-
+    <!-- Links to the CSS stylesheets, Bootstrap, etc. -->
     <link rel='stylesheet' type='text/css' href='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.css?1346362758'>
     <link rel='stylesheet' href='http://cdn1.editmysite.com/editor/images/common/common-v2.css?buildTime=1346362758' type='text/css' />
     <link rel='stylesheet' type='text/css' href='css/main_style.css' title='wsite-theme-css' />
@@ -62,6 +64,8 @@ $events = $stmt->fetchAll();
             background-position: 0 0 !important;
         }
     </style>
+
+    <!-- Links to the javasripts, JQuery, etc, scripts -->
     <script type='text/javascript'><!--
     var STATIC_BASE = 'http://cdn1.editmysite.com/';
     var STYLE_PREFIX = 'wsite';
@@ -80,10 +84,11 @@ $events = $stmt->fetchAll();
 <body class='wsite-theme-dark tall-header-page wsite-page-concerts'>
 <div id="wrapper">
     <table id="header">
-        <tr>
+        <tr> <!-- Website logo -->
             <td id="logo"><span class='wsite-logo'><a href='index.php'><span id="wsite-title">E-venturePR</span></a></span></td>
             <td id="header-right">
                 <table style="width:150px;">
+                    <!-- Checks if the user is logged to show the "Profile | Sign out" links, if not it shows "Register | Login" links -->
                     <?php if($loggedin) { ?>
                     <tr>
                         <td class="phone-number"><span class='wsite-text'><a href="profile.php" style="color: #32CD32; text-decoration: underline; ">Profile</a> | 
@@ -108,14 +113,19 @@ $events = $stmt->fetchAll();
             </td>
         </tr>
     </table>
+
+    <!-- This shows the navigation bar. -->
     <div id="navigation">
         <ul><li id='active'><a href='index.php'>Home</a></li><li id='pg145650631833651339'><a href='events.php?category=Concert'>Music</a></li><li id='pg404778243583026952'><a href='events.php?category=Sports'>Sports</a></li><li id='pg441792526610757515'><a href='events.php?category=Entertainment'>Entertainment</a></li><li id='pg269210016325162137'><a href='events.php?category=Business'>Business & Education</a></li><li id="pgabout_us"><a href="about.php">About Us</a></li></ul>
+
+        <!-- Here starts the container of all the main things -->
         <div id="container" style="margin-top: 29px;">
             <div id="content">
+                <!-- Button to go back to the user's profile -->
                 <div style="text-align: left;"><a class="btn btn-eventPR" href="profile.php"><span style="font-weight: bold; font-size: 14px; font-family: Arial sans-serif;">GO BACK TO PROFILE</span></a></div>
                 <div class="text"><div id='wsite-content' class='wsite-not-footer'>
 
-
+                    <!-- Loop that shows all the events from the result of the query (the events he/she created) -->
                     <?php
 
                     foreach ($events as $event) {
@@ -132,32 +142,33 @@ $events = $stmt->fetchAll();
                                 <tr class='wsite-multicol-tr'>
                                     <td class='wsite-multicol-col' style='width:35%;padding:0 15px'>
 
+                                        <!-- Shows the event's name -->
                                         <h2 style="text-align:left;"><?php echo $event['eventName'] ?></h2>
+                                        <!-- SHows the event's picture -->
                                         <span class='imgPusher' style='float:left;height:0px'></span><span style='position:relative;float:left;z-index:10;;clear:left;margin-top:0px;*margin-top:0px'><a href="event.php?eventID=<?php echo $event['eventID'] ?>"><img class="wsite-image galleryImageBorder" src="picture.php?picID=<?php echo $event['flyer'] ?>" style="margin-top: 5px; margin-bottom: 10px; margin-left: 0px; margin-right: 10px; border-width:1px;padding:3px;" alt="Picture" width="200" height="300"/></a><div style="display: block; font-size: 90%; margin-top: -10px; margin-bottom: 10px; text-align: center;"></div></span>
                                         <hr style="clear:both;visibility:hidden;width:100%;">
 
+                                        <!-- Shows the "More Info" button and redirects to the event's profile -->
                                         <div style="display: inline;"><div style="float:left; display: inline-block;"> </div>
                                             <a class="btn btn-eventPR" href="event.php?eventID=<?php echo $event['eventID'] ?>"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">MORE INFO</span></a>
-                                            <a class="btn btn-eventPR" href="#"><span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;">FLAG</span></a>
                                             <div style="height: 10px; overflow: hidden;"></div></div>
 
                                     </td>
                                     <td>
+                                        <!-- Shows some of the event's info -->
                                         <div class="paragraph" style="text-align:left;display:block;"><font size="4"><?php echo $event['date'] ?></font><br /><font size="4"><?php echo $event['venueName'] ?></font><br /><font size="4"><span style="line-height: 27px;"><br /></span></font><br /><font size="4"><span style="line-height: 27px;">Genre: <?php echo $event['genre'] ?></span></font></div>
 
                                     </td>
                                     <td class='wsite-multicol-col' style='width:20.925110132159%;padding:0 15px'>
 
                                         <div class="btn-toolbar" style=" position:relative; padding: 60px 10px 0 0; text-align:center; ">
-                                        <div class="btn-group btn-group-vertical"  >
-                                            
+                                        <div class="btn-group btn-group-vertical">
+
+                                            <!-- Find tickets button -->
                                                 <a class="btn btn-eventPR" href="http://www.google.com/search?q=<?php echo $event['eventName'] ?>+tickets" >
                                                     <span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;  text-transform: capitalize;">Find tickets</span>
                                                 </a>
-                                                
-                                                <a class="btn btn-eventPR" href="event.php?eventID=<?php echo $event['eventID'] ?>" >
-                                                    <span style="font-weight: bold; font-size: 14px; font-family: arial sans-serif;  text-transform: capitalize;">Share E-venture</span>
-                                                </a>
+
                                         </div>
                                     </div>
 
