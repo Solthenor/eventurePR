@@ -1,4 +1,5 @@
-<?php              // Used to create venues and load them into the venue table of our database
+<?php
+// Basically the same as create-venue, but it uploads the info of the existing venue instead of creating a new one.
 require_once('logoutHandler.php');
 require_once('checkAuth.php');
 require_once('db.php');

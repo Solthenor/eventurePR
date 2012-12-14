@@ -18,7 +18,7 @@ class db {
         }
 
         /**
-        * Return DB instance or create intitial connection
+        * Return DB instance or create initial connection
         * @return object
         * @access public
         */

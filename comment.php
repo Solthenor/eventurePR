@@ -1,4 +1,4 @@
-<?php
+<?php   // This code is to fetch the comment by using the comment id, to send it to event.
 
 require_once('db.php');
 

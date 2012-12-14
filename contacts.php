@@ -15,6 +15,7 @@ if(isset($userID)) {
     $id = $userID;
 }
 
+// If the submit button was pressed, look fof the user whose name has a similar character pattern
 if (isset($_POST['submit'])) {
     $userName = $_POST['submit'];
 
@@ -47,7 +48,7 @@ if (isset($_POST['submit'])) {
     <title>E-venturePR - My Contacts</title>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-
+    <!-- Links to the CSS stylesheets, Bootstrap, etc. -->
     <link rel='stylesheet' type='text/css' href='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.css?1346362758'>
     <link rel='stylesheet' href='http://cdn1.editmysite.com/editor/images/common/common-v2.css?buildTime=1346362758' type='text/css' />
     <link rel='stylesheet' type='text/css' href='css/main_style.css' title='wsite-theme-css' />
@@ -61,6 +62,7 @@ if (isset($_POST['submit'])) {
         #wsite-content a:visited, .blog-sidebar a:visited{color:#FFFFFF }
         #wsite-content a:hover, .blog-sidebar a:hover{color:#FFFFFF }
     </style>
+    <!-- Links to the javasripts, JQuery, etc, scripts -->
     <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/jquery_effects.js?1346362758'></script>
     <script type='text/javascript' src='http://cdn1.editmysite.com/editor/libraries/fancybox/fancybox.min.js?1346362758'></script>
@@ -71,8 +73,10 @@ if (isset($_POST['submit'])) {
 <body class='wsite-theme-dark tall-header-page wsite-page-index'>
 <div id="wrapper">
     <table id="header">
-        <tr>
+        <tr> <!-- Website's logo -->
             <td id="logo"><span class='wsite-logo'><a href='index.php'><span id="wsite-title">E-venturePR</span></a></span></td>
+
+            <!-- Checks if the user is logged to show the "Profile | Sign out" links, if not it shows "Register | Login" links -->
             <td id="header-right">
                 <table style="width: 150px;">
                     <?php if($loggedin) { ?>
@@ -99,17 +103,23 @@ if (isset($_POST['submit'])) {
             </td>
         </tr>
     </table>
+
+    <!-- This shows the navigation bar. -->
     <div id="navigation">
         <ul><li id='active'><a href='index.php'>Home</a></li><li id='pg145650631833651339'><a href='events.php?category=Concert'>Music</a></li><li id='pg404778243583026952'><a href='events.php?category=Sports'>Sports</a></li><li id='pg441792526610757515'><a href='events.php?category=Entertainment'>Entertainment</a></li><li id='pg269210016325162137'><a href='events.php?category=Business'>Business & Education</a></li><li id="pgabout_us"><a href="about.php">About Us</a></li></ul>
     </div>
+
+    <!-- Here starts the container of all the main things -->
     <div id="container">
         <div id="content">
 
+            <!-- This is the text input bos for the user to write the username of the person he/she wants to find -->
             <div class="text"><div id='wsite-content' class='wsite-not-footer'>
                 <div style="text-align: left;"><a class="btn btn-eventPR" href="profile.php"><span style="font-weight: bold; font-size: 14px; font-family: Arial sans-serif;">GO BACK TO PROFILE</span></a></div>
                 <h2 style="text-align:left;">Search for people:<br /></h2>
 
                 <div>
+                    <!-- The submit button to search for the people -->
                     <form class="navbar-form pull-left"  action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST">
                         <input type="text" id="submit" name="submit">
                         <button type="submit" class="btn">Submit</button>
@@ -120,6 +130,7 @@ if (isset($_POST['submit'])) {
 
                <div>
 
+                   <!-- This is a loop that gets the people found with similar username and displays it one after the other -->
                     <?php if(isset($result)) {?>
                         <?php foreach ($result as $user) { ?>
 
@@ -138,6 +149,7 @@ if (isset($_POST['submit'])) {
                                     <div class="paragraph" style="text-align:left;display:block;float:left;">Username: <br />Age: <br />Gender: <br />Work: <br />E-mail: </div>
                                     <div class="paragraph"style="text-align:center;display:block;float:left;"><?php echo $user['userName'] ?><br /><?php echo $user['age'] ?><br /><?php echo $user['gender'] ?><br /><?php echo $user['work'] ?><br /><?php echo $user['email'] ?></div>
 
+                                    <!-- This is a button to see the profile of the person -->
                                     <a class="wsite-button wsite-button-small wsite-button-normal" href="profile.php?userID=<?php echo $user['userID'] ?>" >
                                         <span class="wsite-button-inner">See profile</span>
                                     </a>
